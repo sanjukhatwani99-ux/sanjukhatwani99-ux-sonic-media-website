@@ -2434,237 +2434,221 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.05);paddin
 }
 
 /* ═══════════════════════════════════════════════════
-   FUTURE VISION — MOBILE SWIPE SLIDER
-   Shown only on touch/coarse-pointer devices
-   Replaces the GSAP split-screen on mobile
+   FUTURE VISION — MOBILE LIST LAYOUT
+   Left: details · Right: small photo
+   Replaces the pinned GSAP split-screen on mobile
 ═══════════════════════════════════════════════════ */
+
+/* Hide split-screen on mobile, show mobile list */
 @media (hover: none) and (pointer: coarse) {
-  /* Hide the GSAP split-screen arch on touch */
-  #futureSplitSection .fv-container { display: none !important; }
-  #fvMobSlider { display: block !important; }
+  .fv-container { display: none !important; }
+  #fv-mob-list-home, #fv-mob-list-page { display: block !important; }
+  #fv-page-desktop-header { display: none !important; }
+  #fv-home-header { display: none !important; }
 }
+/* Hide mobile list on desktop, keep split-screen */
 @media (hover: hover) and (pointer: fine) {
-  #fvMobSlider { display: none !important; }
+  #fv-mob-list-home, #fv-mob-list-page { display: none !important; }
 }
 
-#fvMobSlider {
-  display: none;
-  padding: 0 0 40px;
-  background: var(--black);
-  overflow: hidden;
+/* Shared mobile list styles */
+#fv-mob-list-home,
+#fv-mob-list-page {
+  display: none; /* shown only on touch via media query above */
+  padding: 0 0 8px;
 }
 
-.fv-mob-track-outer {
-  overflow: hidden;
-  padding: 0 20px;
-  position: relative;
-}
-
-.fv-mob-track {
+.fv-mob-list {
   display: flex;
-  gap: 16px;
-  will-change: transform;
-  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  flex-direction: column;
+  gap: 0;
+  padding: 0 16px;
 }
 
-/* Individual slide card */
-.fv-mob-slide {
-  flex: 0 0 88vw;
-  max-width: 360px;
-  border-radius: 22px;
-  overflow: hidden;
+/* Each item row */
+.fv-mob-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   position: relative;
-  background: var(--black3);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: box-shadow 0.35s, border-color 0.35s;
-  user-select: none;
-  -webkit-user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s;
+}
+.fv-mob-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+.fv-mob-item:active { background: rgba(255,92,0,0.04); border-radius: 12px; }
+
+/* Left: text details */
+.fv-mob-item-left {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.fv-mob-slide.is-active {
-  border-color: rgba(255, 92, 0, 0.5);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 92, 0, 0.18);
-}
-
-/* Photo area */
-.fv-mob-slide-img-wrap {
-  width: 100%;
-  height: 230px;
-  overflow: hidden;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.fv-mob-slide-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-}
-.fv-mob-slide.is-active .fv-mob-slide-img-wrap img {
-  transform: scale(1.05);
-}
-
-/* Gradient over image */
-.fv-mob-slide-img-grad {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 70%;
-  background: linear-gradient(to top, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0.2) 100%);
-  pointer-events: none;
-}
-
-/* Orange accent glow */
-.fv-mob-slide::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 110%, rgba(255, 92, 0, 0.2) 0%, transparent 65%);
-  opacity: 0;
-  transition: opacity 0.4s;
-  pointer-events: none;
-  z-index: 0;
-}
-.fv-mob-slide.is-active::after { opacity: 1; }
-
-/* Tag pill overlaid on image */
-.fv-mob-slide-tag {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  z-index: 2;
-  padding: 5px 12px;
+/* Tag pill */
+.fv-mob-item-tag {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 3px 10px;
   border-radius: 50px;
-  background: rgba(255, 92, 0, 0.15);
-  border: 1px solid rgba(255, 92, 0, 0.35);
+  background: rgba(255,92,0,0.1);
+  border: 1px solid rgba(255,92,0,0.25);
   font-family: var(--font-heading);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--orange);
-  backdrop-filter: blur(8px);
+  margin-bottom: 2px;
 }
 
-/* Slide number watermark */
-.fv-mob-slide-num {
-  position: absolute;
-  top: 12px;
-  right: 16px;
+/* Item number */
+.fv-mob-item-num {
   font-family: var(--font-display);
-  font-size: 56px;
-  color: rgba(255, 92, 0, 0.08);
+  font-size: 11px;
+  color: rgba(255,92,0,0.35);
+  letter-spacing: 0.1em;
   line-height: 1;
-  pointer-events: none;
-  z-index: 1;
-  transition: color 0.4s;
-}
-.fv-mob-slide.is-active .fv-mob-slide-num { color: rgba(255, 92, 0, 0.16); }
-
-/* Details area below image */
-.fv-mob-slide-body {
-  padding: 20px 22px 24px;
-  position: relative;
-  z-index: 2;
 }
 
-.fv-mob-slide-title {
+/* Title */
+.fv-mob-item-title {
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 800;
   color: var(--white);
-  line-height: 1.2;
-  margin-bottom: 10px;
-  transition: color 0.3s;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  transition: color 0.25s;
 }
-.fv-mob-slide.is-active .fv-mob-slide-title { color: var(--orange); }
 
-.fv-mob-slide-desc {
-  font-size: 13px;
-  line-height: 1.65;
-  color: rgba(245, 240, 235, 0.5);
+/* Description */
+.fv-mob-item-desc {
+  font-family: var(--font-body);
+  font-size: 12px;
   font-weight: 300;
-  margin-bottom: 18px;
+  color: rgba(245,240,235,0.48);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.fv-mob-slide-cta {
+/* CTA arrow row */
+.fv-mob-item-cta {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   font-family: var(--font-heading);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--orange);
-  background: none;
-  border: none;
-  padding: 0;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.35s, transform 0.35s;
+  margin-top: 2px;
+  opacity: 0.85;
 }
-.fv-mob-slide.is-active .fv-mob-slide-cta {
-  opacity: 1;
-  transform: translateY(0);
-}
-.fv-mob-slide-cta-line {
-  width: 18px;
+.fv-mob-item-cta-line {
+  width: 14px;
   height: 1.5px;
   background: var(--orange);
-  transition: width 0.3s;
-}
-.fv-mob-slide.is-active .fv-mob-slide-cta-line { width: 28px; }
-
-/* Dot pagination */
-.fv-mob-dots {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 18px 0 4px;
-}
-.fv-mob-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(245, 240, 235, 0.2);
-  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   flex-shrink: 0;
 }
-.fv-mob-dot.active {
-  width: 22px;
-  border-radius: 3px;
-  background: var(--orange);
-  box-shadow: 0 0 10px rgba(255, 92, 0, 0.5);
-}
 
-/* Swipe hint text */
-.fv-mob-hint {
-  text-align: center;
-  font-size: 12px;
-  color: rgba(245, 240, 235, 0.3);
-  font-family: var(--font-heading);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 4px 0 0;
+/* Right: small photo */
+.fv-mob-item-right {
+  flex-shrink: 0;
+  width: 88px;
+  height: 88px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255,92,0,0.18);
+  background: var(--black3);
+}
+.fv-mob-item-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.fv-mob-item:active .fv-mob-item-right img {
+  transform: scale(1.06);
+}
+/* Orange shimmer overlay on photo */
+.fv-mob-item-right::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,92,0,0.18) 0%, transparent 60%);
   pointer-events: none;
 }
 
-/* Explore all CTA */
-.fv-mob-all-btn {
+/* "View All" footer button */
+.fv-mob-footer {
+  padding: 22px 16px 0;
   display: flex;
-  justify-content: center;
-  padding: 20px 20px 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.fv-mob-footer-count {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,240,235,0.35);
 }
 
+/* Section header for mobile list context */
+.fv-mob-header {
+  padding: 28px 16px 16px;
+}
+.fv-mob-header-eyebrow {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fv-mob-header-eyebrow::before {
+  content: '';
+  width: 18px;
+  height: 1.5px;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+.fv-mob-header-title {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.fv-mob-header-title span { color: var(--orange); }
+.fv-mob-header-sub {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(245,240,235,0.45);
+  margin-top: 8px;
+  line-height: 1.6;
+}
 
 
 /* ═══════════════════════════════════════════════════
@@ -3449,19 +3433,8 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
       </div>
     </div>
 
-    <!-- MOBILE SWIPE SLIDER (touch only — shown via CSS) -->
-    <div id="fvMobSlider" aria-label="Future Vision" role="region">
-      <div class="fv-mob-track-outer" id="fvMobTrackOuter">
-        <div class="fv-mob-track" id="fvMobTrack">
-          <!-- Cards injected by JS -->
-        </div>
-      </div>
-      <div class="fv-mob-dots" id="fvMobDots"></div>
-      <div class="fv-mob-hint" id="fvMobHint">← Swipe to explore →</div>
-      <div class="fv-mob-all-btn">
-        <a href="#" onclick="navigate('future');return false;" class="btn-p" style="font-size:12px;padding:11px 22px;">Explore Our Full Vision →</a>
-      </div>
-    </div>
+    <!-- MOBILE LIST (touch only) — populated by JS from PAGE_DATA -->
+    <div id="fv-mob-list-home" aria-label="Future Vision" role="region"></div>
 
     <!-- Pinned split-screen container -->
     <div class="fv-container" id="fvContainer">
@@ -3858,13 +3831,16 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
 
   <!-- FUTURE VISION — Pinned Split-Screen Mask Reveal (page version) -->
   <section id="futureSplitSectionPage" style="background:var(--black);padding-top:0;">
-    <div style="padding:60px 48px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;max-width:1440px;margin:0 auto;">
+    <div id="fv-page-desktop-header" style="padding:60px 48px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;max-width:1440px;margin:0 auto;">
       <div style="text-align:left;">
         <div class="section-tag" style="color:var(--orange);margin-bottom:10px;">What's Next</div>
         <h2 class="section-title" style="font-size:clamp(36px,5vw,76px);text-align:left;line-height:1;color:var(--white);">The <span style="color:var(--orange);">Future</span> We're Building</h2>
         <p style="font-family:var(--font-body);font-size:15px;color:rgba(245,240,235,.5);margin-top:10px;font-weight:300;letter-spacing:.02em;">Scroll to explore the innovations and expansions we're building towards.</p>
       </div>
     </div>
+
+    <!-- MOBILE LIST (touch only) — populated by JS from PAGE_DATA -->
+    <div id="fv-mob-list-page" aria-label="Future Vision" role="region"></div>
 
     <div class="fv-container" id="fvContainerPage">
       <div class="fv-arch" id="fvArchPage">
@@ -8088,142 +8064,96 @@ body{font-family:'DM Sans',sans-serif;background:#080808;color:#F5F0EB;line-heig
 
   window.addEventListener('resize', function() { goTo(current, false); });
 
-})();
-
-
 /* ═══════════════════════════════════════════════════════════════
-   MOBILE FUTURE VISION SWIPE SLIDER — Touch-native horizontal swipe
-   Only initialised on touch/coarse-pointer devices
+   MOBILE FUTURE VISION LIST BUILDER
+   Runs on touch devices only. Builds left-details / right-photo
+   list for both the home preview and the full Future Vision page.
 ═══════════════════════════════════════════════════════════════ */
-(function initFvMobSlider() {
+(function initFvMobList() {
 
-  var isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-  if (!isTouchDevice) return;
+  var isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  if (!isTouch) return;
 
-  var track   = document.getElementById('fvMobTrack');
-  var dotsEl  = document.getElementById('fvMobDots');
-  var outer   = document.getElementById('fvMobTrackOuter');
-  var hintEl  = document.getElementById('fvMobHint');
-  if (!track || !dotsEl || !outer) return;
-
-  /* Wait for renderPageData to populate PAGE_DATA */
+  /* Wait for renderPageData to run and PAGE_DATA to be ready */
   function tryBuild() {
     if (typeof PAGE_DATA === 'undefined' || !PAGE_DATA.future || !PAGE_DATA.future.panels) {
       setTimeout(tryBuild, 80);
       return;
     }
-    build(PAGE_DATA.future.panels.slice(0, 8)); /* show first 8 panels */
+    var panels = PAGE_DATA.future.panels;
+    buildList('fv-mob-list-home', panels.slice(0, 4), true);  /* home: first 4 */
+    buildList('fv-mob-list-page', panels, false);             /* page: all 10  */
   }
-  tryBuild();
 
-  function build(panels) {
-    var total      = panels.length;
-    var current    = 0;
-    var startX     = 0;
-    var startY     = 0;
-    var isDragging = false;
-    var isScrolling= null;
-    var THRESHOLD  = 48;
-    var slideEls   = [];
+  function buildList(containerId, panels, isHome) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
 
-    /* ── Build slide cards ── */
+    /* Header */
+    var header = document.createElement('div');
+    header.className = 'fv-mob-header';
+    header.innerHTML =
+      '<div class="fv-mob-header-eyebrow">What\'s Next</div>' +
+      '<div class="fv-mob-header-title">The <span>Future</span> We\'re Building</div>' +
+      '<div class="fv-mob-header-sub">The innovations and expansions we\'re building towards — shaping digital marketing\'s future.</div>';
+    container.appendChild(header);
+
+    /* List */
+    var list = document.createElement('div');
+    list.className = 'fv-mob-list';
+
     panels.forEach(function(p, i) {
-      var el = document.createElement('div');
-      el.className = 'fv-mob-slide' + (i === 0 ? ' is-active' : '');
-      el.setAttribute('role', 'button');
-      el.setAttribute('tabindex', '0');
-      el.setAttribute('aria-label', 'Open ' + p.title);
-      el.innerHTML =
-        '<div class="fv-mob-slide-img-wrap">' +
-          '<img src="' + p.img + '" alt="' + p.title + '" loading="lazy" draggable="false">' +
-          '<div class="fv-mob-slide-img-grad"></div>' +
+      var item = document.createElement('div');
+      item.className = 'fv-mob-item';
+      item.setAttribute('role', 'button');
+      item.setAttribute('tabindex', '0');
+      item.setAttribute('aria-label', 'Open details: ' + p.title);
+
+      item.innerHTML =
+        '<div class="fv-mob-item-left">' +
+          '<div class="fv-mob-item-tag">' + p.tag + '</div>' +
+          '<div class="fv-mob-item-title">' + p.title + '</div>' +
+          '<div class="fv-mob-item-desc">' + p.desc + '</div>' +
+          '<div class="fv-mob-item-cta"><div class="fv-mob-item-cta-line"></div>Full Details</div>' +
         '</div>' +
-        '<div class="fv-mob-slide-tag">' + p.tag + '</div>' +
-        '<div class="fv-mob-slide-num">0' + (i < 9 ? (i + 1) : '') + '</div>' +
-        '<div class="fv-mob-slide-body">' +
-          '<div class="fv-mob-slide-title">' + p.title + '</div>' +
-          '<div class="fv-mob-slide-desc">' + p.desc + '</div>' +
-          '<button class="fv-mob-slide-cta" onclick="if(!isDragging){openFvDetail(' + i + ')}">' +
-            '<div class="fv-mob-slide-cta-line"></div>Full Details ↗' +
-          '</button>' +
+        '<div class="fv-mob-item-right">' +
+          '<img src="' + p.img + '" alt="' + p.title + '" loading="lazy" draggable="false">' +
         '</div>';
 
-      /* Tap to open detail */
+      /* Tap handler */
       (function(index) {
-        el.addEventListener('click', function() { if (!isDragging) openFvDetail(index); });
-        el.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') openFvDetail(index); });
+        item.addEventListener('click', function() { openFvDetail(index); });
+        item.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') openFvDetail(index);
+        });
       })(i);
 
-      track.appendChild(el);
-      slideEls.push(el);
+      list.appendChild(item);
     });
 
-    /* ── Build dots ── */
-    panels.forEach(function(_, i) {
-      var dot = document.createElement('div');
-      dot.className = 'fv-mob-dot' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', function() { goTo(i, true); });
-      dotsEl.appendChild(dot);
-    });
-    var dotEls = Array.from(dotsEl.querySelectorAll('.fv-mob-dot'));
+    container.appendChild(list);
 
-    function getSlideWidth() {
-      return slideEls[0] ? (slideEls[0].offsetWidth + 16) : 0; /* 16 = gap */
+    /* Footer */
+    var footer = document.createElement('div');
+    footer.className = 'fv-mob-footer';
+
+    if (isHome) {
+      footer.innerHTML =
+        '<span class="fv-mob-footer-count">' + panels.length + ' of ' + PAGE_DATA.future.panels.length + ' shown</span>' +
+        '<a href="#" onclick="navigate(\'future\');return false;" class="btn-p" style="font-size:12px;padding:10px 20px;">All ' + PAGE_DATA.future.panels.length + ' Visions →</a>';
+    } else {
+      footer.innerHTML =
+        '<span class="fv-mob-footer-count">' + panels.length + ' visions</span>';
     }
 
-    function getOffset(index) {
-      var sw   = getSlideWidth();
-      var ow   = outer.offsetWidth;
-      var cAdj = (ow - (slideEls[0] ? slideEls[0].offsetWidth : 0)) / 2;
-      return -(index * sw - cAdj + 20); /* 20 = track-outer left padding */
-    }
+    container.appendChild(footer);
+  }
 
-    function setPos(x, instant) {
-      track.style.transition = instant ? 'none' : 'transform 0.42s cubic-bezier(0.22,1,0.36,1)';
-      track.style.transform  = 'translateX(' + x + 'px)';
-    }
-
-    function goTo(index, animate) {
-      index   = Math.max(0, Math.min(total - 1, index));
-      current = index;
-      setPos(getOffset(current), !animate);
-      slideEls.forEach(function(el, i) { el.classList.toggle('is-active', i === current); });
-      dotEls.forEach(function(el, i)   { el.classList.toggle('active',    i === current); });
-      /* Fade out hint after first swipe */
-      if (hintEl && index > 0) { hintEl.style.opacity = '0'; hintEl.style.pointerEvents = 'none'; }
-    }
-
-    goTo(0, false);
-
-    /* ── Touch handling ── */
-    outer.addEventListener('touchstart', function(e) {
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      isDragging = false;
-      isScrolling = null;
-      track.style.transition = 'none';
-    }, { passive: true });
-
-    outer.addEventListener('touchmove', function(e) {
-      var dx = e.touches[0].clientX - startX;
-      var dy = e.touches[0].clientY - startY;
-      if (isScrolling === null) isScrolling = Math.abs(dy) > Math.abs(dx);
-      if (isScrolling) return;
-      e.preventDefault();
-      isDragging = true;
-      track.style.transform = 'translateX(' + (getOffset(current) + dx) + 'px)';
-    }, { passive: false });
-
-    outer.addEventListener('touchend', function(e) {
-      if (isScrolling) return;
-      var dx = e.changedTouches[0].clientX - startX;
-      if      (dx < -THRESHOLD) goTo(current + 1, true);
-      else if (dx >  THRESHOLD) goTo(current - 1, true);
-      else                      goTo(current,     true);
-      setTimeout(function() { isDragging = false; }, 60);
-    }, { passive: true });
-
-    window.addEventListener('resize', function() { goTo(current, false); });
+  /* Run after DOM + renderPageData */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(tryBuild, 150); });
+  } else {
+    setTimeout(tryBuild, 150);
   }
 
 })();
