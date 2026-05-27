@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
 <title>The Sonic Media — Premium Digital Marketing Agency</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
@@ -206,6 +206,7 @@ nav.stuck{
 .mob-nav{
   position:fixed;inset:0;z-index:9985;
   display:flex;
+  justify-content:flex-end;
   visibility:hidden;
   pointer-events:none;
   overflow:hidden;
@@ -227,9 +228,10 @@ nav.stuck{
   width:min(320px,88vw);
   height:100%;
   background:var(--black2);
-  border-right:1px solid rgba(255,255,255,.08);
+  border-left:1px solid rgba(255,255,255,.08);
+  border-right:none;
   display:flex;flex-direction:column;
-  transform:translateX(-100%);
+  transform:translateX(100%);
   transition:transform .42s cubic-bezier(.77,0,.175,1);
   overflow:hidden;
   flex-shrink:0;
@@ -1698,6 +1700,10 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.05);paddin
   .cs-item:first-child{grid-row:auto;}
   .faq-inner{grid-template-columns:1fr;}
   .faq-section{padding:80px 40px;}
+  /* Ensure nav height works well on mobile */
+  nav { height: 64px; }
+  .nav-brand { font-size: 13px; }
+}
   .inner-hero{padding:130px 40px 80px;}
   .contact-section{padding:80px 24px;}
   .services-grid{grid-template-columns:1fr 1fr;}
@@ -8197,6 +8203,9 @@ body{font-family:'DM Sans',sans-serif;background:#080808;color:#F5F0EB;line-heig
     if(typeof PAGE_DATA === 'undefined' || !PAGE_DATA.future || !PAGE_DATA.future.panels){
       return setTimeout(tryBuild, 150);
     }
+
+    /* ── Guard: only build once ── */
+    if(rail.children.length > 0) return;
 
     /* ── HOME PREVIEW: first 4 panels only ── */
     var panels  = PAGE_DATA.future.panels.slice(0, 4);
