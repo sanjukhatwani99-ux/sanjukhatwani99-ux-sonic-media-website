@@ -1097,30 +1097,72 @@ section{position:relative;z-index:2;}
   .fw-stat-cell:nth-child(3){border-top:1px solid rgba(0,0,0,.1);}
 }
 @media(max-width:768px){
-  .fw-header{grid-template-columns:1fr;padding:48px 24px 36px;}
+  .fw-header{grid-template-columns:1fr;padding:32px 20px 24px;}
   .fw-header-right{align-items:flex-start;}
-  .fw-tagline{text-align:left;}
-  .fw-topbar{padding:12px 24px;}
+  .fw-tagline{text-align:left;font-size:12px;}
+  .fw-topbar{padding:10px 20px;}
+  .fw-title{font-size:clamp(42px,11vw,72px);}
+
+  /* ── Compact horizontal card layout ── */
   .fw-row{
-    grid-template-columns:48px 1fr;
-    grid-template-rows:auto auto;
+    display:flex;
+    flex-direction:row;
+    align-items:stretch;
     min-height:auto;
+    gap:0;
+    position:relative;
+    padding:0;
   }
+  .fw-row-num{
+    width:36px;flex-shrink:0;
+    padding:16px 0 0;
+    font-size:11px;
+    border-right:1px solid rgba(0,0,0,.08);
+  }
+  .fw-row-info{
+    flex:1;padding:16px 14px 14px;
+    display:flex;flex-direction:column;gap:6px;
+    justify-content:center;
+    min-width:0;
+  }
+  .fw-row-cat{font-size:9px;letter-spacing:.2em;margin-bottom:2px;}
+  .fw-row-name{font-size:15px;margin-bottom:4px;line-height:1.15;}
+  .fw-row-tags{gap:5px;}
+  .fw-row-tag{padding:3px 8px;font-size:8px;}
+
+  /* Photo col: compact fixed thumbnail */
   .fw-row-photo{
-    grid-column:1/3;height:200px;
-    border-left:none;border-right:none;
+    flex-shrink:0;
+    width:90px;
+    height:auto;
+    border-left:1px solid rgba(0,0,0,.08);
+    border-right:none;
+    position:relative;
+    overflow:hidden;
   }
-  .fw-row-photo img{position:absolute;}
+  .fw-row-photo img{position:absolute;inset:0;}
+
+  /* Metric col: small inline badge */
   .fw-row-metric{
-    grid-column:1/3;
-    flex-direction:row;justify-content:flex-start;
-    padding:16px 24px;
-    border-top:1px solid rgba(0,0,0,.08);
-    gap:12px;
+    flex-shrink:0;
+    width:72px;
+    padding:0 10px;
+    border-left:1px solid rgba(0,0,0,.08);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:2px;
+    text-align:center;
   }
-  .fw-row-arrow{margin-top:0;}
+  .fw-row-val{font-size:clamp(18px,4vw,26px);}
+  .fw-row-lbl{font-size:7px;letter-spacing:.12em;}
+  .fw-row-arrow{display:none;}
+
+  /* Stat strip: 2×2 compact */
   .fw-stat-strip{grid-template-columns:1fr 1fr;}
+  .fw-stat-cell{padding:24px 16px;}
   .fw-stat-cell:nth-child(2){border-right:1px solid rgba(0,0,0,.1);}
+  .fw-stat-cell:nth-child(3){border-top:1px solid rgba(0,0,0,.1);}
+  .fw-stat-big{font-size:clamp(32px,8vw,52px);}
+  .fw-stat-label{font-size:10px;}
 }
 
 /* ── Full case studies list (dedicated page) ── */
@@ -1640,10 +1682,10 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.05);paddin
   .about{padding:80px 24px;}
   .services{padding:80px 24px;}
   .studio{padding:80px 24px;}
-  .future{padding:80px 24px;}
+  .future{padding:44px 20px;}
   .testimonials{padding:80px 24px;}
-  .casestudies{padding:80px 24px;}
-  .journal{padding:80px 24px;}
+  .casestudies{padding:0;}
+  .journal{padding:44px 0;}
   .blogs-half,.newsletter-half{padding:70px 24px;}
   .cta{padding:100px 24px;}
   footer{padding:60px 24px 30px;}
@@ -2433,269 +2475,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.05);paddin
   .fv-img-wrapper { height: 220px; border-radius: 14px; }
 }
 
-/* ═══════════════════════════════════════════════════
-   FUTURE VISION — MOBILE LIST LAYOUT
-   Left: details · Right: small photo
-   Replaces the pinned GSAP split-screen on mobile
-═══════════════════════════════════════════════════ */
-
-/* Hide split-screen on mobile, show mobile list */
-@media (hover: none) and (pointer: coarse) {
-  .fv-container { display: none !important; }
-  #fv-mob-list-home, #fv-mob-list-page { display: block !important; }
-  #fv-page-desktop-header { display: none !important; }
-  #fv-home-header { display: none !important; }
-
-  /* Future section wrapper on mobile */
-  #futureSplitSection {
-    background: var(--black2) !important;
-    padding: 0 !important;
-  }
-
-  /* Blogs/Newsletter split — stack on mobile */
-  .blogs-newsletter {
-    grid-template-columns: 1fr !important;
-    min-height: auto !important;
-  }
-  .blogs-half {
-    padding: 56px 20px 40px !important;
-  }
-  .newsletter-half {
-    padding: 56px 20px !important;
-  }
-  .nl-h {
-    font-size: clamp(40px, 11vw, 64px) !important;
-  }
-  .nl-input {
-    width: 100% !important;
-  }
-  .nl-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .nl-submit {
-    width: 100% !important;
-  }
-}
-/* Hide mobile list on desktop, keep split-screen */
-@media (hover: hover) and (pointer: fine) {
-  #fv-mob-list-home, #fv-mob-list-page { display: none !important; }
-}
-
-/* Shared mobile list styles */
-#fv-mob-list-home,
-#fv-mob-list-page {
-  display: none; /* shown only on touch via media query above */
-  padding: 0;
-  background: var(--black2);
-  width: 100%;
-  overflow: hidden;
-}
-
-.fv-mob-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 0 20px 8px;
-}
-
-/* Each item row */
-.fv-mob-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 22px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  position: relative;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition: background 0.2s;
-}
-.fv-mob-item:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
-.fv-mob-item:active { background: rgba(255,92,0,0.06); border-radius: 12px; margin: 0 -8px; padding-left: 8px; padding-right: 8px; }
-
-/* Left: text details */
-.fv-mob-item-left {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-/* Tag pill */
-.fv-mob-item-tag {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  padding: 3px 10px;
-  border-radius: 50px;
-  background: rgba(255,92,0,0.1);
-  border: 1px solid rgba(255,92,0,0.25);
-  font-family: var(--font-heading);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 2px;
-}
-
-/* Item number */
-.fv-mob-item-num {
-  font-family: var(--font-display);
-  font-size: 11px;
-  color: rgba(255,92,0,0.35);
-  letter-spacing: 0.1em;
-  line-height: 1;
-}
-
-/* Title */
-.fv-mob-item-title {
-  font-family: var(--font-heading);
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--white);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  transition: color 0.25s;
-}
-
-/* Description */
-.fv-mob-item-desc {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 300;
-  color: rgba(245,240,235,0.5);
-  line-height: 1.65;
-  letter-spacing: 0.01em;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* CTA arrow row */
-.fv-mob-item-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-heading);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-top: 2px;
-  opacity: 0.85;
-}
-.fv-mob-item-cta-line {
-  width: 14px;
-  height: 1.5px;
-  background: var(--orange);
-  flex-shrink: 0;
-}
-
-/* Right: small photo */
-.fv-mob-item-right {
-  flex-shrink: 0;
-  width: 96px;
-  height: 96px;
-  border-radius: 14px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid rgba(255,92,0,0.2);
-  background: var(--black3);
-}
-.fv-mob-item-right img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
-}
-.fv-mob-item:active .fv-mob-item-right img {
-  transform: scale(1.06);
-}
-/* Orange shimmer overlay on photo */
-.fv-mob-item-right::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,92,0,0.18) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-/* "View All" footer button */
-.fv-mob-footer {
-  padding: 28px 20px 36px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  background: var(--black2);
-}
-.fv-mob-footer-count {
-  font-family: var(--font-heading);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(245,240,235,0.35);
-}
-
-/* Section header for mobile list context */
-.fv-mob-header {
-  padding: 40px 20px 20px;
-  background: var(--black2);
-  border-top: 2px solid var(--orange);
-  position: relative;
-}
-.fv-mob-header::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--orange), rgba(255,92,0,0.3));
-}
-.fv-mob-header-eyebrow {
-  font-family: var(--font-heading);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.fv-mob-header-eyebrow::before {
-  content: '';
-  width: 18px;
-  height: 1.5px;
-  background: var(--orange);
-  flex-shrink: 0;
-}
-.fv-mob-header-title {
-  font-family: var(--font-heading);
-  font-size: 30px;
-  font-weight: 800;
-  color: var(--white);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-.fv-mob-header-title span { color: var(--orange); }
-.fv-mob-header-sub {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 300;
-  color: rgba(245,240,235,0.5);
-  margin-top: 10px;
-  line-height: 1.65;
-}
-
 
 /* ═══════════════════════════════════════════════════
    HOME FOOTER — PARALLAX ANIMATION STRIP
@@ -2781,10 +2560,14 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
 
   /* Case studies / Featured work */
   .fw-topbar { padding: 10px 20px; }
-  .fw-header { padding: 40px 20px 28px; }
-  .fw-row { grid-template-columns: 44px 1fr; }
-  .fw-row-info { padding: 20px 16px; }
-  .fw-row-name { font-size: 16px; }
+  .fw-header { padding: 28px 16px 20px; }
+  .fw-row { min-height: 72px; }
+  .fw-row-photo { width: 72px; }
+  .fw-row-metric { width: 60px; padding: 0 6px; }
+  .fw-row-val { font-size: 16px; }
+  .fw-row-info { padding: 12px 10px; }
+  .fw-row-name { font-size: 13px; }
+  .fw-row-tags { display: none; }
 
   /* Testimonials */
   .testimonials { padding: 60px 20px; }
@@ -3479,10 +3262,7 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
       </div>
     </div>
 
-    <!-- MOBILE LIST (touch only) — populated by JS from PAGE_DATA -->
-    <div id="fv-mob-list-home" aria-label="Future Vision" role="region"></div>
-
-    <!-- Pinned split-screen container -->
+    <!-- Pinned split-screen container (desktop/tablet) -->
     <div class="fv-container" id="fvContainer">
       <div class="fv-arch">
 
@@ -3495,6 +3275,10 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
       </div>
       <div class="fv-spacer"></div>
     </div>
+
+    <!-- MOBILE: compact swipeable card rail (touch devices only) -->
+    <div id="fv-home-mobile-cards-rail" style="display:none;"></div>
+    <div id="fv-mob-dots" style="display:none;"></div>
   </section>
 
   <!-- BLOGS & NEWSLETTER -->
@@ -3877,16 +3661,13 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
 
   <!-- FUTURE VISION — Pinned Split-Screen Mask Reveal (page version) -->
   <section id="futureSplitSectionPage" style="background:var(--black);padding-top:0;">
-    <div id="fv-page-desktop-header" style="padding:60px 48px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;max-width:1440px;margin:0 auto;">
+    <div style="padding:60px 48px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;max-width:1440px;margin:0 auto;">
       <div style="text-align:left;">
         <div class="section-tag" style="color:var(--orange);margin-bottom:10px;">What's Next</div>
         <h2 class="section-title" style="font-size:clamp(36px,5vw,76px);text-align:left;line-height:1;color:var(--white);">The <span style="color:var(--orange);">Future</span> We're Building</h2>
         <p style="font-family:var(--font-body);font-size:15px;color:rgba(245,240,235,.5);margin-top:10px;font-weight:300;letter-spacing:.02em;">Scroll to explore the innovations and expansions we're building towards.</p>
       </div>
     </div>
-
-    <!-- MOBILE LIST (touch only) — populated by JS from PAGE_DATA -->
-    <div id="fv-mob-list-page" aria-label="Future Vision" role="region"></div>
 
     <div class="fv-container" id="fvContainerPage">
       <div class="fv-arch" id="fvArchPage">
@@ -7948,11 +7729,274 @@ body{font-family:'DM Sans',sans-serif;background:#080808;color:#F5F0EB;line-heig
 .fv-cta-h span{color:#FF5C00;}
 .fv-cta-p{font-size:15px;line-height:1.75;color:rgba(245,240,235,.55);font-weight:300;max-width:480px;margin:0 auto 36px;}
 .fv-cta-btn{display:inline-flex;align-items:center;gap:10px;background:#FF5C00;color:#fff;padding:16px 38px;border-radius:50px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;letter-spacing:.04em;text-decoration:none;position:relative;overflow:hidden;box-shadow:0 0 30px rgba(255,92,0,.4);transition:all .3s;}
-.fv-cta-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:translateX(-100%);transition:transform .5s;}
-.fv-cta-btn:hover::before{transform:translateX(100%);}
-.fv-cta-btn:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(255,92,0,.65);}
-@media(max-width:768px){.fv-nav,.fv-footer{padding-left:20px;padding-right:20px;}.fv-hero{padding:60px 20px 48px;}.fv-body{padding:40px 20px 80px;}.fv-article{padding:28px;}.fv-cta-band{padding:48px 24px;}}
-</style>
+/* ═══════════════════════════════════════════════════
+   MOBILE REDESIGN — Results · Case Studies · Future Vision
+   Compact, modern, premium mobile layouts
+═══════════════════════════════════════════════════ */
+
+/* ── CASE STUDIES PREVIEW (home .journal section) ── */
+@media(max-width:768px){
+  /* Horizontal scroll snap card rail */
+  .journal{ padding:44px 0 44px; }
+  .journal-header{
+    padding:0 20px;
+    flex-wrap:wrap;gap:10px;
+    margin-bottom:20px;
+  }
+  .journal-header .section-title{ font-size:clamp(28px,8vw,42px)!important; }
+  .journal-header .section-tag{ font-size:9px; }
+
+  /* Override grid → horizontal scroll rail */
+  #home-casestudies-grid.jnl-grid{
+    display:flex;
+    flex-direction:row;
+    gap:14px;
+    overflow-x:auto;
+    overflow-y:visible;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    padding:4px 20px 16px;
+    scrollbar-width:none;
+    grid-template-columns:unset;
+  }
+  #home-casestudies-grid.jnl-grid::-webkit-scrollbar{ display:none; }
+
+  /* Constrain card width for peekaboo effect */
+  #home-casestudies-grid.jnl-grid > .jcard{
+    flex:0 0 78vw;
+    max-width:300px;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    min-width:0;
+  }
+
+  .jcard-img{ aspect-ratio:16/10; }
+  .jcard-body{ padding:16px 18px 18px; }
+  .jcard-title{ font-size:15px!important; line-height:1.25; }
+  .jcard-excerpt{ font-size:12px; -webkit-line-clamp:2; display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden; }
+
+  /* View all link on right side */
+  .journal-header a.cs-view-all{ font-size:10px; padding:9px 16px; flex-shrink:0; }
+}
+
+/* ── RESULTS THAT SPEAK (home #home-portfolio-list) ── */
+@media(max-width:768px){
+  /* The Results section wrapping .casestudies on home */
+  section.casestudies{ padding:0!important; }
+
+  /* Top bar tighter */
+  .fw-topbar{ font-size:10px; }
+
+  /* Hide large decorative title on mobile — keep compact eyebrow */
+  .fw-header{ padding:28px 20px 20px; gap:16px; }
+  .fw-title{ font-size:clamp(40px,11vw,60px); line-height:.9; }
+  .fw-eyebrow{ margin-bottom:10px; font-size:9px; }
+
+  /* Compact stat strip pills instead of big cells */
+  .fw-stat-strip{
+    display:flex;
+    flex-direction:row;
+    overflow-x:auto;
+    scrollbar-width:none;
+    border-top:1px solid rgba(0,0,0,.1);
+    gap:0;
+  }
+  .fw-stat-strip::-webkit-scrollbar{ display:none; }
+  .fw-stat-cell{
+    flex:0 0 42vw;
+    min-width:140px;
+    padding:20px 18px;
+    border-right:1px solid rgba(0,0,0,.08)!important;
+    border-top:none!important;
+    flex-shrink:0;
+  }
+  .fw-stat-big{ font-size:clamp(28px,7vw,42px); margin-bottom:4px; }
+  .fw-stat-label{ font-size:9px; letter-spacing:.14em; }
+}
+
+/* ── FUTURE VISION (home futureSplitSection) ── */
+@media(max-width:768px){
+  /* Sticky header: more compact */
+  #fv-home-header{
+    padding:10px 20px!important;
+    border-bottom:1px solid rgba(255,255,255,.06)!important;
+    gap:8px!important;
+    flex-wrap:nowrap!important;
+    align-items:center!important;
+  }
+  #fv-home-header .section-title{
+    font-size:clamp(15px,4vw,22px)!important;
+    line-height:1.05!important;
+  }
+  #fv-home-header .section-tag{ font-size:9px!important; margin-bottom:2px!important; }
+  #fv-home-header p{ display:none!important; } /* hide subtext on mobile */
+  #fv-home-header .btn-p{ font-size:11px!important; padding:8px 14px!important; white-space:nowrap; }
+
+  /* Replace pinned split-screen with compact swipeable card grid */
+  .fv-container{ padding:0 0 40px!important; }
+  .fv-arch{
+    flex-direction:column;
+    gap:0;
+    max-width:100%;
+  }
+
+  /* Left text panels: convert to horizontal scroll rail */
+  .fv-arch__left{
+    display:flex!important;
+    flex-direction:row!important;
+    overflow-x:auto;
+    overflow-y:visible;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    gap:0;
+    scrollbar-width:none;
+    padding-bottom:0;
+  }
+  .fv-arch__left::-webkit-scrollbar{ display:none; }
+
+  .fv-arch__info{
+    flex:0 0 100vw;
+    min-width:0;
+    height:auto!important;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    display:flex!important;
+    align-items:stretch!important;
+    padding:0!important;
+  }
+
+  /* Each info panel becomes a full-width stacked card (image top, text bottom) */
+  .fv-arch__info .fv-card-panel-inner{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    padding:0;
+  }
+
+  /* Hide right image rail on mobile (images go inside each card via ::before hack) */
+  .fv-arch__right{ display:none!important; }
+
+  /* Redesigned compact info card for mobile */
+  .fv-arch__info > div{
+    width:100%;
+    padding:20px 20px 28px;
+  }
+  .fv-header{ font-size:clamp(20px,5.5vw,28px); margin-bottom:8px; line-height:1.1; }
+  .fv-desc{ font-size:13px; margin-block:4px 16px; line-height:1.6; color:rgba(245,240,235,.6); }
+  .fv-link{
+    font-size:12px;
+    padding:10px 18px;
+    border-radius:50px;
+    border:1.5px solid rgba(255,92,0,.4);
+    color:var(--orange);
+    background:rgba(255,92,0,.06);
+  }
+}
+
+/* ── FUTURE VISION: compact image+text card layout for mobile ── */
+@media(hover:none) and (pointer:coarse){
+  /* Build a compact card swiper for the future panels */
+  #fv-home-mobile-cards-rail{
+    display:flex;
+    flex-direction:row;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    gap:0;
+    scrollbar-width:none;
+    padding:16px 20px 24px;
+  }
+  #fv-home-mobile-cards-rail::-webkit-scrollbar{ display:none; }
+  .fv-mob-card{
+    flex:0 0 82vw;
+    max-width:320px;
+    scroll-snap-align:start;
+    border-radius:18px;
+    overflow:hidden;
+    background:var(--black3);
+    border:1px solid rgba(255,92,0,.12);
+    margin-right:12px;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+  }
+  .fv-mob-card-img{
+    width:100%;
+    height:180px;
+    overflow:hidden;
+    position:relative;
+    flex-shrink:0;
+  }
+  .fv-mob-card-img img{
+    width:100%;height:100%;object-fit:cover;
+    filter:saturate(.7) brightness(.65);
+    display:block;
+  }
+  .fv-mob-card-img::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(to bottom,transparent 30%,rgba(8,8,8,.8));
+  }
+  .fv-mob-card-body{ padding:16px 18px 20px; flex:1; }
+  .fv-mob-tag{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:var(--font-heading);font-size:9px;font-weight:700;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--orange);
+    margin-bottom:8px;
+  }
+  .fv-mob-tag::before{ content:'';width:14px;height:1.5px;background:var(--orange); }
+  .fv-mob-title{
+    font-family:var(--font-heading);font-size:16px;font-weight:800;
+    color:var(--white);line-height:1.15;margin-bottom:8px;
+  }
+  .fv-mob-desc{
+    font-size:12px;line-height:1.6;color:rgba(245,240,235,.5);
+    font-weight:300;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .fv-mob-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    margin-top:14px;
+    font-family:var(--font-heading);font-size:10px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--orange);
+  }
+
+  /* Dot indicator for FV cards */
+  #fv-mob-dots{
+    display:flex;justify-content:center;gap:7px;padding:0 0 8px;
+  }
+  .fv-mob-dot{
+    width:6px;height:6px;border-radius:50%;
+    background:rgba(245,240,235,.18);
+    transition:all .3s cubic-bezier(.22,1,.36,1);
+    flex-shrink:0;
+  }
+  .fv-mob-dot.active{
+    width:20px;border-radius:3px;
+    background:var(--orange);
+    box-shadow:0 0 8px rgba(255,92,0,.5);
+  }
+}
+
+/* ── Spacer fix on mobile for Future Vision sticky section ── */
+@media(max-width:768px){
+  .fv-spacer{ height:0!important; }
+  /* The pinned container becomes a normal scroll container */
+  #fvContainer{ position:static!important; overflow:visible!important; }
+  #fvContainer .fv-arch{ pointer-events:auto; }
+}
+
+/* ── Small phone (≤480px) additional tightening ── */
+@media(max-width:480px){
+  /* Results stat strip */
+  .fw-stat-cell{ flex:0 0 52vw; min-width:160px; }
+
+  /* Case studies card width */
+  #home-casestudies-grid.jnl-grid > .jcard{ flex:0 0 86vw; }
+
+  /* FV cards */
+  .fv-mob-card{ flex:0 0 88vw; }
+}
+
 </head>
 <body>
 <nav class="fv-nav">
@@ -8110,98 +8154,6 @@ body{font-family:'DM Sans',sans-serif;background:#080808;color:#F5F0EB;line-heig
 
   window.addEventListener('resize', function() { goTo(current, false); });
 
-/* ═══════════════════════════════════════════════════════════════
-   MOBILE FUTURE VISION LIST BUILDER
-   Runs on touch devices only. Builds left-details / right-photo
-   list for both the home preview and the full Future Vision page.
-═══════════════════════════════════════════════════════════════ */
-(function initFvMobList() {
-
-  var isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-  if (!isTouch) return;
-
-  /* Wait for renderPageData to run and PAGE_DATA to be ready */
-  function tryBuild() {
-    if (typeof PAGE_DATA === 'undefined' || !PAGE_DATA.future || !PAGE_DATA.future.panels) {
-      setTimeout(tryBuild, 80);
-      return;
-    }
-    var panels = PAGE_DATA.future.panels;
-    buildList('fv-mob-list-home', panels.slice(0, 4), true);  /* home: first 4 */
-    buildList('fv-mob-list-page', panels, false);             /* page: all 10  */
-  }
-
-  function buildList(containerId, panels, isHome) {
-    var container = document.getElementById(containerId);
-    if (!container) return;
-
-    /* Header */
-    var header = document.createElement('div');
-    header.className = 'fv-mob-header';
-    header.innerHTML =
-      '<div class="fv-mob-header-eyebrow">What\'s Next</div>' +
-      '<div class="fv-mob-header-title">The <span>Future</span> We\'re Building</div>' +
-      '<div class="fv-mob-header-sub">The innovations and expansions we\'re building towards — shaping digital marketing\'s future.</div>';
-    container.appendChild(header);
-
-    /* List */
-    var list = document.createElement('div');
-    list.className = 'fv-mob-list';
-
-    panels.forEach(function(p, i) {
-      var item = document.createElement('div');
-      item.className = 'fv-mob-item';
-      item.setAttribute('role', 'button');
-      item.setAttribute('tabindex', '0');
-      item.setAttribute('aria-label', 'Open details: ' + p.title);
-
-      item.innerHTML =
-        '<div class="fv-mob-item-left">' +
-          '<div class="fv-mob-item-tag">' + p.tag + '</div>' +
-          '<div class="fv-mob-item-title">' + p.title + '</div>' +
-          '<div class="fv-mob-item-desc">' + p.desc + '</div>' +
-          '<div class="fv-mob-item-cta"><div class="fv-mob-item-cta-line"></div>Full Details</div>' +
-        '</div>' +
-        '<div class="fv-mob-item-right">' +
-          '<img src="' + p.img + '" alt="' + p.title + '" loading="lazy" draggable="false">' +
-        '</div>';
-
-      /* Tap handler */
-      (function(index) {
-        item.addEventListener('click', function() { openFvDetail(index); });
-        item.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter' || e.key === ' ') openFvDetail(index);
-        });
-      })(i);
-
-      list.appendChild(item);
-    });
-
-    container.appendChild(list);
-
-    /* Footer */
-    var footer = document.createElement('div');
-    footer.className = 'fv-mob-footer';
-
-    if (isHome) {
-      footer.innerHTML =
-        '<span class="fv-mob-footer-count">' + panels.length + ' of ' + PAGE_DATA.future.panels.length + ' shown</span>' +
-        '<a href="#" onclick="navigate(\'future\');return false;" class="btn-p" style="font-size:12px;padding:10px 20px;">All ' + PAGE_DATA.future.panels.length + ' Visions →</a>';
-    } else {
-      footer.innerHTML =
-        '<span class="fv-mob-footer-count">' + panels.length + ' visions</span>';
-    }
-
-    container.appendChild(footer);
-  }
-
-  /* Run after DOM + renderPageData */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() { setTimeout(tryBuild, 150); });
-  } else {
-    setTimeout(tryBuild, 150);
-  }
-
 })();
 
 
@@ -8257,6 +8209,99 @@ body{font-family:'DM Sans',sans-serif;background:#080808;color:#F5F0EB;line-heig
     }
   }, { passive: true });
 
+})();
+</script>
+
+<script>
+/* ════════════════════════════════════════════════════
+   MOBILE FUTURE VISION CARD RAIL
+   Builds a swipeable card strip from PAGE_DATA.future.panels
+   Only activates on touch/coarse-pointer devices
+════════════════════════════════════════════════════ */
+(function initMobFvRail(){
+  var isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  if(!isTouch) return;
+
+  var rail   = document.getElementById('fv-home-mobile-cards-rail');
+  var dotsEl = document.getElementById('fv-mob-dots');
+  var fvCont = document.getElementById('fvContainer');
+  if(!rail || !dotsEl) return;
+
+  /* Hide the desktop pinned container */
+  if(fvCont){ fvCont.style.display='none'; }
+
+  /* Show the mobile rail */
+  rail.style.display='flex';
+  dotsEl.style.display='flex';
+
+  /* Wait for PAGE_DATA to exist */
+  function tryBuild(){
+    if(typeof PAGE_DATA === 'undefined' || !PAGE_DATA.future || !PAGE_DATA.future.panels){
+      setTimeout(tryBuild,150); return;
+    }
+    var panels = PAGE_DATA.future.panels;
+    var total  = panels.length;
+    var current= 0;
+    var dotEls = [];
+
+    panels.forEach(function(p,i){
+      var card = document.createElement('div');
+      card.className = 'fv-mob-card';
+
+      var imgHtml = p.img
+        ? '<div class="fv-mob-card-img"><img src="'+p.img+'" alt="'+encodeURIComponent(p.title||'')+'" loading="lazy"></div>'
+        : '';
+
+      var bullets = (p.bullets && p.bullets.length)
+        ? '<ul style="margin-top:10px;list-style:none;display:flex;flex-direction:column;gap:4px;">'
+          + p.bullets.slice(0,2).map(function(b){
+              return '<li style="font-size:11px;color:rgba(245,240,235,.5);line-height:1.5;padding-left:14px;position:relative;font-family:var(--font-body);font-weight:300;">&#8594; '+b+'</li>';
+            }).join('')
+          + '</ul>'
+        : '';
+
+      card.innerHTML =
+        imgHtml +
+        '<div class="fv-mob-card-body">' +
+          '<div class="fv-mob-tag">' + (p.tag||'Future Vision') + '</div>' +
+          '<div class="fv-mob-title">' + (p.title||'') + '</div>' +
+          '<div class="fv-mob-desc">' + (p.body||'').slice(0,140) + (( (p.body||'').length>140 )?'…':'') + '</div>' +
+          bullets +
+          '<div class="fv-mob-btn" style="cursor:pointer;" onclick="if(typeof openFvDetail===\'function\')openFvDetail('+i+')">' +
+            'Explore &nbsp;→' +
+          '</div>' +
+        '</div>';
+
+      rail.appendChild(card);
+
+      /* Dot */
+      var dot = document.createElement('div');
+      dot.className = 'fv-mob-dot' + (i===0?' active':'');
+      dot.setAttribute('role','button');
+      dot.setAttribute('tabindex','0');
+      (function(idx){ dot.onclick=function(){ scrollToCard(idx); }; })(i);
+      dotsEl.appendChild(dot);
+      dotEls.push(dot);
+    });
+
+    /* Dot sync on scroll */
+    rail.addEventListener('scroll', function(){
+      var cardW = rail.firstChild ? (rail.firstChild.offsetWidth + 12) : (rail.scrollWidth / total);
+      var idx   = Math.round(rail.scrollLeft / cardW);
+      idx = Math.max(0, Math.min(total-1, idx));
+      if(idx !== current){
+        current = idx;
+        dotEls.forEach(function(d,j){ d.classList.toggle('active', j===current); });
+      }
+    }, { passive: true });
+
+    function scrollToCard(idx){
+      var cardW = rail.firstChild ? (rail.firstChild.offsetWidth + 12) : (rail.scrollWidth / total);
+      rail.scrollTo({ left: idx * cardW, behavior: 'smooth' });
+    }
+  }
+
+  tryBuild();
 })();
 </script>
 
