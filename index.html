@@ -2433,6 +2433,239 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.05);paddin
   .fv-img-wrapper { height: 220px; border-radius: 14px; }
 }
 
+/* ═══════════════════════════════════════════════════
+   FUTURE VISION — MOBILE SWIPE SLIDER
+   Shown only on touch/coarse-pointer devices
+   Replaces the GSAP split-screen on mobile
+═══════════════════════════════════════════════════ */
+@media (hover: none) and (pointer: coarse) {
+  /* Hide the GSAP split-screen arch on touch */
+  #futureSplitSection .fv-container { display: none !important; }
+  #fvMobSlider { display: block !important; }
+}
+@media (hover: hover) and (pointer: fine) {
+  #fvMobSlider { display: none !important; }
+}
+
+#fvMobSlider {
+  display: none;
+  padding: 0 0 40px;
+  background: var(--black);
+  overflow: hidden;
+}
+
+.fv-mob-track-outer {
+  overflow: hidden;
+  padding: 0 20px;
+  position: relative;
+}
+
+.fv-mob-track {
+  display: flex;
+  gap: 16px;
+  will-change: transform;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Individual slide card */
+.fv-mob-slide {
+  flex: 0 0 88vw;
+  max-width: 360px;
+  border-radius: 22px;
+  overflow: hidden;
+  position: relative;
+  background: var(--black3);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: box-shadow 0.35s, border-color 0.35s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.fv-mob-slide.is-active {
+  border-color: rgba(255, 92, 0, 0.5);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 92, 0, 0.18);
+}
+
+/* Photo area */
+.fv-mob-slide-img-wrap {
+  width: 100%;
+  height: 230px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.fv-mob-slide-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.fv-mob-slide.is-active .fv-mob-slide-img-wrap img {
+  transform: scale(1.05);
+}
+
+/* Gradient over image */
+.fv-mob-slide-img-grad {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 70%;
+  background: linear-gradient(to top, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0.2) 100%);
+  pointer-events: none;
+}
+
+/* Orange accent glow */
+.fv-mob-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 110%, rgba(255, 92, 0, 0.2) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+  z-index: 0;
+}
+.fv-mob-slide.is-active::after { opacity: 1; }
+
+/* Tag pill overlaid on image */
+.fv-mob-slide-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  padding: 5px 12px;
+  border-radius: 50px;
+  background: rgba(255, 92, 0, 0.15);
+  border: 1px solid rgba(255, 92, 0, 0.35);
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  backdrop-filter: blur(8px);
+}
+
+/* Slide number watermark */
+.fv-mob-slide-num {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-family: var(--font-display);
+  font-size: 56px;
+  color: rgba(255, 92, 0, 0.08);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 1;
+  transition: color 0.4s;
+}
+.fv-mob-slide.is-active .fv-mob-slide-num { color: rgba(255, 92, 0, 0.16); }
+
+/* Details area below image */
+.fv-mob-slide-body {
+  padding: 20px 22px 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.fv-mob-slide-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 10px;
+  transition: color 0.3s;
+}
+.fv-mob-slide.is-active .fv-mob-slide-title { color: var(--orange); }
+
+.fv-mob-slide-desc {
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(245, 240, 235, 0.5);
+  font-weight: 300;
+  margin-bottom: 18px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.fv-mob-slide-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: none;
+  border: none;
+  padding: 0;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s, transform 0.35s;
+}
+.fv-mob-slide.is-active .fv-mob-slide-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fv-mob-slide-cta-line {
+  width: 18px;
+  height: 1.5px;
+  background: var(--orange);
+  transition: width 0.3s;
+}
+.fv-mob-slide.is-active .fv-mob-slide-cta-line { width: 28px; }
+
+/* Dot pagination */
+.fv-mob-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px 0 4px;
+}
+.fv-mob-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(245, 240, 235, 0.2);
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  flex-shrink: 0;
+}
+.fv-mob-dot.active {
+  width: 22px;
+  border-radius: 3px;
+  background: var(--orange);
+  box-shadow: 0 0 10px rgba(255, 92, 0, 0.5);
+}
+
+/* Swipe hint text */
+.fv-mob-hint {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(245, 240, 235, 0.3);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 0 0;
+  pointer-events: none;
+}
+
+/* Explore all CTA */
+.fv-mob-all-btn {
+  display: flex;
+  justify-content: center;
+  padding: 20px 20px 0;
+}
+
+
 
 /* ═══════════════════════════════════════════════════
    HOME FOOTER — PARALLAX ANIMATION STRIP
@@ -3213,6 +3446,20 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
       </div>
       <div style="flex-shrink:0;">
         <a href="#" onclick="navigate('future');return false;" class="btn-p" style="font-size:12px;padding:10px 22px;">Explore Our Vision →</a>
+      </div>
+    </div>
+
+    <!-- MOBILE SWIPE SLIDER (touch only — shown via CSS) -->
+    <div id="fvMobSlider" aria-label="Future Vision" role="region">
+      <div class="fv-mob-track-outer" id="fvMobTrackOuter">
+        <div class="fv-mob-track" id="fvMobTrack">
+          <!-- Cards injected by JS -->
+        </div>
+      </div>
+      <div class="fv-mob-dots" id="fvMobDots"></div>
+      <div class="fv-mob-hint" id="fvMobHint">← Swipe to explore →</div>
+      <div class="fv-mob-all-btn">
+        <a href="#" onclick="navigate('future');return false;" class="btn-p" style="font-size:12px;padding:11px 22px;">Explore Our Full Vision →</a>
       </div>
     </div>
 
@@ -7840,6 +8087,144 @@ body{font-family:'DM Sans',sans-serif;background:#080808;color:#F5F0EB;line-heig
   }, { passive: true });
 
   window.addEventListener('resize', function() { goTo(current, false); });
+
+})();
+
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE FUTURE VISION SWIPE SLIDER — Touch-native horizontal swipe
+   Only initialised on touch/coarse-pointer devices
+═══════════════════════════════════════════════════════════════ */
+(function initFvMobSlider() {
+
+  var isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  if (!isTouchDevice) return;
+
+  var track   = document.getElementById('fvMobTrack');
+  var dotsEl  = document.getElementById('fvMobDots');
+  var outer   = document.getElementById('fvMobTrackOuter');
+  var hintEl  = document.getElementById('fvMobHint');
+  if (!track || !dotsEl || !outer) return;
+
+  /* Wait for renderPageData to populate PAGE_DATA */
+  function tryBuild() {
+    if (typeof PAGE_DATA === 'undefined' || !PAGE_DATA.future || !PAGE_DATA.future.panels) {
+      setTimeout(tryBuild, 80);
+      return;
+    }
+    build(PAGE_DATA.future.panels.slice(0, 8)); /* show first 8 panels */
+  }
+  tryBuild();
+
+  function build(panels) {
+    var total      = panels.length;
+    var current    = 0;
+    var startX     = 0;
+    var startY     = 0;
+    var isDragging = false;
+    var isScrolling= null;
+    var THRESHOLD  = 48;
+    var slideEls   = [];
+
+    /* ── Build slide cards ── */
+    panels.forEach(function(p, i) {
+      var el = document.createElement('div');
+      el.className = 'fv-mob-slide' + (i === 0 ? ' is-active' : '');
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('aria-label', 'Open ' + p.title);
+      el.innerHTML =
+        '<div class="fv-mob-slide-img-wrap">' +
+          '<img src="' + p.img + '" alt="' + p.title + '" loading="lazy" draggable="false">' +
+          '<div class="fv-mob-slide-img-grad"></div>' +
+        '</div>' +
+        '<div class="fv-mob-slide-tag">' + p.tag + '</div>' +
+        '<div class="fv-mob-slide-num">0' + (i < 9 ? (i + 1) : '') + '</div>' +
+        '<div class="fv-mob-slide-body">' +
+          '<div class="fv-mob-slide-title">' + p.title + '</div>' +
+          '<div class="fv-mob-slide-desc">' + p.desc + '</div>' +
+          '<button class="fv-mob-slide-cta" onclick="if(!isDragging){openFvDetail(' + i + ')}">' +
+            '<div class="fv-mob-slide-cta-line"></div>Full Details ↗' +
+          '</button>' +
+        '</div>';
+
+      /* Tap to open detail */
+      (function(index) {
+        el.addEventListener('click', function() { if (!isDragging) openFvDetail(index); });
+        el.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') openFvDetail(index); });
+      })(i);
+
+      track.appendChild(el);
+      slideEls.push(el);
+    });
+
+    /* ── Build dots ── */
+    panels.forEach(function(_, i) {
+      var dot = document.createElement('div');
+      dot.className = 'fv-mob-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', function() { goTo(i, true); });
+      dotsEl.appendChild(dot);
+    });
+    var dotEls = Array.from(dotsEl.querySelectorAll('.fv-mob-dot'));
+
+    function getSlideWidth() {
+      return slideEls[0] ? (slideEls[0].offsetWidth + 16) : 0; /* 16 = gap */
+    }
+
+    function getOffset(index) {
+      var sw   = getSlideWidth();
+      var ow   = outer.offsetWidth;
+      var cAdj = (ow - (slideEls[0] ? slideEls[0].offsetWidth : 0)) / 2;
+      return -(index * sw - cAdj + 20); /* 20 = track-outer left padding */
+    }
+
+    function setPos(x, instant) {
+      track.style.transition = instant ? 'none' : 'transform 0.42s cubic-bezier(0.22,1,0.36,1)';
+      track.style.transform  = 'translateX(' + x + 'px)';
+    }
+
+    function goTo(index, animate) {
+      index   = Math.max(0, Math.min(total - 1, index));
+      current = index;
+      setPos(getOffset(current), !animate);
+      slideEls.forEach(function(el, i) { el.classList.toggle('is-active', i === current); });
+      dotEls.forEach(function(el, i)   { el.classList.toggle('active',    i === current); });
+      /* Fade out hint after first swipe */
+      if (hintEl && index > 0) { hintEl.style.opacity = '0'; hintEl.style.pointerEvents = 'none'; }
+    }
+
+    goTo(0, false);
+
+    /* ── Touch handling ── */
+    outer.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      isDragging = false;
+      isScrolling = null;
+      track.style.transition = 'none';
+    }, { passive: true });
+
+    outer.addEventListener('touchmove', function(e) {
+      var dx = e.touches[0].clientX - startX;
+      var dy = e.touches[0].clientY - startY;
+      if (isScrolling === null) isScrolling = Math.abs(dy) > Math.abs(dx);
+      if (isScrolling) return;
+      e.preventDefault();
+      isDragging = true;
+      track.style.transform = 'translateX(' + (getOffset(current) + dx) + 'px)';
+    }, { passive: false });
+
+    outer.addEventListener('touchend', function(e) {
+      if (isScrolling) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      if      (dx < -THRESHOLD) goTo(current + 1, true);
+      else if (dx >  THRESHOLD) goTo(current - 1, true);
+      else                      goTo(current,     true);
+      setTimeout(function() { isDragging = false; }, 60);
+    }, { passive: true });
+
+    window.addEventListener('resize', function() { goTo(current, false); });
+  }
 
 })();
 
