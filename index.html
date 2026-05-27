@@ -1097,72 +1097,30 @@ section{position:relative;z-index:2;}
   .fw-stat-cell:nth-child(3){border-top:1px solid rgba(0,0,0,.1);}
 }
 @media(max-width:768px){
-  .fw-header{grid-template-columns:1fr;padding:32px 20px 24px;}
+  .fw-header{grid-template-columns:1fr;padding:48px 24px 36px;}
   .fw-header-right{align-items:flex-start;}
-  .fw-tagline{text-align:left;font-size:12px;}
-  .fw-topbar{padding:10px 20px;}
-  .fw-title{font-size:clamp(42px,11vw,72px);}
-
-  /* ── Compact horizontal card layout ── */
+  .fw-tagline{text-align:left;}
+  .fw-topbar{padding:12px 24px;}
   .fw-row{
-    display:flex;
-    flex-direction:row;
-    align-items:stretch;
+    grid-template-columns:48px 1fr;
+    grid-template-rows:auto auto;
     min-height:auto;
-    gap:0;
-    position:relative;
-    padding:0;
   }
-  .fw-row-num{
-    width:36px;flex-shrink:0;
-    padding:16px 0 0;
-    font-size:11px;
-    border-right:1px solid rgba(0,0,0,.08);
-  }
-  .fw-row-info{
-    flex:1;padding:16px 14px 14px;
-    display:flex;flex-direction:column;gap:6px;
-    justify-content:center;
-    min-width:0;
-  }
-  .fw-row-cat{font-size:9px;letter-spacing:.2em;margin-bottom:2px;}
-  .fw-row-name{font-size:15px;margin-bottom:4px;line-height:1.15;}
-  .fw-row-tags{gap:5px;}
-  .fw-row-tag{padding:3px 8px;font-size:8px;}
-
-  /* Photo col: compact fixed thumbnail */
   .fw-row-photo{
-    flex-shrink:0;
-    width:90px;
-    height:auto;
-    border-left:1px solid rgba(0,0,0,.08);
-    border-right:none;
-    position:relative;
-    overflow:hidden;
+    grid-column:1/3;height:200px;
+    border-left:none;border-right:none;
   }
-  .fw-row-photo img{position:absolute;inset:0;}
-
-  /* Metric col: small inline badge */
+  .fw-row-photo img{position:absolute;}
   .fw-row-metric{
-    flex-shrink:0;
-    width:72px;
-    padding:0 10px;
-    border-left:1px solid rgba(0,0,0,.08);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    gap:2px;
-    text-align:center;
+    grid-column:1/3;
+    flex-direction:row;justify-content:flex-start;
+    padding:16px 24px;
+    border-top:1px solid rgba(0,0,0,.08);
+    gap:12px;
   }
-  .fw-row-val{font-size:clamp(18px,4vw,26px);}
-  .fw-row-lbl{font-size:7px;letter-spacing:.12em;}
-  .fw-row-arrow{display:none;}
-
-  /* Stat strip: 2×2 compact */
+  .fw-row-arrow{margin-top:0;}
   .fw-stat-strip{grid-template-columns:1fr 1fr;}
-  .fw-stat-cell{padding:24px 16px;}
   .fw-stat-cell:nth-child(2){border-right:1px solid rgba(0,0,0,.1);}
-  .fw-stat-cell:nth-child(3){border-top:1px solid rgba(0,0,0,.1);}
-  .fw-stat-big{font-size:clamp(32px,8vw,52px);}
-  .fw-stat-label{font-size:10px;}
 }
 
 /* ── Full case studies list (dedicated page) ── */
@@ -1682,10 +1640,10 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.05);paddin
   .about{padding:80px 24px;}
   .services{padding:80px 24px;}
   .studio{padding:80px 24px;}
-  .future{padding:44px 20px;}
+  .future{padding:80px 24px;}
   .testimonials{padding:80px 24px;}
-  .casestudies{padding:0;}
-  .journal{padding:44px 0;}
+  .casestudies{padding:80px 24px;}
+  .journal{padding:80px 24px;}
   .blogs-half,.newsletter-half{padding:70px 24px;}
   .cta{padding:100px 24px;}
   footer{padding:60px 24px 30px;}
@@ -1895,244 +1853,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.05);paddin
 }
 @media(max-width:600px){
   .hcf-scroll-wrapper{ height: 2400px; }
-}
-
-/* ═══════════════════════════════════════════════════
-   MOBILE SERVICES SWIPE SLIDER
-   Replaces the scroll-coverflow on touch/mobile
-═══════════════════════════════════════════════════ */
-@media (hover: none) and (pointer: coarse) {
-
-  /* Hide scroll-based wrapper, show swipe slider instead */
-  .home-coverflow-section .hcf-scroll-wrapper { display: none !important; }
-
-  /* Inject mobile swipe slider layout */
-  .mob-svc-slider-wrap {
-    display: block;
-    width: 100%;
-    padding: 0 0 48px;
-    background: var(--black);
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Slider header */
-  .mob-svc-slider-header {
-    padding: 48px 24px 28px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-
-  /* Track that holds the draggable cards */
-  .mob-svc-track-outer {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    touch-action: pan-y;
-  }
-  .mob-svc-track {
-    display: flex;
-    gap: 16px;
-    padding: 0 24px 8px;
-    will-change: transform;
-    transition: transform 0s;  /* JS controls this */
-    cursor: grab;
-  }
-  .mob-svc-track:active { cursor: grabbing; }
-
-  /* Individual slide card */
-  .mob-svc-slide {
-    flex: 0 0 76vw;
-    max-width: 320px;
-    height: 420px;
-    border-radius: 20px;
-    overflow: hidden;
-    position: relative;
-    background: var(--black3);
-    border: 1px solid rgba(255,255,255,0.07);
-    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s;
-    user-select: none;
-    -webkit-user-select: none;
-    cursor: pointer;
-  }
-  .mob-svc-slide.is-active {
-    border-color: rgba(255,92,0,0.5);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,92,0,0.18);
-    transform: scale(1.02);
-  }
-  .mob-svc-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
-    pointer-events: none;
-  }
-  .mob-svc-slide.is-active img { transform: scale(1.06); }
-
-  /* Gradient overlay */
-  .mob-svc-slide-grad {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.45) 55%, transparent 100%);
-    pointer-events: none;
-  }
-
-  /* Accent glow for active card */
-  .mob-svc-slide::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 110%, rgba(255,92,0,0.22) 0%, transparent 65%);
-    opacity: 0;
-    transition: opacity 0.4s;
-    pointer-events: none;
-  }
-  .mob-svc-slide.is-active::after { opacity: 1; }
-
-  /* Card number watermark */
-  .mob-svc-slide-num {
-    position: absolute;
-    top: 14px;
-    right: 16px;
-    font-family: var(--font-display);
-    font-size: 64px;
-    color: rgba(255,92,0,0.09);
-    line-height: 1;
-    pointer-events: none;
-    transition: color 0.4s;
-  }
-  .mob-svc-slide.is-active .mob-svc-slide-num { color: rgba(255,92,0,0.16); }
-
-  /* Card content */
-  .mob-svc-slide-body {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px 22px 24px;
-    z-index: 2;
-  }
-  .mob-svc-slide-cat {
-    font-family: var(--font-heading);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--orange);
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .mob-svc-slide-cat::before {
-    content: '';
-    width: 18px;
-    height: 1.5px;
-    background: var(--orange);
-    flex-shrink: 0;
-  }
-  .mob-svc-slide-title {
-    font-family: var(--font-heading);
-    font-size: 17px;
-    font-weight: 800;
-    color: var(--white);
-    line-height: 1.2;
-    margin-bottom: 14px;
-    transition: color 0.3s;
-  }
-  .mob-svc-slide.is-active .mob-svc-slide-title { color: var(--orange); }
-
-  .mob-svc-slide-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-family: var(--font-heading);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--orange);
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.35s, transform 0.35s;
-  }
-  .mob-svc-slide.is-active .mob-svc-slide-cta {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .mob-svc-slide-cta-line {
-    width: 18px;
-    height: 1.5px;
-    background: var(--orange);
-    transition: width 0.3s;
-  }
-  .mob-svc-slide.is-active .mob-svc-slide-cta-line { width: 28px; }
-
-  /* Dot pagination */
-  .mob-svc-dots {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 20px 0 8px;
-  }
-  .mob-svc-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(245,240,235,0.2);
-    transition: all 0.35s cubic-bezier(0.22,1,0.36,1);
-    flex-shrink: 0;
-  }
-  .mob-svc-dot.active {
-    width: 22px;
-    border-radius: 3px;
-    background: var(--orange);
-    box-shadow: 0 0 10px rgba(255,92,0,0.5);
-  }
-
-  /* CTA button in mobile slider */
-  .mob-svc-slider-cta {
-    text-align: center;
-    padding: 8px 24px 0;
-  }
-}
-
-/* Ensure the slider wrap is hidden on desktop */
-@media (hover: hover) and (pointer: fine) {
-  .mob-svc-slider-wrap { display: none !important; }
-}
-
-/* Hide the scroll-coverflow section on touch (slider takes its place) */
-@media (hover: none) and (pointer: coarse) {
-  #homeSvcCoverflowSection { display: none !important; }
-}
-
-/* ═══════════════════════════════════════════════════
-   SECTION SCROLL-UP EXIT ANIMATION
-   Smooth translateY downward when scrolling upward
-   past the services coverflow section
-═══════════════════════════════════════════════════ */
-.mob-svc-slider-wrap {
-  will-change: transform, opacity;
-}
-.svc-section-exit {
-  animation: svcSectionExit 0.75s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-.svc-section-enter {
-  animation: svcSectionEnter 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-@keyframes svcSectionExit {
-  from { transform: translateY(0);   opacity: 1; }
-  to   { transform: translateY(48px); opacity: 0; }
-}
-@keyframes svcSectionEnter {
-  from { transform: translateY(48px); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
 }
 
 /* ═══════════════════════════════════════════════════
@@ -2560,14 +2280,10 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
 
   /* Case studies / Featured work */
   .fw-topbar { padding: 10px 20px; }
-  .fw-header { padding: 28px 16px 20px; }
-  .fw-row { min-height: 72px; }
-  .fw-row-photo { width: 72px; }
-  .fw-row-metric { width: 60px; padding: 0 6px; }
-  .fw-row-val { font-size: 16px; }
-  .fw-row-info { padding: 12px 10px; }
-  .fw-row-name { font-size: 13px; }
-  .fw-row-tags { display: none; }
+  .fw-header { padding: 40px 20px 28px; }
+  .fw-row { grid-template-columns: 44px 1fr; }
+  .fw-row-info { padding: 20px 16px; }
+  .fw-row-name { font-size: 16px; }
 
   /* Testimonials */
   .testimonials { padding: 60px 20px; }
@@ -3176,24 +2892,6 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
     </div>
   </section>
 
-  <!-- MOBILE SERVICES SWIPE SLIDER (touch devices only — shown via CSS media query) -->
-  <div class="mob-svc-slider-wrap" id="mobSvcSlider" aria-label="Our Services" role="region">
-    <div class="mob-svc-slider-header">
-      <div>
-        <div class="section-tag" style="margin-bottom:10px;">All 10 Services</div>
-        <h2 class="section-title" style="font-size:clamp(30px,8vw,48px);line-height:1;">What <span>We Do</span></h2>
-        <p style="font-size:14px;color:rgba(245,240,235,0.45);margin-top:10px;font-weight:300;font-family:var(--font-body);">Swipe to explore every service →</p>
-      </div>
-      <a href="#" onclick="navigate('services');return false;" class="btn-p" style="font-size:12px;padding:11px 20px;flex-shrink:0;align-self:flex-start;margin-top:6px;">All Services →</a>
-    </div>
-    <div class="mob-svc-track-outer" id="mobSvcTrackOuter">
-      <div class="mob-svc-track" id="mobSvcTrack">
-        <!-- Cards injected by JS below -->
-      </div>
-    </div>
-    <div class="mob-svc-dots" id="mobSvcDots"></div>
-  </div>
-
   <!-- PORTFOLIO PREVIEW — EDITORIAL LIST REDESIGN -->
   <section class="casestudies">
 
@@ -3262,7 +2960,7 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
       </div>
     </div>
 
-    <!-- Pinned split-screen container (desktop/tablet) -->
+    <!-- Pinned split-screen container -->
     <div class="fv-container" id="fvContainer">
       <div class="fv-arch">
 
@@ -3275,10 +2973,6 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
       </div>
       <div class="fv-spacer"></div>
     </div>
-
-    <!-- MOBILE: compact swipeable card rail (touch devices only) -->
-    <div id="fv-home-mobile-cards-rail" style="display:none;"></div>
-    <div id="fv-mob-dots" style="display:none;"></div>
   </section>
 
   <!-- BLOGS & NEWSLETTER -->
@@ -7729,274 +7423,11 @@ body{font-family:'DM Sans',sans-serif;background:#080808;color:#F5F0EB;line-heig
 .fv-cta-h span{color:#FF5C00;}
 .fv-cta-p{font-size:15px;line-height:1.75;color:rgba(245,240,235,.55);font-weight:300;max-width:480px;margin:0 auto 36px;}
 .fv-cta-btn{display:inline-flex;align-items:center;gap:10px;background:#FF5C00;color:#fff;padding:16px 38px;border-radius:50px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;letter-spacing:.04em;text-decoration:none;position:relative;overflow:hidden;box-shadow:0 0 30px rgba(255,92,0,.4);transition:all .3s;}
-/* ═══════════════════════════════════════════════════
-   MOBILE REDESIGN — Results · Case Studies · Future Vision
-   Compact, modern, premium mobile layouts
-═══════════════════════════════════════════════════ */
-
-/* ── CASE STUDIES PREVIEW (home .journal section) ── */
-@media(max-width:768px){
-  /* Horizontal scroll snap card rail */
-  .journal{ padding:44px 0 44px; }
-  .journal-header{
-    padding:0 20px;
-    flex-wrap:wrap;gap:10px;
-    margin-bottom:20px;
-  }
-  .journal-header .section-title{ font-size:clamp(28px,8vw,42px)!important; }
-  .journal-header .section-tag{ font-size:9px; }
-
-  /* Override grid → horizontal scroll rail */
-  #home-casestudies-grid.jnl-grid{
-    display:flex;
-    flex-direction:row;
-    gap:14px;
-    overflow-x:auto;
-    overflow-y:visible;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-    padding:4px 20px 16px;
-    scrollbar-width:none;
-    grid-template-columns:unset;
-  }
-  #home-casestudies-grid.jnl-grid::-webkit-scrollbar{ display:none; }
-
-  /* Constrain card width for peekaboo effect */
-  #home-casestudies-grid.jnl-grid > .jcard{
-    flex:0 0 78vw;
-    max-width:300px;
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
-    min-width:0;
-  }
-
-  .jcard-img{ aspect-ratio:16/10; }
-  .jcard-body{ padding:16px 18px 18px; }
-  .jcard-title{ font-size:15px!important; line-height:1.25; }
-  .jcard-excerpt{ font-size:12px; -webkit-line-clamp:2; display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden; }
-
-  /* View all link on right side */
-  .journal-header a.cs-view-all{ font-size:10px; padding:9px 16px; flex-shrink:0; }
-}
-
-/* ── RESULTS THAT SPEAK (home #home-portfolio-list) ── */
-@media(max-width:768px){
-  /* The Results section wrapping .casestudies on home */
-  section.casestudies{ padding:0!important; }
-
-  /* Top bar tighter */
-  .fw-topbar{ font-size:10px; }
-
-  /* Hide large decorative title on mobile — keep compact eyebrow */
-  .fw-header{ padding:28px 20px 20px; gap:16px; }
-  .fw-title{ font-size:clamp(40px,11vw,60px); line-height:.9; }
-  .fw-eyebrow{ margin-bottom:10px; font-size:9px; }
-
-  /* Compact stat strip pills instead of big cells */
-  .fw-stat-strip{
-    display:flex;
-    flex-direction:row;
-    overflow-x:auto;
-    scrollbar-width:none;
-    border-top:1px solid rgba(0,0,0,.1);
-    gap:0;
-  }
-  .fw-stat-strip::-webkit-scrollbar{ display:none; }
-  .fw-stat-cell{
-    flex:0 0 42vw;
-    min-width:140px;
-    padding:20px 18px;
-    border-right:1px solid rgba(0,0,0,.08)!important;
-    border-top:none!important;
-    flex-shrink:0;
-  }
-  .fw-stat-big{ font-size:clamp(28px,7vw,42px); margin-bottom:4px; }
-  .fw-stat-label{ font-size:9px; letter-spacing:.14em; }
-}
-
-/* ── FUTURE VISION (home futureSplitSection) ── */
-@media(max-width:768px){
-  /* Sticky header: more compact */
-  #fv-home-header{
-    padding:10px 20px!important;
-    border-bottom:1px solid rgba(255,255,255,.06)!important;
-    gap:8px!important;
-    flex-wrap:nowrap!important;
-    align-items:center!important;
-  }
-  #fv-home-header .section-title{
-    font-size:clamp(15px,4vw,22px)!important;
-    line-height:1.05!important;
-  }
-  #fv-home-header .section-tag{ font-size:9px!important; margin-bottom:2px!important; }
-  #fv-home-header p{ display:none!important; } /* hide subtext on mobile */
-  #fv-home-header .btn-p{ font-size:11px!important; padding:8px 14px!important; white-space:nowrap; }
-
-  /* Replace pinned split-screen with compact swipeable card grid */
-  .fv-container{ padding:0 0 40px!important; }
-  .fv-arch{
-    flex-direction:column;
-    gap:0;
-    max-width:100%;
-  }
-
-  /* Left text panels: convert to horizontal scroll rail */
-  .fv-arch__left{
-    display:flex!important;
-    flex-direction:row!important;
-    overflow-x:auto;
-    overflow-y:visible;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-    gap:0;
-    scrollbar-width:none;
-    padding-bottom:0;
-  }
-  .fv-arch__left::-webkit-scrollbar{ display:none; }
-
-  .fv-arch__info{
-    flex:0 0 100vw;
-    min-width:0;
-    height:auto!important;
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
-    display:flex!important;
-    align-items:stretch!important;
-    padding:0!important;
-  }
-
-  /* Each info panel becomes a full-width stacked card (image top, text bottom) */
-  .fv-arch__info .fv-card-panel-inner{
-    display:flex;
-    flex-direction:column;
-    width:100%;
-    padding:0;
-  }
-
-  /* Hide right image rail on mobile (images go inside each card via ::before hack) */
-  .fv-arch__right{ display:none!important; }
-
-  /* Redesigned compact info card for mobile */
-  .fv-arch__info > div{
-    width:100%;
-    padding:20px 20px 28px;
-  }
-  .fv-header{ font-size:clamp(20px,5.5vw,28px); margin-bottom:8px; line-height:1.1; }
-  .fv-desc{ font-size:13px; margin-block:4px 16px; line-height:1.6; color:rgba(245,240,235,.6); }
-  .fv-link{
-    font-size:12px;
-    padding:10px 18px;
-    border-radius:50px;
-    border:1.5px solid rgba(255,92,0,.4);
-    color:var(--orange);
-    background:rgba(255,92,0,.06);
-  }
-}
-
-/* ── FUTURE VISION: compact image+text card layout for mobile ── */
-@media(hover:none) and (pointer:coarse){
-  /* Build a compact card swiper for the future panels */
-  #fv-home-mobile-cards-rail{
-    display:flex;
-    flex-direction:row;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-    gap:0;
-    scrollbar-width:none;
-    padding:16px 20px 24px;
-  }
-  #fv-home-mobile-cards-rail::-webkit-scrollbar{ display:none; }
-  .fv-mob-card{
-    flex:0 0 82vw;
-    max-width:320px;
-    scroll-snap-align:start;
-    border-radius:18px;
-    overflow:hidden;
-    background:var(--black3);
-    border:1px solid rgba(255,92,0,.12);
-    margin-right:12px;
-    display:flex;
-    flex-direction:column;
-    position:relative;
-  }
-  .fv-mob-card-img{
-    width:100%;
-    height:180px;
-    overflow:hidden;
-    position:relative;
-    flex-shrink:0;
-  }
-  .fv-mob-card-img img{
-    width:100%;height:100%;object-fit:cover;
-    filter:saturate(.7) brightness(.65);
-    display:block;
-  }
-  .fv-mob-card-img::after{
-    content:'';position:absolute;inset:0;
-    background:linear-gradient(to bottom,transparent 30%,rgba(8,8,8,.8));
-  }
-  .fv-mob-card-body{ padding:16px 18px 20px; flex:1; }
-  .fv-mob-tag{
-    display:inline-flex;align-items:center;gap:6px;
-    font-family:var(--font-heading);font-size:9px;font-weight:700;
-    letter-spacing:.2em;text-transform:uppercase;color:var(--orange);
-    margin-bottom:8px;
-  }
-  .fv-mob-tag::before{ content:'';width:14px;height:1.5px;background:var(--orange); }
-  .fv-mob-title{
-    font-family:var(--font-heading);font-size:16px;font-weight:800;
-    color:var(--white);line-height:1.15;margin-bottom:8px;
-  }
-  .fv-mob-desc{
-    font-size:12px;line-height:1.6;color:rgba(245,240,235,.5);
-    font-weight:300;
-    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
-  }
-  .fv-mob-btn{
-    display:inline-flex;align-items:center;gap:6px;
-    margin-top:14px;
-    font-family:var(--font-heading);font-size:10px;font-weight:700;
-    letter-spacing:.1em;text-transform:uppercase;color:var(--orange);
-  }
-
-  /* Dot indicator for FV cards */
-  #fv-mob-dots{
-    display:flex;justify-content:center;gap:7px;padding:0 0 8px;
-  }
-  .fv-mob-dot{
-    width:6px;height:6px;border-radius:50%;
-    background:rgba(245,240,235,.18);
-    transition:all .3s cubic-bezier(.22,1,.36,1);
-    flex-shrink:0;
-  }
-  .fv-mob-dot.active{
-    width:20px;border-radius:3px;
-    background:var(--orange);
-    box-shadow:0 0 8px rgba(255,92,0,.5);
-  }
-}
-
-/* ── Spacer fix on mobile for Future Vision sticky section ── */
-@media(max-width:768px){
-  .fv-spacer{ height:0!important; }
-  /* The pinned container becomes a normal scroll container */
-  #fvContainer{ position:static!important; overflow:visible!important; }
-  #fvContainer .fv-arch{ pointer-events:auto; }
-}
-
-/* ── Small phone (≤480px) additional tightening ── */
-@media(max-width:480px){
-  /* Results stat strip */
-  .fw-stat-cell{ flex:0 0 52vw; min-width:160px; }
-
-  /* Case studies card width */
-  #home-casestudies-grid.jnl-grid > .jcard{ flex:0 0 86vw; }
-
-  /* FV cards */
-  .fv-mob-card{ flex:0 0 88vw; }
-}
-
+.fv-cta-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:translateX(-100%);transition:transform .5s;}
+.fv-cta-btn:hover::before{transform:translateX(100%);}
+.fv-cta-btn:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(255,92,0,.65);}
+@media(max-width:768px){.fv-nav,.fv-footer{padding-left:20px;padding-right:20px;}.fv-hero{padding:60px 20px 48px;}.fv-body{padding:40px 20px 80px;}.fv-article{padding:28px;}.fv-cta-band{padding:48px 24px;}}
+</style>
 </head>
 <body>
 <nav class="fv-nav">
@@ -8033,275 +7464,6 @@ body{font-family:'DM Sans',sans-serif;background:#080808;color:#F5F0EB;line-heig
 
   // Keep closeFvDetail as no-op for any residual references
   window.closeFvDetail = function() {};
-})();
-</script>
-
-<script>
-/* ═══════════════════════════════════════════════════════════════
-   MOBILE SERVICES SWIPE SLIDER — Touch-native horizontal swipe
-   Only initialised on touch/coarse-pointer devices
-═══════════════════════════════════════════════════════════════ */
-(function initMobSvcSlider() {
-
-  var isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-  if (!isTouchDevice) return;
-
-  var track  = document.getElementById('mobSvcTrack');
-  var dotsEl = document.getElementById('mobSvcDots');
-  var outer  = document.getElementById('mobSvcTrackOuter');
-  if (!track || !dotsEl || !outer) return;
-
-  var cards = typeof SVC_CARDS_DATA !== 'undefined' ? SVC_CARDS_DATA : [];
-  if (!cards.length) return;
-
-  var total      = cards.length;
-  var current    = 0;
-  var startX     = 0;
-  var startY     = 0;
-  var isDragging = false;
-  var isScrolling= null;
-  var THRESHOLD  = 50;
-  var slideEls   = [];
-
-  /* ── Build cards ── */
-  cards.forEach(function(d, i) {
-    var el = document.createElement('div');
-    el.className = 'mob-svc-slide' + (i === 0 ? ' is-active' : '');
-    el.setAttribute('role', 'button');
-    el.setAttribute('tabindex', '0');
-    el.setAttribute('aria-label', 'Open ' + d.title);
-    el.innerHTML =
-      '<img src="' + d.img + '" alt="' + d.title + '" loading="lazy" draggable="false">' +
-      '<div class="mob-svc-slide-grad"></div>' +
-      '<div class="mob-svc-slide-num">0' + (i < 9 ? (i + 1) : '') + '</div>' +
-      '<div class="mob-svc-slide-body">' +
-        '<div class="mob-svc-slide-cat">' + d.cat + '</div>' +
-        '<div class="mob-svc-slide-title">' + d.title + '</div>' +
-        '<div class="mob-svc-slide-cta"><div class="mob-svc-slide-cta-line"></div>Explore</div>' +
-      '</div>';
-    if (d.page) {
-      (function(page) {
-        el.addEventListener('click', function() { if (!isDragging) navigate(page); });
-        el.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') navigate(page); });
-      })(d.page);
-    }
-    track.appendChild(el);
-    slideEls.push(el);
-  });
-
-  /* ── Build dots ── */
-  cards.forEach(function(_, i) {
-    var dot = document.createElement('div');
-    dot.className = 'mob-svc-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', function() { goTo(i, true); });
-    dotsEl.appendChild(dot);
-  });
-  var dotEls = Array.from(dotsEl.querySelectorAll('.mob-svc-dot'));
-
-  function getSlideWidth() {
-    return slideEls[0] ? (slideEls[0].offsetWidth + 16) : 0; // 16 = gap
-  }
-
-  function getOffset(index) {
-    var sw   = getSlideWidth();
-    var ow   = outer.offsetWidth;
-    var cAdj = (ow - (slideEls[0] ? slideEls[0].offsetWidth : 0)) / 2;
-    return -(index * sw - cAdj + 24); // 24 = left padding
-  }
-
-  function setPos(x, instant) {
-    track.style.transition = instant ? 'none' : 'transform 0.42s cubic-bezier(0.22,1,0.36,1)';
-    track.style.transform  = 'translateX(' + x + 'px)';
-  }
-
-  function goTo(index, animate) {
-    index   = Math.max(0, Math.min(total - 1, index));
-    current = index;
-    setPos(getOffset(current), !animate);
-    slideEls.forEach(function(el, i) { el.classList.toggle('is-active', i === current); });
-    dotEls.forEach(function(el, i)   { el.classList.toggle('active',    i === current); });
-  }
-
-  goTo(0, false);
-
-  /* ── Touch handling ── */
-  outer.addEventListener('touchstart', function(e) {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    isDragging = false;
-    isScrolling = null;
-    track.style.transition = 'none';
-  }, { passive: true });
-
-  outer.addEventListener('touchmove', function(e) {
-    var dx = e.touches[0].clientX - startX;
-    var dy = e.touches[0].clientY - startY;
-    if (isScrolling === null) isScrolling = Math.abs(dy) > Math.abs(dx);
-    if (isScrolling) return;
-    e.preventDefault();
-    isDragging = true;
-    track.style.transform = 'translateX(' + (getOffset(current) + dx) + 'px)';
-  }, { passive: false });
-
-  outer.addEventListener('touchend', function(e) {
-    if (isScrolling) return;
-    var dx = e.changedTouches[0].clientX - startX;
-    if      (dx < -THRESHOLD) goTo(current + 1, true);
-    else if (dx >  THRESHOLD) goTo(current - 1, true);
-    else                      goTo(current,     true);
-    setTimeout(function() { isDragging = false; }, 60);
-  }, { passive: true });
-
-  window.addEventListener('resize', function() { goTo(current, false); });
-
-})();
-
-
-/* ═══════════════════════════════════════════════════════════════
-   SERVICES SECTION SCROLL-UP EXIT ANIMATION
-   When user scrolls back up past the services section, it
-   gracefully slides downward and fades — then re-enters on
-   scroll-down with an upward lift animation.
-═══════════════════════════════════════════════════════════════ */
-(function initSvcScrollAnim() {
-
-  if (!window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
-
-  var el = document.getElementById('mobSvcSlider');
-  if (!el) return;
-
-  var lastY   = window.scrollY;
-  var visible = false;
-  var busy    = false;
-
-  function clearAnim() {
-    el.classList.remove('svc-section-exit', 'svc-section-enter');
-  }
-
-  function triggerAnim(cls) {
-    if (busy) return;
-    busy = true;
-    clearAnim();
-    void el.offsetWidth; // force reflow
-    el.classList.add(cls);
-    el.addEventListener('animationend', function done() {
-      el.removeEventListener('animationend', done);
-      el.classList.remove(cls);
-      busy = false;
-    });
-  }
-
-  window.addEventListener('scroll', function() {
-    var sy   = window.scrollY;
-    var dir  = sy < lastY ? 'up' : 'down';
-    lastY    = sy;
-
-    var rect = el.getBoundingClientRect();
-    var vh   = window.innerHeight;
-    var inVP = rect.top < vh * 0.9 && rect.bottom > 0;
-
-    if (inVP && !visible) {
-      visible = true;
-      triggerAnim('svc-section-enter');
-    } else if (!inVP && visible && dir === 'up') {
-      visible = false;
-      triggerAnim('svc-section-exit');
-    }
-  }, { passive: true });
-
-})();
-</script>
-
-<script>
-/* ════════════════════════════════════════════════════
-   MOBILE FUTURE VISION CARD RAIL
-   Builds a swipeable card strip from PAGE_DATA.future.panels
-   Only activates on touch/coarse-pointer devices
-════════════════════════════════════════════════════ */
-(function initMobFvRail(){
-  var isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-  if(!isTouch) return;
-
-  var rail   = document.getElementById('fv-home-mobile-cards-rail');
-  var dotsEl = document.getElementById('fv-mob-dots');
-  var fvCont = document.getElementById('fvContainer');
-  if(!rail || !dotsEl) return;
-
-  /* Hide the desktop pinned container */
-  if(fvCont){ fvCont.style.display='none'; }
-
-  /* Show the mobile rail */
-  rail.style.display='flex';
-  dotsEl.style.display='flex';
-
-  /* Wait for PAGE_DATA to exist */
-  function tryBuild(){
-    if(typeof PAGE_DATA === 'undefined' || !PAGE_DATA.future || !PAGE_DATA.future.panels){
-      setTimeout(tryBuild,150); return;
-    }
-    var panels = PAGE_DATA.future.panels;
-    var total  = panels.length;
-    var current= 0;
-    var dotEls = [];
-
-    panels.forEach(function(p,i){
-      var card = document.createElement('div');
-      card.className = 'fv-mob-card';
-
-      var imgHtml = p.img
-        ? '<div class="fv-mob-card-img"><img src="'+p.img+'" alt="'+encodeURIComponent(p.title||'')+'" loading="lazy"></div>'
-        : '';
-
-      var bullets = (p.bullets && p.bullets.length)
-        ? '<ul style="margin-top:10px;list-style:none;display:flex;flex-direction:column;gap:4px;">'
-          + p.bullets.slice(0,2).map(function(b){
-              return '<li style="font-size:11px;color:rgba(245,240,235,.5);line-height:1.5;padding-left:14px;position:relative;font-family:var(--font-body);font-weight:300;">&#8594; '+b+'</li>';
-            }).join('')
-          + '</ul>'
-        : '';
-
-      card.innerHTML =
-        imgHtml +
-        '<div class="fv-mob-card-body">' +
-          '<div class="fv-mob-tag">' + (p.tag||'Future Vision') + '</div>' +
-          '<div class="fv-mob-title">' + (p.title||'') + '</div>' +
-          '<div class="fv-mob-desc">' + (p.body||'').slice(0,140) + (( (p.body||'').length>140 )?'…':'') + '</div>' +
-          bullets +
-          '<div class="fv-mob-btn" style="cursor:pointer;" onclick="if(typeof openFvDetail===\'function\')openFvDetail('+i+')">' +
-            'Explore &nbsp;→' +
-          '</div>' +
-        '</div>';
-
-      rail.appendChild(card);
-
-      /* Dot */
-      var dot = document.createElement('div');
-      dot.className = 'fv-mob-dot' + (i===0?' active':'');
-      dot.setAttribute('role','button');
-      dot.setAttribute('tabindex','0');
-      (function(idx){ dot.onclick=function(){ scrollToCard(idx); }; })(i);
-      dotsEl.appendChild(dot);
-      dotEls.push(dot);
-    });
-
-    /* Dot sync on scroll */
-    rail.addEventListener('scroll', function(){
-      var cardW = rail.firstChild ? (rail.firstChild.offsetWidth + 12) : (rail.scrollWidth / total);
-      var idx   = Math.round(rail.scrollLeft / cardW);
-      idx = Math.max(0, Math.min(total-1, idx));
-      if(idx !== current){
-        current = idx;
-        dotEls.forEach(function(d,j){ d.classList.toggle('active', j===current); });
-      }
-    }, { passive: true });
-
-    function scrollToCard(idx){
-      var cardW = rail.firstChild ? (rail.firstChild.offsetWidth + 12) : (rail.scrollWidth / total);
-      rail.scrollTo({ left: idx * cardW, behavior: 'smooth' });
-    }
-  }
-
-  tryBuild();
 })();
 </script>
 
