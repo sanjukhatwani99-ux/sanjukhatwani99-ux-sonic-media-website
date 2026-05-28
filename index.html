@@ -2593,6 +2593,407 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
   /* Studio reel — smaller aspect on tablet */
   .studio-reel { aspect-ratio: 4/3; }
 }
+
+/* ═══════════════════════════════════════════════════
+   MOBILE SWIPE CAROUSEL — SERVICES SECTION
+   Replaces the scroll-based coverflow on mobile
+═══════════════════════════════════════════════════ */
+.mob-svc-carousel-wrap {
+  display: none; /* hidden on desktop */
+  flex-direction: column;
+  width: 100%;
+  padding: 0 0 40px;
+  position: relative;
+  z-index: 2;
+}
+.mob-svc-track-outer {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+.mob-svc-track {
+  display: flex;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  align-items: stretch;
+}
+.mob-svc-card {
+  flex: 0 0 calc(85vw);
+  max-width: 340px;
+  margin: 0 8px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--black3);
+  border: 1px solid rgba(255,255,255,.07);
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+.mob-svc-card:first-child { margin-left: calc(7.5vw); }
+.mob-svc-card:last-child  { margin-right: calc(7.5vw); }
+.mob-svc-card-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.mob-svc-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+  transition: opacity 0.4s;
+}
+.mob-svc-card.active .mob-svc-card-img img { opacity: 0.55; }
+.mob-svc-card-grad {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8,8,8,0.97) 0%, rgba(8,8,8,0.5) 55%, rgba(8,8,8,0.05) 100%);
+  z-index: 1;
+}
+.mob-svc-card-body {
+  position: relative;
+  z-index: 2;
+  padding: 20px 22px 24px;
+}
+.mob-svc-card-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: rgba(255,92,0,0.12);
+  border: 1px solid rgba(255,92,0,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+  transition: background 0.3s;
+}
+.mob-svc-card.active .mob-svc-card-icon {
+  background: rgba(255,92,0,0.25);
+  border-color: rgba(255,92,0,0.5);
+}
+.mob-svc-card-num {
+  position: absolute;
+  top: 14px; right: 16px;
+  font-family: var(--font-display);
+  font-size: 56px;
+  color: rgba(255,92,0,0.08);
+  line-height: 1;
+  z-index: 2;
+  pointer-events: none;
+}
+.mob-svc-card-title {
+  font-family: var(--font-heading);
+  font-size: 17px; font-weight: 800;
+  color: var(--white);
+  margin-bottom: 6px;
+  line-height: 1.2;
+  transition: color 0.3s;
+}
+.mob-svc-card.active .mob-svc-card-title { color: var(--orange); }
+.mob-svc-card-desc {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: rgba(245,240,235,0.5);
+  font-weight: 300;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.mob-svc-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  background: rgba(255,92,0,0.1);
+  border: 1px solid rgba(255,92,0,0.2);
+  font-family: var(--font-heading);
+  font-size: 10px; font-weight: 700;
+  color: var(--orange);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+/* Navigation dots */
+.mob-svc-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+.mob-svc-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.mob-svc-dot.active {
+  background: var(--orange);
+  width: 20px;
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(255,92,0,0.5);
+}
+/* Nav arrows */
+.mob-svc-arrows {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 0;
+}
+.mob-svc-arrow {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white);
+  font-size: 18px;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+.mob-svc-arrow:active {
+  background: rgba(255,92,0,0.2);
+  border-color: rgba(255,92,0,0.4);
+  color: var(--orange);
+}
+.mob-svc-arrow.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+.mob-svc-count {
+  font-family: var(--font-heading);
+  font-size: 12px; font-weight: 700;
+  color: rgba(245,240,235,0.4);
+  letter-spacing: .1em;
+}
+.mob-svc-count span { color: var(--orange); }
+
+/* Show/hide based on screen size */
+@media(max-width:768px){
+  /* Hide the scroll-based coverflow on mobile */
+  #homeSvcScrollWrapper { display: none !important; }
+  /* Show the touch carousel instead */
+  .mob-svc-carousel-wrap { display: flex !important; }
+
+  /* ── HERO MOBILE FIX ── */
+  .hero { min-height: 100svh; flex-direction: column; }
+  .hero-left { padding: 88px 20px 48px !important; }
+  .hero-h1 { font-size: clamp(46px, 12vw, 72px) !important; line-height: 0.95 !important; }
+  .hero-sub { font-size: 15px !important; line-height: 1.65 !important; }
+  .hero-btns { flex-direction: column; gap: 12px; }
+  .hero-btns .btn-p, .hero-btns .btn-s { width: 100%; justify-content: center; text-align: center; }
+  .hero-stats { flex-wrap: wrap; gap: 18px 28px; margin-top: 32px; }
+  .hero-stat .num { font-size: 34px !important; }
+  .hero-stat .lbl { font-size: 11px; }
+  .hero-right { display: none; } /* hide hero right strips on mobile */
+  .hero-scroll { left: 20px; bottom: 24px; }
+  .mstrip-wrap { display: none; }
+
+  /* ── SECTION TITLE FIX ── */
+  .section-title { font-size: clamp(34px, 9vw, 58px) !important; }
+
+  /* ── HOME SERVICES SECTION HEADER ON MOBILE ── */
+  #homeSvcCoverflowSection > .hcf-scroll-wrapper { display: none !important; }
+
+  /* ── FUTURE VISION MOBILE FIX — HOME ── */
+  #futureSplitSection {
+    padding-bottom: 40px;
+  }
+  #fv-home-header {
+    position: relative !important;
+    top: auto !important;
+    padding: 24px 20px !important;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  #fv-home-header .section-title {
+    font-size: clamp(24px, 7vw, 38px) !important;
+  }
+  /* Convert Future Vision split-screen to card stack on mobile */
+  .fv-container { padding: 0 16px !important; }
+  .fv-arch {
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+  .fv-arch__left { order: 1; }
+  .fv-arch__right {
+    display: none !important; /* hide sticky right pane — cards already show image */
+  }
+  .fv-arch__info {
+    height: auto !important;
+    padding: 0 !important;
+    display: block !important;
+    place-items: unset !important;
+  }
+  /* Mobile FV card-based layout */
+  .fv-mobile-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--black3);
+    border: 1px solid rgba(255,92,0,0.12);
+    margin-bottom: 16px;
+    transition: border-color 0.3s;
+  }
+  .fv-mobile-card-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .fv-mobile-card-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.7) brightness(0.65);
+  }
+  .fv-mobile-card-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(8,8,8,0.7));
+  }
+  .fv-mobile-card-body {
+    padding: 20px 20px 24px;
+  }
+  .fv-mobile-card-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-heading);
+    font-size: 9px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+  }
+  .fv-mobile-card-tag::before {
+    content: ''; width: 16px; height: 1.5px;
+    background: var(--orange); flex-shrink: 0;
+  }
+  .fv-mobile-card-title {
+    font-family: var(--font-heading);
+    font-size: 16px; font-weight: 800;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .fv-mobile-card-desc {
+    font-size: 13px; line-height: 1.65;
+    color: rgba(245,240,235,0.5);
+    font-weight: 300;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .fv-mobile-card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 14px;
+    font-family: var(--font-heading);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--orange);
+    background: none; border: none;
+    -webkit-tap-highlight-color: transparent;
+    padding: 0;
+  }
+  .fv-spacer { height: 4vh !important; }
+
+  /* ── ABOUT SECTION MOBILE ── */
+  .about { padding: 60px 20px !important; flex-direction: column !important; }
+  .about-visual { order: -1; margin-bottom: 0; padding-bottom: 40px; padding-right: 0; }
+  .about-h2 { font-size: clamp(34px, 9vw, 54px) !important; }
+  .about-pills { gap: 8px; }
+  .pill { padding: 8px 16px; font-size: 11px; }
+
+  /* ── TESTIMONIALS MOBILE ── */
+  .testimonials { padding: 64px 0 !important; }
+  .testimonials-header { padding: 0 20px; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 36px; }
+  .tcard { flex: 0 0 calc(100vw - 48px) !important; }
+
+  /* ── PORTFOLIO MOBILE ── */
+  .portfolio { padding: 60px 20px !important; }
+  .portfolio-masonry { grid-template-columns: 1fr !important; grid-auto-rows: 220px !important; }
+  .port-item.port-tall,.port-item.port-wide { grid-row: span 1 !important; grid-column: span 1 !important; }
+
+  /* ── FAQ MOBILE ── */
+  .faq-section { padding: 60px 20px !important; }
+  .faq-inner { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .faq-stats { grid-template-columns: 1fr 1fr !important; }
+
+  /* ── JOURNAL / BLOG HALF ── */
+  .journal { padding: 60px 20px !important; }
+  .journal-header { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 36px; }
+  .jnl-grid { grid-template-columns: 1fr !important; }
+
+  /* ── BLOGS-NEWSLETTER ── */
+  .blogs-newsletter { grid-template-columns: 1fr !important; }
+  .blogs-half,.newsletter-half { padding: 60px 20px !important; }
+
+  /* ── CTA SECTION MOBILE ── */
+  .cta { padding: 72px 20px !important; }
+  .cta-h { font-size: clamp(42px, 11vw, 72px) !important; }
+  .cta-p { font-size: 15px !important; }
+  .cta-btns { flex-direction: column; align-items: center; }
+  .cta-btns .btn-p { width: 100%; justify-content: center; text-align: center; }
+  .cta-cards { flex-direction: column; }
+  .cta-card { flex: 0 0 100% !important; max-width: 100% !important; }
+  .cta-zoom-wrapper { display: none !important; }
+
+  /* ── CONTACT MOBILE ── */
+  .contact-section { padding: 60px 20px !important; }
+  .contact-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+  .contact-form { padding: 28px 20px !important; }
+  .cf-row { grid-template-columns: 1fr !important; }
+
+  /* ── CASE STUDIES / FEATURED WORK ── */
+  .fw-header { padding: 40px 20px 28px !important; grid-template-columns: 1fr !important; }
+  .fw-topbar { padding: 12px 20px !important; }
+  .fw-header-right { align-items: flex-start; }
+  .fw-row {
+    grid-template-columns: 44px 1fr !important;
+    grid-template-rows: auto auto !important;
+    min-height: auto !important;
+  }
+  .fw-row-photo {
+    grid-column: 1/3 !important;
+    height: 180px !important;
+  }
+  .fw-row-metric {
+    grid-column: 1/3 !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    padding: 14px 20px !important;
+    gap: 10px !important;
+  }
+  .fw-row-info { padding: 20px 16px !important; }
+  .fw-row-name { font-size: 15px !important; }
+
+  /* ── FOOTER MOBILE ── */
+  footer { padding: 60px 20px 30px !important; padding-top: 220px !important; }
+  .footer-parallax { height: 220px !important; }
+  .footer-top { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .footer-bottom { flex-direction: column !important; align-items: flex-start !important; }
+  .footer-bar-item { font-size: 22px !important; }
+  .footer-bl { flex-wrap: wrap !important; gap: 14px !important; }
+}
+
+/* ── Small phones (480px and below) — extra touch ── */
+@media(max-width:480px){
+  .hero-h1 { font-size: clamp(40px, 11vw, 62px) !important; }
+  .mob-svc-card { flex: 0 0 calc(88vw) !important; }
+  .mob-svc-card:first-child { margin-left: 6vw; }
+  .mob-svc-card:last-child  { margin-right: 6vw; }
+  .section-title { font-size: clamp(30px, 9vw, 52px) !important; }
+  #tsm-vc, #ab-tsm-vc { width: 88vw !important; height: 88vw !important; }
+}
 </style>
   <!-- GSAP for coverflow slider -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -2894,6 +3295,26 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
     </div>
   </section>
 
+
+  <!-- MOBILE SWIPE CAROUSEL — Services (shown only on mobile, hidden on desktop via CSS) -->
+  <div class="mob-svc-carousel-wrap" id="mobSvcCarousel" style="background:var(--black);padding-top:24px;">
+    <div style="padding:0 20px 20px;">
+      <div class="section-tag" style="color:var(--orange);margin-bottom:8px;">All 10 Services</div>
+      <h2 class="section-title" style="font-size:clamp(28px,8vw,48px);text-align:left;line-height:1;color:var(--white);">Swipe Through <span style="color:var(--orange);">What We Do</span></h2>
+      <p style="font-size:14px;color:rgba(245,240,235,.45);margin-top:8px;font-weight:300;">Every discipline. One agency.</p>
+    </div>
+    <div class="mob-svc-track-outer" id="mobSvcTrackOuter">
+      <div class="mob-svc-track" id="mobSvcTrack"></div>
+    </div>
+    <div class="mob-svc-arrows">
+      <button class="mob-svc-arrow" id="mobSvcPrev" aria-label="Previous service">&#8592;</button>
+      <div class="mob-svc-dots" id="mobSvcDots"></div>
+      <button class="mob-svc-arrow" id="mobSvcNext" aria-label="Next service">&#8594;</button>
+    </div>
+    <div style="text-align:center;margin-top:28px;padding:0 20px 8px;">
+      <a href="#" onclick="navigate('services');return false;" class="btn-p" style="width:100%;justify-content:center;">Explore All Services &#8594;</a>
+    </div>
+  </div>
   <!-- PORTFOLIO PREVIEW — EDITORIAL LIST REDESIGN -->
   <section class="casestudies">
 
@@ -2962,19 +3383,18 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
       </div>
     </div>
 
-    <!-- Pinned split-screen container -->
+    <!-- Pinned split-screen container (desktop) -->
     <div class="fv-container" id="fvContainer">
       <div class="fv-arch">
-
         <!-- LEFT: stacked text panels (rendered from PAGE_DATA.future.panels) -->
         <div class="fv-arch__left" id="home-fv-left"></div>
-
         <!-- RIGHT: stacked images (rendered from PAGE_DATA.future.panels) -->
         <div class="fv-arch__right" id="home-fv-right"></div>
-
       </div>
       <div class="fv-spacer"></div>
     </div>
+    <!-- MOBILE: card stack layout (hidden on desktop, shown on mobile) -->
+    <div id="home-fv-mobile" style="display:none;padding:16px 16px 32px;"></div>
   </section>
 
   <!-- BLOGS & NEWSLETTER -->
@@ -6647,6 +7067,125 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
   };
 
   document.addEventListener('DOMContentLoaded', () => setTimeout(maybeInit, 200));
+})();
+
+/* ═══════════════════════════════════════════════════
+   MOBILE SWIPE CAROUSEL — SERVICES
+═══════════════════════════════════════════════════ */
+(function initMobSvcCarousel() {
+  function buildCarousel() {
+    if (typeof SVC_CARDS_DATA === 'undefined') { setTimeout(buildCarousel, 150); return; }
+    var track   = document.getElementById('mobSvcTrack');
+    var outer   = document.getElementById('mobSvcTrackOuter');
+    var dotsEl  = document.getElementById('mobSvcDots');
+    var prevBtn = document.getElementById('mobSvcPrev');
+    var nextBtn = document.getElementById('mobSvcNext');
+    if (!track || !outer || !dotsEl) return;
+    var cards = SVC_CARDS_DATA;
+    var current = 0, startX = 0, isDragging = false, dragDelta = 0;
+
+    track.innerHTML = cards.map(function(c, i) {
+      return '<div class="mob-svc-card' + (i===0?' active':'') + '" data-idx="' + i + '">' +
+        '<div class="mob-svc-card-img"><img src="' + (c.img || 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80') + '" alt="' + c.title + '" loading="lazy"></div>' +
+        '<div class="mob-svc-card-grad"></div>' +
+        '<div class="mob-svc-card-num">' + String(i+1).padStart(2,'0') + '</div>' +
+        '<div class="mob-svc-card-body">' +
+          '<div class="mob-svc-card-icon">' + (c.icon || '🚀') + '</div>' +
+          '<div class="mob-svc-card-title">' + c.title + '</div>' +
+          '<div class="mob-svc-card-desc">' + (c.desc || '') + '</div>' +
+          '<div class="mob-svc-card-tag">' + (c.tag || c.title) + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    dotsEl.innerHTML = cards.map(function(_, i) {
+      return '<div class="mob-svc-dot' + (i===0?' active':'') + '" data-idx="' + i + '"></div>';
+    }).join('');
+
+    function getCardWidth() {
+      var c = track.querySelector('.mob-svc-card');
+      if (!c) return window.innerWidth * 0.85 + 16;
+      var rect = c.getBoundingClientRect();
+      var style = getComputedStyle(c);
+      return rect.width + parseInt(style.marginLeft) + parseInt(style.marginRight);
+    }
+
+    function goTo(idx, animated) {
+      if (idx < 0 || idx >= cards.length) return;
+      current = idx;
+      var cw = getCardWidth();
+      track.style.transition = animated === false ? 'none' : 'transform 0.42s cubic-bezier(0.22,1,0.36,1)';
+      track.style.transform = 'translateX(' + -(current * cw) + 'px)';
+      track.querySelectorAll('.mob-svc-card').forEach(function(el,i){ el.classList.toggle('active',i===current); });
+      dotsEl.querySelectorAll('.mob-svc-dot').forEach(function(el,i){ el.classList.toggle('active',i===current); });
+      prevBtn.classList.toggle('disabled', current===0);
+      nextBtn.classList.toggle('disabled', current===cards.length-1);
+    }
+
+    prevBtn.addEventListener('click', function(){ goTo(current-1, true); });
+    nextBtn.addEventListener('click', function(){ goTo(current+1, true); });
+    dotsEl.addEventListener('click', function(e){
+      var dot = e.target.closest('.mob-svc-dot');
+      if (dot) goTo(parseInt(dot.dataset.idx), true);
+    });
+    outer.addEventListener('touchstart', function(e){ startX=e.touches[0].clientX; isDragging=true; dragDelta=0; },{passive:true});
+    outer.addEventListener('touchmove', function(e){
+      if (!isDragging) return;
+      dragDelta = e.touches[0].clientX - startX;
+      track.style.transition = 'none';
+      track.style.transform = 'translateX(' + (-(current*getCardWidth()) + dragDelta*0.6) + 'px)';
+    },{passive:true});
+    outer.addEventListener('touchend', function(){
+      isDragging = false;
+      if (dragDelta < -50 && current < cards.length-1) goTo(current+1, true);
+      else if (dragDelta > 50 && current > 0)          goTo(current-1, true);
+      else                                              goTo(current, true);
+    });
+    goTo(0, false);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', buildCarousel);
+  else buildCarousel();
+})();
+
+/* ═══════════════════════════════════════════════════
+   MOBILE FUTURE VISION — Card Stack Renderer
+═══════════════════════════════════════════════════ */
+(function initMobFvCards() {
+  function buildMobFv() {
+    if (window.innerWidth > 768) return;
+    if (typeof PAGE_DATA === 'undefined') { setTimeout(buildMobFv, 200); return; }
+    var container = document.getElementById('home-fv-mobile');
+    if (!container || container.dataset.built) return;
+    container.dataset.built = '1';
+    container.style.display = 'block';
+    var desktop = document.getElementById('fvContainer');
+    if (desktop) desktop.style.display = 'none';
+    var hdr = document.getElementById('fv-home-header');
+    if (hdr) hdr.style.position = 'relative';
+    var panels = (PAGE_DATA.future && PAGE_DATA.future.panels) ? PAGE_DATA.future.panels : [];
+    container.innerHTML = panels.map(function(p, i) {
+      return '<div class="fv-mobile-card">' +
+        '<div class="fv-mobile-card-img"><img src="' + p.img + '" alt="' + p.title + '" loading="lazy"></div>' +
+        '<div class="fv-mobile-card-body">' +
+          '<div class="fv-mobile-card-tag">' + (p.tag || 'Vision') + '</div>' +
+          '<div class="fv-mobile-card-title">' + p.title + '</div>' +
+          '<div class="fv-mobile-card-desc">' + (p.desc || '') + '</div>' +
+          '<button class="fv-mobile-card-btn" onclick="openFvDetail(' + i + ')">Learn More &#8594;</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+  document.addEventListener('DOMContentLoaded', function(){ setTimeout(buildMobFv, 350); });
+  window.addEventListener('resize', function(){
+    if (window.innerWidth > 768) {
+      var desktop = document.getElementById('fvContainer');
+      if (desktop) desktop.style.display = '';
+      var mob = document.getElementById('home-fv-mobile');
+      if (mob) { mob.style.display='none'; mob.dataset.built=''; mob.innerHTML=''; }
+    } else {
+      buildMobFv();
+    }
+  });
 })();
 </script>
 
