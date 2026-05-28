@@ -3803,26 +3803,29 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
 
   <!-- FUTURE VISION — Pinned Split-Screen Mask Reveal (page version) -->
   <section id="futureSplitSectionPage" style="background:var(--black);padding-top:0;">
-    <div style="padding:60px 48px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;max-width:1440px;margin:0 auto;">
+    <!-- Section header — sticky until section ends (matches homepage exactly) -->
+    <div id="fv-page-header" style="position:sticky;top:72px;z-index:100;background:var(--black);padding:14px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;max-width:100%;margin:0 auto;border-bottom:1px solid rgba(255,255,255,.05);">
       <div style="text-align:left;">
-        <div class="section-tag" style="color:var(--orange);margin-bottom:10px;">What's Next</div>
-        <h2 class="section-title" style="font-size:clamp(36px,5vw,76px);text-align:left;line-height:1;color:var(--white);">The <span style="color:var(--orange);">Future</span> We're Building</h2>
-        <p style="font-family:var(--font-body);font-size:15px;color:rgba(245,240,235,.5);margin-top:10px;font-weight:300;letter-spacing:.02em;">Scroll to explore the innovations and expansions we're building towards.</p>
+        <div class="section-tag" style="color:var(--orange);margin-bottom:4px;font-size:10px;">What's Next</div>
+        <h2 class="section-title" style="font-size:clamp(22px,2.4vw,38px);text-align:left;line-height:1;color:var(--white);">The <span style="color:var(--orange);">Future</span> We're Building</h2>
+        <p style="font-family:var(--font-body);font-size:12px;color:rgba(245,240,235,.45);margin-top:4px;font-weight:300;letter-spacing:.02em;">Scroll to explore the innovations and expansions we're building towards.</p>
       </div>
     </div>
 
+    <!-- Pinned split-screen container (desktop) -->
     <div class="fv-container" id="fvContainerPage">
       <div class="fv-arch" id="fvArchPage">
 
         <!-- LEFT: stacked text panels (rendered from PAGE_DATA.future.panels) -->
         <div class="fv-arch__left" id="page-fv-left"></div>
-        
 
         <!-- RIGHT: stacked images (rendered from PAGE_DATA.future.panels) -->
         <div class="fv-arch__right" id="page-fv-right"></div>
       </div>
       <div class="fv-spacer"></div>
     </div>
+    <!-- MOBILE: card stack layout (hidden on desktop, shown on mobile) -->
+    <div id="page-fv-mobile" style="display:none;padding:16px 16px 32px;"></div>
   </section>
 
   <section class="cta" style="padding:100px 60px;">
@@ -7176,19 +7179,8 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
    MOBILE FUTURE VISION — Card Stack Renderer
 ═══════════════════════════════════════════════════ */
 (function initMobFvCards() {
-  function buildMobFv() {
-    if (window.innerWidth > 768) return;
-    if (typeof PAGE_DATA === 'undefined') { setTimeout(buildMobFv, 200); return; }
-    var container = document.getElementById('home-fv-mobile');
-    if (!container || container.dataset.built) return;
-    container.dataset.built = '1';
-    container.style.display = 'block';
-    var desktop = document.getElementById('fvContainer');
-    if (desktop) desktop.style.display = 'none';
-    var hdr = document.getElementById('fv-home-header');
-    if (hdr) hdr.style.position = 'relative';
-    var panels = (PAGE_DATA.future && PAGE_DATA.future.panels) ? PAGE_DATA.future.panels : [];
-    container.innerHTML = panels.map(function(p, i) {
+  function buildCardsHTML(panels) {
+    return panels.map(function(p, i) {
       return '<div class="fv-mobile-card">' +
         '<div class="fv-mobile-card-img"><img src="' + p.img + '" alt="' + p.title + '" loading="lazy"></div>' +
         '<div class="fv-mobile-card-body">' +
@@ -7200,17 +7192,71 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
       '</div>';
     }).join('');
   }
-  document.addEventListener('DOMContentLoaded', function(){ setTimeout(buildMobFv, 350); });
+
+  /* ── Home page mobile FV ── */
+  function buildMobFv() {
+    if (window.innerWidth > 768) return;
+    if (typeof PAGE_DATA === 'undefined') { setTimeout(buildMobFv, 200); return; }
+    var container = document.getElementById('home-fv-mobile');
+    if (!container || container.dataset.built) return;
+    container.dataset.built = '1';
+    container.style.display = 'block';
+    var desktop = document.getElementById('fvContainer');
+    if (desktop) desktop.style.display = 'none';
+    var hdr = document.getElementById('fv-home-header');
+    if (hdr) hdr.style.position = 'relative';
+    var panels = (PAGE_DATA.future && PAGE_DATA.future.panels) ? PAGE_DATA.future.panels.slice(0, 4) : [];
+    container.innerHTML = buildCardsHTML(panels);
+  }
+
+  /* ── Future Vision page mobile FV (all panels) ── */
+  function buildPageMobFv() {
+    if (window.innerWidth > 768) return;
+    if (typeof PAGE_DATA === 'undefined') { setTimeout(buildPageMobFv, 200); return; }
+    var container = document.getElementById('page-fv-mobile');
+    if (!container || container.dataset.built) return;
+    container.dataset.built = '1';
+    container.style.display = 'block';
+    var desktop = document.getElementById('fvContainerPage');
+    if (desktop) desktop.style.display = 'none';
+    var hdr = document.getElementById('fv-page-header');
+    if (hdr) hdr.style.position = 'relative';
+    var panels = (PAGE_DATA.future && PAGE_DATA.future.panels) ? PAGE_DATA.future.panels : [];
+    container.innerHTML = buildCardsHTML(panels);
+  }
+
+  function buildAll() {
+    buildMobFv();
+    buildPageMobFv();
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){ setTimeout(buildAll, 350); });
+
   window.addEventListener('resize', function(){
     if (window.innerWidth > 768) {
-      var desktop = document.getElementById('fvContainer');
-      if (desktop) desktop.style.display = '';
-      var mob = document.getElementById('home-fv-mobile');
-      if (mob) { mob.style.display='none'; mob.dataset.built=''; mob.innerHTML=''; }
+      /* restore desktop versions */
+      var desktopHome = document.getElementById('fvContainer');
+      if (desktopHome) desktopHome.style.display = '';
+      var mobHome = document.getElementById('home-fv-mobile');
+      if (mobHome) { mobHome.style.display='none'; mobHome.dataset.built=''; mobHome.innerHTML=''; }
+
+      var desktopPage = document.getElementById('fvContainerPage');
+      if (desktopPage) desktopPage.style.display = '';
+      var mobPage = document.getElementById('page-fv-mobile');
+      if (mobPage) { mobPage.style.display='none'; mobPage.dataset.built=''; mobPage.innerHTML=''; }
     } else {
-      buildMobFv();
+      buildAll();
     }
   });
+
+  /* Also rebuild page FV when navigating to future page on mobile */
+  var _origNav = window.navigate;
+  window.navigate = function(page) {
+    if (_origNav) _origNav(page);
+    if (page === 'future' && window.innerWidth <= 768) {
+      requestAnimationFrame(function(){ setTimeout(buildPageMobFv, 100); });
+    }
+  };
 })();
 </script>
 
