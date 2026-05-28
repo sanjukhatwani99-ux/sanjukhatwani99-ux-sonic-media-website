@@ -210,6 +210,10 @@ nav.stuck{
   overflow:hidden;
 }
 .mob-nav.open{visibility:visible;pointer-events:all;}
+/* Hide navbar logo & brand name when mobile drawer is open */
+.mob-nav.open ~ nav .nav-left,
+body.mob-open .nav-left{opacity:0;pointer-events:none;transition:opacity .25s ease;}
+.nav-left{transition:opacity .25s ease;}
 
 /* Backdrop */
 .mob-nav-backdrop{
@@ -4871,11 +4875,13 @@ const hamBtn=document.getElementById('ham');
 function openMob(){
   mobNav.classList.add('open');
   hamBtn.classList.add('active');
+  document.body.classList.add('mob-open');
   document.body.style.overflow='hidden';
 }
 function closeMob(){
   mobNav.classList.remove('open');
   hamBtn.classList.remove('active');
+  document.body.classList.remove('mob-open');
   document.body.style.overflow='';
   // Close services accordion too
   const toggle=document.getElementById('mobSvcToggle');
