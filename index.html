@@ -205,7 +205,7 @@ nav.stuck{
 /* ─ MOBILE NAV OVERLAY ─ */
 .mob-nav{
   position:fixed;inset:0;z-index:9985;
-  display:flex;
+  display:flex;justify-content:flex-end;
   visibility:hidden;
   pointer-events:none;
   overflow:hidden;
@@ -227,9 +227,9 @@ nav.stuck{
   width:min(320px,88vw);
   height:100%;
   background:var(--black2);
-  border-right:1px solid rgba(255,255,255,.08);
+  border-left:1px solid rgba(255,255,255,.08);
   display:flex;flex-direction:column;
-  transform:translateX(-100%);
+  transform:translateX(100%);
   transition:transform .42s cubic-bezier(.77,0,.175,1);
   overflow:hidden;
   flex-shrink:0;
@@ -1144,6 +1144,7 @@ section{position:relative;z-index:2;}
 .journal-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;}
 .journal-header .section-title{color:var(--white);}
 .jnl-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:20px;}
+#home-casestudies-grid .jcard:nth-child(4){display:none;}
 .jcard{border-radius:20px;overflow:hidden;background:var(--black3);border:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;transition:all .35s;}
 .jcard:hover{border-color:rgba(255,92,0,.2);transform:translateY(-5px);}
 .jcard-img{width:100%;aspect-ratio:16/10;overflow:hidden;background:linear-gradient(135deg,rgba(255,92,0,.12),rgba(255,92,0,.03));flex-shrink:0;position:relative;}
@@ -2371,7 +2372,7 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
   /* Mobile nav improvements - handled by drawer CSS */
 
   /* Scroll reveal TSM */
-  .tsm-scroll-section { height: 200vh; }
+  .tsm-scroll-section { height: 250vh; }
   #tsm-vc, #ab-tsm-vc { width: 88vw; height: 88vw; }
 
   /* Home coverflow */
@@ -2977,6 +2978,7 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
   .journal-header { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 28px; }
   /* 2 columns on mobile — compact cards */
   .jnl-grid { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+  #home-casestudies-grid .jcard:nth-child(4) { display: flex !important; }
   /* First card no longer gets featured full-width treatment */
   .jnl-grid .jcard:first-child { grid-column: span 1 !important; }
   .jcard:first-child .jcard-img { aspect-ratio: 16/10 !important; }
@@ -6496,7 +6498,7 @@ function renderPageData() {
   }
 
   /* Home shows first 3 case study cards */
-  setEl('home-casestudies-grid', cs.items.slice(0, 3).map(i => buildJcard(i, 'Read Full Case Study →')).join(''));
+  setEl('home-casestudies-grid', cs.items.slice(0, 4).map(i => buildJcard(i, 'Read Full Case Study →')).join(''));
   /* Page shows all 9 */
   setEl('page-casestudies-grid', cs.items.map(i => buildJcard(i, 'Read Article →')).join(''));
 
@@ -6861,6 +6863,9 @@ buildCoverflowInstance({
 
     vid.play().catch(() => {});
 
+    const isMobile = window.innerWidth <= 768;
+    const tsmExpandH = isMobile ? '88vw' : '88vh';
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '#tsmScrollSection',
@@ -6875,7 +6880,7 @@ buildCoverflowInstance({
       /* 1. Expand box to near-fullscreen */
       .to(vc, {
         width: '88vw',
-        height: '88vh',
+        height: tsmExpandH,
         borderRadius: '0px',
         borderColor: 'transparent',
         ease: 'expo.out',
