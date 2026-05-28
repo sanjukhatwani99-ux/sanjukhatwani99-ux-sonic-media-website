@@ -210,10 +210,13 @@ nav.stuck{
   overflow:hidden;
 }
 .mob-nav.open{visibility:visible;pointer-events:all;}
-/* Hide navbar logo & brand name when mobile drawer is open */
+/* When drawer is open: hide BOTH the hamburger menu icon AND the drawer's close (✕) icon */
 .mob-nav.open ~ nav .nav-left,
 body.mob-open .nav-left{opacity:0;pointer-events:none;transition:opacity .25s ease;}
+body.mob-open .ham{opacity:0;pointer-events:none;transition:opacity .25s ease;}
+body.mob-open #mobClose{opacity:0;pointer-events:none;transition:opacity .25s ease;}
 .nav-left{transition:opacity .25s ease;}
+.ham{transition:opacity .25s ease, background .25s, border-color .25s;}
 
 /* Backdrop */
 .mob-nav-backdrop{
@@ -234,8 +237,7 @@ body.mob-open .nav-left{opacity:0;pointer-events:none;transition:opacity .25s ea
   display:flex;flex-direction:column;
   transform:translateX(100%);
   transition:transform .42s cubic-bezier(.77,0,.175,1);
-  overflow-y:auto;
-  overflow-x:hidden;
+  overflow:hidden;
   flex-shrink:0;
 }
 .mob-nav.open .mob-nav-drawer{transform:translateX(0);}
@@ -247,9 +249,6 @@ body.mob-open .nav-left{opacity:0;pointer-events:none;transition:opacity .25s ea
   border-bottom:1px solid rgba(255,255,255,.07);
   flex-shrink:0;
   min-height:68px;
-  position:sticky;top:0;
-  background:var(--black2);
-  z-index:10;
 }
 .mob-nav-brand{
   display:flex;align-items:center;gap:10px;
@@ -264,10 +263,6 @@ body.mob-open .nav-left{opacity:0;pointer-events:none;transition:opacity .25s ea
   display:flex;align-items:center;justify-content:center;
   font-size:14px;color:var(--white2);
   transition:all .2s;flex-shrink:0;
-  touch-action:manipulation;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-  position:relative;z-index:20;
 }
 .mob-close:hover{background:rgba(255,92,0,.15);border-color:rgba(255,92,0,.35);color:var(--orange);}
 
@@ -3145,7 +3140,7 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
         <img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779787887/favicon_oalxfi.png" alt="The Sonic Media" />
         THE SONIC MEDIA
       </div>
-      <button class="mob-close" id="mobClose" aria-label="Close menu" onclick="closeMob()" style="position:relative;z-index:20;cursor:pointer;">✕</button>
+      <button class="mob-close" id="mobClose" aria-label="Close menu">✕</button>
     </div>
 
     <!-- Body -->
@@ -4880,37 +4875,17 @@ window.addEventListener('scroll',()=>{
 const mobNav=document.getElementById('mobNav');
 const hamBtn=document.getElementById('ham');
 
-let _mobScrollY = 0; // save scroll position before locking
-
 function openMob(){
-  // Save current scroll position before locking
-  _mobScrollY = window.scrollY || window.pageYOffset || 0;
-  // Stop Lenis smooth scroll
-  if (window.lenis) window.lenis.stop();
-  // Lock body scroll: fix position so iOS/Android can't scroll behind drawer
-  document.body.style.top = '-' + _mobScrollY + 'px';
-  document.body.style.position = 'fixed';
-  document.body.style.width = '100%';
-  document.body.style.overflow = 'hidden';
-
   mobNav.classList.add('open');
   hamBtn.classList.add('active');
   document.body.classList.add('mob-open');
+  document.body.style.overflow='hidden';
 }
 function closeMob(){
-  // Restore body scroll
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.width = '';
-  document.body.style.overflow = '';
-  // Restore scroll position
-  window.scrollTo(0, _mobScrollY);
-  // Restart Lenis
-  if (window.lenis) window.lenis.start();
-
   mobNav.classList.remove('open');
   hamBtn.classList.remove('active');
   document.body.classList.remove('mob-open');
+  document.body.style.overflow='';
   // Close services accordion too
   const toggle=document.getElementById('mobSvcToggle');
   const submenu=document.getElementById('mobSvcSubmenu');
