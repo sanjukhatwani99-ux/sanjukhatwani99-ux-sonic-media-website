@@ -1993,7 +1993,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.05);paddin
   color: var(--orange);
 }
 @media(max-width:600px){
-  #tsm-vc, #ab-tsm-vc { width: 85vw; height: 85vw; }
+  #tsm-vc, #ab-tsm-vc { width: 72vw; height: 72vw; }
   .tsm-vid-overlay h2 { font-size: 1.5rem; }
 }
 
@@ -2381,8 +2381,8 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
   /* Mobile nav improvements - handled by drawer CSS */
 
   /* Scroll reveal TSM */
-  .tsm-scroll-section { height: 250vh; }
-  #tsm-vc, #ab-tsm-vc { width: 88vw; height: 88vw; }
+  .tsm-scroll-section { height: 300vh; }
+  #tsm-vc, #ab-tsm-vc { width: 72vw; height: 72vw; }
 
   /* Home coverflow */
   .hcf-scroll-wrapper { height: 2000px; }
@@ -3076,7 +3076,7 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
   .hero-h1 { font-size: clamp(40px, 11vw, 62px) !important; }
   /* mob-svc-card is 100vw — no overrides needed at 480px */
   .section-title { font-size: clamp(30px, 9vw, 52px) !important; }
-  #tsm-vc, #ab-tsm-vc { width: 88vw !important; height: 88vw !important; }
+  #tsm-vc, #ab-tsm-vc { width: 72vw !important; height: 72vw !important; }
 }
 </style>
   <!-- GSAP for coverflow slider -->
@@ -4742,7 +4742,8 @@ function reinitHomeAnimations() {
     if (!vc || !vid) return;
 
     // Reset elements to initial state before re-animating
-    const _tsmInitSize = window.innerWidth <= 768 ? '88vw' : '320px';
+    const _isMob = window.innerWidth <= 768;
+    const _tsmInitSize = _isMob ? '72vw' : '320px';
     gsap.set(vc,        { width: _tsmInitSize, height: _tsmInitSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
     gsap.set(vid,       { scale: 1 });
     gsap.set(darkOv,    { backgroundColor: 'rgba(0,0,0,0)' });
@@ -4762,7 +4763,7 @@ function reinitHomeAnimations() {
         onEnter: () => vid.play()
       }
     })
-    .to(vc,        { width: '88vw', height: window.innerWidth <= 768 ? '88vw' : '88vh', borderRadius: '0px', borderColor: 'transparent', ease: 'expo.out', duration: 0.5 }, 0)
+    .to(vc,        { width: '100vw', height: _isMob ? '56vw' : '88vh', borderRadius: '0px', borderColor: 'transparent', ease: 'expo.out', duration: 0.5 }, 0)
     .to(vid,       { scale: 1.08, ease: 'expo.out', duration: 0.5 }, 0)
     .to(darkOv,    { backgroundColor: 'rgba(0,0,0,0.45)', ease: 'power3.inOut', duration: 0.5 }, 0)
     .to(overlay,   { clipPath: 'inset(0% 0 0 0)', ease: 'expo.out', duration: 0.3 }, 0.4)
@@ -6965,6 +6966,16 @@ buildCoverflowInstance({
     if (!vc || !vid) return;
     inited = true;
 
+    // Set initial state (small square, like desktop)
+    const _abIsMob = window.innerWidth <= 768;
+    const _abInitSize = _abIsMob ? '72vw' : '320px';
+    gsap.set(vc,        { width: _abInitSize, height: _abInitSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
+    gsap.set(vid,       { scale: 1 });
+    gsap.set(darkOv,    { backgroundColor: 'rgba(0,0,0,0)' });
+    gsap.set(overlay,   { clipPath: 'inset(100% 0 0 0)' });
+    if (caption) gsap.set(caption, { transform: 'translateY(30px)' });
+    gsap.set(ovContent, { filter: 'blur(10px)', transform: 'scale(1.1)' });
+
     vid.play().catch(() => {});
 
     const tl = gsap.timeline({
@@ -6979,8 +6990,8 @@ buildCoverflowInstance({
 
     tl
       .to(vc, {
-        width: '88vw',
-        height: '88vh',
+        width: '100vw',
+        height: _abIsMob ? '56vw' : '88vh',
         borderRadius: '0px',
         borderColor: 'transparent',
         ease: 'expo.out',
