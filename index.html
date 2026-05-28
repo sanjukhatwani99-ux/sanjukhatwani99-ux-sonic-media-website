@@ -198,11 +198,8 @@ nav.stuck{
   display:block;width:100%;height:2px;background:var(--white);border-radius:2px;
   transition:all .35s cubic-bezier(.77,0,.175,1);transform-origin:center;
 }
-/* ham.active — transform to X */
+/* ham.active — no X transform; drawer has its own close button */
 .ham.active{background:rgba(255,92,0,.15);border-color:rgba(255,92,0,.4);}
-.ham.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.ham.active span:nth-child(2){opacity:0;transform:scaleX(0);}
-.ham.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
 /* ─ MOBILE NAV OVERLAY ─ */
 .mob-nav{
@@ -213,10 +210,11 @@ nav.stuck{
   overflow:hidden;
 }
 .mob-nav.open{visibility:visible;pointer-events:all;}
-/* Keep nav-left visible when mobile drawer is open */
-.nav-left{transition:opacity .25s ease;}
-/* Keep hamburger always on top and visible */
-body.mob-open .ham { z-index: 9995; position: relative; }
+/* When drawer opens: hide nav-left AND hamburger — drawer has its own brand + close button */
+body.mob-open .nav-left { opacity: 0; pointer-events: none; }
+body.mob-open .ham { opacity: 0; pointer-events: none; }
+.nav-left { transition: opacity .25s ease; }
+.ham { transition: opacity .25s ease, background .25s, border-color .25s; }
 
 /* Backdrop */
 .mob-nav-backdrop{
@@ -2975,33 +2973,9 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
   .port-item.port-tall,.port-item.port-wide { grid-row: span 1 !important; grid-column: span 1 !important; }
 
   /* ── FAQ MOBILE ── */
-  .faq-section { padding: 48px 20px !important; }
-  .faq-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
-  .faq-stats { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
-  .faq-stat { padding: 16px 14px !important; }
-  .faq-stat .faq-stat-num { font-size: 28px !important; }
-  .faq-stat .faq-stat-lbl { font-size: 9px !important; }
-  .faq-sub { font-size: 14px !important; margin-bottom: 24px !important; }
-  .faq-q-btn { padding: 16px 18px !important; font-size: 13px !important; }
-  .faq-ans-pro p { padding: 0 18px 16px !important; font-size: 13px !important; padding-top: 12px !important; }
-  .faq-q-icon { width: 26px !important; height: 26px !important; font-size: 13px !important; }
-  .faq-left > div[style] { padding: 20px !important; margin-top: 24px !important; }
-
-  /* ── FRESH READS / BLOGS-NEWSLETTER ── */
-  .blogs-newsletter { grid-template-columns: 1fr !important; min-height: auto !important; }
-  .blogs-half { padding: 48px 20px !important; }
-  .newsletter-half { padding: 48px 20px !important; }
-  .nl-h { font-size: clamp(32px, 9vw, 50px) !important; margin-bottom: 12px !important; }
-  .nl-p { font-size: 14px !important; margin-bottom: 24px !important; line-height: 1.6 !important; }
-  .nl-count { margin-bottom: 20px !important; font-size: 11px !important; }
-  .nl-input { padding: 13px 16px !important; font-size: 13px !important; }
-  .nl-submit { padding: 13px !important; font-size: 13px !important; }
-  .blog-list { margin-top: 24px !important; }
-  .blog-item { padding: 16px 0 !important; gap: 14px !important; }
-  .blog-num { font-size: 18px !important; width: 28px !important; }
-  .blog-info .bt { font-size: 13px !important; margin-bottom: 5px !important; line-height: 1.35 !important; }
-  .blog-info .bm { font-size: 11px !important; gap: 8px !important; }
-  .blog-info a[style] { font-size: 10px !important; margin-top: 5px !important; }
+  .faq-section { padding: 60px 20px !important; }
+  .faq-inner { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .faq-stats { grid-template-columns: 1fr 1fr !important; }
 
   /* ── JOURNAL / CASE STUDIES PREVIEW — 2-col grid ── */
   .journal { padding: 60px 20px !important; }
@@ -3021,6 +2995,10 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
   .jcard-cat { font-size: 9px !important; padding: 3px 8px !important; }
   .jcard-date { display: none !important; }
   .jcard-read { font-size: 10px !important; }
+
+  /* ── BLOGS-NEWSLETTER ── */
+  .blogs-newsletter { grid-template-columns: 1fr !important; }
+  .blogs-half,.newsletter-half { padding: 60px 20px !important; }
 
   /* ── CTA SECTION MOBILE ── */
   .cta { padding: 72px 20px !important; }
@@ -4677,10 +4655,16 @@ function navigate(page) {
   // Show new
   document.getElementById('page-' + page).classList.add('active');
   currentPage = page;
-  // Scroll to top — use both native and Lenis so smooth scroll doesn't override
-  window.scrollTo(0, 0);
+  // Scroll to top — aggressive: stop lenis, force native scroll, then re-enable
   if (window.lenis) {
+    window.lenis.stop();
     window.lenis.scrollTo(0, { immediate: true });
+  }
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  if (window.lenis) {
+    setTimeout(() => { window.lenis.start(); }, 80);
   }
   // Update nav active state
   document.querySelectorAll('.nav-links [data-page]').forEach(a => {
@@ -6979,9 +6963,6 @@ buildCoverflowInstance({
 
     vid.play().catch(() => {});
 
-    const isMobileAbout = window.innerWidth <= 768;
-    const abExpandH = isMobileAbout ? '88vw' : '88vh';
-
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '#abTsmScrollSection',
@@ -6995,7 +6976,7 @@ buildCoverflowInstance({
     tl
       .to(vc, {
         width: '88vw',
-        height: abExpandH,
+        height: '88vh',
         borderRadius: '0px',
         borderColor: 'transparent',
         ease: 'expo.out',
@@ -7948,6 +7929,10 @@ section.sr-visible > * .section-tag::before {
   window.navigate = function(page) {
     // Flash the overlay
     pageOverlay.style.opacity = '0.45';
+    // Scroll to top immediately (before page switch)
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
     setTimeout(() => {
       _originalNavigate(page);
       // Re-run annotation on new page
