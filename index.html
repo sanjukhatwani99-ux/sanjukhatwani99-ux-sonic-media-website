@@ -4689,6 +4689,10 @@ function navigate(page) {
   }
   // Rebuild FAQ if needed
   if (page === 'faq') buildFAQPage();
+  // Reinit About page GSAP scroll animation
+  if (page === 'about') {
+    setTimeout(reinitAboutAnimations, 120);
+  }
 }
 
 /* ── Home animation reinit helper ──
@@ -6952,17 +6956,29 @@ buildCoverflowInstance({
 
 /* ═══════════════════════════════════════════════════
    THOUGHT VESSEL — ABOUT PAGE VERSION
+   Mirrors reinitHomeAnimations pattern for reliability
+   on both desktop and mobile.
 ═══════════════════════════════════════════════════ */
-(function initAboutThoughtVessel() {
-  function buildAboutTV() {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-      setTimeout(buildAboutTV, 100);
-      return;
-    }
+function reinitAboutAnimations() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    setTimeout(reinitAboutAnimations, 80);
+    return;
+  }
 
-    const pg = document.getElementById('page-about');
-    if (!pg || !pg.classList.contains('active')) return;
+  // 1. Kill all stale ScrollTriggers scoped to the about section
+  ScrollTrigger.getAll().forEach(st => {
+    const trigger = st.trigger || st.vars?.trigger;
+    if (!trigger) return;
+    const el = typeof trigger === 'string' ? document.querySelector(trigger) : trigger;
+    if (!el) return;
+    if (el.closest && el.closest('#page-about')) st.kill();
+  });
 
+  // 2. Refresh so ScrollTrigger recalculates page dimensions after page swap
+  ScrollTrigger.refresh();
+
+  // 3. Rebuild About Thought Vessel scroll animation
+  (function() {
     const vc        = document.getElementById('ab-tsm-vc');
     const vid       = document.getElementById('ab-tsm-vid');
     const darkOv    = document.getElementById('ab-tsm-dark-overlay');
@@ -6972,18 +6988,10 @@ buildCoverflowInstance({
 
     if (!vc || !vid) return;
 
-    // Kill any stale ScrollTriggers for this section before rebuilding
-    ScrollTrigger.getAll().forEach(st => {
-      const t = st.trigger || (st.vars && st.vars.trigger);
-      if (!t) return;
-      const el = typeof t === 'string' ? document.querySelector(t) : t;
-      if (el && el.id === 'abTsmScrollSection') st.kill();
-    });
-
-    // Set initial state — small square
+    // Reset elements to initial state
     const _abIsMob = window.innerWidth <= 768;
     const _abInitSize = _abIsMob ? '72vw' : '320px';
-    gsap.set(vc,        { width: _abInitSize, height: _abInitSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
+    gsap.set(vc,        { width: _abInitSize, height: _abInitSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)', clearProps: 'none' });
     gsap.set(vid,       { scale: 1 });
     gsap.set(darkOv,    { backgroundColor: 'rgba(0,0,0,0)' });
     gsap.set(overlay,   { clipPath: 'inset(100% 0 0 0)' });
@@ -6997,6 +7005,7 @@ buildCoverflowInstance({
         trigger: '#abTsmScrollSection',
         start: 'top top',
         end: 'bottom bottom',
+        pin: false,
         scrub: 1.2,
         onEnter: () => vid.play()
       }
@@ -7035,22 +7044,18 @@ buildCoverflowInstance({
       ease: 'expo.out',
       duration: 0.4
     }, 0.45);
+  })();
 
-    ScrollTrigger.refresh();
-  }
+  ScrollTrigger.refresh();
+}
 
-  // Hook into navigate
-  const _origNavAboutTV = window.navigate;
-  window.navigate = function(page) {
-    _origNavAboutTV(page);
-    if (page === 'about') {
-      requestAnimationFrame(() => setTimeout(buildAboutTV, 80));
-    }
-  };
-
-  // In case the page loads directly on about
-  document.addEventListener('DOMContentLoaded', () => setTimeout(buildAboutTV, 200));
-})();
+// Bootstrap: if page loads directly on about (edge case)
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    const pg = document.getElementById('page-about');
+    if (pg && pg.classList.contains('active')) reinitAboutAnimations();
+  }, 200);
+});
 
 /* ═══════════════════════════════════════════════════
    FUTURE VISION — PINNED SPLIT-SCREEN MASK REVEAL
