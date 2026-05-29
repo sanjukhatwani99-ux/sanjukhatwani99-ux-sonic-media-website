@@ -1882,6 +1882,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.05);paddin
   justify-content: center;
   align-items: center;
   z-index: 2;
+  overflow: hidden;
 }
 #tsm-vc,
 #ab-tsm-vc {
@@ -6879,10 +6880,19 @@ buildCoverflowInstance({
 
     if (!vc || !vid) return;
 
-    vid.play().catch(() => {});
-
     const isMobile = window.innerWidth <= 768;
-    const tsmExpandH = isMobile ? '88vw' : '88vh';
+    const initSize = isMobile ? '72vw' : '320px';
+    const expandW  = '100vw';
+    const expandH  = isMobile ? '56vw' : '88vh';
+
+    gsap.set(vc,        { width: initSize, height: initSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
+    gsap.set(vid,       { scale: 1 });
+    gsap.set(darkOv,    { backgroundColor: 'rgba(0,0,0,0)' });
+    gsap.set(overlay,   { clipPath: 'inset(100% 0 0 0)' });
+    if (caption)   gsap.set(caption,   { transform: 'translateY(30px)' });
+    if (ovContent) gsap.set(ovContent, { filter: 'blur(10px)', transform: 'scale(1.1)' });
+
+    vid.play().catch(() => {});
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -6895,10 +6905,10 @@ buildCoverflowInstance({
     });
 
     tl
-      /* 1. Expand box to near-fullscreen */
+      /* 1. Expand box — small square → wide cinematic rectangle */
       .to(vc, {
-        width: '88vw',
-        height: tsmExpandH,
+        width: expandW,
+        height: expandH,
         borderRadius: '0px',
         borderColor: 'transparent',
         ease: 'expo.out',
@@ -6944,10 +6954,7 @@ buildCoverflowInstance({
    THOUGHT VESSEL — ABOUT PAGE VERSION
 ═══════════════════════════════════════════════════ */
 (function initAboutThoughtVessel() {
-  let inited = false;
-
   function buildAboutTV() {
-    if (inited) return;
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
       setTimeout(buildAboutTV, 100);
       return;
@@ -6964,21 +6971,28 @@ buildCoverflowInstance({
     const ovContent = document.getElementById('abTsmOvContent');
 
     if (!vc || !vid) return;
-    inited = true;
 
-    // Set initial state (small square, like desktop)
+    // Kill any stale ScrollTriggers for this section before rebuilding
+    ScrollTrigger.getAll().forEach(st => {
+      const t = st.trigger || (st.vars && st.vars.trigger);
+      if (!t) return;
+      const el = typeof t === 'string' ? document.querySelector(t) : t;
+      if (el && el.id === 'abTsmScrollSection') st.kill();
+    });
+
+    // Set initial state — small square
     const _abIsMob = window.innerWidth <= 768;
     const _abInitSize = _abIsMob ? '72vw' : '320px';
     gsap.set(vc,        { width: _abInitSize, height: _abInitSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
     gsap.set(vid,       { scale: 1 });
     gsap.set(darkOv,    { backgroundColor: 'rgba(0,0,0,0)' });
     gsap.set(overlay,   { clipPath: 'inset(100% 0 0 0)' });
-    if (caption) gsap.set(caption, { transform: 'translateY(30px)' });
-    gsap.set(ovContent, { filter: 'blur(10px)', transform: 'scale(1.1)' });
+    if (caption)   gsap.set(caption,   { transform: 'translateY(30px)' });
+    if (ovContent) gsap.set(ovContent, { filter: 'blur(10px)', transform: 'scale(1.1)' });
 
     vid.play().catch(() => {});
 
-    const tl = gsap.timeline({
+    gsap.timeline({
       scrollTrigger: {
         trigger: '#abTsmScrollSection',
         start: 'top top',
@@ -6986,43 +7000,41 @@ buildCoverflowInstance({
         scrub: 1.2,
         onEnter: () => vid.play()
       }
-    });
-
-    tl
-      .to(vc, {
-        width: '100vw',
-        height: _abIsMob ? '56vw' : '88vh',
-        borderRadius: '0px',
-        borderColor: 'transparent',
-        ease: 'expo.out',
-        duration: 0.5
-      }, 0)
-      .to(vid, {
-        scale: 1.08,
-        ease: 'expo.out',
-        duration: 0.5
-      }, 0)
-      .to(darkOv, {
-        backgroundColor: 'rgba(0,0,0,0.45)',
-        ease: 'power3.inOut',
-        duration: 0.5
-      }, 0)
-      .to(overlay, {
-        clipPath: 'inset(0% 0 0 0)',
-        ease: 'expo.out',
-        duration: 0.3
-      }, 0.4)
-      .to(caption, {
-        transform: 'translateY(0)',
-        ease: 'expo.out',
-        duration: 0.3
-      }, 0.45)
-      .to(ovContent, {
-        filter: 'blur(0px)',
-        transform: 'scale(1)',
-        ease: 'expo.out',
-        duration: 0.4
-      }, 0.45);
+    })
+    .to(vc, {
+      width: '100vw',
+      height: _abIsMob ? '56vw' : '88vh',
+      borderRadius: '0px',
+      borderColor: 'transparent',
+      ease: 'expo.out',
+      duration: 0.5
+    }, 0)
+    .to(vid, {
+      scale: 1.08,
+      ease: 'expo.out',
+      duration: 0.5
+    }, 0)
+    .to(darkOv, {
+      backgroundColor: 'rgba(0,0,0,0.45)',
+      ease: 'power3.inOut',
+      duration: 0.5
+    }, 0)
+    .to(overlay, {
+      clipPath: 'inset(0% 0 0 0)',
+      ease: 'expo.out',
+      duration: 0.3
+    }, 0.4)
+    .to(caption, {
+      transform: 'translateY(0)',
+      ease: 'expo.out',
+      duration: 0.3
+    }, 0.45)
+    .to(ovContent, {
+      filter: 'blur(0px)',
+      transform: 'scale(1)',
+      ease: 'expo.out',
+      duration: 0.4
+    }, 0.45);
 
     ScrollTrigger.refresh();
   }
@@ -7145,11 +7157,26 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
   let pageInited = false;
 
   function maybeInit() {
-    if (pageInited) return;
     if (!document.getElementById('page-future') ||
         !document.getElementById('page-future').classList.contains('active')) return;
     // Panels must exist (renderPageData already ran at DOMContentLoaded)
     if (!document.querySelector('.fv-img-wrapper--page')) return;
+
+    // Kill any stale ScrollTriggers for the future page before rebuilding
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.getAll().forEach(st => {
+        const t = st.trigger || (st.vars && st.vars.trigger);
+        if (!t) return;
+        const el = typeof t === 'string' ? document.querySelector(t) : t;
+        if (el && el.closest && el.closest('#page-future')) st.kill();
+      });
+    }
+
+    // Reset image clip-path so they are fully visible before animation re-attaches
+    document.querySelectorAll('.fv-img-wrapper--page img').forEach(img => {
+      img.style.clipPath = '';
+    });
+
     pageInited = true;
     buildFutureVisionSplit({
       sectionId:    'futureSplitSectionPage',
@@ -7166,6 +7193,8 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
   window.navigate = function(page) {
     _origNavigate(page);
     if (page === 'future') {
+      // Always reset so images re-initialise each visit
+      pageInited = false;
       requestAnimationFrame(() => setTimeout(maybeInit, 50));
     }
   };
@@ -8052,9 +8081,6 @@ section.sr-visible > * .section-tag::before {
     if (!p || !p.detail) return;
     const d = p.detail;
 
-    const win = window.open('', '_blank');
-    if (!win) return;
-
     const bulletsHtml = (d.bullets || []).map(b => `
       <div style="display:flex;align-items:flex-start;gap:14px;padding:16px 20px;border-radius:12px;background:rgba(255,92,0,.06);border:1px solid rgba(255,92,0,.15);margin-bottom:12px;">
         <span style="width:8px;height:8px;border-radius:50%;background:#FF5C00;flex-shrink:0;margin-top:6px;box-shadow:0 0 8px rgba(255,92,0,.5);"></span>
@@ -8145,12 +8171,60 @@ body{font-family:'DM Sans',sans-serif;background:#080808;color:#F5F0EB;line-heig
 </div>
 </body>
 </html>`;
-    win.document.write(html);
-    win.document.close();
+    // Use a Blob URL so the page has a real URL that survives browser refresh
+    const blob = new Blob([html], { type: 'text/html' });
+    const blobUrl = URL.createObjectURL(blob);
+    const newTab = window.open(blobUrl, '_blank');
+    // Revoke the blob URL after the tab has loaded to free memory
+    if (newTab) {
+      newTab.addEventListener('load', function() {
+        URL.revokeObjectURL(blobUrl);
+      }, { once: true });
+    }
   };
 
   // Keep closeFvDetail as no-op for any residual references
   window.closeFvDetail = function() {};
+})();
+
+</script>
+
+<script>
+/* ═══════════════════════════════════════════════════
+   MOBILE VIDEO LOOP FIX
+   On iOS/Android, the `loop` attribute can be silently
+   ignored when the browser restricts autoplay or when
+   GSAP manages the element. Force a restart on 'ended'.
+═══════════════════════════════════════════════════ */
+(function fixMobileVideoLoop() {
+  function ensureLoop(videoEl) {
+    if (!videoEl) return;
+    videoEl.addEventListener('ended', function() {
+      videoEl.currentTime = 0;
+      videoEl.play().catch(function(){});
+    });
+    // Resume play after tab becomes visible again
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible' && videoEl.paused) {
+        videoEl.play().catch(function(){});
+      }
+    });
+  }
+
+  function initVideoLoops() {
+    // (a) Full-width showreel video after hero section on home page
+    ensureLoop(document.getElementById('homeShowreel'));
+    // (b) About section scroll-reveal video preview
+    ensureLoop(document.getElementById('ab-tsm-vid'));
+    // Also cover the home thought-vessel video
+    ensureLoop(document.getElementById('tsm-vid'));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVideoLoops);
+  } else {
+    initVideoLoops();
+  }
 })();
 </script>
 
