@@ -2383,6 +2383,8 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
 
   /* Scroll reveal TSM */
   .tsm-scroll-section { height: 300vh; }
+  /* Hide 2nd video section (thought-vessel scroll reveal) on mobile */
+  #tsmScrollSection { display: none !important; }
   #tsm-vc, #ab-tsm-vc { width: 72vw; height: 72vw; }
 
   /* Home coverflow */
@@ -4689,10 +4691,6 @@ function navigate(page) {
   }
   // Rebuild FAQ if needed
   if (page === 'faq') buildFAQPage();
-  // Reinit About page GSAP scroll animation
-  if (page === 'about') {
-    setTimeout(reinitAboutAnimations, 120);
-  }
 }
 
 /* ── Home animation reinit helper ──
@@ -6956,29 +6954,17 @@ buildCoverflowInstance({
 
 /* ═══════════════════════════════════════════════════
    THOUGHT VESSEL — ABOUT PAGE VERSION
-   Mirrors reinitHomeAnimations pattern for reliability
-   on both desktop and mobile.
 ═══════════════════════════════════════════════════ */
-function reinitAboutAnimations() {
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-    setTimeout(reinitAboutAnimations, 80);
-    return;
-  }
+(function initAboutThoughtVessel() {
+  function buildAboutTV() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      setTimeout(buildAboutTV, 100);
+      return;
+    }
 
-  // 1. Kill all stale ScrollTriggers scoped to the about section
-  ScrollTrigger.getAll().forEach(st => {
-    const trigger = st.trigger || st.vars?.trigger;
-    if (!trigger) return;
-    const el = typeof trigger === 'string' ? document.querySelector(trigger) : trigger;
-    if (!el) return;
-    if (el.closest && el.closest('#page-about')) st.kill();
-  });
+    const pg = document.getElementById('page-about');
+    if (!pg || !pg.classList.contains('active')) return;
 
-  // 2. Refresh so ScrollTrigger recalculates page dimensions after page swap
-  ScrollTrigger.refresh();
-
-  // 3. Rebuild About Thought Vessel scroll animation
-  (function() {
     const vc        = document.getElementById('ab-tsm-vc');
     const vid       = document.getElementById('ab-tsm-vid');
     const darkOv    = document.getElementById('ab-tsm-dark-overlay');
@@ -6988,10 +6974,18 @@ function reinitAboutAnimations() {
 
     if (!vc || !vid) return;
 
-    // Reset elements to initial state
+    // Kill any stale ScrollTriggers for this section before rebuilding
+    ScrollTrigger.getAll().forEach(st => {
+      const t = st.trigger || (st.vars && st.vars.trigger);
+      if (!t) return;
+      const el = typeof t === 'string' ? document.querySelector(t) : t;
+      if (el && el.id === 'abTsmScrollSection') st.kill();
+    });
+
+    // Set initial state — small square
     const _abIsMob = window.innerWidth <= 768;
     const _abInitSize = _abIsMob ? '72vw' : '320px';
-    gsap.set(vc,        { width: _abInitSize, height: _abInitSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)', clearProps: 'none' });
+    gsap.set(vc,        { width: _abInitSize, height: _abInitSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
     gsap.set(vid,       { scale: 1 });
     gsap.set(darkOv,    { backgroundColor: 'rgba(0,0,0,0)' });
     gsap.set(overlay,   { clipPath: 'inset(100% 0 0 0)' });
@@ -7005,7 +6999,6 @@ function reinitAboutAnimations() {
         trigger: '#abTsmScrollSection',
         start: 'top top',
         end: 'bottom bottom',
-        pin: false,
         scrub: 1.2,
         onEnter: () => vid.play()
       }
@@ -7044,18 +7037,22 @@ function reinitAboutAnimations() {
       ease: 'expo.out',
       duration: 0.4
     }, 0.45);
-  })();
 
-  ScrollTrigger.refresh();
-}
+    ScrollTrigger.refresh();
+  }
 
-// Bootstrap: if page loads directly on about (edge case)
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(function() {
-    const pg = document.getElementById('page-about');
-    if (pg && pg.classList.contains('active')) reinitAboutAnimations();
-  }, 200);
-});
+  // Hook into navigate
+  const _origNavAboutTV = window.navigate;
+  window.navigate = function(page) {
+    _origNavAboutTV(page);
+    if (page === 'about') {
+      requestAnimationFrame(() => setTimeout(buildAboutTV, 80));
+    }
+  };
+
+  // In case the page loads directly on about
+  document.addEventListener('DOMContentLoaded', () => setTimeout(buildAboutTV, 200));
+})();
 
 /* ═══════════════════════════════════════════════════
    FUTURE VISION — PINNED SPLIT-SCREEN MASK REVEAL
