@@ -3333,7 +3333,6 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
       loop
       muted
       playsinline
-      webkit-playsinline
       preload="auto"
     >
       <source src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1779437141/44748-439982672_medium_ot7bbh.mp4" type="video/mp4">
@@ -3345,7 +3344,7 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
   <div class="tsm-scroll-section" id="tsmScrollSection">
     <div class="tsm-video-wrapper">
       <div id="tsm-vc">
-        <video id="tsm-vid" loop muted playsinline webkit-playsinline>
+        <video id="tsm-vid" loop muted playsinline>
           <source src="https://cdn.cosmos.so/74eaa492-31ae-4550-b5a1-40917d873af5.mp4" type="video/mp4" />
         </video>
         <div id="tsm-dark-overlay"></div>
@@ -3622,7 +3621,7 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
   <div class="tsm-scroll-section" id="abTsmScrollSection">
     <div class="tsm-video-wrapper">
       <div id="ab-tsm-vc">
-        <video id="ab-tsm-vid" loop muted playsinline webkit-playsinline>
+        <video id="ab-tsm-vid" loop muted playsinline>
           <source src="https://cdn.cosmos.so/74eaa492-31ae-4550-b5a1-40917d873af5.mp4" type="video/mp4" />
         </video>
         <div id="ab-tsm-dark-overlay"></div>
@@ -4743,27 +4742,10 @@ function reinitHomeAnimations() {
     const ovContent = document.getElementById('tsmOvContent');
     if (!vc || !vid) return;
 
+    // Reset elements to initial state before re-animating
     const _isMob = window.innerWidth <= 768;
-
-    // Mobile: keep video expanded and looping — no scroll-scrub
-    if (_isMob) {
-      const section = document.getElementById('tsmScrollSection');
-      if (section) { section.style.height = 'auto'; section.style.minHeight = '60vw'; }
-      const wrapper = vc.closest('.tsm-video-wrapper');
-      if (wrapper) { wrapper.style.position = 'relative'; wrapper.style.height = 'auto'; wrapper.style.minHeight = '56vw'; }
-      gsap.set(vc, { width: '100vw', height: '56vw', borderRadius: '0px', borderColor: 'transparent' });
-      gsap.set(vid, { scale: 1 });
-      if (darkOv) gsap.set(darkOv, { backgroundColor: 'rgba(0,0,0,0.35)' });
-      if (overlay) gsap.set(overlay, { clipPath: 'inset(0% 0 0 0)' });
-      if (caption) gsap.set(caption, { transform: 'translateY(0)' });
-      if (ovContent) gsap.set(ovContent, { filter: 'blur(0px)', transform: 'scale(1)' });
-      vid.muted = true; vid.loop = true;
-      vid.play().catch(() => {});
-      return;
-    }
-
-    // Desktop: reset to initial state and rebuild scroll-scrub
-    gsap.set(vc,        { width: '320px', height: '320px', borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
+    const _tsmInitSize = _isMob ? '72vw' : '320px';
+    gsap.set(vc,        { width: _tsmInitSize, height: _tsmInitSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
     gsap.set(vid,       { scale: 1 });
     gsap.set(darkOv,    { backgroundColor: 'rgba(0,0,0,0)' });
     gsap.set(overlay,   { clipPath: 'inset(100% 0 0 0)' });
@@ -4782,7 +4764,7 @@ function reinitHomeAnimations() {
         onEnter: () => vid.play()
       }
     })
-    .to(vc,        { width: '100vw', height: '88vh', borderRadius: '0px', borderColor: 'transparent', ease: 'expo.out', duration: 0.5 }, 0)
+    .to(vc,        { width: '100vw', height: _isMob ? '56vw' : '88vh', borderRadius: '0px', borderColor: 'transparent', ease: 'expo.out', duration: 0.5 }, 0)
     .to(vid,       { scale: 1.08, ease: 'expo.out', duration: 0.5 }, 0)
     .to(darkOv,    { backgroundColor: 'rgba(0,0,0,0.45)', ease: 'power3.inOut', duration: 0.5 }, 0)
     .to(overlay,   { clipPath: 'inset(0% 0 0 0)', ease: 'expo.out', duration: 0.3 }, 0.4)
@@ -6899,44 +6881,11 @@ buildCoverflowInstance({
     if (!vc || !vid) return;
 
     const isMobile = window.innerWidth <= 768;
-
-    // ── MOBILE: skip the scroll-scrub animation entirely ──
-    // The scrub timeline controls playback progress directly, which breaks loop.
-    // On mobile, show the video fully expanded and playing from the start.
-    if (isMobile) {
-      const section = document.getElementById('tsmScrollSection');
-      if (section) {
-        section.style.height = 'auto';
-        section.style.minHeight = '60vw';
-      }
-      const wrapper = vc.closest('.tsm-video-wrapper');
-      if (wrapper) {
-        wrapper.style.position = 'relative';
-        wrapper.style.height = 'auto';
-        wrapper.style.minHeight = '56vw';
-      }
-      gsap.set(vc, { width: '100vw', height: '56vw', borderRadius: '0px', borderColor: 'transparent' });
-      gsap.set(vid, { scale: 1 });
-      if (darkOv) gsap.set(darkOv, { backgroundColor: 'rgba(0,0,0,0.35)' });
-      if (overlay) gsap.set(overlay, { clipPath: 'inset(0% 0 0 0)' });
-      if (caption) gsap.set(caption, { transform: 'translateY(0)' });
-      if (ovContent) gsap.set(ovContent, { filter: 'blur(0px)', transform: 'scale(1)' });
-      vid.setAttribute('loop', '');
-      vid.setAttribute('muted', '');
-      vid.setAttribute('playsinline', '');
-      vid.setAttribute('webkit-playsinline', '');
-      vid.muted = true;
-      vid.loop = true;
-      vid.play().catch(() => {});
-      vid.addEventListener('ended', function() { vid.currentTime = 0; vid.play().catch(() => {}); });
-      return;
-    }
-
-    // ── DESKTOP: original scroll-scrub animation ──
+    const initSize = isMobile ? '72vw' : '320px';
     const expandW  = '100vw';
-    const expandH  = '88vh';
+    const expandH  = isMobile ? '56vw' : '88vh';
 
-    gsap.set(vc,        { width: '320px', height: '320px', borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
+    gsap.set(vc,        { width: initSize, height: initSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
     gsap.set(vid,       { scale: 1 });
     gsap.set(darkOv,    { backgroundColor: 'rgba(0,0,0,0)' });
     gsap.set(overlay,   { clipPath: 'inset(100% 0 0 0)' });
@@ -6956,12 +6905,46 @@ buildCoverflowInstance({
     });
 
     tl
-      .to(vc, { width: expandW, height: expandH, borderRadius: '0px', borderColor: 'transparent', ease: 'expo.out', duration: 0.5 }, 0)
-      .to(vid,       { scale: 1.08, ease: 'expo.out', duration: 0.5 }, 0)
-      .to(darkOv,    { backgroundColor: 'rgba(0,0,0,0.45)', ease: 'power3.inOut', duration: 0.5 }, 0)
-      .to(overlay,   { clipPath: 'inset(0% 0 0 0)', ease: 'expo.out', duration: 0.3 }, 0.4)
-      .to(caption,   { transform: 'translateY(0)', ease: 'expo.out', duration: 0.3 }, 0.45)
-      .to(ovContent, { filter: 'blur(0px)', transform: 'scale(1)', ease: 'expo.out', duration: 0.4 }, 0.45);
+      /* 1. Expand box — small square → wide cinematic rectangle */
+      .to(vc, {
+        width: expandW,
+        height: expandH,
+        borderRadius: '0px',
+        borderColor: 'transparent',
+        ease: 'expo.out',
+        duration: 0.5
+      }, 0)
+      /* 2. Subtle scale on the video itself */
+      .to(vid, {
+        scale: 1.08,
+        ease: 'expo.out',
+        duration: 0.5
+      }, 0)
+      /* 3. Dark overlay darkens */
+      .to(darkOv, {
+        backgroundColor: 'rgba(0,0,0,0.45)',
+        ease: 'power3.inOut',
+        duration: 0.5
+      }, 0)
+      /* 4. Reveal the text overlay panel */
+      .to(overlay, {
+        clipPath: 'inset(0% 0 0 0)',
+        ease: 'expo.out',
+        duration: 0.3
+      }, 0.4)
+      /* 5. Caption slides in */
+      .to(caption, {
+        transform: 'translateY(0)',
+        ease: 'expo.out',
+        duration: 0.3
+      }, 0.45)
+      /* 6. Main content unblurs */
+      .to(ovContent, {
+        filter: 'blur(0px)',
+        transform: 'scale(1)',
+        ease: 'expo.out',
+        duration: 0.4
+      }, 0.45);
   }
 
   tryTVInit();
@@ -6997,42 +6980,10 @@ buildCoverflowInstance({
       if (el && el.id === 'abTsmScrollSection') st.kill();
     });
 
+    // Set initial state — small square
     const _abIsMob = window.innerWidth <= 768;
-
-    // ── MOBILE: skip the scroll-scrub animation entirely ──
-    if (_abIsMob) {
-      const section = document.getElementById('abTsmScrollSection');
-      if (section) {
-        section.style.height = 'auto';
-        section.style.minHeight = '60vw';
-      }
-      const wrapper = vc.closest('.tsm-video-wrapper');
-      if (wrapper) {
-        wrapper.style.position = 'relative';
-        wrapper.style.height = 'auto';
-        wrapper.style.minHeight = '56vw';
-      }
-      gsap.set(vc, { width: '100vw', height: '56vw', borderRadius: '0px', borderColor: 'transparent' });
-      gsap.set(vid, { scale: 1 });
-      if (darkOv) gsap.set(darkOv, { backgroundColor: 'rgba(0,0,0,0.35)' });
-      if (overlay) gsap.set(overlay, { clipPath: 'inset(0% 0 0 0)' });
-      if (caption) gsap.set(caption, { transform: 'translateY(0)' });
-      if (ovContent) gsap.set(ovContent, { filter: 'blur(0px)', transform: 'scale(1)' });
-      vid.setAttribute('loop', '');
-      vid.setAttribute('muted', '');
-      vid.setAttribute('playsinline', '');
-      vid.setAttribute('webkit-playsinline', '');
-      vid.muted = true;
-      vid.loop = true;
-      vid.play().catch(() => {});
-      // Belt-and-braces: restart manually on ended in case loop attr is ignored
-      vid.addEventListener('ended', function() { vid.currentTime = 0; vid.play().catch(() => {}); });
-      ScrollTrigger.refresh();
-      return;
-    }
-
-    // ── DESKTOP: original scroll-scrub animation ──
-    gsap.set(vc,        { width: '320px', height: '320px', borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
+    const _abInitSize = _abIsMob ? '72vw' : '320px';
+    gsap.set(vc,        { width: _abInitSize, height: _abInitSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
     gsap.set(vid,       { scale: 1 });
     gsap.set(darkOv,    { backgroundColor: 'rgba(0,0,0,0)' });
     gsap.set(overlay,   { clipPath: 'inset(100% 0 0 0)' });
@@ -7052,7 +7003,7 @@ buildCoverflowInstance({
     })
     .to(vc, {
       width: '100vw',
-      height: '88vh',
+      height: _abIsMob ? '56vw' : '88vh',
       borderRadius: '0px',
       borderColor: 'transparent',
       ease: 'expo.out',
