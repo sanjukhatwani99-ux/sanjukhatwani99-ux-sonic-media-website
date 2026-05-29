@@ -1996,7 +1996,12 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.05);paddin
 @media(max-width:600px){
   #tsm-vc, #ab-tsm-vc { width: 72vw; height: 72vw; }
   .tsm-vid-overlay h2 { font-size: 1.5rem; }
-  #abTsmScrollSection { display: none !important; }
+  .tsm-vid-overlay p  { font-size: 0.78rem; max-width: 22ch; }
+  .tsm-vid-overlay .about-btn { font-size: 0.7rem; padding: 8px 16px; }
+  /* Mobile: show the about page video section with optimised height */
+  #abTsmScrollSection { display: block !important; }
+  #abTsmScrollSection .tsm-scroll-section { height: 220vh; }
+  #abTsmScrollSection .tsm-video-wrapper { height: 100svh; }
 }
 
 /* ═══════════════════════════════════════════════════
@@ -2382,10 +2387,10 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
 
   /* Mobile nav improvements - handled by drawer CSS */
 
-  /* Scroll reveal TSM */
-  .tsm-scroll-section { height: 300vh; }
-  /* Hide 2nd video section (thought-vessel scroll reveal) on mobile */
-  #tsmScrollSection { display: none !important; }
+  /* Scroll reveal TSM — show on mobile with optimised sizing */
+  #tsmScrollSection { display: block !important; }
+  #tsmScrollSection .tsm-scroll-section { height: 220vh; }
+  #tsmScrollSection .tsm-video-wrapper { height: 100svh; }
   #tsm-vc, #ab-tsm-vc { width: 72vw; height: 72vw; }
 
   /* Home coverflow */
