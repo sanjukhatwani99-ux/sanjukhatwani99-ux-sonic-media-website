@@ -2824,6 +2824,7 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
 @media(max-width:768px){
   /* Hide the scroll-based coverflow on mobile */
   #homeSvcScrollWrapper { display: none !important; }
+  #pageSvcScrollWrapper { display: none !important; }
   /* Show the touch carousel instead */
   .mob-svc-carousel-wrap { display: flex !important; }
 
@@ -3709,6 +3710,26 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
   </section>
 
 
+
+  <!-- MOBILE SWIPE CAROUSEL — Services page (shown only on mobile) -->
+  <div class="mob-svc-carousel-wrap" id="pageMobSvcCarousel" style="background:var(--black);padding-top:24px;display:none;">
+    <div style="padding:0 20px 20px;">
+      <div class="section-tag" style="color:var(--orange);margin-bottom:8px;">All 10 Services</div>
+      <h2 class="section-title" style="font-size:clamp(28px,8vw,48px);text-align:left;line-height:1;color:var(--white);">Swipe Through <span style="color:var(--orange);">What We Do</span></h2>
+      <p style="font-size:14px;color:rgba(245,240,235,.45);margin-top:8px;font-weight:300;">Tap any card to learn more.</p>
+    </div>
+    <div class="mob-svc-track-outer" id="pageMobSvcTrackOuter">
+      <div class="mob-svc-track" id="pageMobSvcTrack"></div>
+    </div>
+    <div class="mob-svc-arrows">
+      <button class="mob-svc-arrow" id="pageMobSvcPrev" aria-label="Previous service">&#8592;</button>
+      <div class="mob-svc-dots" id="pageMobSvcDots"></div>
+      <button class="mob-svc-arrow" id="pageMobSvcNext" aria-label="Next service">&#8594;</button>
+    </div>
+    <div style="text-align:center;margin-top:28px;padding:0 20px 8px;">
+      <a href="#" onclick="navigate('contact');return false;" class="btn-p" style="width:100%;justify-content:center;">Start Your Project &#8594;</a>
+    </div>
+  </div>
 
   <section class="cta" style="padding:100px 60px;">
     <div class="cta-bg-glow"></div>
@@ -7285,6 +7306,134 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', buildCarousel);
   else buildCarousel();
+})();
+
+/* ═══════════════════════════════════════════════════
+   SERVICES PAGE — MOBILE SWIPE CAROUSEL
+   Mirrors the home-page carousel but uses separate
+   IDs so both can coexist in the DOM.
+═══════════════════════════════════════════════════ */
+(function initPageMobSvcCarousel() {
+  var inited = false;
+
+  function buildCarousel() {
+    if (typeof SVC_CARDS_DATA === 'undefined') { setTimeout(buildCarousel, 150); return; }
+    var track   = document.getElementById('pageMobSvcTrack');
+    var outer   = document.getElementById('pageMobSvcTrackOuter');
+    var dotsEl  = document.getElementById('pageMobSvcDots');
+    var prevBtn = document.getElementById('pageMobSvcPrev');
+    var nextBtn = document.getElementById('pageMobSvcNext');
+    if (!track || !outer || !dotsEl) return;
+
+    var cards = SVC_CARDS_DATA;
+    var current = 0, startX = 0, isDragging = false, dragDelta = 0;
+
+    track.innerHTML = cards.map(function(c, i) {
+      return '<div class="mob-svc-card' + (i===0?' active':'') + '" data-idx="' + i + '" style="cursor:pointer;">' +
+        '<div class="mob-svc-card-inner-wrap">' +
+          '<div class="mob-svc-card-img"><img src="' + (c.img || 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80') + '" alt="' + c.title + '" loading="lazy"></div>' +
+          '<div class="mob-svc-card-grad"></div>' +
+          '<div class="mob-svc-card-num">' + String(i+1).padStart(2,'0') + '</div>' +
+          '<div class="mob-svc-card-body">' +
+            '<div class="mob-svc-card-icon">' + (c.icon || (c.cat ? c.cat.split('·')[0].trim() : '')) + '</div>' +
+            '<div class="mob-svc-card-title">' + c.title + '</div>' +
+            '<div class="mob-svc-card-desc">' + (c.desc || c.cat || '') + '</div>' +
+            '<div class="mob-svc-card-tag">' + (c.tag || c.cat || c.title) + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    dotsEl.innerHTML = cards.map(function(_, i) {
+      return '<div class="mob-svc-dot' + (i===0?' active':'') + '" data-idx="' + i + '"></div>';
+    }).join('');
+
+    function getCardWidth() { return window.innerWidth; }
+
+    function goTo(idx, animated) {
+      if (idx < 0 || idx >= cards.length) return;
+      current = idx;
+      var cw = getCardWidth();
+      track.style.transition = animated === false ? 'none' : 'transform 0.42s cubic-bezier(0.22,1,0.36,1)';
+      track.style.transform = 'translateX(' + -(current * cw) + 'px)';
+      track.querySelectorAll('.mob-svc-card').forEach(function(el,i){ el.classList.toggle('active',i===current); });
+      dotsEl.querySelectorAll('.mob-svc-dot').forEach(function(el,i){ el.classList.toggle('active',i===current); });
+      prevBtn.classList.toggle('disabled', current===0);
+      nextBtn.classList.toggle('disabled', current===cards.length-1);
+    }
+
+    prevBtn.addEventListener('click', function(){ goTo(current-1, true); });
+    nextBtn.addEventListener('click', function(){ goTo(current+1, true); });
+    dotsEl.addEventListener('click', function(e){
+      var dot = e.target.closest('.mob-svc-dot');
+      if (dot) goTo(parseInt(dot.dataset.idx), true);
+    });
+
+    /* Tap on card navigates to its detail page */
+    track.addEventListener('click', function(e) {
+      if (Math.abs(dragDelta) > 10) return; /* was a swipe, not a tap */
+      var card = e.target.closest('.mob-svc-card');
+      if (!card) return;
+      var idx = parseInt(card.dataset.idx);
+      if (idx === current && cards[idx] && cards[idx].page) {
+        navigate(cards[idx].page);
+      } else {
+        goTo(idx, true);
+      }
+    });
+
+    outer.addEventListener('touchstart', function(e){ startX=e.touches[0].clientX; isDragging=true; dragDelta=0; },{passive:true});
+    outer.addEventListener('touchmove', function(e){
+      if (!isDragging) return;
+      dragDelta = e.touches[0].clientX - startX;
+      track.style.transition = 'none';
+      track.style.transform = 'translateX(' + (-(current*getCardWidth()) + dragDelta*0.6) + 'px)';
+    },{passive:true});
+    outer.addEventListener('touchend', function(){
+      isDragging = false;
+      if (dragDelta < -50 && current < cards.length-1) goTo(current+1, true);
+      else if (dragDelta > 50 && current > 0)          goTo(current-1, true);
+      else                                              goTo(current, true);
+    });
+
+    goTo(0, false);
+    inited = true;
+  }
+
+  /* Show carousel and hide coverflow when services page activates on mobile */
+  function maybeShow() {
+    if (window.innerWidth > 768) return;
+    var carousel = document.getElementById('pageMobSvcCarousel');
+    var coverflow = document.getElementById('pageSvcScrollWrapper');
+    if (carousel) carousel.style.display = 'flex';
+    if (coverflow) coverflow.style.display = 'none';
+    if (!inited) buildCarousel();
+  }
+
+  /* Hook into navigate */
+  var _origNavPageSvc = window.navigate;
+  window.navigate = function(page) {
+    _origNavPageSvc(page);
+    if (page === 'services') {
+      requestAnimationFrame(function(){ setTimeout(maybeShow, 60); });
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function(){ setTimeout(maybeShow, 300); });
+  window.addEventListener('resize', function(){
+    var carousel = document.getElementById('pageMobSvcCarousel');
+    var coverflow = document.getElementById('pageSvcScrollWrapper');
+    var pg = document.getElementById('page-services');
+    if (!pg || !pg.classList.contains('active')) return;
+    if (window.innerWidth <= 768) {
+      if (carousel) carousel.style.display = 'flex';
+      if (coverflow) coverflow.style.display = 'none';
+      if (!inited) buildCarousel();
+    } else {
+      if (carousel) carousel.style.display = 'none';
+      if (coverflow) coverflow.style.display = '';
+    }
+  });
 })();
 
 /* ═══════════════════════════════════════════════════
