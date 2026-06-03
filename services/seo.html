@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO — The Sonic Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</head>
+
+<body>
+
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-follower"></div>
+<canvas id="cursor-trail"></canvas>
+<div id="mouse-glow"></div>
+<!-- Scroll progress -->
+<div id="sp"></div>
+
+<!-- ═══════ NAVBAR ═══════ -->
+<nav id="navbar">
+  <div class="nav-left" onclick="navigate('home')">
+    <img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779787887/favicon_oalxfi.png" alt="The Sonic Media Logo" style="width:36px;height:36px;object-fit:contain;flex-shrink:0;" />
+    <div class="nav-brand">
+      THE SONIC MEDIA
+    </div>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" onclick="navigate('home');return false;" data-page="home" class="active-link">Home</a></li>
+    <li><a href="#" onclick="navigate('about');return false;" data-page="about">About</a></li>
+    <li class="has-drop">
+      <button onclick="return false;">Services <span class="drop-arrow">▾</span></button>
+      <div class="dropdown">
+        <a href="#" onclick="navigate('services');return false;" style="border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:6px;padding-bottom:14px;color:var(--orange);font-weight:700;"><span class="drop-icon">📋</span>All Services</a>
+        <a href="#" onclick="navigate('svc-web');return false;"><span class="drop-icon">🌐</span>Website Development</a>
+        <a href="#" onclick="navigate('svc-app');return false;"><span class="drop-icon">📱</span>Mobile App Development</a>
+        <a href="#" onclick="navigate('svc-seo');return false;"><span class="drop-icon">🔍</span>Search Engine Optimization</a>
+        <a href="#" onclick="navigate('svc-smm');return false;"><span class="drop-icon">📣</span>Social Media Management</a>
+        <a href="#" onclick="navigate('svc-perf');return false;"><span class="drop-icon">🚀</span>Performance Marketing & Paid Ads</a>
+        <a href="#" onclick="navigate('svc-inf');return false;"><span class="drop-icon">🤝</span>Influencer Marketing</a>
+        <a href="#" onclick="navigate('svc-ecom');return false;"><span class="drop-icon">🛒</span>E-Commerce Marketing</a>
+        <a href="#" onclick="navigate('svc-content');return false;"><span class="drop-icon">🎬</span>Content Production & Photo/Videography</a>
+        <a href="#" onclick="navigate('svc-brand');return false;"><span class="drop-icon">🎨</span>Branding & Creative Design</a>
+        <a href="#" onclick="navigate('svc-ai');return false;"><span class="drop-icon">🤖</span>AI Doodling/Editing</a>
+      </div>
+    </li>
+    <li><a href="#" onclick="navigate('studio');return false;" data-page="studio">Portfolio</a></li>
+    <li><a href="#" onclick="navigate('casestudies');return false;" data-page="casestudies">Case Studies</a></li>
+    <li><a href="#" onclick="navigate('journal');return false;" data-page="journal">Journal</a></li>
+    <li><a href="#" onclick="navigate('future');return false;" data-page="future">Future Vision</a></li>
+    <li><a href="#" onclick="navigate('faq');return false;" data-page="faq">FAQ</a></li>
+    <li><a href="#" onclick="navigate('contact');return false;" data-page="contact" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="ham" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Nav Drawer -->
+<div class="mob-nav" id="mobNav">
+  <!-- Backdrop -->
+  <div class="mob-nav-backdrop" id="mobBackdrop" onclick="closeMob()"></div>
+
+  <!-- Drawer -->
+  <div class="mob-nav-drawer">
+
+    <!-- Header -->
+    <div class="mob-nav-header">
+      <div class="mob-nav-brand">
+        <img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779787887/favicon_oalxfi.png" alt="The Sonic Media" />
+        THE SONIC MEDIA
+      </div>
+      <button class="mob-close" id="mobClose" aria-label="Close menu">✕</button>
+    </div>
+
+    <!-- Body -->
+    <div class="mob-nav-body">
+
+      <!-- Main nav -->
+      <div class="mob-nav-section-label">Navigation</div>
+
+      <button class="mob-nav-link" onclick="navigate('home');closeMob()" data-mob-page="home">
+        Home <span class="mob-nav-link-arrow">→</span>
+      </button>
+      <button class="mob-nav-link" onclick="navigate('about');closeMob()" data-mob-page="about">
+        About <span class="mob-nav-link-arrow">→</span>
+      </button>
+
+      <!-- Services accordion -->
+      <button class="mob-services-toggle" id="mobSvcToggle" onclick="toggleMobServices()" aria-expanded="false">
+        Services
+        <span class="mob-acc-icon">▾</span>
+      </button>
+      <div class="mob-services-submenu" id="mobSvcSubmenu">
+        <button class="mob-svc-all" onclick="navigate('services');closeMob()">
+          <span class="mob-svc-item-icon">📋</span> All Services
+        </button>
+        <button class="mob-svc-item" onclick="navigate('svc-web');closeMob()">
+          <span class="mob-svc-item-icon">🌐</span> Website Development
+        </button>
+        <button class="mob-svc-item" onclick="navigate('svc-app');closeMob()">
+          <span class="mob-svc-item-icon">📱</span> Mobile App Development
+        </button>
+        <button class="mob-svc-item" onclick="navigate('svc-seo');closeMob()">
+          <span class="mob-svc-item-icon">🔍</span> Search Engine Optimization
+        </button>
+        <button class="mob-svc-item" onclick="navigate('svc-smm');closeMob()">
+          <span class="mob-svc-item-icon">📣</span> Social Media Management
+        </button>
+        <button class="mob-svc-item" onclick="navigate('svc-perf');closeMob()">
+          <span class="mob-svc-item-icon">🚀</span> Performance Marketing
+        </button>
+        <button class="mob-svc-item" onclick="navigate('svc-inf');closeMob()">
+          <span class="mob-svc-item-icon">🤝</span> Influencer Marketing
+        </button>
+        <button class="mob-svc-item" onclick="navigate('svc-ecom');closeMob()">
+          <span class="mob-svc-item-icon">🛒</span> E-Commerce Marketing
+        </button>
+        <button class="mob-svc-item" onclick="navigate('svc-content');closeMob()">
+          <span class="mob-svc-item-icon">🎬</span> Content Production
+        </button>
+        <button class="mob-svc-item" onclick="navigate('svc-brand');closeMob()">
+          <span class="mob-svc-item-icon">🎨</span> Branding & Creative Design
+        </button>
+        <button class="mob-svc-item" onclick="navigate('svc-ai');closeMob()">
+          <span class="mob-svc-item-icon">🤖</span> AI Doodling / Editing
+        </button>
+      </div>
+
+      <button class="mob-nav-link" onclick="navigate('studio');closeMob()" data-mob-page="studio">
+        Portfolio <span class="mob-nav-link-arrow">→</span>
+      </button>
+      <button class="mob-nav-link" onclick="navigate('casestudies');closeMob()" data-mob-page="casestudies">
+        Case Studies <span class="mob-nav-link-arrow">→</span>
+      </button>
+
+      <div class="mob-nav-divider"></div>
+      <div class="mob-nav-section-label">Explore</div>
+
+      <button class="mob-nav-link" onclick="navigate('journal');closeMob()" data-mob-page="journal">
+        Journal <span class="mob-nav-link-arrow">→</span>
+      </button>
+      <button class="mob-nav-link" onclick="navigate('future');closeMob()" data-mob-page="future">
+        Future Vision <span class="mob-nav-link-arrow">→</span>
+      </button>
+      <button class="mob-nav-link" onclick="navigate('faq');closeMob()" data-mob-page="faq">
+        FAQ <span class="mob-nav-link-arrow">→</span>
+      </button>
+
+      <!-- CTA -->
+      <div class="mob-nav-divider" style="margin-top:16px;"></div>
+      <button class="mob-nav-cta" onclick="navigate('contact');closeMob()">
+        Start Your Project →
+      </button>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="mob-nav-footer">
+      <div class="mob-nav-footer-copy">© 2026 <span>The Sonic Media</span></div>
+      <div class="mob-nav-socials">
+        <a href="https://wa.me/918733087249" class="mob-nav-social" target="_blank" title="WhatsApp">💬</a>
+        <a href="mailto:info@thesonicmedia.com" class="mob-nav-social" title="Email">✉️</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: HOME
+═══════════════════════════════════════════ -->
+
+<!-- ═══════ ALL PAGE SECTIONS ═══════ -->
+<div id="page-home" class="page">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-noise"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-left">
+      <div class="hero-eyebrow">MARKETING AGENCY · AHMEDABAD</div>
+      <h1 class="hero-h1">
+        <span class="line">WE DON'T JUST</span>
+        <span class="line">MARKET.</span>
+        <span class="line"><span class="or">WE DOMINATE.</span></span>
+      </h1>
+      <p class="hero-sub">Transform your brand into a cultural movement — through data-driven strategy, cinematic content & technology that actually converts.</p>
+      <div class="hero-btns">
+        <a href="#" onclick="navigate('services');return false;" class="btn-p">Explore Services →</a>
+        <a href="#" onclick="navigate('contact');return false;" class="btn-s">Start Your Journey</a>
+      </div>
+
+    </div>
+    <div class="hero-right">
+      <div class="side-fade"></div>
+      <div class="mstrip"><div class="mstrip-inner">
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779983858/MH_1_1_exys0k.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779983858/MH_1_2_u09mx4.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779983857/MH_1_3_jwlpcu.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779983858/MH_1_4_efibsj.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779983857/MH_1_5_qvqzfz.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779983858/MH_1_1_exys0k.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779983858/MH_1_2_u09mx4.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779983857/MH_1_3_jwlpcu.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779983858/MH_1_4_efibsj.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779983857/MH_1_5_qvqzfz.jpg" alt=""></div>
+      </div></div>
+      <div class="mstrip"><div class="mstrip-inner">
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779985567/MH_2_1_bj1xfr.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779985567/MH_2_2_owrlks.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779985568/MH_2_3_fcjg16.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779985567/MH_2_4_dpznik.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779985568/MH_2_5_qzu7sq.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779985567/MH_2_1_bj1xfr.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779985567/MH_2_2_owrlks.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779985568/MH_2_3_fcjg16.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779985567/MH_2_4_dpznik.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779985568/MH_2_5_qzu7sq.jpg" alt=""></div>
+      </div></div>
+      <div class="mstrip"><div class="mstrip-inner">
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779986863/MH_3_3_jzk0tb.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779986860/MH_3_2_ynn2ky.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779986862/MH_3_1_j16yhi.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779986860/MH_3_4_bs7s7y.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779987237/MH_3_5_wjxoyj.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779986863/MH_3_3_jzk0tb.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779986860/MH_3_2_ynn2ky.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779986862/MH_3_1_j16yhi.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779986860/MH_3_4_bs7s7y.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779987237/MH_3_5_wjxoyj.jpg" alt=""></div>
+      </div></div>
+      <div class="mstrip"><div class="mstrip-inner">
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779988339/MH_4_1_qqzr7l.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779988341/MH_4_2_n4fi3z.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://images.unsplash.com/photo-1637858868799-7f26a0640eb6?w=400&q=80" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779988341/MH_4_3_hli4an.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779988342/MH_4_4_wp8ism.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779988339/MH_4_1_qqzr7l.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779988341/MH_4_2_n4fi3z.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://images.unsplash.com/photo-1637858868799-7f26a0640eb6?w=400&q=80" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779988341/MH_4_3_hli4an.jpg" alt=""></div>
+        <div class="mstrip-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779988342/MH_4_4_wp8ism.jpg" alt=""></div>
+      </div></div>
+    </div>
+    <div class="hero-scroll"><div class="scroll-line"></div><div class="scroll-txt">Scroll to Explore</div></div>
+  </section>
+
+  <!-- FULL-WIDTH VIDEO SECTION -->
+  <section class="home-video-section">
+    <div class="home-video-overlay"></div>
+    <video
+      id="homeShowreel"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="auto"
+    >
+      <source src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1779437141/44748-439982672_medium_ot7bbh.mp4" type="video/mp4">
+    </video>
+  </section>
+
+<!-- ABOUT PREVIEW — rendered from PAGE_DATA.about -->
+  <!-- THOUGHT VESSEL — SCROLL REVEAL ANIMATION -->
+  <div class="tsm-scroll-section" id="tsmScrollSection">
+    <div class="tsm-video-wrapper">
+      <div id="tsm-vc">
+        <video id="tsm-vid" loop muted playsinline>
+          <source src="https://cdn.cosmos.so/74eaa492-31ae-4550-b5a1-40917d873af5.mp4" type="video/mp4" />
+        </video>
+        <div id="tsm-dark-overlay"></div>
+        <div class="tsm-vid-overlay" id="tsmVidOverlay">
+          <div class="tsm-ov-content" id="tsmOvContent">
+            <h2>We Build Brands<br>That Dominate</h2>
+            <p>Strategy-first. Data-driven. Built to scale. We turn ambitious businesses into category leaders.</p>
+            <a href="#" onclick="navigate('about');return false;" class="about-btn" id="home-about-btn">Discover Our Story →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES COVERFLOW — synced animation -->
+  <section class="home-coverflow-section" id="homeSvcCoverflowSection" style="padding-top:0;padding-bottom:0;background:var(--black);">
+    <div class="hcf-scroll-wrapper" id="homeSvcScrollWrapper">
+      <div class="hcf-gallery" id="homeSvcGallery" style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0;padding:32px 24px 28px;">
+        <!-- Heading sits at top of the pinned viewport -->
+        <div style="width:100%;flex-shrink:0;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+          <div style="text-align:left;">
+            <div class="section-tag" style="color:var(--orange);margin-bottom:10px;">All 10 Services</div>
+            <h2 class="section-title" style="font-size:clamp(32px,4vw,60px);text-align:left;line-height:1;">Scroll Through <span style="color:var(--orange);">What We Do</span></h2>
+            <p class="hcf-sub" style="margin:10px 0 0;text-align:left;">Every discipline. One agency. Built to dominate your entire digital ecosystem.</p>
+          </div>
+          <div style="flex-shrink:0;">
+            <a href="#" onclick="navigate('services');return false;" class="btn-p">Explore All Services →</a>
+          </div>
+        </div>
+        <!-- Card list -->
+        <ul class="hcf-list" id="homeSvcList" style="position:relative;top:auto;left:auto;transform:none;flex-shrink:0;"></ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- MOBILE SWIPE CAROUSEL — Services (shown only on mobile, hidden on desktop via CSS) -->
+  <div class="mob-svc-carousel-wrap" id="mobSvcCarousel" style="background:var(--black);padding-top:24px;">
+    <div style="padding:0 20px 20px;">
+      <div class="section-tag" style="color:var(--orange);margin-bottom:8px;">All 10 Services</div>
+      <h2 class="section-title" style="font-size:clamp(28px,8vw,48px);text-align:left;line-height:1;color:var(--white);">Swipe Through <span style="color:var(--orange);">What We Do</span></h2>
+      <p style="font-size:14px;color:rgba(245,240,235,.45);margin-top:8px;font-weight:300;">Every discipline. One agency.</p>
+    </div>
+    <div class="mob-svc-track-outer" id="mobSvcTrackOuter">
+      <div class="mob-svc-track" id="mobSvcTrack"></div>
+    </div>
+    <div class="mob-svc-arrows">
+      <button class="mob-svc-arrow" id="mobSvcPrev" aria-label="Previous service">&#8592;</button>
+      <div class="mob-svc-dots" id="mobSvcDots"></div>
+      <button class="mob-svc-arrow" id="mobSvcNext" aria-label="Next service">&#8594;</button>
+    </div>
+    <div style="text-align:center;margin-top:28px;padding:0 20px 8px;">
+      <a href="#" onclick="navigate('services');return false;" class="btn-p" style="width:100%;justify-content:center;">Explore All Services &#8594;</a>
+    </div>
+  </div>
+  <!-- PORTFOLIO PREVIEW — EDITORIAL LIST REDESIGN -->
+  <section class="casestudies">
+
+    <!-- Header — rendered from PAGE_DATA.portfolio -->
+    <div class="fw-header reveal">
+      <div class="fw-header-left">
+        <div class="fw-eyebrow" id="home-portfolio-eyebrow">Featured Work</div>
+        <h2 class="fw-title" id="home-portfolio-title">Results<br>That <em id="home-portfolio-title-em">Speak</em></h2>
+      </div>
+      <div class="fw-header-right">
+        <p class="fw-tagline" id="home-portfolio-tagline">Every project is a movement. Every number is a brand that changed.</p>
+        <a href="#" onclick="navigate('studio');return false;" class="cs-view-all">
+          <span>View All Work ↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Work rows -->
+    <!-- Portfolio rows rendered from PAGE_DATA.portfolio.works -->
+    <div class="fw-list reveal d1" id="home-portfolio-list"></div><!-- /fw-list -->
+
+  </section>
+
+  <!-- CASE STUDIES PREVIEW -->
+  <section class="journal">
+    <div class="journal-header">
+      <div><div class="section-tag" id="home-casestudies-tag">Case Studies</div><h2 class="section-title" id="home-casestudies-title">Insights &amp; <span id="home-casestudies-title-span">Ideas</span></h2></div>
+      <a href="#" onclick="navigate('casestudies');return false;" class="cs-view-all" style="color:var(--orange);">All Case Studies →</a>
+    </div>
+    <div class="jnl-grid reveal" id="home-casestudies-grid"></div>
+  </section>
+
+    <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="testimonials-header">
+      <div><div class="section-tag">Client Stories</div><h2 class="section-title">What Our <span>Clients Say</span></h2></div>
+    </div>
+    <div class="testi-marquee-wrap" style="margin-bottom:20px;">
+      <div class="testi-marquee-track">
+        <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"The Sonic Media transformed our digital presence completely. Our leads increased by 300% in just 3 months of working with them."</p><div class="tcard-author"><div class="avatar">A</div><div><div class="author-name">Amit Oza</div><div class="author-role">Calgary, Canada</div></div></div><div class="testi-result">📈300% Lead Growth</div></div>
+        <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"Great team with good expertise. They built a professional website for our accounting firm that helped us get more clients."</p><div class="tcard-author"><div class="avatar">M</div><div><div class="author-name">Mohit Chimnani</div><div class="author-role">Ahmedabad, India</div></div></div><div class="testi-result">💰4X More Client Inquiries</div></div>
+        <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"The content they produce is world-class. Our social media following grew from 5K to 50K in under a year."</p><div class="tcard-author"><div class="avatar">A</div><div><div class="author-name">Ashok Bajaj</div><div class="author-role">Dubai, UAE</div></div></div><div class="testi-result">🎬10X Social Media Growth</div></div>
+        <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"The Sonic Media gave our brand a modern digital presence with strong creative execution and impressive marketing results."</p><div class="tcard-author"><div class="avatar">K</div><div><div class="author-name">Khushal Sadnani</div><div class="author-role">Dubai, UAE</div></div></div><div class="testi-result">🌐Stronger Brand Presence Worldwide</div></div>
+        <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"Professional team, great communication, and excellent marketing strategy. They helped us scale our online presence effectively."</p><div class="tcard-author"><div class="avatar">M</div><div><div class="author-name">Monica Dodwani</div><div class="author-role">Chicago, USA</div></div></div><div class="testi-result">🔍Scalable Online Business Growth</div></div>
+        <!-- duplicates -->
+        <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"The Sonic Media transformed our digital presence completely. Our leads increased by 300% in just 3 months of working with them."</p><div class="tcard-author"><div class="avatar">A</div><div><div class="author-name">Amit Oza</div><div class="author-role">Calgary, Canada</div></div></div><div class="testi-result">📈300% Lead Growth</div></div>
+        <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"Great team with good expertise. They built a professional website for our accounting firm that helped us get more clients."</p><div class="tcard-author"><div class="avatar">M</div><div><div class="author-name">Mohit Chimnani</div><div class="author-role">Ahmedabad, India</div></div></div><div class="testi-result">💰4X More Client Inquiries</div></div>
+        <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"The content they produce is world-class. Our social media following grew from 5K to 50K in under a year."</p><div class="tcard-author"><div class="avatar">A</div><div><div class="author-name">Ashok Bajaj</div><div class="author-role">Dubai, UAE</div></div></div><div class="testi-result">🎬10X Social Media Growth</div></div>
+        <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"The Sonic Media gave our brand a modern digital presence with strong creative execution and impressive marketing results."</p><div class="tcard-author"><div class="avatar">K</div><div><div class="author-name">Khushal Sadnani</div><div class="author-role">Dubai, UAE</div></div></div><div class="testi-result">🌐Stronger Brand Presence Worldwide</div></div>
+        <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"Professional team, great communication, and excellent marketing strategy. They helped us scale our online presence effectively."</p><div class="tcard-author"><div class="avatar">M</div><div><div class="author-name">Monica Dodwani</div><div class="author-role">Chicago, USA</div></div></div><div class="testi-result">🔍Scalable Online Business Growth</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUTURE VISION — Pinned Split-Screen Mask Reveal -->
+  <section id="futureSplitSection" style="background:var(--black);padding-top:0;">
+    <!-- Section header — sticky until section ends -->
+    <div id="fv-home-header" style="position:sticky;top:72px;z-index:100;background:var(--black);padding:14px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;max-width:100%;margin:0 auto;border-bottom:1px solid rgba(255,255,255,.05);">
+      <div style="text-align:left;">
+        <div class="section-tag" style="color:var(--orange);margin-bottom:4px;font-size:10px;">What's Next</div>
+        <h2 class="section-title" style="font-size:clamp(22px,2.4vw,38px);text-align:left;line-height:1;color:var(--white);">The <span style="color:var(--orange);">Future</span> We're Building</h2>
+        <p style="font-family:var(--font-body);font-size:12px;color:rgba(245,240,235,.45);margin-top:4px;font-weight:300;letter-spacing:.02em;">Scroll to explore the innovations and expansions we're building towards.</p>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="#" onclick="navigate('future');return false;" class="btn-p" style="font-size:12px;padding:10px 22px;">Explore Our Vision →</a>
+      </div>
+    </div>
+
+    <!-- Pinned split-screen container (desktop) -->
+    <div class="fv-container" id="fvContainer">
+      <div class="fv-arch">
+        <!-- LEFT: stacked text panels (rendered from PAGE_DATA.future.panels) -->
+        <div class="fv-arch__left" id="home-fv-left"></div>
+        <!-- RIGHT: stacked images (rendered from PAGE_DATA.future.panels) -->
+        <div class="fv-arch__right" id="home-fv-right"></div>
+      </div>
+      <div class="fv-spacer"></div>
+    </div>
+    <!-- MOBILE: card stack layout (hidden on desktop, shown on mobile) -->
+    <div id="home-fv-mobile" style="display:none;"></div>
+  </section>
+
+  <!-- BLOGS & NEWSLETTER -->
+  <div class="blogs-newsletter">
+    <div class="blogs-half">
+      <div class="section-tag" id="home-journal-tag">Journal</div>
+      <h2 class="section-title" id="home-journal-title" style="font-size:clamp(36px,4vw,60px);">Fresh <span id="home-journal-span">Reads</span></h2>
+      <div style="margin-top:12px;margin-bottom:8px;"><a href="#" onclick="navigate('journal');return false;" class="cs-view-all" style="color:var(--orange);">View All →</a></div>
+      <div class="blog-list" id="home-journal-list">
+        <div class="blog-item"><div class="blog-num">01</div><div class="blog-info"><div class="bt">How Google AI Overviews Are Changing SEO in India — And What to Do About It</div><div class="bm"><span>SEO</span>· 7 min read · May 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-google-ai-seo');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item"><div class="blog-num">02</div><div class="blog-info"><div class="bt">How to Achieve 10× ROAS on Meta Ads for Indian D2C Brands in 2026</div><div class="bm"><span>Performance</span>· 8 min read · May 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-meta-roas');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item"><div class="blog-num">03</div><div class="blog-info"><div class="bt">What Makes Indian Consumers Trust a Brand Online? The 2026 Playbook</div><div class="bm"><span>Branding</span>· 6 min read · Apr 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-brand-trust');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item"><div class="blog-num">04</div><div class="blog-info"><div class="bt">Instagram Reels Algorithm 2026: How to Get Organic Reach Without Paid Ads</div><div class="bm"><span>Social Media</span>· 6 min read · Apr 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-reels-algorithm');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item"><div class="blog-num">05</div><div class="blog-info"><div class="bt">Why Your Website Gets Traffic But Zero Leads — And How to Fix It Today</div><div class="bm"><span>Web Dev</span>· 5 min read · Mar 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-website-conversion');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+      </div>
+    </div>
+    <div class="newsletter-half">
+      <div class="nl-bg"><div class="nl-bg-circle"></div><div class="nl-bg-circle"></div><div class="nl-bg-circle"></div></div>
+      <div class="nl-content">
+        <div class="nl-tag">Weekly Newsletter</div>
+        <h2 class="nl-h">THE SONIC<br>DISPATCH</h2>
+        <p class="nl-p">Marketing takes hotter than your morning coffee. — Weekly growth tactics, ad breakdowns, branding gems, and behind-the-scenes chaos from the agency world.</p>
+        <div class="nl-count">2,400+ marketers already subscribed</div>
+        <div class="nl-form">
+          <input type="text" class="nl-input" placeholder="Your full name">
+          <input type="email" class="nl-input" placeholder="Your email address">
+          <button class="nl-submit" type="button">JOIN THE DISPATCH →</button>
+        </div>
+        <div class="nl-privacy">🔒 No spam. Unsubscribe anytime. We respect your inbox.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ PREVIEW -->
+  <section class="faq-section">
+    <div class="faq-bg-glow"></div>
+    <div class="faq-inner">
+      <div class="faq-left reveal-l">
+        <div class="section-tag">FAQ</div>
+        <h2 class="section-title" style="font-size:clamp(42px,5vw,78px);margin-bottom:20px;">All Your <span>Answers</span></h2>
+        <p class="faq-sub">Everything you need to know about working with The Sonic Media — answered clearly, no fluff.</p>
+        <div style="margin-top:36px;padding:28px;border-radius:16px;border:1px solid rgba(255,92,0,.2);background:rgba(255,92,0,.04);">
+          <p style="font-size:15px;color:rgba(245,240,235,.6);line-height:1.7;font-weight:300;margin-bottom:16px;">Still have questions? Our team is ready to help.</p>
+          <a href="#" onclick="navigate('contact');return false;" class="btn-p" style="display:inline-flex;font-size:13px;padding:12px 28px;">Contact Us →</a>
+        </div>
+      </div>
+      <div class="faq-right reveal-r">
+        <div id="faqList"></div>
+        <div style="text-align:right;margin-top:24px;">
+          <a href="#" onclick="navigate('faq');return false;" class="cs-view-all" style="color:var(--orange);">View All FAQs →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERSPECTIVE ZOOM — CTA PRELUDE -->
+  <div class="cta-zoom-wrapper">
+    <div class="cta-zoom-container">
+      <h2 class="cta-zoom-heading">DESIGN YOUR <span>LEGACY.</span></h2>
+
+      <div class="czoom-item" data-layer="2">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80" alt="" />
+      </div>
+      <div class="czoom-item" data-layer="1">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="" />
+      </div>
+      <div class="czoom-item" data-layer="2">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="" />
+      </div>
+      <div class="czoom-item" data-layer="1">
+        <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&q=80" alt="" />
+      </div>
+      <div class="czoom-item" data-layer="3">
+        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&q=80" alt="" />
+      </div>
+      <div class="czoom-item" data-layer="1">
+        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=600&q=80" alt="" />
+      </div>
+      <div class="czoom-item" data-layer="3">
+        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80" alt="" />
+      </div>
+      <div class="czoom-item" data-layer="3">
+        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80" alt="" />
+      </div>
+      <div class="czoom-item" data-layer="1">
+        <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&q=80" alt="" />
+      </div>
+      <div class="czoom-item" data-layer="3">
+        <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="" />
+      </div>
+      <div class="czoom-item" data-layer="2">
+        <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&q=80" alt="" />
+      </div>
+      <div class="czoom-item" data-layer="1">
+        <img src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=600&q=80" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-bg-glow"></div>
+    <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+    <div class="cta-inner">
+      <div class="cta-tag reveal">Ready to Grow?</div>
+      <h2 class="cta-h reveal d1">LET'S BUILD<br>SOMETHING <span>ICONIC.</span></h2>
+      <p class="cta-p reveal d2">Connect with our experts to explore tailored strategies designed to strengthen your brand presence, attract the right audience, and drive measurable business growth.</p>
+      <div class="cta-btns reveal d3">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Let’s Build Your Brand →</a>
+        <a href="#" onclick="navigate('studio');return false;" class="btn-s">See Our Work</a>
+      </div>
+      <div class="cta-cards reveal d4">
+        <div class="cta-card cta-card-b"><div class="cc-icon">🚀</div><div class="cc-title">Launch in 30 Days</div><div class="cc-desc">From zero to market-ready with our rapid launch framework.</div><span class="cc-arrow"></span></div>
+        <div class="cta-card cta-card-a"><div class="cc-icon">📈</div><div class="cc-title">End-To-End Brand Support</div><div class="cc-desc">From strategy to execution, we help your brand move forward with confidence.</div><span class="cc-arrow"></span></div>
+        <div class="cta-card cta-card-c"><div class="cc-icon">🎯</div><div class="cc-title">ROI-First Always</div><div class="cc-desc">Every rupee tracked. Every decision data-driven. No vanity metrics.</div><span class="cc-arrow"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="page-footer-slot"></div>
+</div><!-- /page-home -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: ABOUT
+═══════════════════════════════════════════ -->
+
+<div id="page-about" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Who We Are</div>
+    <h1 class="inner-hero-h">About <span>Sonic</span><br>Media</h1>
+    <p class="inner-hero-p">Born in Ahmedabad. Built for the world. We are the growth engine that transforms ambitious brands into cultural movements.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><span class="bc-cur">About</span></div>
+  </div>
+
+
+<!-- ABOUT PREVIEW — rendered from PAGE_DATA.about -->
+  <!-- THOUGHT VESSEL — SCROLL REVEAL ANIMATION (About Page) -->
+  <div class="tsm-scroll-section" id="abTsmScrollSection">
+    <div class="tsm-video-wrapper">
+      <div id="ab-tsm-vc">
+        <video id="ab-tsm-vid" loop muted playsinline>
+          <source src="https://cdn.cosmos.so/74eaa492-31ae-4550-b5a1-40917d873af5.mp4" type="video/mp4" />
+        </video>
+        <div id="ab-tsm-dark-overlay"></div>
+        <div class="tsm-vid-overlay" id="abTsmVidOverlay">
+          <div class="tsm-ov-content" id="abTsmOvContent">
+            <h2>We Build Brands<br>That Dominate</h2>
+            <p>Strategy-first. Data-driven. Built to scale. We turn ambitious businesses into category leaders.</p>
+            <a href="#" onclick="navigate('contact');return false;" class="about-btn">Get In Touch →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <section class="about-values">
+    <div style="text-align:center;margin-bottom:0;">
+      <div class="section-tag" style="justify-content:center;">What Drives Us</div>
+      <h2 class="section-title reveal" style="color:var(--white);text-align:center;">Our <span>Core Values</span></h2>
+    </div>
+    <div class="values-grid">
+      <div class="val-card reveal"><div class="val-icon">🔥</div><div class="val-title">Relentless Ambition</div><div class="val-desc">We don't do average. Every project gets 100% of our energy, creativity, and strategic thinking. Good enough is never enough.</div></div>
+      <div class="val-card reveal d1"><div class="val-icon">📊</div><div class="val-title">Data Over Gut</div><div class="val-desc">Every decision we make is backed by data. We track everything, optimise constantly, and let the numbers lead us to results.</div></div>
+      <div class="val-card reveal d2"><div class="val-icon">🤝</div><div class="val-title">Client Partnership</div><div class="val-desc">We don't take clients — we take partners. Your success is our success. We are invested in your brand as deeply as you are.</div></div>
+      <div class="val-card reveal"><div class="val-icon">🎨</div><div class="val-title">Creative Obsession</div><div class="val-desc">Creativity isn't a department — it's in our DNA. We obsess over every pixel, word, and frame to produce work that stands out.</div></div>
+      <div class="val-card reveal d1"><div class="val-icon">⚡</div><div class="val-title">Speed & Agility</div><div class="val-desc">The market doesn't wait. We move fast, iterate quickly, and stay ahead of every trend, algorithm change, and cultural shift.</div></div>
+      <div class="val-card reveal d2"><div class="val-icon">🌍</div><div class="val-title">Global Mindset</div><div class="val-desc">We think globally from day one. Our strategies are built to scale beyond borders — bringing world-class quality to every client.</div></div>
+    </div>
+  </section>
+
+  <section class="about-team">
+    <div style="text-align:center;margin-bottom:0;">
+      <div class="section-tag" style="justify-content:center;color:var(--orange);">The People</div>
+      <h2 class="section-title reveal" style="color:var(--white);text-align:center;">Meet The <span>Team</span></h2>
+    </div>
+    <div class="team-grid">
+      <h2 class="section-title reveal" style="color:var(--white);text-align:center;"> <span></span></h2>
+      <div class="team-card reveal d1"><div class="team-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779812266/Founders_jrvgcs.jpg" alt="CMO"></div><div class="team-info"><div class="team-name">Sanju Khatwani</div><div class="team-role">Co-Founder</div><div class="team-bio"></div></div></div>
+      <div class="team-card reveal d2"><div class="team-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779812266/Founders_jrvgcs.jpg" alt="CTO"></div><div class="team-info"><div class="team-name">Mohit Kalwani</div><div class="team-role">Co-Founder</div><div class="team-bio"></div></div></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="page-footer-slot"></div>
+</div><!-- /page-about -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: SERVICES
+═══════════════════════════════════════════ -->
+
+<div id="page-services" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">What We Offer</div>
+    <h1 class="inner-hero-h">Our <span>Services</span></h1>
+    <p class="inner-hero-p">Nine specialized disciplines. One unified team. Built to dominate every corner of your digital ecosystem.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><span class="bc-cur">Services</span></div>
+  </div>
+
+  <section class="services" style="padding-bottom:0;">
+    <div class="services-header">
+      <div class="section-tag reveal">Full Service Suite</div>
+      <h2 class="section-title reveal d1">Services That <span>Scale</span></h2>
+    </div>
+  </section>
+
+  <!-- SERVICES PAGE COVERFLOW -->
+  <section class="home-coverflow-section" id="pageSvcCoverflowSection" style="padding-top:0;background:var(--black);">
+    <div class="hcf-header" style="padding-top:0;display:none;"></div>
+    <div class="hcf-scroll-wrapper" id="pageSvcScrollWrapper">
+      <div class="hcf-gallery" id="pageSvcGallery">
+        <ul class="hcf-list" id="pageSvcList"></ul>
+      </div>
+    </div>
+    <div style="text-align:center;padding:40px 0 60px;" class="reveal d2">
+      <p style="color:rgba(245,240,235,.5);font-size:15px;margin-bottom:20px;">Click any service card to explore in detail</p>
+    </div>
+  </section>
+
+
+
+  <!-- MOBILE SWIPE CAROUSEL — Services page (shown only on mobile) -->
+  <div class="mob-svc-carousel-wrap" id="pageMobSvcCarousel" style="background:var(--black);padding-top:24px;display:none;">
+    <div style="padding:0 20px 20px;">
+      <div class="section-tag" style="color:var(--orange);margin-bottom:8px;">All 10 Services</div>
+      <h2 class="section-title" style="font-size:clamp(28px,8vw,48px);text-align:left;line-height:1;color:var(--white);">Swipe Through <span style="color:var(--orange);">What We Do</span></h2>
+      <p style="font-size:14px;color:rgba(245,240,235,.45);margin-top:8px;font-weight:300;">Tap any card to learn more.</p>
+    </div>
+    <div class="mob-svc-track-outer" id="pageMobSvcTrackOuter">
+      <div class="mob-svc-track" id="pageMobSvcTrack"></div>
+    </div>
+    <div class="mob-svc-arrows">
+      <button class="mob-svc-arrow" id="pageMobSvcPrev" aria-label="Previous service">&#8592;</button>
+      <div class="mob-svc-dots" id="pageMobSvcDots"></div>
+      <button class="mob-svc-arrow" id="pageMobSvcNext" aria-label="Next service">&#8594;</button>
+    </div>
+    <div style="text-align:center;margin-top:28px;padding:0 20px 8px;">
+      <a href="#" onclick="navigate('contact');return false;" class="btn-p" style="width:100%;justify-content:center;">Start Your Project &#8594;</a>
+    </div>
+  </div>
+
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Ready To Scale Something Bigger?</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Performance <span>Over Promises</span></h2>
+      <p class="cta-p">Partner with The Sonic Media to build a brand that captures attention and drives measurable results.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start Your Project →</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-services -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: PORTFOLIO
+═══════════════════════════════════════════ -->
+
+<div id="page-studio" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Our Work</div>
+    <h1 class="inner-hero-h">Our <span>Portfolio</span></h1>
+    <p class="inner-hero-p">Real brands. Real campaigns. Real results. Every project is a movement. Every number is a brand that changed.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><span class="bc-cur">Portfolio</span></div>
+  </div>
+
+  <!-- FEATURED WORK — full editorial list (synced with home section) -->
+  <section class="casestudies">
+    <div class="fw-topbar">
+      <div class="fw-topbar-label">Featured Work · Results That Speak</div>
+      <div class="fw-topbar-count">6 PROJECTS</div>
+    </div>
+    <div class="fw-header reveal">
+      <div class="fw-header-left">
+        <div class="fw-eyebrow">Featured Work</div>
+        <h2 class="fw-title">Results<br>That <em>Speak</em></h2>
+      </div>
+      <div class="fw-header-right">
+        <p class="fw-tagline">Every project is a movement. Every number is a brand that changed.</p>
+      </div>
+    </div>
+    <div class="fw-list reveal d1" id="page-portfolio-list">
+    </div>
+
+  </section>
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Want Results Like These?</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Talk To Our <span>Team</span></h2>
+      <p class="cta-p">Let’s build your brand into the next success story with strategy, creativity, and performance-driven execution.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start Your Project →</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-studio -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: CASE STUDIES
+═══════════════════════════════════════════ -->
+
+<div id="page-casestudies" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Proof of Work</div>
+    <h1 class="inner-hero-h">Case <span>Studies</span></h1>
+    <p class="inner-hero-p">Execution That Changed Brands.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><span class="bc-cur">Case Studies</span></div>
+  </div>
+
+  <section class="journal" style="padding-top:80px;">
+    <div class="jnl-cats reveal">
+      <button class="jcat-btn active" onclick="filterJournal(this,'all')">All</button>
+      <button class="jcat-btn" onclick="filterJournal(this,'strategy')">Strategy</button>
+      <button class="jcat-btn" onclick="filterJournal(this,'technology')">Technology</button>
+      <button class="jcat-btn" onclick="filterJournal(this,'social')">Social Media</button>
+      <button class="jcat-btn" onclick="filterJournal(this,'seo')">SEO</button>
+      <button class="jcat-btn" onclick="filterJournal(this,'branding')">Branding</button>
+      <button class="jcat-btn" onclick="filterJournal(this,'performance')">Performance</button>
+    </div>
+    <div class="jnl-full-grid reveal d1" id="page-casestudies-grid"></div>
+  </section>
+
+  </section>
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Ready to Grow?</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Work With <span>The Sonic Media</span></h2>
+      <p class="cta-p">Let's build your brand's next growth chapter together — strategy, content, performance, and technology under one roof.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start Your Project →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-footer-slot"></div>
+</div><!-- /page-casestudies -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: JOURNAL
+═══════════════════════════════════════════ -->
+
+<div id="page-journal" class="page">
+  <div class="inner-hero" style="background:var(--black2);">
+    <div class="section-tag">Insights & Ideas</div>
+    <h1 class="inner-hero-h">The Sonic <span>Journal</span></h1>
+    <p class="inner-hero-p">Marketing intelligence, agency stories, and growth tactics from the team.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><span class="bc-cur">Journal</span></div>
+  </div>
+
+    <div class="blogs-half">
+      <div class="section-tag" id="page-journal-tag">Journal</div>
+      <h2 class="section-title" id="page-journal-title" style="font-size:clamp(36px,4vw,60px);">Fresh <span id="page-journal-span">Reads</span></h2>
+      <div style="margin-top:12px;margin-bottom:8px;"><a href="#" onclick="navigate('journal');return false;" class="cs-view-all" style="color:var(--orange);">Visit Journal →</a></div>
+      <div class="blog-list" id="page-journal-list">
+        <div class="blog-item"><div class="blog-num">01</div><div class="blog-info"><div class="bt">How Google AI Overviews Are Changing SEO in India — And What to Do About It</div><div class="bm"><span>SEO</span>· 7 min read · May 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-google-ai-seo');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item"><div class="blog-num">02</div><div class="blog-info"><div class="bt">How to Achieve 10× ROAS on Meta Ads for Indian D2C Brands in 2026</div><div class="bm"><span>Performance</span>· 8 min read · May 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-meta-roas');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item"><div class="blog-num">03</div><div class="blog-info"><div class="bt">What Makes Indian Consumers Trust a Brand Online? The 2026 Playbook</div><div class="bm"><span>Branding</span>· 6 min read · Apr 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-brand-trust');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item"><div class="blog-num">04</div><div class="blog-info"><div class="bt">Instagram Reels Algorithm 2026: How to Get Organic Reach Without Paid Ads</div><div class="bm"><span>Social Media</span>· 6 min read · Apr 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-reels-algorithm');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item"><div class="blog-num">05</div><div class="blog-info"><div class="bt">Why Your Website Gets Traffic But Zero Leads — And How to Fix It Today</div><div class="bm"><span>Web Dev</span>· 5 min read · Mar 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-website-conversion');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item"><div class="blog-num">06</div><div class="blog-info"><div class="bt">How We Use AI to Produce 60+ Pieces of Content Per Month Without Losing Quality</div><div class="bm"><span>Content</span>· 7 min read · Mar 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-ai-content');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item"><div class="blog-num">07</div><div class="blog-info"><div class="bt">Local SEO for Indian Businesses: How to Rank #1 on Google Maps in Your City</div><div class="bm"><span>SEO</span>· 8 min read · Mar 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-local-seo');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item"><div class="blog-num">08</div><div class="blog-info"><div class="bt">E-Commerce Launch Checklist 2026: 30 Things to Do Before Going Live in India</div><div class="bm"><span>E-Commerce</span>· 9 min read · Mar 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-ecom-launch');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item"><div class="blog-num">09</div><div class="blog-info"><div class="bt">Influencer Marketing ROI: How to Pick the Right Creator and Measure Real Results</div><div class="bm"><span>Influencer</span>· 6 min read · Mar 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-influencer-roi');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item"><div class="blog-num">10</div><div class="blog-info"><div class="bt">WhatsApp Marketing for Indian Brands: The Complete Strategy Guide for 2026</div><div class="bm"><span>Strategy</span>· 7 min read · Mar 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-whatsapp-marketing');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+      </div>
+    </div>
+
+  </section>
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Ready to Grow?</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Work With <span>The Sonic Media</span></h2>
+      <p class="cta-p">Let's build your brand's next growth chapter together — strategy, content, performance, and technology under one roof.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start Your Project →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-footer-slot"></div>
+</div><!-- /page-journal -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: FUTURE VISION
+═══════════════════════════════════════════ -->
+
+<div id="page-future" class="page">
+  <div class="inner-hero" style="background:var(--black2);">
+    <div class="section-tag">What's Next</div>
+    <h1 class="inner-hero-h">Future <span>Vision</span></h1>
+    <p class="inner-hero-p">The innovations, technologies, and global expansions we are building towards — shaping the future of digital marketing.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><span class="bc-cur">Future Vision</span></div>
+  </div>
+
+  <!-- FUTURE VISION — Pinned Split-Screen Mask Reveal (page version) -->
+  <section id="futureSplitSectionPage" style="background:var(--black);padding-top:0;">
+    <!-- Section header — sticky until section ends (matches homepage exactly) -->
+    <div id="fv-page-header" style="position:sticky;top:72px;z-index:100;background:var(--black);padding:14px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;max-width:100%;margin:0 auto;border-bottom:1px solid rgba(255,255,255,.05);">
+      <div style="text-align:left;">
+        <div class="section-tag" style="color:var(--orange);margin-bottom:4px;font-size:10px;">What's Next</div>
+        <h2 class="section-title" style="font-size:clamp(22px,2.4vw,38px);text-align:left;line-height:1;color:var(--white);">The <span style="color:var(--orange);">Future</span> We're Building</h2>
+        <p style="font-family:var(--font-body);font-size:12px;color:rgba(245,240,235,.45);margin-top:4px;font-weight:300;letter-spacing:.02em;">Scroll to explore the innovations and expansions we're building towards.</p>
+      </div>
+    </div>
+
+    <!-- Pinned split-screen container (desktop) -->
+    <div class="fv-container" id="fvContainerPage">
+      <div class="fv-arch" id="fvArchPage">
+
+        <!-- LEFT: stacked text panels (rendered from PAGE_DATA.future.panels) -->
+        <div class="fv-arch__left" id="page-fv-left"></div>
+
+        <!-- RIGHT: stacked images (rendered from PAGE_DATA.future.panels) -->
+        <div class="fv-arch__right" id="page-fv-right"></div>
+      </div>
+      <div class="fv-spacer"></div>
+    </div>
+    <!-- MOBILE: card stack layout (hidden on desktop, shown on mobile) -->
+    <div id="page-fv-mobile" style="display:none;"></div>
+  </section>
+
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Ready to Grow?</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Work With <span>The Sonic Media</span></h2>
+      <p class="cta-p">Let's build your brand's next growth chapter together — strategy, content, performance, and technology under one roof.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start Your Project →</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-future -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: FAQ
+═══════════════════════════════════════════ -->
+
+<div id="page-faq" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Questions & Answers</div>
+    <h1 class="inner-hero-h">Got <span>Questions?</span></h1>
+    <p class="inner-hero-p">Everything you need to know about working with The Sonic Media — answered clearly, no fluff.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><span class="bc-cur">FAQ</span></div>
+  </div>
+
+  <section class="faq-section">
+    <div class="faq-bg-glow"></div>
+    <div class="faq-inner">
+      <div class="faq-left reveal-l">
+        <div class="section-tag">FAQ</div>
+        <h2 class="section-title" style="font-size:clamp(42px,5vw,78px);margin-bottom:20px;">All Your <span>Answers</span></h2>
+        <p class="faq-sub">Everything you need to know about working with The Sonic Media — answered clearly, no fluff.</p>
+
+      </div>
+      <div class="faq-right reveal-r">
+        <div id="faqListPage"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Still Have Questions?</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Talk To Our <span>Team</span></h2>
+      <p class="cta-p">From strategy to execution, we help ambitious brands create measurable digital growth and lasting impact.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start Your Project →</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-faq -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: CONTACT
+═══════════════════════════════════════════ -->
+
+<div id="page-contact" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Get In Touch</div>
+    <h1 class="inner-hero-h">Let's <span>Talk</span></h1>
+    <p class="inner-hero-p">Ready to grow? Book a personalized strategy consultation or drop us a message. Our team will get back to you shortly.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><span class="bc-cur">Contact</span></div>
+  </div>
+
+  <section class="contact-section">
+    <div class="contact-grid">
+      <div class="contact-info reveal-l">
+        <h2 class="contact-info-title">Start Your<br><span>Growth Journey</span></h2>
+        <p class="contact-info-p">We'd love to hear about your brand, your goals, and how we can help you dominate your market. Fill out the form or reach us directly — our team is ready.</p>
+        <div class="contact-methods">
+          <div class="contact-method"><div class="cm-icon">📧</div><div><div class="cm-lbl">Email Us</div><div class="cm-val"><li><a href="mailto:info@thesonicmedia.com">info@thesonicmedia.com</a></li></div></div></div>
+          <div class="contact-method"><div class="cm-icon">📞</div><div><div class="cm-lbl">Call / WhatsApp</div><div class="cm-val"><li><a href="tel:+918733087249">+91 87330 87249</a></li></div></div></div>
+          <div class="contact-method"><div class="cm-icon">📞</div><div><div class="cm-lbl">Call / WhatsApp</div><div class="cm-val"><li><a href="tel:+919157707249">+91 91577 07249</a></li></div></div></div>
+          <div class="contact-method"><div class="cm-icon">📍</div><div><div class="cm-lbl">Location</div><div class="cm-val">Ahmedabad, Gujarat, India</div></div></div>
+        </div>
+
+        <div class="contact-map" style="padding:0;overflow:hidden;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118154.24219886418!2d72.41493010000001!3d23.0201581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1716000000000!5m2!1sen!2sin"
+            width="100%"
+            height="100%"
+            style="border:0;display:block;filter:grayscale(30%) invert(92%) hue-rotate(180deg) brightness(0.85) contrast(0.9);"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="The Sonic Media — Ahmedabad, Gujarat, India"
+          ></iframe>
+        </div>
+      </div>
+      <form class="contact-form reveal-r" action="https://api.web3forms.com/submit" method="POST" id="contact-web3form">
+        <input type="hidden" name="access_key" value="66f90d59-83e7-4136-8823-1bfeb38deb41">
+        <input type="hidden" name="subject" value="New Strategy Session Request — The Sonic Media">
+        <input type="hidden" name="from_name" value="The Sonic Media Website">
+        <div class="cf-title">Book a Free Strategy Session</div>
+        <div class="cf-sub">Tell us about your brand and we'll show you exactly how we'll 10× your growth.</div>
+        <div class="cf-row">
+          <div class="cf-field"><label class="cf-label">First Name</label><input type="text" name="first_name" class="cf-input" placeholder="Rahul" required></div>
+          <div class="cf-field"><label class="cf-label">Last Name</label><input type="text" name="last_name" class="cf-input" placeholder="Sharma"></div>
+        </div>
+        <div class="cf-field"><label class="cf-label">Email Address</label><input type="email" name="email" class="cf-input" placeholder="rahul@company.com" required></div>
+        <div class="cf-field"><label class="cf-label">Phone / WhatsApp</label><input type="tel" name="phone" class="cf-input" placeholder="+91 99999 99999"></div>
+        <div class="cf-field"><label class="cf-label">Company / Brand Name</label><input type="text" name="company" class="cf-input" placeholder="Your Brand"></div>
+        <div class="cf-field"><label class="cf-label">Service You Need</label><select name="service" class="cf-select cf-input"><option value="">Select a service...</option><option>Website Development</option><option>Mobile App Development</option><option>SEO Optimization</option><option>Social Media Marketing</option><option>Performance Marketing</option><option>Content Production</option><option>Branding & Design</option><option>E-Commerce Marketing</option><option>Influencer Marketing</option><option>AI Doodling/Editing</option><option>Custom</option></select></div>
+        <div class="cf-field"><label class="cf-label">Tell Us About Your Goals</label><textarea name="message" class="cf-textarea" placeholder="Describe your brand, current challenges, and what you want to achieve..."></textarea></div>
+        <button type="submit" class="cf-submit" id="cf-submit-btn">Send Message & Book Free Call →</button>
+        <div id="cf-result" style="margin-top:16px;text-align:center;font-family:var(--font-heading);font-size:13px;font-weight:600;display:none;"></div>
+      </form>
+      <script>
+      (function(){
+        var form = document.getElementById('contact-web3form');
+        var btn  = document.getElementById('cf-submit-btn');
+        var res  = document.getElementById('cf-result');
+        if (!form) return;
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          btn.disabled = true;
+          btn.textContent = 'Sending…';
+          res.style.display = 'none';
+          var data = new FormData(form);
+          fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+            .then(function(r){ return r.json(); })
+            .then(function(json){
+              if (json.success) {
+                res.style.color = '#4ade80';
+                res.textContent = '✓ Message sent! We\'ll be in touch within 24 hours.';
+                form.reset();
+                btn.textContent = 'Send Message & Book Free Call →';
+              } else {
+                throw new Error(json.message || 'Submission failed');
+              }
+            })
+            .catch(function(err){
+              res.style.color = '#f87171';
+              res.textContent = '✗ Something went wrong. Please try again.';
+              btn.textContent = 'Send Message & Book Free Call →';
+            })
+            .finally(function(){
+              btn.disabled = false;
+              res.style.display = 'block';
+            });
+        });
+      })();
+      </script>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-contact -->
+
+
+<!-- ═══════════════════════════════════════════
+     SERVICE PAGE SHARED FOOTER HELPER
+═══════════════════════════════════════════ -->
+
+
+<!-- ═══════════════════════════════════════════
+     SERVICE PAGE: WEBSITE DEVELOPMENT
+═══════════════════════════════════════════ -->
+
+<div id="page-svc-web" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Service · 01</div>
+    <h1 class="inner-hero-h">Website <span>Development</span></h1>
+    <p class="inner-hero-p">Revenue machines engineered from the ground up — blazing-fast, pixel-perfect, and built to turn every visitor into a customer.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><a href="#" onclick="navigate('services');return false;">Services</a><span class="bc-sep">→</span><span class="bc-cur">Website Development</span></div>
+  </div>
+  <section class="studio" style="padding:80px 60px;">
+    <div class="studio-inner">
+      <div class="studio-content reveal-l">
+        <div class="section-tag">What We Build</div>
+        <h2 class="section-title" style="margin-bottom:24px;">Websites That <span>Convert</span></h2>
+        <p class="studio-p">We don't build pretty brochures — we engineer revenue machines. Every site we create is obsessed with speed, UX clarity, and conversion architecture. From landing pages to full enterprise platforms, we make your web presence your #1 salesperson.</p>
+        <div class="studio-grid">
+          <div class="studio-card"><div class="sc-icon">⚡</div><div class="sc-title">Sub-2s Load Time</div><div class="sc-desc">Optimised code, CDN delivery, image compression — your site blazes.</div></div>
+          <div class="studio-card"><div class="sc-icon">🎨</div><div class="sc-title">Custom UI/UX Design</div><div class="sc-desc">No templates. Every pixel crafted for your brand and audience.</div></div>
+          <div class="studio-card"><div class="sc-icon">📱</div><div class="sc-title">Fully Responsive</div><div class="sc-desc">Flawless on every screen — mobile-first, always.</div></div>
+          <div class="studio-card"><div class="sc-icon">🔒</div><div class="sc-title">Secure & Scalable</div><div class="sc-desc">SSL, DDoS protection, and cloud hosting that scales with you.</div></div>
+          <div class="studio-card"><div class="sc-icon">📊</div><div class="sc-title">CRO Architecture</div><div class="sc-desc">Every CTA, layout and flow engineered to maximise conversions.</div></div>
+          <div class="studio-card"><div class="sc-icon">🔗</div><div class="sc-title">CMS Integration</div><div class="sc-desc">WordPress, Webflow, custom CMS — you control your content.</div></div>
+        </div>
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start Your Website Project →</a>
+      </div>
+      <div class="studio-visual reveal-r">
+        <div class="studio-reel" style="aspect-ratio:4/3;">
+          <div class="studio-reel-bg"></div>
+          <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=900&q=80" alt="Website Development" style="width:100%;height:100%;object-fit:cover;opacity:.7;position:absolute;inset:0;">
+          <div class="reel-tag">Web Dev</div>
+          <div class="reel-label">Pixel-Perfect<br><span>Engineering</span></div>
+        </div>
+        <div class="studio-floats">
+          <div class="sfloat"><div class="sf-n">280%</div><div class="sf-l">Avg. Conversion Lift</div></div>
+          <div class="sfloat"><div class="sf-n">1.8s</div><div class="sf-l">Average Load Time</div></div>
+          <div class="sfloat"><div class="sf-n">150+</div><div class="sf-l">Sites Delivered</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Ready to Launch?</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Let's Build Your <span>Dream Site.</span></h2>
+      <p class="cta-p">Partner with a team focused on building brands that grow, convert, and stand out in competitive markets.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start The Conversation →</a>
+        <a href="#" onclick="navigate('studio');return false;" class="btn-s">View Web Portfolio</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-svc-web -->
+
+
+
+<!-- ═══════════════════════════════════════════
+     SERVICE PAGE: MOBILE APP DEVELOPMENT
+═══════════════════════════════════════════ -->
+
+<div id="page-svc-app" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Service · 02</div>
+    <h1 class="inner-hero-h">Mobile App <span>Development</span></h1>
+    <p class="inner-hero-p">iOS & Android apps users can't put down — native or cross-platform, engineered for performance, retention, and 4.9★ ratings.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><a href="#" onclick="navigate('services');return false;">Services</a><span class="bc-sep">→</span><span class="bc-cur">Mobile App Development</span></div>
+  </div>
+  <section class="studio" style="padding:80px 60px;">
+    <div class="studio-inner">
+      <div class="studio-content reveal-l">
+        <div class="section-tag">What We Build</div>
+        <h2 class="section-title" style="margin-bottom:24px;">Apps Users <span>Love</span></h2>
+        <p class="studio-p">From MVP to full-scale consumer apps, we build mobile experiences that users keep coming back to. Our team delivers clean code, intuitive UX, and native performance — whether you need iOS, Android, or cross-platform with React Native or Flutter.</p>
+        <div class="studio-grid">
+          <div class="studio-card"><div class="sc-icon">🍎</div><div class="sc-title">iOS Development</div><div class="sc-desc">Swift-native apps with App Store optimisation and seamless Apple ecosystem integration.</div></div>
+          <div class="studio-card"><div class="sc-icon">🤖</div><div class="sc-title">Android Development</div><div class="sc-desc">Kotlin-first Android apps with Google Play distribution and material design.</div></div>
+          <div class="studio-card"><div class="sc-icon">⚛️</div><div class="sc-title">Cross-Platform</div><div class="sc-desc">React Native & Flutter — one codebase, two platforms, full performance.</div></div>
+          <div class="studio-card"><div class="sc-icon">🔔</div><div class="sc-title">Push & Engagement</div><div class="sc-desc">Smart notifications, deep linking, and retention flows built in from day one.</div></div>
+          <div class="studio-card"><div class="sc-icon">💳</div><div class="sc-title">Payments & Auth</div><div class="sc-desc">Stripe, Razorpay, biometric login — secure and seamless.</div></div>
+          <div class="studio-card"><div class="sc-icon">📈</div><div class="sc-title">Analytics & Growth</div><div class="sc-desc">Firebase, Mixpanel, A/B testing — data to fuel your product decisions.</div></div>
+        </div>
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start Your App Project →</a>
+      </div>
+      <div class="studio-visual reveal-r">
+        <div class="studio-reel" style="aspect-ratio:4/3;">
+          <div class="studio-reel-bg"></div>
+          <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80" alt="Mobile App Development" style="width:100%;height:100%;object-fit:cover;opacity:.7;position:absolute;inset:0;">
+          <div class="reel-tag">Mobile Apps</div>
+          <div class="reel-label">Native Speed,<br><span>Beautiful UX</span></div>
+        </div>
+        <div class="studio-floats">
+          <div class="sfloat"><div class="sf-n">4.9★</div><div class="sf-l">Average App Rating</div></div>
+          <div class="sfloat"><div class="sf-n">60+</div><div class="sf-l">Apps Launched</div></div>
+          <div class="sfloat"><div class="sf-n">2M+</div><div class="sf-l">Total App Downloads</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Build Your App</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Your Idea. Our <span>Code.</span></h2>
+      <p class="cta-p">Tell us about your app idea and we'll turn it into a production-ready product.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Discuss Your App Idea →</a>
+        <a href="#" onclick="navigate('studio');return false;" class="btn-s">View App Portfolio</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-svc-app -->
+
+
+<!-- ═══════════════════════════════════════════
+     SERVICE PAGE: SEO
+═══════════════════════════════════════════ -->
+
+<div id="page-svc-seo" class="page active">
+  <div class="inner-hero">
+    <div class="section-tag">Service · 03</div>
+    <h1 class="inner-hero-h">Search Engine <span>Optimization</span></h1>
+    <p class="inner-hero-p">Rank #1 and stay there. Technical SEO, content strategy, and link building that drives compounding organic traffic — month after month.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><a href="#" onclick="navigate('services');return false;">Services</a><span class="bc-sep">→</span><span class="bc-cur">SEO</span></div>
+  </div>
+  <section class="studio" style="padding:80px 60px;">
+    <div class="studio-inner">
+      <div class="studio-content reveal-l">
+        <div class="section-tag">Our SEO Approach</div>
+        <h2 class="section-title" style="margin-bottom:24px;">Rank First. <span>Stay First.</span></h2>
+        <p class="studio-p">SEO isn't a one-time project — it's a compounding asset. Our full-stack SEO methodology covers technical foundations, keyword strategy, content engineering, and authority building. We've taken 12+ clients to #1 in their competitive niches within 90 days.</p>
+        <div class="studio-grid">
+          <div class="studio-card"><div class="sc-icon">🔧</div><div class="sc-title">Technical SEO</div><div class="sc-desc">Site speed, crawlability, Core Web Vitals, structured data — the foundation Google rewards.</div></div>
+          <div class="studio-card"><div class="sc-icon">🔑</div><div class="sc-title">Keyword Strategy</div><div class="sc-desc">Intent-mapped keyword research that finds high-value, winnable search opportunities.</div></div>
+          <div class="studio-card"><div class="sc-icon">✍️</div><div class="sc-title">Content Architecture</div><div class="sc-desc">Topic clusters, pillar pages, and SEO-optimised content that ranks and converts.</div></div>
+          <div class="studio-card"><div class="sc-icon">🔗</div><div class="sc-title">Link Building</div><div class="sc-desc">High-authority backlinks through digital PR, outreach, and content partnerships.</div></div>
+          <div class="studio-card"><div class="sc-icon">📍</div><div class="sc-title">Local SEO</div><div class="sc-desc">Google Business Profile, local citations, and map pack dominance for local brands.</div></div>
+          <div class="studio-card"><div class="sc-icon">📊</div><div class="sc-title">SEO Reporting</div><div class="sc-desc">Monthly dashboards showing rankings, traffic, and revenue attribution — crystal clear.</div></div>
+        </div>
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Let’s Talk Growth →</a>
+      </div>
+      <div class="studio-visual reveal-r">
+        <div class="studio-reel" style="aspect-ratio:4/3;">
+          <div class="studio-reel-bg"></div>
+          <img src="https://images.unsplash.com/photo-1432888622747-4eb9a8eMar07?w=900&q=80" alt="SEO" style="width:100%;height:100%;object-fit:cover;opacity:.7;position:absolute;inset:0;">
+          <div class="reel-tag">SEO</div>
+          <div class="reel-label">Organic Traffic<br><span>On Autopilot</span></div>
+        </div>
+        <div class="studio-floats">
+          <div class="sfloat"><div class="sf-n">500%</div><div class="sf-l">Avg. Traffic Growth</div></div>
+          <div class="sfloat"><div class="sf-n">90</div><div class="sf-l">Days to #1 Rankings</div></div>
+          <div class="sfloat"><div class="sf-n">12+</div><div class="sf-l">Clients at #1</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Dominate Search</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Your Competitors Are <span>Ranking.</span></h2>
+      <p class="cta-p">We'll show you exactly what's holding you back and how we'll fix it — in plain language, no jargon.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Let’s Talk Growth →</a>
+        <a href="#" onclick="navigate('casestudies');return false;" class="btn-s">See Case Studies</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-svc-seo -->
+
+
+<!-- ═══════════════════════════════════════════
+     SERVICE PAGE: SOCIAL MEDIA MANAGEMENT
+═══════════════════════════════════════════ -->
+
+<div id="page-svc-smm" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Service · 04</div>
+    <h1 class="inner-hero-h">Social Media <span>Management</span></h1>
+    <p class="inner-hero-p">Strategic content, community building, and platform growth across Instagram, Facebook, LinkedIn, and beyond — all managed for you.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><a href="#" onclick="navigate('services');return false;">Services</a><span class="bc-sep">→</span><span class="bc-cur">Social Media Management</span></div>
+  </div>
+  <section class="studio" style="padding:80px 60px;">
+    <div class="studio-inner">
+      <div class="studio-content reveal-l">
+        <div class="section-tag">What We Manage</div>
+        <h2 class="section-title" style="margin-bottom:24px;">Your Brand. <span>Always On.</span></h2>
+        <p class="studio-p">We become your brand's social media team — strategising, creating, scheduling, and engaging every single day. From content calendars to community management, we handle everything so your social presence is consistent, on-brand, and always growing.</p>
+        <div class="studio-grid">
+          <div class="studio-card"><div class="sc-icon">📅</div><div class="sc-title">Content Calendars</div><div class="sc-desc">Monthly content planning with themes, campaigns, and strategic posting schedules.</div></div>
+          <div class="studio-card"><div class="sc-icon">🎨</div><div class="sc-title">Creative Content</div><div class="sc-desc">Branded graphics, reels, carousels, and stories — designed to stop the scroll.</div></div>
+          <div class="studio-card"><div class="sc-icon">💬</div><div class="sc-title">Community Management</div><div class="sc-desc">DMs, comments, and engagement handled by a real human who knows your brand voice.</div></div>
+          <div class="studio-card"><div class="sc-icon">📊</div><div class="sc-title">Monthly Analytics</div><div class="sc-desc">Clear reports on reach, engagement, follower growth, and content performance.</div></div>
+          <div class="studio-card"><div class="sc-icon">🌐</div><div class="sc-title">Multi-Platform</div><div class="sc-desc">Instagram, Facebook, LinkedIn, Twitter/X, YouTube Shorts — all platforms covered.</div></div>
+          <div class="studio-card"><div class="sc-icon">🎯</div><div class="sc-title">Strategy & Growth</div><div class="sc-desc">Hashtag strategy, collaboration plans, and growth tactics built into every month.</div></div>
+        </div>
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Grow My Social Media →</a>
+      </div>
+      <div class="studio-visual reveal-r">
+        <div class="studio-reel" style="aspect-ratio:4/3;">
+          <div class="studio-reel-bg"></div>
+          <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=900&q=80" alt="Social Media Management" style="width:100%;height:100%;object-fit:cover;opacity:.7;position:absolute;inset:0;">
+          <div class="reel-tag">Social Media</div>
+          <div class="reel-label">Grow Your<br><span>Audience Daily</span></div>
+        </div>
+        <div class="studio-floats">
+          <div class="sfloat"><div class="sf-n">150K</div><div class="sf-l">Followers in 90 Days</div></div>
+          <div class="sfloat"><div class="sf-n">5×</div><div class="sf-l">Avg. Engagement Lift</div></div>
+          <div class="sfloat"><div class="sf-n">30+</div><div class="sf-l">Posts Per Month</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Go Social</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Your Audience Is <span>Waiting.</span></h2>
+      <p class="cta-p">From content creation to full-scale social media management, we build brands people remember online.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Let’s Scale Your Socials →</a>
+        <a href="#" onclick="navigate('studio');return false;" class="btn-s">See Our Portfolio</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-svc-smm -->
+
+
+<!-- ═══════════════════════════════════════════
+     SERVICE PAGE: PERFORMANCE MARKETING
+═══════════════════════════════════════════ -->
+
+<div id="page-svc-perf" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Service · 05</div>
+    <h1 class="inner-hero-h">Performance Marketing <span>& Paid Ads</span></h1>
+    <p class="inner-hero-p">Meta & Google Ads campaigns engineered for maximum ROAS. Every rupee tracked, every funnel optimised — zero vanity metrics, pure results.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><a href="#" onclick="navigate('services');return false;">Services</a><span class="bc-sep">→</span><span class="bc-cur">Performance Marketing</span></div>
+  </div>
+  <section class="studio" style="padding:80px 60px;">
+    <div class="studio-inner">
+      <div class="studio-content reveal-l">
+        <div class="section-tag">Our Paid Media Approach</div>
+        <h2 class="section-title" style="margin-bottom:24px;">Every Rupee. <span>Maximised.</span></h2>
+        <p class="studio-p">We manage paid advertising as growth infrastructure — not an expense. Our performance team has generated 18× ROAS for e-commerce brands and scaled Meta & Google campaigns to ₹2Cr+ in monthly revenue. We build, test, and optimise every day until your numbers win.</p>
+        <div class="studio-grid">
+          <div class="studio-card"><div class="sc-icon">📘</div><div class="sc-title">Meta Ads</div><div class="sc-desc">Facebook & Instagram campaigns — awareness to conversion, fully funnel-mapped.</div></div>
+          <div class="studio-card"><div class="sc-icon">🔍</div><div class="sc-title">Google Ads</div><div class="sc-desc">Search, Shopping, Display, YouTube — full Google ecosystem coverage.</div></div>
+          <div class="studio-card"><div class="sc-icon">🔄</div><div class="sc-title">Retargeting</div><div class="sc-desc">Precision retargeting that pulls warm audiences back to convert.</div></div>
+          <div class="studio-card"><div class="sc-icon">🧪</div><div class="sc-title">Creative Testing</div><div class="sc-desc">Systematic A/B testing of creatives, copy, and audiences — data wins every time.</div></div>
+          <div class="studio-card"><div class="sc-icon">📉</div><div class="sc-title">Funnel Optimisation</div><div class="sc-desc">Landing pages, checkout flows, and lead magnets engineered to eliminate drop-off.</div></div>
+          <div class="studio-card"><div class="sc-icon">📊</div><div class="sc-title">ROAS Reporting</div><div class="sc-desc">Real-time dashboards showing spend, revenue, CPA, and ROAS — always transparent.</div></div>
+        </div>
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Scale My Ads →</a>
+      </div>
+      <div class="studio-visual reveal-r">
+        <div class="studio-reel" style="aspect-ratio:4/3;">
+          <div class="studio-reel-bg"></div>
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80" alt="Performance Marketing" style="width:100%;height:100%;object-fit:cover;opacity:.7;position:absolute;inset:0;">
+          <div class="reel-tag">Paid Ads</div>
+          <div class="reel-label">18× ROAS.<br><span>Proven.</span></div>
+        </div>
+        <div class="studio-floats">
+          <div class="sfloat"><div class="sf-n">18×</div><div class="sf-l">Best ROAS Achieved</div></div>
+          <div class="sfloat"><div class="sf-n">₹2Cr</div><div class="sf-l">Revenue in 60 Days</div></div>
+          <div class="sfloat"><div class="sf-n">100+</div><div class="sf-l">Campaigns Managed</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Scale Your ROI</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Stop Burning <span>Ad Budget.</span></h2>
+      <p class="cta-p">We'll review your current campaigns and show you exactly how much money you're leaving on the table — and how we'll fix it.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start Performance Marketing →</a>
+        <a href="#" onclick="navigate('casestudies');return false;" class="btn-s">See Campaign Results</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-svc-perf -->
+
+
+<!-- ═══════════════════════════════════════════
+     SERVICE PAGE: INFLUENCER MARKETING
+═══════════════════════════════════════════ -->
+
+<div id="page-svc-inf" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Service · 06</div>
+    <h1 class="inner-hero-h">Influencer <span>Marketing</span></h1>
+    <p class="inner-hero-p">Curated influencer partnerships that deliver authentic reach, engaged audiences, and measurable ROI — from nano to mega creators.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><a href="#" onclick="navigate('services');return false;">Services</a><span class="bc-sep">→</span><span class="bc-cur">Influencer Marketing</span></div>
+  </div>
+  <section class="studio" style="padding:80px 60px;">
+    <div class="studio-inner">
+      <div class="studio-content reveal-l">
+        <div class="section-tag">Our Creator Network</div>
+        <h2 class="section-title" style="margin-bottom:24px;">Real Voices. <span>Real Impact.</span></h2>
+        <p class="studio-p">We don't just match brands with influencers — we build campaigns that convert. Our vetted network spans 500+ creators across niches. We handle discovery, briefing, contracting, content review, and performance tracking so every collaboration drives real business results.</p>
+        <div class="studio-grid">
+          <div class="studio-card"><div class="sc-icon">🔍</div><div class="sc-title">Creator Discovery</div><div class="sc-desc">Data-driven influencer identification — audience authenticity, engagement rates, and brand fit verified.</div></div>
+          <div class="studio-card"><div class="sc-icon">📝</div><div class="sc-title">Campaign Briefing</div><div class="sc-desc">Detailed creative briefs that align influencer content with your brand voice and campaign goals.</div></div>
+          <div class="studio-card"><div class="sc-icon">📋</div><div class="sc-title">Contract Management</div><div class="sc-desc">Usage rights, deliverables, and payment — all handled professionally end-to-end.</div></div>
+          <div class="studio-card"><div class="sc-icon">✅</div><div class="sc-title">Content Review</div><div class="sc-desc">Every piece of influencer content reviewed and approved before posting — brand-safe, always.</div></div>
+          <div class="studio-card"><div class="sc-icon">📊</div><div class="sc-title">Performance Tracking</div><div class="sc-desc">Reach, impressions, clicks, conversions — full ROI attribution from every collaboration.</div></div>
+          <div class="studio-card"><div class="sc-icon">🌟</div><div class="sc-title">All Tiers Covered</div><div class="sc-desc">Nano (5K–50K), micro, macro, and mega influencers — the right tier for your budget and goal.</div></div>
+        </div>
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Launch Influencer Campaign →</a>
+      </div>
+      <div class="studio-visual reveal-r">
+        <div class="studio-reel" style="aspect-ratio:4/3;">
+          <div class="studio-reel-bg"></div>
+          <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=900&q=80" alt="Influencer Marketing" style="width:100%;height:100%;object-fit:cover;opacity:.7;position:absolute;inset:0;">
+          <div class="reel-tag">Influencer</div>
+          <div class="reel-label">500+ Vetted<br><span>Creators</span></div>
+        </div>
+        <div class="studio-floats">
+          <div class="sfloat"><div class="sf-n">500+</div><div class="sf-l">Creator Network</div></div>
+          <div class="sfloat"><div class="sf-n">2M+</div><div class="sf-l">Campaign Reach</div></div>
+          <div class="sfloat"><div class="sf-n">8.2%</div><div class="sf-l">Avg. Engagement Rate</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Amplify Your Brand</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">The Right Creator. <span>Every Time.</span></h2>
+      <p class="cta-p">Tell us about your brand and campaign goals — we'll curate a shortlist of perfectly matched influencers.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Find My Influencers →</a>
+        <a href="#" onclick="navigate('casestudies');return false;" class="btn-s">See Campaign Results</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-svc-inf -->
+
+
+<!-- ═══════════════════════════════════════════
+     SERVICE PAGE: E-COMMERCE MARKETING
+═══════════════════════════════════════════ -->
+
+<div id="page-svc-ecom" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Service · 07</div>
+    <h1 class="inner-hero-h">E-Commerce <span>Marketing</span></h1>
+    <p class="inner-hero-p">End-to-end D2C & e-commerce growth — from Shopify builds to dynamic retargeting, cart recovery flows, and marketplace dominance.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><a href="#" onclick="navigate('services');return false;">Services</a><span class="bc-sep">→</span><span class="bc-cur">E-Commerce Marketing</span></div>
+  </div>
+  <section class="studio" style="padding:80px 60px;">
+    <div class="studio-inner">
+      <div class="studio-content reveal-l">
+        <div class="section-tag">D2C Growth Engine</div>
+        <h2 class="section-title" style="margin-bottom:24px;">Turn Stores Into <span>Sales Machines.</span></h2>
+        <p class="studio-p">We've taken e-commerce brands from ₹2L/month to ₹18L/month in under 4 months. Our D2C growth methodology covers the full e-commerce funnel — from traffic acquisition to checkout optimisation, repeat purchase flows, and marketplace management.</p>
+        <div class="studio-grid">
+          <div class="studio-card"><div class="sc-icon">🛍️</div><div class="sc-title">Shopify / WooCommerce</div><div class="sc-desc">High-converting store builds with optimised product pages, upsells, and checkout flows.</div></div>
+          <div class="studio-card"><div class="sc-icon">🎯</div><div class="sc-title">Dynamic Retargeting</div><div class="sc-desc">Product-level retargeting ads that show exactly what customers viewed — and bring them back.</div></div>
+          <div class="studio-card"><div class="sc-icon">🛒</div><div class="sc-title">Cart Recovery</div><div class="sc-desc">Email, WhatsApp, and SMS cart abandonment flows that recover 15–30% of lost sales.</div></div>
+          <div class="studio-card"><div class="sc-icon">🏪</div><div class="sc-title">Marketplace Growth</div><div class="sc-desc">Amazon, Flipkart, Meesho — listing optimisation and marketplace advertising to dominate.</div></div>
+          <div class="studio-card"><div class="sc-icon">📧</div><div class="sc-title">Email & WhatsApp</div><div class="sc-desc">Lifecycle marketing flows — welcome, post-purchase, winback — that drive repeat revenue.</div></div>
+          <div class="studio-card"><div class="sc-icon">📈</div><div class="sc-title">AOV Optimisation</div><div class="sc-desc">Bundles, cross-sells, and post-purchase upsells that increase average order value significantly.</div></div>
+        </div>
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Scale My E-Commerce →</a>
+      </div>
+      <div class="studio-visual reveal-r">
+        <div class="studio-reel" style="aspect-ratio:4/3;">
+          <div class="studio-reel-bg"></div>
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80" alt="E-Commerce Marketing" style="width:100%;height:100%;object-fit:cover;opacity:.7;position:absolute;inset:0;">
+          <div class="reel-tag">E-Commerce</div>
+          <div class="reel-label">9× Revenue<br><span>in 4 Months</span></div>
+        </div>
+        <div class="studio-floats">
+          <div class="sfloat"><div class="sf-n">9×</div><div class="sf-l">Revenue Multiplier</div></div>
+          <div class="sfloat"><div class="sf-n">30%</div><div class="sf-l">Cart Recovery Rate</div></div>
+          <div class="sfloat"><div class="sf-n">80+</div><div class="sf-l">D2C Brands Grown</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Grow Your Store</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Your Best Month Is <span>Ahead.</span></h2>
+      <p class="cta-p">We'll analyse your store, ads, and email flows — then show you exactly where the money is being left on the table.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Scale Your Ecommerce Brand →</a>
+        <a href="#" onclick="navigate('casestudies');return false;" class="btn-s">See D2C Case Studies</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-svc-ecom -->
+
+
+<!-- ═══════════════════════════════════════════
+     SERVICE PAGE: CONTENT PRODUCTION
+═══════════════════════════════════════════ -->
+
+<div id="page-svc-content" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Service · 08</div>
+    <h1 class="inner-hero-h">Content Production <span>& Photo/Video</span></h1>
+    <p class="inner-hero-p">Cinematic video, photography, reels, and written content crafted to stop the scroll — produced in-house with studio-quality output.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><a href="#" onclick="navigate('services');return false;">Services</a><span class="bc-sep">→</span><span class="bc-cur">Content Production</span></div>
+  </div>
+  <section class="studio" style="padding:80px 60px;">
+    <div class="studio-inner">
+      <div class="studio-content reveal-l">
+        <div class="section-tag">In-House Production</div>
+        <h2 class="section-title" style="margin-bottom:24px;">Content That <span>Moves People.</span></h2>
+        <p class="studio-p">We run a fully equipped in-house production studio — cameras, lighting, editing suite, and a creative team that bleeds storytelling. From product shoots to brand films, Instagram reels to long-form documentaries, we make your brand look world-class.</p>
+        <div class="studio-grid">
+          <div class="studio-card"><div class="sc-icon">🎬</div><div class="sc-title">Brand Films & Ads</div><div class="sc-desc">Cinematic 15s to 3-min brand films that make viewers feel your brand, not just see it.</div></div>
+          <div class="studio-card"><div class="sc-icon">📸</div><div class="sc-title">Photography</div><div class="sc-desc">Product, lifestyle, corporate, and event photography — studio and on-location.</div></div>
+          <div class="studio-card"><div class="sc-icon">📱</div><div class="sc-title">Reels & Short-Form</div><div class="sc-desc">Scroll-stopping vertical video content built for Instagram, YouTube Shorts, and TikTok.</div></div>
+          <div class="studio-card"><div class="sc-icon">✂️</div><div class="sc-title">Video Editing</div><div class="sc-desc">Raw footage transformed — colour grading, motion graphics, sound design, and subtitles.</div></div>
+          <div class="studio-card"><div class="sc-icon">✍️</div><div class="sc-title">Copywriting</div><div class="sc-desc">Ad copy, website copy, email sequences, and social captions — all on-brand and conversion-focused.</div></div>
+          <div class="studio-card"><div class="sc-icon">🎙️</div><div class="sc-title">Podcasts & Audio</div><div class="sc-desc">Podcast production, voiceovers, and audio branding for brands building thought leadership.</div></div>
+        </div>
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Book a Production Session →</a>
+      </div>
+      <div class="studio-visual reveal-r">
+        <div class="studio-reel" style="aspect-ratio:4/3;">
+          <div class="studio-reel-bg"></div>
+          <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=900&q=80" alt="Content Production" style="width:100%;height:100%;object-fit:cover;opacity:.7;position:absolute;inset:0;">
+          <div class="reel-tag">Content Studio</div>
+          <div class="reel-label">Cinematic<br><span>Quality Content</span></div>
+        </div>
+        <div class="studio-floats">
+          <div class="sfloat"><div class="sf-n">2M+</div><div class="sf-l">Organic Video Views</div></div>
+          <div class="sfloat"><div class="sf-n">500+</div><div class="sf-l">Videos Produced</div></div>
+          <div class="sfloat"><div class="sf-n">4K</div><div class="sf-l">Production Quality</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="studio-equip">
+    <div style="text-align:center;margin-bottom:0;">
+      <div class="section-tag" style="justify-content:center;">Our Studio</div>
+      <h2 class="section-title reveal" style="color:var(--white);text-align:center;">Professional <span>Equipment</span></h2>
+    </div>
+    <div class="equip-grid">
+      <div class="equip-card reveal"><div class="equip-icon">📷</div><div class="equip-name">Sony A7 IV</div><div class="equip-detail">Full-frame mirrorless, 4K cinema quality</div></div>
+      <div class="equip-card reveal d1"><div class="equip-icon">🎥</div><div class="equip-name">DJI Ronin 4D</div><div class="equip-detail">6K cinema camera with built-in gimbal</div></div>
+      <div class="equip-card reveal d2"><div class="equip-icon">💡</div><div class="equip-name">Aputure 600D</div><div class="equip-detail">Broadcast-grade LED lighting system</div></div>
+      <div class="equip-card reveal d3"><div class="equip-icon">🚁</div><div class="equip-name">DJI Mavic 3 Pro</div><div class="equip-detail">Aerial 4K drone cinematography</div></div>
+    </div>
+  </section>
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Content That Captures Attention</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Your Brand Deserves <span>Better Content.</span></h2>
+      <p class="cta-p">We'll discuss your content goals & recommend a production package.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Book Creative Consultation →</a>
+        <a href="#" onclick="navigate('studio');return false;" class="btn-s">View Content Portfolio</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-svc-content -->
+
+
+<!-- ═══════════════════════════════════════════
+     SERVICE PAGE: BRANDING & CREATIVE DESIGN
+═══════════════════════════════════════════ -->
+
+<div id="page-svc-brand" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Service · 09</div>
+    <h1 class="inner-hero-h">Branding & <span>Creative Design</span></h1>
+    <p class="inner-hero-p">Logos, brand identities, design systems, and visual languages that make brands unforgettable — built to last decades, not seasons.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><a href="#" onclick="navigate('services');return false;">Services</a><span class="bc-sep">→</span><span class="bc-cur">Branding & Creative Design</span></div>
+  </div>
+  <section class="studio" style="padding:80px 60px;">
+    <div class="studio-inner">
+      <div class="studio-content reveal-l">
+        <div class="section-tag">Brand Alchemy</div>
+        <h2 class="section-title" style="margin-bottom:24px;">Brands That <span>Stick.</span></h2>
+        <p class="studio-p">Great branding is the difference between a business and a movement. We craft visual identities that command attention, build trust, and become cultural assets. Every element — from logo to typography to colour — is purposeful, strategic, and built to own your space.</p>
+        <div class="studio-grid">
+          <div class="studio-card"><div class="sc-icon">✏️</div><div class="sc-title">Logo Design</div><div class="sc-desc">Strategic logo creation — concept, exploration, refinement, and final delivery in all formats.</div></div>
+          <div class="studio-card"><div class="sc-icon">🎨</div><div class="sc-title">Brand Identity System</div><div class="sc-desc">Colour palettes, typography, iconography, and usage rules — the complete brand toolkit.</div></div>
+          <div class="studio-card"><div class="sc-icon">📖</div><div class="sc-title">Brand Guidelines</div><div class="sc-desc">Comprehensive brand book ensuring consistency across every touchpoint, forever.</div></div>
+          <div class="studio-card"><div class="sc-icon">📦</div><div class="sc-title">Packaging Design</div><div class="sc-desc">Product packaging, labels, and retail materials that stand out on shelves and in unboxings.</div></div>
+          <div class="studio-card"><div class="sc-icon">🖨️</div><div class="sc-title">Print & Collateral</div><div class="sc-desc">Business cards, brochures, banners, and marketing materials — all on-brand.</div></div>
+          <div class="studio-card"><div class="sc-icon">🌐</div><div class="sc-title">Digital Asset Creation</div><div class="sc-desc">Social media templates, email headers, presentation decks — brand consistency everywhere.</div></div>
+        </div>
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Build My Brand →</a>
+      </div>
+      <div class="studio-visual reveal-r">
+        <div class="studio-reel" style="aspect-ratio:4/3;">
+          <div class="studio-reel-bg"></div>
+          <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80" alt="Branding Design" style="width:100%;height:100%;object-fit:cover;opacity:.7;position:absolute;inset:0;">
+          <div class="reel-tag">Branding</div>
+          <div class="reel-label">Identity That<br><span>Commands Rooms</span></div>
+        </div>
+        <div class="studio-floats">
+          <div class="sfloat"><div class="sf-n">200+</div><div class="sf-l">Brands Created</div></div>
+          <div class="sfloat"><div class="sf-n">340%</div><div class="sf-l">Revenue Lift Post-Rebrand</div></div>
+          <div class="sfloat"><div class="sf-n">100%</div><div class="sf-l">Custom, No Templates</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Build Your Identity</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">Your Brand Should Be <span>Iconic.</span></h2>
+      <p class="cta-p">Let's build a brand that makes your competitors nervous.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start Brand Discovery →</a>
+        <a href="#" onclick="navigate('studio');return false;" class="btn-s">View Brand Portfolio</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-svc-brand -->
+
+
+<!-- ═══════════════════════════════════════════
+     SERVICE PAGE: AI DOODLING/EDITING
+═══════════════════════════════════════════ -->
+
+<div id="page-svc-ai" class="page">
+  <div class="inner-hero">
+    <div class="section-tag">Service · 10</div>
+    <h1 class="inner-hero-h">AI Doodling <span>& Editing</span></h1>
+    <p class="inner-hero-p">Cutting-edge AI-powered visuals, generative art, AI video editing, and creative automation — giving your brand a futuristic, scroll-stopping edge.</p>
+    <div class="breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a><span class="bc-sep">→</span><a href="#" onclick="navigate('services');return false;">Services</a><span class="bc-sep">→</span><span class="bc-cur">AI Doodling/Editing</span></div>
+  </div>
+  <section class="studio" style="padding:80px 60px;">
+    <div class="studio-inner">
+      <div class="studio-content reveal-l">
+        <div class="section-tag">The Future of Creative</div>
+        <h2 class="section-title" style="margin-bottom:24px;">AI-Powered <span>Creativity.</span></h2>
+        <p class="studio-p">We're at the frontier of AI creative — combining Midjourney, Runway, Sora, Adobe Firefly, and proprietary workflows to produce content that was impossible 2 years ago. Generative brand art, AI-edited videos, automated creative pipelines, and hyper-personalised ad creatives — all at a fraction of traditional production cost.</p>
+        <div class="studio-grid">
+          <div class="studio-card"><div class="sc-icon">🎨</div><div class="sc-title">AI Generative Art</div><div class="sc-desc">Midjourney, DALL-E, Stable Diffusion — stunning visuals generated and refined for your brand aesthetic.</div></div>
+          <div class="studio-card"><div class="sc-icon">🎬</div><div class="sc-title">AI Video Generation</div><div class="sc-desc">Runway, Sora, and Kling AI — text-to-video and image-to-video for social ads and content.</div></div>
+          <div class="studio-card"><div class="sc-icon">✂️</div><div class="sc-title">AI Video Editing</div><div class="sc-desc">Auto-cut, AI captions, background removal, face tracking — editing 10× faster with AI tools.</div></div>
+          <div class="studio-card"><div class="sc-icon">🖼️</div><div class="sc-title">AI Photo Editing</div><div class="sc-desc">Firefly, Photoshop AI, generative fill — product images and lifestyle photos enhanced instantly.</div></div>
+          <div class="studio-card"><div class="sc-icon">⚙️</div><div class="sc-title">Creative Automation</div><div class="sc-desc">Automated ad creative pipelines that generate 100s of variants for testing — instantly.</div></div>
+          <div class="studio-card"><div class="sc-icon">🤖</div><div class="sc-title">AI Brand Identity</div><div class="sc-desc">AI-assisted logo concepts, colour exploration, and moodboard generation — faster ideation.</div></div>
+        </div>
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Go AI-First →</a>
+      </div>
+      <div class="studio-visual reveal-r">
+        <div class="studio-reel" style="aspect-ratio:4/3;">
+          <div class="studio-reel-bg"></div>
+          <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&q=80" alt="AI Creative" style="width:100%;height:100%;object-fit:cover;opacity:.7;position:absolute;inset:0;">
+          <div class="reel-tag">AI Creative</div>
+          <div class="reel-label">The Future of<br><span>Brand Content</span></div>
+        </div>
+        <div class="studio-floats">
+          <div class="sfloat"><div class="sf-n">10×</div><div class="sf-l">Faster Creative Output</div></div>
+          <div class="sfloat"><div class="sf-n">70%</div><div class="sf-l">Lower Production Cost</div></div>
+          <div class="sfloat"><div class="sf-n">100s</div><div class="sf-l">Ad Variants Generated</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="future" style="padding:80px 60px;">
+    <div class="future-header">
+      <div class="section-tag reveal" style="justify-content:center;">AI Tools We Use</div>
+      <h2 class="section-title reveal d1" style="text-align:center;">Our AI <span>Toolkit</span></h2>
+    </div>
+    <div class="future-grid reveal d2">
+      <div class="fv-card"><div class="fv-card-body" style="padding:32px;"><div class="fv-icon">🎨</div><div class="fv-title">Midjourney v6</div><div class="fv-desc">State-of-the-art image generation for brand visuals, ad creatives, and concept art.</div><div class="fv-tag">Image AI</div></div></div>
+      <div class="fv-card"><div class="fv-card-body" style="padding:32px;"><div class="fv-icon">🎬</div><div class="fv-title">Runway Gen-3</div><div class="fv-desc">AI video generation and editing — text-to-video, image-to-video, and video enhancement.</div><div class="fv-tag">Video AI</div></div></div>
+      <div class="fv-card"><div class="fv-card-body" style="padding:32px;"><div class="fv-icon">🖼️</div><div class="fv-title">Adobe Firefly</div><div class="fv-desc">Generative fill, background generation, and AI-powered photo editing in the Adobe suite.</div><div class="fv-tag">Edit AI</div></div></div>
+      <div class="fv-card"><div class="fv-card-body" style="padding:32px;"><div class="fv-icon">📝</div><div class="fv-title">ChatGPT & Claude</div><div class="fv-desc">AI-powered copywriting, concept generation, creative briefs, and content strategy.</div><div class="fv-tag">Copy AI</div></div></div>
+      <div class="fv-card"><div class="fv-card-body" style="padding:32px;"><div class="fv-icon">🎵</div><div class="fv-title">ElevenLabs & Suno</div><div class="fv-desc">AI voiceovers and music generation for ads, reels, and brand films.</div><div class="fv-tag">Audio AI</div></div></div>
+      <div class="fv-card"><div class="fv-card-body" style="padding:32px;"><div class="fv-icon">⚡</div><div class="fv-title">CapCut AI & Descript</div><div class="fv-desc">Automated video editing, AI captions, auto-cut, and podcast editing at scale.</div><div class="fv-tag">Auto-Edit AI</div></div></div>
+    </div>
+  </section>
+  <section class="cta" style="padding:100px 60px;">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">Go AI-First</div>
+      <h2 class="cta-h" style="font-size:clamp(48px,6vw,90px);">The Future of Creative <span>Is Here.</span></h2>
+      <p class="cta-p">We'll show you what's possible for your brand with the latest AI tools — and build a content strategy around it.</p>
+      <div class="cta-btns">
+        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Explore AI Creative →</a>
+        <a href="#" onclick="navigate('studio');return false;" class="btn-s">View AI Portfolio</a>
+      </div>
+    </div>
+  </section>
+  <div class="page-footer-slot"></div>
+</div><!-- /page-svc-ai -->
+
+
+<!-- Email Floater -->
+<a href="mailto:info@thesonicmedia.com" class="email-float" title="Email Us">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="#fff" style="display:block;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+</a>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/918733087249" class="wa-float" target="_blank" title="Chat on WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="#fff" style="display:block;">
+    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-23.1-115-65.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+  </svg>
+</a>
+
+<!-- ═══════ SCRIPTS ═══════ -->
+
+
+<!-- Email Floater -->
+<a href="mailto:info@thesonicmedia.com" class="email-float" title="Email Us">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="#fff" style="display:block;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+</a>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/918733087249" class="wa-float" target="_blank" title="Chat on WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="#fff" style="display:block;">
+    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-23.1-115-65.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+  </svg>
+</a>
+
+<!-- SHARED FOOTER TEMPLATE (single source of truth) -->
+<template id="shared-footer-tpl">
+  <footer>
+  <!-- HOME FOOTER PARALLAX ANIMATION -->
+  <div class="footer-parallax">
+    <div class="fp-layer fp-trees"></div>
+    <div class="fp-moto"></div>
+    <div class="fp-layer fp-second"></div>
+    <div class="fp-layer fp-premier"></div>
+    <div class="fp-voiture"></div>
+  </div>
+<div class="footer-top"><div class="footer-brand"><div class="footer-logo"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779787887/favicon_oalxfi.png" alt="The Sonic Media Logo" style="width:36px;height:36px;object-fit:contain;flex-shrink:0;" /><div class="footer-logo-name">THE SONIC MEDIA</div></div><p class="footer-desc">Transform your brand into a cultural movement — through data-driven strategy, cinematic content & technology that actually converts.</p><div class="footer-socials"><a href="https://www.instagram.com/thesonicmedia" target="_blank" class="fsoc" title="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="https://www.facebook.com/people/The-Sonic-Media/61588527764890/" target="_blank" class="fsoc" title="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="https://linkedin.com/company/the-sonic-media/" target="_blank" class="fsoc" title="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://x.com/thesonicmedia" target="_blank" class="fsoc" title="X / Twitter"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></a></div></div><div><div class="footer-col-title">Services</div><ul class="footer-links"><li><button onclick="navigate('svc-web')">Website Development</button></li><li><button onclick="navigate('svc-app')">Mobile App Development</button></li><li><button onclick="navigate('svc-seo')">SEO Optimization</button></li><li><button onclick="navigate('svc-smm')">Social Media Management</button></li><li><button onclick="navigate('svc-perf')">Performance Marketing</button></li><li><button onclick="navigate('svc-inf')">Influencer Marketing</button></li><li><button onclick="navigate('svc-ecom')">E-Commerce Marketing</button></li><li><button onclick="navigate('svc-content')">Content Production</button></li><li><button onclick="navigate('svc-brand')">Branding &amp; Design</button></li><li><button onclick="navigate('svc-ai')">AI Doodling/Editing</button></li></ul></div><div><div class="footer-col-title">Company</div><ul class="footer-links"><li><button onclick="navigate('about')">About</button></li><li><button onclick="navigate('services')">All Services</button></li><li><button onclick="navigate('studio')">Portfolio</button></li><li><button onclick="navigate('casestudies')">Case Studies</button></li><li><button onclick="navigate('journal')">Journal</button></li><li><button onclick="navigate('future')">Future Vision</button></li><li><button onclick="navigate('faq')">FAQ</button></li></ul></div><div><div class="footer-col-title">Contact</div><ul class="footer-links"><li><a href="mailto:info@thesonicmedia.com">info@thesonicmedia.com</a></li><li><a href="tel:+918733087249">+91 87330 87249</a></li><li><a href="tel:+919157707249">+91 91577 07249</a></li><li><a href="#">Ahmedabad, Gujarat, India</a></li></ul><div style="margin-top:28px;"><a href="#" onclick="navigate('contact');return false;" class="btn-p" style="font-size:13px;padding:12px 24px;width:fit-content;">Get In Touch →</a></div></div></div><div class="footer-bottom"><div class="footer-copy">© 2026 <span>The Sonic Media</span>. All rights reserved. Built with ❤️ for growth.</div><div class="footer-bl"><a href="#" onclick="openLegalPage('privacy');return false;">Privacy Policy</a><a href="#" onclick="openLegalPage('terms');return false;">Terms of Service</a><a href="#" onclick="openLegalPage('cookie');return false;">Cookie Policy</a></div></div></footer>
+</template>
+
+<!-- ═══════ FUTURE VISION DETAIL MODAL ═══════ -->
+<div id="fv-modal-overlay" onclick="if(event.target===this)closeFvDetail()">
+  <div id="fv-modal">
+    <button id="fv-modal-close" onclick="closeFvDetail()">✕</button>
+    <img id="fv-modal-img" src="" alt="" />
+    <div id="fv-modal-body">
+      <div id="fv-modal-tag"></div>
+      <h2 id="fv-modal-title"></h2>
+      <div id="fv-modal-subtitle"></div>
+      <p id="fv-modal-text"></p>
+      <div id="fv-modal-bullets"></div>
+      <a href="#" id="fv-modal-cta" onclick="closeFvDetail();navigate('contact');return false;"
+        style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:50px;background:var(--orange);color:#fff;font-family:var(--font-heading);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;box-shadow:0 0 28px rgba(255,92,0,0.4);transition:all .3s;"
+        onmouseover="this.style.boxShadow='0 0 40px rgba(255,92,0,0.65)';this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.boxShadow='0 0 28px rgba(255,92,0,0.4)';this.style.transform=''">
+        Get In Touch →
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Set the initial active page to: svc-seo */
+(function() {
+  window.__INITIAL_PAGE__ = 'svc-seo';
+})();
+</script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>
