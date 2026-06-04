@@ -597,7 +597,7 @@
   background: #111;
   border: 1px solid rgba(255,255,255,.06);
   border-radius: 20px;
-  padding: 44px 36px;
+  padding: 28px 28px 24px;
   position: relative;
   overflow: hidden;
   cursor: default;
@@ -616,24 +616,24 @@
 }
 .wsv-cap-card:hover { border-color: rgba(255,92,0,.25); }
 .wsv-cap-card:hover::after { opacity: 1; }
-.wsv-cap-icon { font-size: 32px; margin-bottom: 24px; display: block; }
+.wsv-cap-icon { font-size: 28px; margin-bottom: 14px; display: block; }
 .wsv-cap-title {
   font-family: var(--font-heading, 'Bebas Neue', sans-serif);
-  font-size: 26px;
+  font-size: 24px;
   color: #fff;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 .wsv-cap-desc {
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.6;
   color: rgba(255,255,255,.45);
 }
 .wsv-cap-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 28px;
-  padding-top: 20px;
+  margin-top: 18px;
+  padding-top: 14px;
   border-top: 1px solid rgba(255,255,255,.05);
 }
 .wsv-cap-badge {
@@ -1272,9 +1272,8 @@
 /* ── FINAL CTA WITH PARTICLES ── */
 .wsv-final-cta {
   position: relative;
-  padding: 180px 60px;
+  padding: 80px 60px;
   background: var(--black);
-  text-align: center;
   overflow: hidden;
 }
 .wsv-cta-canvas {
@@ -1285,37 +1284,52 @@
 .wsv-final-inner {
   position: relative;
   z-index: 2;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.wsv-final-left {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .wsv-final-tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-heading, 'Bebas Neue', sans-serif);
+  gap: 6px;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
   font-size: 12px;
-  letter-spacing: .2em;
+  font-weight: 500;
   color: var(--orange);
   background: rgba(255,92,0,.08);
   border: 1px solid rgba(255,92,0,.2);
-  padding: 8px 18px;
+  padding: 6px 14px;
   border-radius: 100px;
-  margin-bottom: 40px;
+  margin-bottom: 18px;
+  letter-spacing: .01em;
+  width: fit-content;
 }
 .wsv-final-h {
   font-family: var(--font-heading, 'Bebas Neue', sans-serif);
-  font-size: clamp(64px, 9vw, 140px);
+  font-size: clamp(36px, 3.8vw, 56px);
   color: #fff;
-  line-height: .9;
-  margin-bottom: 32px;
+  line-height: .95;
+  margin-bottom: 14px;
+  letter-spacing: -.01em;
 }
 .wsv-final-h span { color: var(--orange); }
 .wsv-final-p {
-  font-size: 17px;
-  color: rgba(255,255,255,.5);
-  max-width: 560px;
-  margin: 0 auto 52px;
-  line-height: 1.7;
+  font-size: 13px;
+  color: rgba(255,255,255,.42);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 320px;
 }
-.wsv-final-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.wsv-final-btns { display: flex; gap: 16px; flex-wrap: wrap; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
@@ -1339,6 +1353,389 @@
   .wsv-hscroll-track { padding: 0 24px; }
   .wsv-step-card { width: 320px; }
 }
+
+/* ══ PREVIEW GENERATOR V2 STYLES ══ */
+.wsv-gen-v2-wrap{
+  width:100%;
+}
+.wsv-gen-v2-wrap .gen-box{
+  max-width:100%;
+  height:clamp(420px,42vw,680px);
+}
+
+
+
+/* ══ SECTION WRAPPER ══ */
+.gen-section{width:100%;max-width:1500px;}
+.gen-header{text-align:center;margin-bottom:48px;}
+.gen-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.22em;color:#ff5c00;margin-bottom:20px;}
+.gen-eyebrow::before,.gen-eyebrow::after{content:'';display:block;width:24px;height:1px;background:#ff5c00;opacity:.5;}
+.gen-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,5vw,80px);color:#fff;line-height:.92;margin-bottom:14px;}
+.gen-title span{color:#ff5c00;}
+.gen-sub{font-size:14px;color:rgba(255,255,255,.38);max-width:460px;margin:0 auto;line-height:1.7;}
+
+/* ══ MAIN BOX — CINEMATIC ══ */
+.gen-box{
+  background:#ffffff;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 0 0 1px rgba(0,0,0,.12),0 60px 120px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.04) inset;
+  display:flex;
+  aspect-ratio:16/9;
+  height:clamp(380px,38vw,620px);
+  max-width:1100px;
+  margin:0 auto;
+}
+
+/* ══ LEFT PANEL ══ */
+.panel-left{
+  width:280px;
+  flex-shrink:0;
+  background:#fafafa;
+  border-right:1px solid #e8e8e8;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+.panel-topbar{
+  padding:14px 16px;
+  background:#fff;
+  border-bottom:1px solid #ebebeb;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-shrink:0;
+}
+.panel-topbar-logo{
+  width:28px;height:28px;
+  background:linear-gradient(135deg,#ff5c00,#ff8c00);
+  border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0;
+}
+.panel-topbar-text{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.12em;color:#ff5c00;}
+
+.panel-body{flex:1;overflow-y:auto;padding:16px 14px 80px;}
+.panel-body::-webkit-scrollbar{width:3px;}
+.panel-body::-webkit-scrollbar-thumb{background:#e0e0e0;border-radius:2px;}
+
+.sec-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:9px;letter-spacing:.2em;color:#aaa;
+  text-transform:uppercase;
+  margin:16px 0 8px;
+  padding-bottom:6px;
+  border-bottom:1px solid #efefef;
+}
+.sec-label:first-child{margin-top:4px;}
+
+/* Fields */
+.field{margin-bottom:12px;position:relative;}
+.field label{display:block;font-size:10px;letter-spacing:.1em;color:#888;text-transform:uppercase;margin-bottom:5px;font-family:'Bebas Neue',sans-serif;}
+.inp{
+  width:100%;
+  background:#fff;
+  border:1.5px solid #e5e5e5;
+  border-radius:8px;
+  padding:9px 11px;
+  font-size:12px;color:#111;
+  font-family:'DM Sans',sans-serif;
+  outline:none;transition:border-color .2s;
+}
+.inp:focus{border-color:#ff5c00;}
+.inp::placeholder{color:#bbb;}
+.inp-select{
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23aaa' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;
+  cursor:pointer;background-color:#fff;
+}
+.inp-select option{background:#fff;color:#111;}
+
+/* Logo preview area */
+.logo-preview-box{
+  background:#fff;border:1.5px solid #ebebeb;border-radius:10px;
+  padding:14px;text-align:center;margin-bottom:12px;min-height:70px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  flex-wrap:wrap;
+}
+.logo-style-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px;}
+.logo-style-btn{
+  padding:7px 4px;background:#fff;
+  border:1.5px solid #e8e8e8;border-radius:7px;
+  font-size:9px;color:#888;cursor:pointer;text-align:center;
+  transition:all .2s;font-family:'DM Sans',sans-serif;
+}
+.logo-style-btn:hover,.logo-style-btn.active{border-color:#ff5c00;color:#ff5c00;background:#fff8f5;}
+
+/* Colour swatches */
+.colour-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px;}
+.colour-swatch{
+  aspect-ratio:1;border-radius:7px;border:2px solid transparent;
+  cursor:pointer;transition:transform .15s,border-color .15s;outline:none;
+}
+.colour-swatch:hover{transform:scale(1.1);}
+.colour-swatch.active{border-color:#000;box-shadow:0 0 0 1px #fff inset;}
+
+/* Style theme buttons */
+.style-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;}
+.style-btn{
+  padding:7px 6px;background:#fff;
+  border:1.5px solid #e8e8e8;border-radius:7px;
+  font-size:10px;color:#666;cursor:pointer;
+  text-align:center;transition:all .2s;font-family:'DM Sans',sans-serif;
+}
+.style-btn:hover,.style-btn.active{border-color:#ff5c00;color:#ff5c00;background:#fff8f5;}
+
+/* Font picker */
+.font-btns{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.font-btn{
+  padding:7px 11px;background:#fff;
+  border:1.5px solid #e8e8e8;border-radius:7px;
+  font-size:11px;color:#555;cursor:pointer;transition:all .2s;
+  text-align:left;display:flex;align-items:center;justify-content:space-between;
+}
+.font-btn:hover,.font-btn.active{border-color:#ff5c00;color:#111;background:#fff8f5;}
+.font-preview{font-size:14px;opacity:.5;}
+
+/* Layout btns */
+.layout-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:12px;}
+.layout-btn{
+  padding:7px 3px;background:#fff;
+  border:1.5px solid #e8e8e8;border-radius:7px;
+  color:#777;cursor:pointer;text-align:center;font-size:9px;
+  transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.layout-btn svg{opacity:.4;transition:opacity .2s;}
+.layout-btn:hover,.layout-btn.active{border-color:#ff5c00;color:#ff5c00;background:#fff8f5;}
+.layout-btn:hover svg,.layout-btn.active svg{opacity:.9;}
+
+/* Range sliders */
+.range-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.range-row label{font-size:10px;color:#888;min-width:62px;font-family:'Bebas Neue',sans-serif;letter-spacing:.06em;}
+.range-row input[type=range]{flex:1;height:4px;accent-color:#ff5c00;}
+.range-val{font-size:11px;font-family:'Bebas Neue',sans-serif;color:#ff5c00;min-width:26px;text-align:right;}
+
+/* Toggle row */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.toggle-label{font-size:10px;color:#555;font-family:'DM Sans',sans-serif;}
+.toggle{position:relative;width:34px;height:18px;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-slider{
+  position:absolute;cursor:pointer;inset:0;
+  background:#ddd;border-radius:18px;transition:.3s;
+}
+.toggle-slider:before{
+  content:'';position:absolute;height:12px;width:12px;
+  left:3px;bottom:3px;background:#fff;
+  border-radius:50%;transition:.3s;
+}
+input:checked + .toggle-slider{background:#ff5c00;}
+input:checked + .toggle-slider:before{transform:translateX(16px);}
+
+/* Generate button */
+.gen-btn-wrap{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:12px 14px;background:#fafafa;
+  border-top:1px solid #ebebeb;
+}
+.gen-btn{
+  width:100%;padding:11px 10px;
+  background:#ff5c00;border:none;border-radius:9px;
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.1em;
+  color:#fff;cursor:pointer;transition:all .25s;
+  position:relative;overflow:hidden;
+}
+.gen-btn:hover{background:#e55000;box-shadow:0 6px 20px rgba(255,92,0,.35);transform:translateY(-1px);}
+.gen-btn:active{transform:translateY(0);}
+
+/* ══ RIGHT PANE ══ */
+.panel-right{
+  flex:1;
+  background:#f0f0f0;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  overflow:hidden;
+}
+
+/* Browser chrome */
+.browser-chrome{
+  background:#e8e8e8;
+  border-bottom:1px solid #d5d5d5;
+  padding:10px 14px;
+  display:flex;align-items:center;gap:10px;
+  flex-shrink:0;
+}
+.chrome-dots{display:flex;gap:5px;}
+.chrome-dots span{width:11px;height:11px;border-radius:50%;}
+.chrome-dots span:nth-child(1){background:#ff5f57;}
+.chrome-dots span:nth-child(2){background:#febc2e;}
+.chrome-dots span:nth-child(3){background:#28c840;}
+.chrome-url{
+  flex:1;background:#fff;border-radius:6px;
+  padding:5px 12px;font-size:11px;color:#888;
+  font-family:monospace;
+  display:flex;align-items:center;gap:6px;
+  border:1px solid #d8d8d8;
+}
+.chrome-url-dot{width:7px;height:7px;border-radius:50%;background:#28c840;box-shadow:0 0 6px #28c840;flex-shrink:0;}
+.chrome-url-text{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;flex:1;}
+.chrome-device-btns{display:flex;gap:4px;}
+.chrome-device-btn{
+  padding:4px 8px;border-radius:5px;background:transparent;
+  border:1px solid #d5d5d5;cursor:pointer;font-size:10px;color:#888;
+  transition:all .2s;font-family:'DM Sans',sans-serif;
+}
+.chrome-device-btn:hover,.chrome-device-btn.active{background:#ff5c00;color:#fff;border-color:#ff5c00;}
+.chrome-live-badge{
+  display:none;align-items:center;gap:5px;
+  font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.1em;color:#28c840;
+}
+.chrome-live-dot{width:6px;height:6px;border-radius:50%;background:#28c840;box-shadow:0 0 6px #28c840;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* Toolbar */
+.browser-toolbar{
+  background:#111111;border-bottom:1px solid #222;
+  padding:6px 14px;display:flex;align-items:center;gap:8px;
+  flex-shrink:0;
+}
+.toolbar-label{font-size:9px;letter-spacing:.1em;color:#555;font-family:'Bebas Neue',sans-serif;text-transform:uppercase;}
+.toolbar-divider{width:1px;height:14px;background:#333;}
+.toolbar-btn{
+  padding:3px 8px;border-radius:4px;background:transparent;
+  border:none;cursor:pointer;font-size:10px;color:#888;
+  transition:all .15s;font-family:'DM Sans',sans-serif;
+  display:flex;align-items:center;gap:4px;
+}
+.toolbar-btn:hover{background:#2a2a2a;color:#fff;}
+.toolbar-btn svg{flex-shrink:0;}
+.zoom-indicator{margin-left:auto;font-size:10px;color:#555;font-family:monospace;}
+
+/* Viewport area */
+.viewport-wrap{
+  flex:1;
+  overflow:auto;
+  position:relative;
+  background:#e8e8e8;
+  padding:16px;
+}
+.viewport-wrap::-webkit-scrollbar{width:8px;height:8px;}
+.viewport-wrap::-webkit-scrollbar-track{background:#e0e0e0;}
+.viewport-wrap::-webkit-scrollbar-thumb{background:#bbb;border-radius:4px;}
+.viewport-wrap::-webkit-scrollbar-thumb:hover{background:#999;}
+
+.viewport-inner{
+  background:#fff;
+  border-radius:6px;
+  box-shadow:0 4px 30px rgba(0,0,0,.12),0 0 0 1px rgba(0,0,0,.06);
+  min-height:700px;
+  overflow:visible;
+  transition:width .4s ease,margin .4s ease;
+  margin:0 auto;
+}
+
+/* Desktop default = full width */
+.viewport-inner.device-desktop{width:100%;max-width:1440px;}
+.viewport-inner.device-tablet{width:768px;}
+.viewport-inner.device-mobile{width:390px;}
+
+/* Empty state */
+.empty-state{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:600px;gap:14px;color:#aaa;text-align:center;padding:40px;
+}
+.empty-icon{font-size:52px;filter:grayscale(1) opacity(.3);}
+.empty-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;color:#bbb;}
+.empty-sub{font-size:13px;line-height:1.6;max-width:260px;color:#c0c0c0;}
+
+/* Spinner */
+.spinner{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:600px;gap:18px;}
+.spinner.active{display:flex;}
+.spinner-ring{width:48px;height:48px;border:3px solid rgba(255,92,0,.15);border-top-color:#ff5c00;border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner-text{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.14em;color:rgba(255,92,0,.6);animation:breathe 1.5s infinite;}
+@keyframes breathe{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* Generated area */
+.gen-output{display:none;}
+.gen-output.active{display:block;}
+
+/* ══ PREVIEW PAGE STYLES ══ */
+.pv-page{width:100%;min-height:700px;font-family:'DM Sans',sans-serif;position:relative;animation:pvIn .5s both;}
+@keyframes pvIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.pv-section{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
+.pv-section.vis{opacity:1;transform:translateY(0);}
+
+/* Preview NAV */
+.pv-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;border-bottom:1px solid rgba(0,0,0,.08);position:relative;z-index:10;}
+.pv-logo{display:flex;align-items:center;gap:10px;}
+.pv-logo-mark{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:15px;color:#fff;flex-shrink:0;}
+.pv-logo-text{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;}
+.pv-navlinks{display:flex;gap:22px;font-size:11px;opacity:.45;}
+.pv-cta{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.08em;padding:7px 16px;border-radius:5px;color:#fff;}
+
+/* Preview HERO */
+.pv-hero{position:relative;overflow:hidden;min-height:340px;display:flex;align-items:center;}
+.pv-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform 8s ease;}
+.pv-hero:hover .pv-hero-img{transform:scale(1.04);}
+.pv-hero-overlay{position:absolute;inset:0;z-index:1;}
+.pv-hero-content{position:relative;z-index:2;padding:52px 36px 48px;max-width:600px;}
+.pv-eyebrow{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.22em;margin-bottom:12px;display:inline-flex;align-items:center;gap:6px;opacity:.85;}
+.pv-eyebrow::before{content:'';width:20px;height:1px;background:currentColor;opacity:.6;}
+.pv-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,4.5vw,62px);line-height:.95;margin-bottom:14px;letter-spacing:-.01em;}
+.pv-sub{font-size:12px;line-height:1.7;max-width:380px;margin-bottom:24px;opacity:.6;}
+.pv-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.pv-btn-p{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.1em;padding:10px 22px;border-radius:5px;cursor:pointer;display:inline-block;color:#fff;}
+.pv-btn-s{font-size:11px;padding:10px 18px;border-radius:5px;cursor:pointer;display:inline-block;border:1px solid currentColor;opacity:.55;}
+
+/* Stats */
+.pv-stats{display:grid;grid-template-columns:repeat(4,1fr);}
+.pv-stat{padding:18px 24px;border-right:1px solid rgba(0,0,0,.06);text-align:center;}
+.pv-stat:last-child{border-right:none;}
+.pv-stat-num{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;margin-bottom:3px;}
+.pv-stat-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;opacity:.35;}
+
+/* Photo grid */
+.pv-photos{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;max-height:180px;overflow:hidden;}
+.pv-photos img{width:100%;height:180px;object-fit:cover;display:block;transition:transform .4s;}
+.pv-photos img:hover{transform:scale(1.04);}
+
+/* Services */
+.pv-services{padding:36px 32px;}
+.pv-sec-tag{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.22em;opacity:.5;margin-bottom:6px;}
+.pv-sec-title{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:.95;margin-bottom:24px;}
+.pv-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.pv-card{border-radius:10px;padding:18px 16px;border:1px solid rgba(0,0,0,.07);transition:transform .25s,box-shadow .25s;cursor:default;animation:cardPop .4s cubic-bezier(.34,1.56,.64,1) both;}
+.pv-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1);}
+@keyframes cardPop{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.pv-card:nth-child(1){animation-delay:.05s}
+.pv-card:nth-child(2){animation-delay:.12s}
+.pv-card:nth-child(3){animation-delay:.19s}
+.pv-card-icon{font-size:22px;margin-bottom:10px;}
+.pv-card-title{font-family:'Bebas Neue',sans-serif;font-size:15px;margin-bottom:5px;}
+.pv-card-desc{font-size:10px;line-height:1.5;opacity:.4;}
+
+/* Feature */
+.pv-feature{display:grid;grid-template-columns:1fr 1fr;min-height:200px;overflow:hidden;}
+.pv-feature-img{width:100%;height:200px;object-fit:cover;display:block;}
+.pv-feature-text{padding:32px 28px;display:flex;flex-direction:column;justify-content:center;}
+.pv-feature-tag{font-family:'Bebas Neue',sans-serif;font-size:9px;letter-spacing:.2em;opacity:.45;margin-bottom:10px;}
+.pv-feature-title{font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1;margin-bottom:10px;}
+.pv-feature-body{font-size:10px;line-height:1.6;opacity:.45;margin-bottom:16px;}
+.pv-feature-btn{font-family:'Bebas Neue',sans-serif;font-size:11px;padding:8px 16px;border-radius:4px;display:inline-block;color:#fff;}
+
+/* Load bar */
+.pv-loadbar{height:2px;width:0;position:absolute;top:0;left:0;transition:width 1.2s cubic-bezier(.23,1,.32,1);}
+.pv-loadbar.done{width:100%;}
+
+/* Footer strip */
+.pv-footer{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;border-top:1px solid rgba(0,0,0,.07);font-size:10px;opacity:.35;}
+
+/* ══ LOGO STYLES ══ */
+.logo-svg-wrap{display:flex;align-items:center;gap:8px;}
+
 </style>
 </head>
 
@@ -1533,7 +1930,7 @@
         <p class="wsv-hero-sub" id="wsvSub">Revenue machines engineered from the ground up — blazing-fast, pixel-perfect, and built to turn every visitor into a customer.</p>
         <div class="wsv-hero-btns" id="wsvBtns">
           <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start Your Project →</a>
-          <a href="#wsv-gen-section-anchor" class="btn-s" onclick="document.getElementById('wsv-gen-section-anchor').scrollIntoView({behavior:'smooth'});return false;">Preview Your Site ↓</a>
+          <a href="#wsv-gen-section-anchor" class="btn-s" onclick="wsvScrollToAnchor('wsv-gen-section-anchor');return false;">Preview Your Site ↓</a>
         </div>
         <div class="wsv-hero-stats" id="wsvStats">
           <div><div class="wsv-stat-num" data-count="280">0</div><div class="wsv-stat-lbl">% Conversion Lift</div></div>
@@ -1607,6 +2004,1366 @@
       </div>
     </div>
   </section>
+  <script>
+(function(){
+'use strict';
+
+// State
+let selColour = '#ff5c00';
+let selStyle  = 'minimal';
+let selFont   = 'bebas';
+let selLayout = 'centered';
+let selLStyle  = 'wordmark';
+let rRadius   = 8, rSpacing = 100, rHero = 340;
+
+/* ── LOGO STYLE ── */
+window.setLogoStyle = function(btn) {
+  document.querySelectorAll('.logo-style-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  selLStyle = btn.dataset.lstyle;
+  renderLogoPreview();
+  liveUpdate();
+};
+
+function getInitials(name) {
+  return name.split(/\s+/).map(w=>w[0]||'').join('').slice(0,2).toUpperCase() || '??';
+}
+
+function buildLogoSVG(name, acc, style, industry) {
+  if (!name) return '<div style="font-size:12px;color:#ccc;font-family:DM Sans,sans-serif;">Enter your brand name to generate a logo</div>';
+  const ini = getInitials(name);
+  const up  = name.toUpperCase();
+  const short = up.length > 16 ? up.slice(0,16)+'…' : up;
+  const onAcc = contrastColor(acc);
+
+  // Industry-specific logo marks
+  const marks = {
+    food: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 44" height="44" style="display:block;">
+      <circle cx="22" cy="22" r="20" fill="${acc}"/>
+      <path d="M14 28 Q22 14 30 28" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <line x1="22" y1="14" x2="22" y2="30" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <text x="50" y="32" font-family="Bebas Neue, sans-serif" font-size="28" fill="${acc}" letter-spacing="2">${short}</text>
+      <text x="50" y="42" font-family="DM Sans, sans-serif" font-size="8" fill="${acc}" opacity=".5" letter-spacing="3">RESTAURANT</text>
+    </svg>`,
+    fashion: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 48" height="48" style="display:block;">
+      <polygon points="22,4 38,14 36,32 22,38 8,32 6,14" fill="none" stroke="${acc}" stroke-width="2"/>
+      <polygon points="22,10 32,17 30,28 22,33 14,28 12,17" fill="${acc}"/>
+      <text x="50" y="30" font-family="Bebas Neue, sans-serif" font-size="26" fill="${acc}" letter-spacing="4">${short}</text>
+      <line x1="50" y1="35" x2="${Math.min(50+short.length*16,260)}" y2="35" stroke="${acc}" stroke-width="1" opacity=".4"/>
+      <text x="50" y="44" font-family="DM Sans, sans-serif" font-size="7" fill="${acc}" opacity=".5" letter-spacing="5">FASHION HOUSE</text>
+    </svg>`,
+    health: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 44" height="44" style="display:block;">
+      <rect x="2" y="2" width="40" height="40" rx="20" fill="${acc}22" stroke="${acc}" stroke-width="1.5"/>
+      <path d="M12 22 L18 14 L22 20 L26 10 L30 22 L36 22" stroke="${acc}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="52" y="28" font-family="Bebas Neue, sans-serif" font-size="24" fill="${acc}" letter-spacing="2">${short}</text>
+      <text x="52" y="40" font-family="DM Sans, sans-serif" font-size="8" fill="${acc}" opacity=".5" letter-spacing="3">WELLNESS</text>
+    </svg>`,
+    finance: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 44" height="44" style="display:block;">
+      <rect x="2" y="8" width="36" height="28" rx="3" fill="${acc}"/>
+      <rect x="8" y="14" width="6" height="16" rx="1" fill="white" opacity=".9"/>
+      <rect x="17" y="18" width="6" height="12" rx="1" fill="white" opacity=".7"/>
+      <rect x="26" y="12" width="6" height="18" rx="1" fill="white" opacity=".5"/>
+      <text x="48" y="32" font-family="Bebas Neue, sans-serif" font-size="28" fill="${acc}" letter-spacing="1">${short}</text>
+      <text x="48" y="42" font-family="DM Sans, sans-serif" font-size="7" fill="${acc}" opacity=".45" letter-spacing="4">FINANCIAL GROUP</text>
+    </svg>`,
+    'real-estate': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 48" height="48" style="display:block;">
+      <polygon points="22,4 40,20 40,42 4,42 4,20" fill="${acc}" opacity=".15" stroke="${acc}" stroke-width="2"/>
+      <polygon points="22,4 40,20 4,20" fill="${acc}"/>
+      <rect x="14" y="26" width="8" height="16" rx="1" fill="${acc}" opacity=".7"/>
+      <rect x="26" y="30" width="7" height="12" rx="1" fill="${acc}" opacity=".5"/>
+      <text x="52" y="32" font-family="Bebas Neue, sans-serif" font-size="27" fill="${acc}" letter-spacing="1">${short}</text>
+      <text x="52" y="44" font-family="DM Sans, sans-serif" font-size="7.5" fill="${acc}" opacity=".5" letter-spacing="4">REAL ESTATE</text>
+    </svg>`,
+    ecommerce: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 44" height="44" style="display:block;">
+      <rect x="2" y="2" width="40" height="40" rx="10" fill="${acc}"/>
+      <path d="M10 12 L14 12 L18 28 L32 28" stroke="white" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="20" cy="33" r="3" fill="white"/>
+      <circle cx="30" cy="33" r="3" fill="white"/>
+      <path d="M16 16 L32 16 L30 26 L18 26 Z" fill="white" opacity=".85"/>
+      <text x="52" y="28" font-family="Bebas Neue, sans-serif" font-size="26" fill="${acc}" letter-spacing="2">${short}</text>
+      <text x="52" y="40" font-family="DM Sans, sans-serif" font-size="8" fill="${acc}" opacity=".5" letter-spacing="4">MARKETPLACE</text>
+    </svg>`,
+    hospitality: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 48" height="48" style="display:block;">
+      <circle cx="22" cy="22" r="19" fill="none" stroke="${acc}" stroke-width="2"/>
+      <path d="M22 8 Q30 12 34 22 Q30 32 22 36 Q14 32 10 22 Q14 12 22 8Z" fill="${acc}" opacity=".18"/>
+      <ellipse cx="22" cy="22" rx="8" ry="14" fill="none" stroke="${acc}" stroke-width="1.5" opacity=".6"/>
+      <line x1="4" y1="22" x2="40" y2="22" stroke="${acc}" stroke-width="1.5" opacity=".5"/>
+      <text x="52" y="30" font-family="Bebas Neue, sans-serif" font-size="27" fill="${acc}" letter-spacing="2">${short}</text>
+      <text x="52" y="43" font-family="DM Sans, sans-serif" font-size="7.5" fill="${acc}" opacity=".5" letter-spacing="4">TRAVEL & STAYS</text>
+    </svg>`,
+    tech: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 44" height="44" style="display:block;">
+      <rect x="2" y="2" width="40" height="40" rx="8" fill="${acc}18" stroke="${acc}" stroke-width="1.5"/>
+      <text x="22" y="28" text-anchor="middle" font-family="monospace" font-size="18" fill="${acc}" font-weight="bold">&lt;/&gt;</text>
+      <text x="52" y="26" font-family="Bebas Neue, sans-serif" font-size="24" fill="${acc}" letter-spacing="3">${short}</text>
+      <text x="52" y="38" font-family="monospace" font-size="8" fill="${acc}" opacity=".5" letter-spacing="1">v2.0 · PLATFORM</text>
+    </svg>`,
+    education: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 48" height="48" style="display:block;">
+      <polygon points="22,4 42,14 22,24 2,14" fill="${acc}"/>
+      <polygon points="4,18 22,28 40,18 40,32 22,42 4,32" fill="${acc}" opacity=".35" stroke="${acc}" stroke-width="1.5"/>
+      <text x="52" y="30" font-family="Bebas Neue, sans-serif" font-size="27" fill="${acc}" letter-spacing="2">${short}</text>
+      <text x="52" y="43" font-family="DM Sans, sans-serif" font-size="7.5" fill="${acc}" opacity=".5" letter-spacing="4">ACADEMY</text>
+    </svg>`
+  };
+
+  if (marks[industry]) return marks[industry];
+
+  // Fallback generic logo
+  if (style === 'icon') {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 44" height="44" style="display:block;">
+      <rect x="0" y="2" width="40" height="40" rx="10" fill="${acc}"/>
+      <text x="20" y="30" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="20" fill="${onAcc}">${ini}</text>
+      <text x="52" y="34" font-family="Bebas Neue, sans-serif" font-size="28" fill="${acc}" letter-spacing="1">${up.length > 12 ? up.slice(0,12)+'…' : up}</text>
+    </svg>`;
+  }
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 44" height="44" style="display:block;">
+    <text x="12" y="34" font-family="Bebas Neue, sans-serif" font-size="34" fill="${acc}" letter-spacing="2">${short}</text>
+  </svg>`;
+}
+
+function renderLogoPreview() {
+  const brand = document.getElementById('inp-brand').value.trim();
+  const industry = document.getElementById('inp-industry').value;
+  const box   = document.getElementById('logoPreviewBox');
+  if (box) box.innerHTML = buildLogoSVG(brand, selColour, selLStyle, industry);
+}
+
+/* ── SETTERS ── */
+window.setColour = function(btn) {
+  document.querySelectorAll('.colour-swatch').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  selColour = btn.dataset.c;
+  renderLogoPreview();
+  liveUpdate();
+};
+window.setStyle = function(btn) {
+  document.querySelectorAll('.style-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  selStyle = btn.dataset.s;
+  liveUpdate();
+};
+window.setFont = function(btn) {
+  document.querySelectorAll('.font-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  selFont = btn.dataset.f;
+  liveUpdate();
+};
+window.setLayout = function(btn) {
+  document.querySelectorAll('.layout-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  selLayout = btn.dataset.l;
+  liveUpdate();
+};
+window.setRange = function(key, val) {
+  if (key==='radius') { rRadius=+val; document.getElementById('rng-radius-val').textContent=val+'px'; }
+  if (key==='spacing') { rSpacing=+val; document.getElementById('rng-spacing-val').textContent=val+'%'; }
+  if (key==='hero') { rHero=+val; document.getElementById('rng-hero-val').textContent=val+'px'; }
+  liveUpdate();
+};
+
+/* ── DEVICE ── */
+window.setDevice = function(dev, btn) {
+  document.querySelectorAll('.chrome-device-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const vi = document.getElementById('viewportInner');
+  vi.className = 'viewport-inner device-' + dev;
+  const labels = {desktop:'1440px desktop',tablet:'768px tablet',mobile:'390px mobile'};
+  document.getElementById('zoomIndicator').textContent = labels[dev];
+};
+
+/* ── SCROLL ── */
+window.scrollPreview = function(to) {
+  const vw = document.getElementById('viewportWrap');
+  if (!vw) return;
+  if (to === 'top') {
+    vw.scrollTo({top: 0, behavior: 'smooth'});
+  } else if (to === 'bottom') {
+    vw.scrollTo({top: vw.scrollHeight, behavior: 'smooth'});
+  } else {
+    const el = document.getElementById('pvSection_' + to);
+    if (el) {
+      const vwRect = vw.getBoundingClientRect();
+      const elRect = el.getBoundingClientRect();
+      const offset = elRect.top - vwRect.top + vw.scrollTop;
+      vw.scrollTo({top: offset, behavior: 'smooth'});
+    }
+  }
+};
+
+window.refreshPreview = function() {
+  const out = document.getElementById('genOutput');
+  if (out && out.classList.contains('active')) generatePreview();
+};
+
+/* ── LIVE UPDATE ── */
+window.liveUpdate = function() {
+  renderLogoPreview();
+  const out = document.getElementById('genOutput');
+  if (!out || !out.classList.contains('active')) return;
+  const brand = document.getElementById('inp-brand').value.trim();
+  if (!brand) return;
+  const tagline = document.getElementById('inp-tagline').value.trim();
+  const industry = document.getElementById('inp-industry').value;
+  out.innerHTML = buildPreview(brand, tagline||'Premium quality. Exceptional results.', industry);
+  observeReveal();
+};
+
+/* ── GENERATE ── */
+window.generatePreview = function() {
+  const brand = document.getElementById('inp-brand').value.trim();
+  if (!brand) {
+    const i = document.getElementById('inp-brand');
+    i.style.borderColor='#ff5c00'; i.focus();
+    setTimeout(()=>i.style.borderColor='',2000); return;
+  }
+  const tagline  = document.getElementById('inp-tagline').value.trim();
+  const industry = document.getElementById('inp-industry').value;
+  const slug = brand.toLowerCase().replace(/[^a-z0-9]/g,'') + '.com';
+  document.getElementById('chromeUrl').textContent = '🔒 ' + slug;
+  document.getElementById('liveBadge').style.display = 'flex';
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('genOutput').classList.remove('active');
+  const sp = document.getElementById('spinner');
+  sp.classList.add('active');
+  setTimeout(()=>{
+    sp.classList.remove('active');
+    const out = document.getElementById('genOutput');
+    out.innerHTML = buildPreview(brand, tagline||'Premium quality. Exceptional results.', industry);
+    out.classList.add('active');
+    observeReveal();
+    document.getElementById('viewportWrap').scrollTop = 0;
+    var ctaEl = document.getElementById('wsvPreviewCta'); if(ctaEl) ctaEl.style.display='block';
+  }, 1100);
+};
+
+function observeReveal() {
+  const vw = document.getElementById('viewportWrap');
+  const sections = document.querySelectorAll('#genOutput .pv-section');
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);} });
+  },{threshold:0.08,root:vw});
+  sections.forEach(s=>obs.observe(s));
+  if(sections[0]) setTimeout(()=>sections[0].classList.add('vis'),60);
+}
+
+/* ══════════════════════════════════════════
+   BUILD PREVIEW HTML
+══════════════════════════════════════════ */
+
+// Returns white or black depending on which has better contrast against a hex colour
+function contrastColor(hex) {
+  const c = hex.replace('#','');
+  const r = parseInt(c.substr(0,2),16);
+  const g = parseInt(c.substr(2,2),16);
+  const b = parseInt(c.substr(4,2),16);
+  // Perceived luminance
+  const lum = (0.299*r + 0.587*g + 0.114*b) / 255;
+  return lum > 0.55 ? '#111111' : '#ffffff';
+}
+
+function buildPreview(brand, tagline, industry) {
+  const acc = selColour;
+  const accText = contrastColor(acc); // text colour that's always readable ON the accent colour
+  const isDark = selStyle==='dark'||selStyle==='vibrant';
+  const fontMap = {
+    bebas:    {h:"'Bebas Neue',sans-serif", b:"'DM Sans',sans-serif"},
+    playfair: {h:"Georgia,'Times New Roman',serif", b:"'DM Sans',sans-serif"},
+    syne:     {h:"'Syne',sans-serif", b:"'DM Sans',sans-serif"},
+    dm:       {h:"'DM Sans',sans-serif", b:"'DM Sans',sans-serif"}
+  };
+  const fonts = fontMap[selFont]||fontMap.bebas;
+  const palettes = {
+    dark:      {bg:'#080808',nav:'#0f0f0f',sec:'#111',card:'#181818',border:'rgba(255,255,255,.08)',fg:'#ffffff',fg2:'rgba(255,255,255,.55)',fg3:'rgba(255,255,255,.32)',statBorder:'rgba(255,255,255,.06)'},
+    minimal:   {bg:'#f5f5f3',nav:'#ffffff',sec:'#ffffff',card:'#ffffff',border:'rgba(0,0,0,.09)',fg:'#0a0a0a',fg2:'rgba(0,0,0,.56)',fg3:'rgba(0,0,0,.36)',statBorder:'rgba(0,0,0,.06)'},
+    vibrant:   {bg:'#06001a',nav:'#09002a',sec:'#0d0030',card:'rgba(255,255,255,.05)',border:'rgba(255,255,255,.08)',fg:'#ffffff',fg2:'rgba(255,255,255,.55)',fg3:'rgba(255,255,255,.32)',statBorder:'rgba(255,255,255,.06)'},
+    corporate: {bg:'#f0f2f5',nav:'#0f1c2e',sec:'#ffffff',card:'#ffffff',border:'rgba(0,0,0,.08)',fg:'#ffffff',fg2:'rgba(255,255,255,.65)',fg3:'rgba(255,255,255,.38)',statBorder:'rgba(255,255,255,.12)'}
+  };
+  const p = palettes[selStyle]||palettes.minimal;
+
+  // Nav foreground — must be readable on nav background
+  const navFg = (selStyle==='corporate'||isDark) ? '#ffffff' : '#0a0a0a';
+  const navFg2 = (selStyle==='corporate'||isDark) ? 'rgba(255,255,255,.45)' : 'rgba(0,0,0,.42)';
+
+  // Hero text — always white (sits over a darkened photo overlay)
+  const heroFg  = '#ffffff';
+  const heroFg2 = 'rgba(255,255,255,.75)';
+
+  // Accent-tinted highlight for accent-coloured sections/bg blocks
+  // When the accent is very light, invert the section bg to dark so text is readable
+  const accSectionBg = acc;
+  const accSectionFg = accText;
+
+  const B = (brand.length>20?brand.slice(0,20)+'…':brand).toUpperCase();
+  const T = tagline.length>70?tagline.slice(0,70)+'…':tagline;
+
+  // ── Per-industry data & unique layout personality ──
+  const industries = {
+    food:{
+      hero:'CRAFTED WITH PASSION', sub:'Award-winning cuisine',
+      stats:[['1.2M+','Happy Diners'],['98%','Fresh Daily'],['200+','Menu Items'],['4.9★','Avg Rating']],
+      cards:[['🍽️','Signature Dishes','Handcrafted by our Michelin-trained chefs'],['🥗','Farm to Table','100% locally sourced, zero compromise'],['🍳','Live Kitchen','Watch your meal come to life']],
+      photos:['https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80','https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80','https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80'],
+      feat:'https://images.unsplash.com/photo-1543353071-087092ec393a?w=800&q=80',
+      featTag:'SIGNATURE EXPERIENCE',featTitle:'A Dining Experience Like No Other',featBody:'Every dish tells a story. From hand-picked ingredients to plated perfection.',
+      // Food: warm full-bleed hero, horizontal photo strip, accent-tinted CTA bar
+      layout:'food'
+    },
+    fashion:{
+      hero:'WEAR THE FUTURE', sub:'Contemporary luxury fashion',
+      stats:[['50K+','Happy Clients'],['New In','Every Week'],['Free','Returns'],['4.8★','Avg Rating']],
+      cards:[['👗','New Collection','Trend-forward pieces for every occasion'],['✨','Premium Fabrics','Sustainably sourced luxury materials'],['🎨','Custom Orders','Tailored to your exact style']],
+      photos:['https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&q=80','https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80','https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80'],
+      feat:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80',
+      featTag:'SUMMER COLLECTION 2026',featTitle:'Effortless Style, Every Season',featBody:'Discover pieces that define your statement. Modern elegance, timeless appeal.',
+      // Fashion: editorial split-screen hero, masonry-style photo grid
+      layout:'fashion'
+    },
+    health:{
+      hero:'LIVE BETTER DAILY', sub:'Evidence-based wellness',
+      stats:[['10K+','Members'],['95%','Success Rate'],['50+','Programmes'],['4.9★','Reviews']],
+      cards:[['💪','Fitness Plans','Personalised training from certified coaches'],['🌿','Nutrition','Meal plans designed by registered dietitians'],['❤️','Mental Wellness','Guided meditation and mindfulness sessions']],
+      photos:['https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80','https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80','https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80'],
+      feat:'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=80',
+      featTag:'TRANSFORM YOUR LIFE',featTitle:'Your Wellness Journey Starts Here',featBody:'Science-backed programmes that deliver real, lasting results.',
+      // Health: clean centered hero, accent pill badges, bright stat bar
+      layout:'health'
+    },
+    finance:{
+      hero:'GROW YOUR WEALTH', sub:'Smart financial solutions',
+      stats:[['₹500Cr+','Managed'],['15K+','Investors'],['18%','Avg Returns'],['AA+','Credit Rating']],
+      cards:[['📈','Smart Investing','AI-driven portfolio management'],['💰','Wealth Planning','Comprehensive financial roadmaps'],['🏦','Banking+','Premium banking, zero hidden fees']],
+      photos:['https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80','https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80','https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80'],
+      feat:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+      featTag:'TRUSTED BY THOUSANDS',featTitle:'Financial Freedom, Intelligently Built',featBody:'Data-driven strategies that put your money to work safely.',
+      // Finance: dark authoritative nav, numbers-first stat banner, minimal cards
+      layout:'finance'
+    },
+    'real-estate':{
+      hero:'FIND YOUR HOME', sub:'Premium property experts',
+      stats:[['2,400+','Properties'],['98%','Satisfaction'],['15+','Years'],['₹200Cr+','Sold']],
+      cards:[['🏠','Residential','Luxury apartments and villas in prime locations'],['🔑','Commercial','Office spaces, retail, and investment properties'],['🏗️','New Projects','Exclusive pre-launch access to premium developments']],
+      photos:['https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80','https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80','https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80'],
+      feat:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
+      featTag:'FEATURED PROPERTY',featTitle:'Luxury Living, Redefined',featBody:'Discover our curated selection of premium properties in the most sought-after locations.',
+      // Real estate: large property imagery tiles, search-bar style CTA, bold address-style stats
+      layout:'realestate'
+    },
+    ecommerce:{
+      hero:'SHOP THE FUTURE', sub:'Curated online marketplace',
+      stats:[['500K+','Products'],['3M+','Happy Buyers'],['24hr','Delivery'],['4.9★','Rating']],
+      cards:[['🛒','Easy Shopping','Seamless checkout with 15+ payment methods'],['📦','Fast Delivery','Same-day to your doorstep, guaranteed'],['⭐','Top Brands','Only authentic, verified products']],
+      photos:['https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80','https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=600&q=80','https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&q=80'],
+      feat:'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&q=80',
+      featTag:'DEALS OF THE SEASON',featTitle:'Exclusive Offers, Every Day',featBody:'Thousands of premium products at the best prices.',
+      // Ecommerce: sale banner top, product grid, promo badge cards
+      layout:'ecommerce'
+    },
+    hospitality:{
+      hero:'TRAVEL IN STYLE', sub:'Curated luxury experiences',
+      stats:[['200+','Destinations'],['50K+','Travellers'],['4.9★','TripAdvisor'],['24/7','Concierge']],
+      cards:[['✈️','Flight Deals','Best-price guaranteed on every route worldwide'],['🌟','Luxury Hotels','5-star properties handpicked by our experts'],['🏨','Experiences','Curated cultural and adventure experiences']],
+      photos:['https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80','https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80','https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80'],
+      feat:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+      featTag:'EXCLUSIVE DESTINATIONS',featTitle:'The World Awaits You',featBody:'Bespoke travel experiences crafted for the discerning explorer.',
+      // Hospitality: panoramic immersive hero, destination photo cards, booking CTA
+      layout:'hospitality'
+    },
+    tech:{
+      hero:'BUILD THE FUTURE', sub:'Enterprise SaaS platform',
+      stats:[['99.9%','Uptime'],['10M+','API Calls/Day'],['500+','Integrations'],['4.9★','G2 Rating']],
+      cards:[['⚡','Performance','Sub-100ms response times at any scale'],['🔒','Security','SOC 2 Type II, ISO 27001 certified'],['🔗','Integrations','Connects with 500+ tools out of the box']],
+      photos:['https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80','https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80','https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80'],
+      feat:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+      featTag:'ENTERPRISE-READY',featTitle:'Scale Without Compromise',featBody:'Built for teams that move fast and need reliability at every step.',
+      // Tech: dark code-like hero, horizontal feature band, terminal-style stat counters
+      layout:'tech'
+    },
+    education:{
+      hero:'LEARN WITHOUT LIMITS', sub:'Modern online education',
+      stats:[['50K+','Students'],['1,200+','Courses'],['95%','Job Placement'],['4.8★','Satisfaction']],
+      cards:[['📚','Expert Instructors','Learn from industry leaders with real-world experience'],['🎓','Certifications','Industry-recognised credentials that employers trust'],['🌍','Live Classes','Real-time interactive sessions from anywhere']],
+      photos:['https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80','https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80','https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=600&q=80'],
+      feat:'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&q=80',
+      featTag:'YOUR LEARNING JOURNEY',featTitle:'Knowledge That Opens Doors',featBody:'Structured learning paths that take you from beginner to expert.',
+      // Education: friendly rounded hero, colourful step-list cards, enrolment CTA
+      layout:'education'
+    }
+  };
+
+  const d = industries[industry]||{
+    hero:'BUILT TO CONVERT',sub:'Premium digital solutions',
+    stats:[['500+','Projects'],['98%','Satisfaction'],['24/7','Support'],['5★','Rated']],
+    cards:[['⚡','Performance','Blazing fast, engineered for speed'],['🎨','Design','Award-winning aesthetics'],['📱','Mobile First','Perfect on every device']],
+    photos:['https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&q=80','https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&q=80','https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80'],
+    feat:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+    featTag:'OUR APPROACH',featTitle:'Where Strategy Meets Creativity',featBody:'We engineer digital experiences that captivate, convert and grow.',
+    layout:'default'
+  };
+
+  const navLinks = {
+    food:['Menu','Reservations','About','Contact'],
+    fashion:['New In','Collections','Lookbook','Store'],
+    health:['Programs','Nutrition','About','Contact'],
+    finance:['Services','Invest','Research','Contact'],
+    'real-estate':['Buy','Sell','Rent','Contact'],
+    ecommerce:['Shop','Deals','Brands','Account'],
+    hospitality:['Destinations','Hotels','Experiences','Contact'],
+    tech:['Features','Pricing','Docs','Login'],
+    education:['Courses','Instructors','Pricing','Sign Up']
+  }[industry]||['Services','About','Work','Contact'];
+
+  const isCenter = true; // layout picker removed — always centered for clean look
+  const hs = `font-family:${fonts.h};`;
+  const bs = `font-family:${fonts.b};`;
+  const br = rRadius+'px';
+  const sp = (rSpacing/100);
+  const showStats   = document.getElementById('tog-stats').checked;
+  const showPhotos  = document.getElementById('tog-photos').checked;
+  const showFeature = document.getElementById('tog-feature').checked;
+  const showAnim    = document.getElementById('tog-anim').checked;
+  const animStyle   = showAnim?'animation:cardPop .4s cubic-bezier(.34,1.56,.64,1) both;':'';
+  const allNavLinks = navLinks.slice(0,5);
+  const logoHTML = buildLogoSVG(brand, acc, selLStyle, industry);
+
+  // ── Per-layout hero text alignment ──
+  const textAlign = isCenter?'center':'left';
+  const heroMaxW  = isCenter?'560px':'460px';
+  const btnJust   = isCenter?'center':'flex-start';
+  const heroML    = isCenter?'auto':'0';
+
+  // ══ INDUSTRY-SPECIFIC SECTION VARIANTS ══
+
+  // — Per-industry hero overlay (unique mood per industry) —
+  const industryHeroOverlay = {
+    food:        `linear-gradient(160deg,rgba(180,40,0,.75) 0%,rgba(0,0,0,.35) 70%)`,
+    fashion:     `linear-gradient(135deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.2) 100%)`,
+    health:      `linear-gradient(to bottom,rgba(0,60,40,.6) 0%,rgba(0,0,0,.5) 100%)`,
+    finance:     `linear-gradient(to right,rgba(5,15,40,.92) 0%,rgba(5,15,40,.7) 60%,rgba(0,0,0,.1) 100%)`,
+    'real-estate':`linear-gradient(to bottom,rgba(0,0,0,.3) 0%,rgba(0,0,0,.7) 100%)`,
+    ecommerce:   `linear-gradient(135deg,rgba(0,0,0,.65) 0%,rgba(0,0,0,.3) 100%)`,
+    hospitality: `linear-gradient(to bottom,rgba(0,20,50,.5) 0%,rgba(0,0,0,.65) 100%)`,
+    tech:        `linear-gradient(135deg,rgba(0,0,20,.92) 0%,rgba(0,0,20,.6) 100%)`,
+    education:   `linear-gradient(to right,rgba(20,0,60,.85) 0%,rgba(0,0,0,.3) 100%)`
+  }[industry] || `linear-gradient(to bottom,rgba(0,0,0,.5) 0%,rgba(0,0,0,.6) 100%)`;
+
+  const heroOverlay = industryHeroOverlay;
+
+  // — Unique stat bar styles per industry —
+  const statBarStyle = {
+    food:      `background:${acc};`,
+    fashion:   `background:${p.nav};border-top:2px solid ${acc};`,
+    health:    `background:${p.sec};border-top:3px solid ${acc};`,
+    finance:   `background:${isDark?'#0a1628':'#0f1e35'};`,
+    'real-estate': `background:${acc};`,
+    ecommerce: `background:${p.sec};border-top:2px solid ${acc};`,
+    hospitality:`background:rgba(0,0,0,.75);position:relative;`,
+    tech:      `background:#0d0d12;border-top:1px solid ${acc}44;`,
+    education: `background:${p.sec};border-top:3px solid ${acc};`
+  }[industry] || `background:${p.sec};border-top:1px solid ${p.border};`;
+
+  const statNumColor = {
+    food:'#ffffff', fashion:acc, health:acc, finance:acc,
+    'real-estate':'#ffffff', ecommerce:acc, hospitality:'#ffffff', tech:acc, education:acc
+  }[industry] || acc;
+  const statLblColor = {
+    food:'rgba(255,255,255,.75)', fashion:p.fg3, health:p.fg3, finance:'rgba(255,255,255,.55)',
+    'real-estate':'rgba(255,255,255,.8)', ecommerce:p.fg3, hospitality:'rgba(255,255,255,.65)', tech:'rgba(255,255,255,.45)', education:p.fg3
+  }[industry] || p.fg3;
+
+  // — Unique card styles per industry —
+  const cardBg = {
+    food:      `background:${p.card};border-left:3px solid ${acc};`,
+    fashion:   `background:${p.card};border-top:2px solid ${acc};`,
+    health:    `background:${p.card};border-radius:16px;`,
+    finance:   `background:${isDark?'#0e1825':'#132034'};border:1px solid ${acc}33;`,
+    'real-estate': `background:${p.card};box-shadow:0 4px 20px rgba(0,0,0,.08);`,
+    ecommerce: `background:${p.card};border-top:3px solid ${acc};`,
+    hospitality:`background:${p.card};border-radius:12px;overflow:hidden;`,
+    tech:      `background:#0d0d14;border:1px solid ${acc}44;font-family:monospace;`,
+    education: `background:${acc}18;border:1.5px solid ${acc}44;`
+  }[industry] || `background:${p.card};`;
+
+  const cardTitleColor = {
+    finance:'#c8d8f0', tech:`${acc}`, education:p.fg
+  }[industry] || p.fg;
+
+  const cardDescColor = {
+    finance:'rgba(180,200,230,.55)', tech:'rgba(180,210,255,.45)'
+  }[industry] || p.fg2;
+
+  // — Unique services section heading per industry —
+  const servicesTitles = {
+    food: {tag:'FROM OUR KITCHEN', title:`Our <span style="color:${acc};">Signature</span> Dishes`},
+    fashion:{tag:'THE COLLECTION', title:`New <span style="color:${acc};">Season</span> Arrivals`},
+    health:{tag:'YOUR JOURNEY', title:`Programmes <span style="color:${acc};">That Work</span>`},
+    finance:{tag:'OUR EXPERTISE', title:`Wealth <span style="color:${acc};">Solutions</span>`},
+    'real-estate':{tag:'WHAT WE OFFER', title:`Property <span style="color:${acc};">Services</span>`},
+    ecommerce:{tag:'WHY SHOP WITH US', title:`Our <span style="color:${acc};">Promise</span> To You`},
+    hospitality:{tag:'TRAVEL YOUR WAY', title:`Curated <span style="color:${acc};">Experiences</span>`},
+    tech:{tag:'PLATFORM FEATURES', title:`Built For <span style="color:${acc};">Scale</span>`},
+    education:{tag:'LEARN WITH US', title:`Courses That <span style="color:${acc};">Open Doors</span>`}
+  }[industry] || {tag:'WHAT WE OFFER', title:`Our <span style="color:${acc};">Core</span> Services`};
+
+  // — Unique services section bg per industry —
+  const servicesBg = {
+    food:`background:${p.bg};`,
+    fashion:`background:${p.nav};`,
+    health:`background:${p.sec};`,
+    finance:`background:${isDark?'#060d18':'#0a1628'};`,
+    'real-estate':`background:${p.sec};`,
+    ecommerce:`background:${p.bg};`,
+    hospitality:`background:${p.sec};`,
+    tech:`background:#06060e;`,
+    education:`background:${p.sec};`
+  }[industry] || `background:${p.sec};`;
+
+  // — Services section fg (readable text on its bg) —
+  const servicesFg = {
+    food:p.fg, fashion:navFg, health:p.fg, finance:'#c8d8f0',
+    'real-estate':p.fg, ecommerce:p.fg, hospitality:p.fg, tech:'rgba(180,210,255,.9)', education:p.fg
+  }[industry] || p.fg;
+
+  // — Photo grid style per industry —
+  const photoStyle = {
+    food:`display:grid;grid-template-columns:2fr 1fr 1fr;gap:3px;max-height:160px;overflow:hidden;`,
+    fashion:`display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;max-height:150px;overflow:hidden;`,
+    health:`display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;max-height:140px;overflow:hidden;padding:10px;`,
+    finance:`display:none;`, // finance uses no photo grid — numbers first
+    'real-estate':`display:grid;grid-template-columns:2fr 1fr;gap:3px;max-height:160px;overflow:hidden;`,
+    ecommerce:`display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;max-height:140px;overflow:hidden;`,
+    hospitality:`display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;max-height:150px;overflow:hidden;`,
+    tech:`display:none;`, // tech uses no photo grid
+    education:`display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;max-height:130px;overflow:hidden;padding:8px;`
+  }[industry] || `display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;max-height:160px;overflow:hidden;`;
+
+  // — Ecommerce promo banner (unique to ecommerce) —
+  const promoBanner = (industry==='ecommerce') ? `
+  <div style="background:${acc};padding:7px 24px;text-align:center;">
+    <span style="${hs}color:${accText};font-size:10px;letter-spacing:.18em;">🔥 MEGA SALE — UP TO 70% OFF · FREE DELIVERY OVER ₹999 · USE CODE: SONIC2026</span>
+  </div>` : '';
+
+  // — Industry-specific nav background —
+  const industryNavBg = {
+    food:        `background:${p.nav};border-bottom:2px solid ${acc};`,
+    fashion:     `background:#0a0a0a;border-bottom:none;`,
+    health:      `background:${p.nav};border-bottom:1px solid ${acc}33;`,
+    finance:     `background:#06101e;border-bottom:1px solid rgba(255,255,255,.06);`,
+    'real-estate':`background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid #e0e0e0;`,
+    ecommerce:   `background:${p.nav};border-bottom:2px solid ${acc};`,
+    hospitality: `background:transparent;position:absolute;width:100%;top:0;z-index:20;border-bottom:1px solid rgba(255,255,255,.15);`,
+    tech:        `background:#03030a;border-bottom:1px solid ${acc}22;`,
+    education:   `background:${p.nav};border-bottom:3px solid ${acc};`
+  }[industry] || `background:${p.nav};border-bottom:1px solid ${p.border};`;
+
+  // — Industry-specific hero eyebrow per industry —
+  const heroEyebrow = (industry==='tech')
+    ? `<div style="${hs}color:${acc};font-size:9px;letter-spacing:.2em;margin-bottom:8px;font-family:monospace;background:${acc}22;display:inline-block;padding:4px 10px;border-radius:4px;border:1px solid ${acc}55;">▸ ${d.sub.toUpperCase()}</div>`
+    : `<div style="${hs}color:${acc};font-size:9px;letter-spacing:.22em;margin-bottom:8px;">${(industry||'brand').toUpperCase()} · ${d.sub.toUpperCase()}</div>`;
+
+  // — Fashion: editorial quote badge in hero —
+  const heroExtra = (industry==='fashion')
+    ? `<div style="display:inline-block;margin-top:10px;padding:5px 14px;border:1px solid rgba(255,255,255,.4);border-radius:20px;${bs}font-size:9px;color:rgba(255,255,255,.8);letter-spacing:.12em;">✦ SUMMER / WINTER 2026</div>`
+    : '';
+
+  // — Education: step indicator in services —
+  const eduStepStyle = (industry==='education') ? `counter-reset:edu-step;` : '';
+
+  return `
+<div class="pv-page" style="background:${p.bg};${bs}">
+  <div class="pv-loadbar" id="pvLoadBar" style="background:${acc};"></div>
+
+  ${promoBanner}
+
+  <!-- NAV -->
+  <div class="pv-section pv-nav" id="pvSection_top" style="${industryNavBg}">
+    <div class="pv-logo">${logoHTML}</div>
+    <div class="pv-navlinks" style="${bs}color:${navFg2};">
+      ${allNavLinks.map(l=>`<span>${l}</span>`).join('')}
+    </div>
+    <div style="background:${acc};color:${accText};${hs}font-size:10px;letter-spacing:.1em;padding:6px 14px;border-radius:${br};white-space:nowrap;">${allNavLinks[allNavLinks.length-1].toUpperCase()} →</div>
+  </div>
+
+  <!-- HERO — always readable white text over photo -->
+  <div class="pv-section pv-hero" id="pvSection_hero" style="min-height:${rHero}px;${industry==='hospitality'?'margin-top:-60px;':''}">
+    <img class="pv-hero-img" src="${d.photos[0]}" loading="eager">
+    <div class="pv-hero-overlay" style="background:${heroOverlay};"></div>
+    <div class="pv-hero-content" style="padding:${Math.round(48*sp)}px ${Math.round(36*sp)}px ${Math.round(44*sp)}px;max-width:${heroMaxW};margin-left:${heroML};margin-right:${heroML};text-align:${textAlign};">
+      ${heroEyebrow}
+      <div class="pv-h1" style="${hs}color:${heroFg};">${B}<br><span style="color:${acc};text-shadow:0 2px 12px rgba(0,0,0,.5);">${d.hero}</span></div>
+      <div class="pv-sub" style="${bs}color:${heroFg2};max-width:${heroMaxW};margin-left:${heroML};margin-right:${heroML};">${T}</div>
+      ${heroExtra}
+      <div class="pv-btns" style="justify-content:${btnJust};margin-top:14px;">
+        <div class="pv-btn-p" style="${hs}background:${acc};color:${accText};">GET STARTED →</div>
+        <div class="pv-btn-s" style="${bs}color:#fff;border-color:rgba(255,255,255,.4);">Learn More</div>
+      </div>
+    </div>
+  </div>
+
+  ${showStats?`<!-- STATS BAR -->
+  <div class="pv-section pv-stats" style="${statBarStyle}border-bottom:1px solid ${p.border};">
+    ${d.stats.map(([n,l])=>`<div class="pv-stat" style="border-color:${p.statBorder};"><div class="pv-stat-num" style="${hs}color:${statNumColor};">${n}</div><div class="pv-stat-lbl" style="${bs}color:${statLblColor};">${l}</div></div>`).join('')}
+  </div>`:''}
+
+  ${(showPhotos && industry!=='finance' && industry!=='tech')?`<!-- PHOTOS -->
+  <div id="pvSection_photos" style="${photoStyle}">
+    ${d.photos.map((src,i)=>`<img src="${src}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;${(industry==='health'||industry==='education')?'border-radius:8px;':''}">`).join('')}
+  </div>`:''}
+
+  <!-- SERVICES -->
+  <div class="pv-section pv-services" id="pvSection_services" style="${servicesBg}padding:${Math.round(32*sp)}px ${Math.round(28*sp)}px;">
+    <div class="pv-sec-tag" style="${hs}color:${acc};opacity:.8;">${servicesTitles.tag}</div>
+    <div class="pv-sec-title" style="${hs}color:${servicesFg};">${servicesTitles.title}</div>
+    <div class="pv-cards" style="${industry==='education'?eduStepStyle:''}">
+      ${d.cards.map(([icon,title,desc],i)=>`
+      <div class="pv-card" style="${cardBg}border-radius:${br};${animStyle}animation-delay:${i*.07}s;padding:16px 14px;">
+        <div class="pv-card-icon" style="${industry==='tech'?`color:${acc};`:''}font-size:20px;margin-bottom:9px;">${icon}</div>
+        <div class="pv-card-title" style="${hs}color:${cardTitleColor};font-size:13px;margin-bottom:4px;">${title}</div>
+        <div class="pv-card-desc" style="${bs}color:${cardDescColor};font-size:9.5px;line-height:1.5;">${desc}</div>
+        <div style="width:${industry==='education'?'32px':'20px'};height:2px;background:${acc};margin-top:10px;border-radius:2px;"></div>
+      </div>`).join('')}
+    </div>
+  </div>
+
+  ${showFeature?`<!-- FEATURE -->
+  <div class="pv-section pv-feature" id="pvSection_feature" style="background:${p.bg};">
+    <img class="pv-feature-img" src="${d.feat}" loading="lazy">
+    <div class="pv-feature-text" style="background:${p.nav};padding:28px 24px;display:flex;flex-direction:column;justify-content:center;">
+      <div style="${hs}color:${acc};font-size:8px;letter-spacing:.22em;opacity:.75;margin-bottom:8px;">✦ ${d.featTag}</div>
+      <div style="${hs}color:${navFg};font-size:20px;line-height:1.05;margin-bottom:8px;">${d.featTitle}</div>
+      <div style="${bs}color:${navFg2};font-size:10px;line-height:1.6;margin-bottom:14px;">${d.featBody}</div>
+      <div style="${hs}background:${acc};color:${accText};font-size:10px;padding:8px 16px;border-radius:${br};display:inline-block;letter-spacing:.08em;">LEARN MORE →</div>
+    </div>
+  </div>`:''}
+
+  <!-- FOOTER -->
+  <div class="pv-section pv-footer" id="pvSection_footer" style="background:${p.nav};color:${navFg2};${bs}border-top:1px solid ${(isDark||selStyle==='corporate')?'rgba(255,255,255,.08)':p.border};">
+    <span style="${hs}color:${navFg};font-size:11px;letter-spacing:.06em;">${B}</span>
+    <span style="color:${navFg2};">© 2026 All rights reserved</span>
+    <span style="color:${acc};">Made by The Sonic Media ✦</span>
+  </div>
+</div>
+<script>
+(function(){
+  var lb = document.getElementById('pvLoadBar');
+  if(lb) setTimeout(function(){lb.style.width='100%';},80);
+})();
+<\/script>`;
+}
+
+})();
+</script>
+
+
+  <!-- ═══ LIVE PREVIEW SHOWCASE ═══ -->
+  <section class="wsv-live-section" id="wsv-live">
+    <div class="wsv-live-header">
+      <div class="section-tag" style="justify-content:center;color:var(--orange);margin-bottom:20px;">
+        <span class="wsv-eyebrow-dot" style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--orange);margin-right:10px;animation:wsv-pulse 2s infinite;"></span>
+        OUR WORK — LIVE
+      </div>
+      <h2 class="wsv-live-title">Choose Your <span>Website Type</span></h2>
+      <p class="wsv-live-sub">Find the perfect fit for your vision.</p>
+    </div>
+
+    <div class="wsv-live-grid">
+
+    <div class="wsv-live-row">
+
+      <!-- PAIR 1: Basic Website -->
+      <div class="wsv-live-pair">
+        <div class="wsv-lcard-title-wrap"><span class="wsv-lcard-title-badge">01</span><span class="wsv-lcard-title-text">Basic Website</span></div>
+        <div class="wsv-lcard" data-index="0">
+          <div class="wsv-lcard-glow"></div>
+          <div class="wsv-lcard-inner">
+            <div class="wsv-lcard-bar">
+              <div class="wsv-lcard-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="wsv-lcard-url">
+                <span class="wsv-lcard-url-dot"></span>
+                lcpladvisory.com
+              </div>
+              <div class="wsv-lcard-meta">LCPL Advisory</div>
+              <button class="wsv-lcard-maximize" onclick="wsvMaximize(this)" title="Maximize">
+                <svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 5V1H5M9 1H13V5M13 9V13H9M5 13H1V9" stroke="#888" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+            <div class="wsv-lcard-viewport">
+              <iframe
+                src="https://www.lcpladvisory.com"
+                title="LCPL Advisory — Live Preview"
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                scrolling="yes"
+              ></iframe>
+            </div>
+            <div class="wsv-lcard-footer">
+              <div class="wsv-lcard-badge">
+                <span class="wsv-lcard-live-dot"></span>
+                LIVE
+              </div>
+              <span class="wsv-lcard-type">Advisory &amp; Finance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAIR 2: Creative Experience Website -->
+      <div class="wsv-live-pair">
+        <div class="wsv-lcard-title-wrap"><span class="wsv-lcard-title-badge">02</span><span class="wsv-lcard-title-text">Creative Experience Website</span></div>
+        <div class="wsv-lcard" data-index="1">
+          <div class="wsv-lcard-glow"></div>
+          <div class="wsv-lcard-inner">
+            <div class="wsv-lcard-bar">
+              <div class="wsv-lcard-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="wsv-lcard-url">
+                <span class="wsv-lcard-url-dot"></span>
+                thesonicmedia.com
+              </div>
+              <div class="wsv-lcard-meta">The Sonic Media</div>
+              <button class="wsv-lcard-maximize" onclick="wsvMaximize(this)" title="Maximize">
+                <svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 5V1H5M9 1H13V5M13 9V13H9M5 13H1V9" stroke="#888" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+            <div class="wsv-lcard-viewport">
+              <iframe
+                src="https://www.thesonicmedia.com"
+                title="The Sonic Media — Live Preview"
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                scrolling="yes"
+              ></iframe>
+            </div>
+            <div class="wsv-lcard-footer">
+              <div class="wsv-lcard-badge">
+                <span class="wsv-lcard-live-dot"></span>
+                LIVE
+              </div>
+              <span class="wsv-lcard-type">Creative Agency</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end row 1 -->
+
+    <div class="wsv-live-row">
+
+      <!-- PAIR 3: E-Commerce Website -->
+      <div class="wsv-live-pair">
+        <div class="wsv-lcard-title-wrap"><span class="wsv-lcard-title-badge">03</span><span class="wsv-lcard-title-text">E-Commerce Website</span></div>
+        <div class="wsv-lcard" data-index="2">
+          <div class="wsv-lcard-glow"></div>
+          <div class="wsv-lcard-inner">
+            <div class="wsv-lcard-bar">
+              <div class="wsv-lcard-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="wsv-lcard-url">
+                <span class="wsv-lcard-url-dot"></span>
+                lcpladvisory.com
+              </div>
+              <div class="wsv-lcard-meta">LCPL Advisory</div>
+              <button class="wsv-lcard-maximize" onclick="wsvMaximize(this)" title="Maximize">
+                <svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 5V1H5M9 1H13V5M13 9V13H9M5 13H1V9" stroke="#888" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+            <div class="wsv-lcard-viewport">
+              <iframe
+                src="https://www.lcpladvisory.com"
+                title="LCPL Advisory — Live Preview 2"
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                scrolling="yes"
+              ></iframe>
+            </div>
+            <div class="wsv-lcard-footer">
+              <div class="wsv-lcard-badge">
+                <span class="wsv-lcard-live-dot"></span>
+                LIVE
+              </div>
+              <span class="wsv-lcard-type">Advisory &amp; Finance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAIR 4: Custom Website -->
+      <div class="wsv-live-pair">
+        <div class="wsv-lcard-title-wrap"><span class="wsv-lcard-title-badge">04</span><span class="wsv-lcard-title-text">Custom Website</span></div>
+        <div class="wsv-lcard" data-index="3">
+          <div class="wsv-lcard-glow"></div>
+          <div class="wsv-lcard-inner">
+            <div class="wsv-lcard-bar">
+              <div class="wsv-lcard-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="wsv-lcard-url">
+                <span class="wsv-lcard-url-dot"></span>
+                zomato.com
+              </div>
+              <div class="wsv-lcard-meta">Zomato</div>
+              <button class="wsv-lcard-maximize" onclick="wsvMaximize(this)" title="Maximize">
+                <svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 5V1H5M9 1H13V5M13 9V13H9M5 13H1V9" stroke="#888" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+            <div class="wsv-lcard-viewport">
+              <iframe
+                src="https://www.zomato.com"
+                title="Zomato — Food Industry Preview"
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                scrolling="yes"
+              ></iframe>
+            </div>
+            <div class="wsv-lcard-footer">
+              <div class="wsv-lcard-badge">
+                <span class="wsv-lcard-live-dot"></span>
+                LIVE
+              </div>
+              <span class="wsv-lcard-type">Food &amp; Restaurant Industry</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end row 2 -->
+
+    </div>
+  </section>
+
+  <!-- ─── LIVE SECTION STYLES ─── -->
+  <style>
+  /* ── SECTION SHELL ── */
+  .wsv-live-section {
+    background: #080808;
+    padding: 120px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .wsv-live-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255,92,0,.055) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 50%, rgba(255,92,0,.03) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ── HEADER ── */
+  .wsv-live-header {
+    text-align: center;
+    margin-bottom: 70px;
+    padding: 0 40px;
+  }
+  .wsv-live-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(50px, 6vw, 88px);
+    color: #fff;
+    line-height: .93;
+    letter-spacing: -.01em;
+    margin-bottom: 16px;
+  }
+  .wsv-live-title span { color: var(--orange); }
+  .wsv-live-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: rgba(255,255,255,.38);
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── GRID: two rows, each with two side-by-side cards ── */
+  .wsv-live-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* Each row holds 2 cards side by side */
+  .wsv-live-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+    padding: 20px 0;
+  }
+  .wsv-live-row + .wsv-live-row {
+    border-top: 1px solid rgba(255,92,0,.1);
+    padding-top: 32px;
+  }
+
+  /* Pair wrapper for title + card stacked */
+  .wsv-live-pair {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* ── SINGLE CARD ── */
+  .wsv-lcard {
+    position: relative;
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1);
+  }
+  .wsv-lcard.wsv-lcard--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Stagger via JS-set delay */
+
+  .wsv-lcard:hover .wsv-lcard-glow { opacity: 0; }
+
+  /* Card frame — light border, white bg for chrome areas */
+  .wsv-lcard-inner {
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,.10);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,92,0,.06),
+      0 30px 80px rgba(0,0,0,.18),
+      0 0 60px rgba(255,92,0,.03);
+    transition: transform .7s cubic-bezier(.23,1,.32,1), box-shadow .7s ease;
+  }
+  .wsv-lcard:hover .wsv-lcard-inner {
+    transform: translateY(-6px) scale(1.005);
+    box-shadow:
+      0 0 0 1px rgba(255,92,0,.18),
+      0 50px 100px rgba(0,0,0,.22),
+      0 0 80px rgba(255,92,0,.07);
+  }
+
+  /* Top browser bar — light macOS style */
+  .wsv-lcard-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px 11px 18px;
+    background: #f0f0f0;
+    border-bottom: 1px solid #d8d8d8;
+    flex-shrink: 0;
+  }
+  .wsv-lcard-dots {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .wsv-lcard-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .wsv-lcard-dots span:nth-child(1) { background: #ff5f57; border: 1px solid rgba(0,0,0,.08); }
+  .wsv-lcard-dots span:nth-child(2) { background: #febc2e; border: 1px solid rgba(0,0,0,.08); }
+  .wsv-lcard-dots span:nth-child(3) { background: #28c840; border: 1px solid rgba(0,0,0,.08); }
+
+  .wsv-lcard-url {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-radius: 7px;
+    padding: 5px 12px;
+    font-family: monospace;
+    font-size: 11px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .wsv-lcard-url-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #28c840;
+    box-shadow: 0 0 5px rgba(40,200,64,.5);
+    flex-shrink: 0;
+  }
+  .wsv-lcard-meta {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: .08em;
+    color: #999;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* ── IFRAME SMOOTH LOAD ── */
+  .wsv-lcard-viewport {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #f0f0f0;
+  }
+  /* Shimmer skeleton shown until iframe loads */
+  .wsv-lcard-viewport::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e4e4e4 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: wsv-shimmer 1.6s ease-in-out infinite;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity .6s ease;
+  }
+  .wsv-lcard-viewport.wsv-loaded::before {
+    opacity: 0;
+  }
+  @keyframes wsv-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  .wsv-lcard-viewport iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    height: 900px;
+    border: none;
+    display: block;
+    pointer-events: auto;
+    background: #fff;
+    transform-origin: top left;
+    /* zoom set dynamically by JS */
+  }
+
+
+
+  /* Footer bar — light */
+  .wsv-lcard-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 18px;
+    background: #f5f5f5;
+    border-top: 1px solid #e0e0e0;
+  }
+  .wsv-lcard-badge {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: .18em;
+    color: #1a9e35;
+  }
+  .wsv-lcard-live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #28c840;
+    box-shadow: 0 0 6px rgba(40,200,64,.5);
+    animation: wsv-blink 2s infinite;
+  }
+  .wsv-lcard-type {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: #999;
+    letter-spacing: .04em;
+  }
+
+  /* ── SCREEN TITLES ── */
+  .wsv-lcard-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+  .wsv-lcard-title-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: .2em;
+    color: #ff5c00;
+    background: rgba(255,92,0,.1);
+    border: 1px solid rgba(255,92,0,.25);
+    border-radius: 4px;
+    padding: 4px 10px;
+    flex-shrink: 0;
+  }
+  .wsv-lcard-title-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: .08em;
+    color: rgba(255,255,255,.75);
+    line-height: 1;
+  }
+  .wsv-lcard-title-wrap::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255,92,0,.2), transparent);
+  }
+
+  /* ── MAXIMIZE BUTTON ── */
+  .wsv-lcard-maximize {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .18s, border-color .18s, transform .15s;
+    padding: 0;
+    outline: none;
+  }
+  .wsv-lcard-maximize:hover {
+    background: #ff5c00;
+    border-color: #ff5c00;
+    transform: scale(1.08);
+  }
+  .wsv-lcard-maximize:hover svg path {
+    stroke: #fff;
+  }
+
+  /* ── FULLSCREEN MODAL ── */
+  .wsv-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(0,0,0,.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .wsv-modal-overlay.wsv-modal--open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .wsv-modal-window {
+    width: calc(100vw - 48px);
+    height: calc(100vh - 48px);
+    max-width: 1600px;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 40px 120px rgba(0,0,0,.5);
+    transform: scale(.94) translateY(20px);
+    transition: transform .35s cubic-bezier(.23,1,.32,1);
+    border: 1px solid rgba(0,0,0,.08);
+  }
+  .wsv-modal-overlay.wsv-modal--open .wsv-modal-window {
+    transform: scale(1) translateY(0);
+  }
+  /* Modal top bar — matches light theme */
+  .wsv-modal-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 16px;
+    background: #f0f0f0;
+    border-bottom: 1px solid #d8d8d8;
+    flex-shrink: 0;
+  }
+  .wsv-modal-dots {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .wsv-modal-dots span {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.08);
+  }
+  .wsv-modal-dots span:nth-child(1) { background: #ff5f57; }
+  .wsv-modal-dots span:nth-child(2) { background: #febc2e; }
+  .wsv-modal-dots span:nth-child(3) { background: #28c840; }
+  .wsv-modal-url {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-radius: 7px;
+    padding: 5px 14px;
+    font-family: monospace;
+    font-size: 12px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .wsv-modal-url-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #28c840;
+    box-shadow: 0 0 5px rgba(40,200,64,.5);
+    flex-shrink: 0;
+  }
+  .wsv-modal-close {
+    width: 32px; height: 32px;
+    background: #e5e5e5;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .18s, border-color .18s;
+    font-size: 16px;
+    color: #555;
+    padding: 0;
+    flex-shrink: 0;
+    outline: none;
+    line-height: 1;
+  }
+  .wsv-modal-close:hover {
+    background: #ff5c00;
+    border-color: #ff5c00;
+    color: #fff;
+  }
+  .wsv-modal-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: .08em;
+    color: #999;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  /* Modal iframe fills remaining space */
+  .wsv-modal-frame {
+    flex: 1;
+    width: 100%;
+    border: none;
+    display: block;
+    background: #fff;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .wsv-live-section { padding: 80px 0 70px; }
+    .wsv-live-grid { padding: 0 18px; }
+    .wsv-live-row { grid-template-columns: 1fr; gap: 28px; min-height: auto; padding: 40px 0; }
+    .wsv-live-title { font-size: clamp(38px, 10vw, 60px); }
+  }
+  </style>
+
+  <!-- ─── FULLSCREEN MODAL ─── -->
+  <div class="wsv-modal-overlay" id="wsvModal" onclick="wsvModalClickOutside(event)">
+    <div class="wsv-modal-window">
+      <div class="wsv-modal-bar">
+        <div class="wsv-modal-dots"><span></span><span></span><span></span></div>
+        <div class="wsv-modal-url">
+          <span class="wsv-modal-url-dot"></span>
+          <span id="wsvModalUrl">site.com</span>
+        </div>
+        <span class="wsv-modal-label" id="wsvModalLabel"></span>
+        <button class="wsv-modal-close" onclick="wsvCloseModal()" title="Close">✕</button>
+      </div>
+      <iframe class="wsv-modal-frame" id="wsvModalFrame" src="" title="Fullscreen Preview"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+        loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <!-- ─── LIVE SECTION SCROLL REVEAL + MAXIMIZE SCRIPT ─── -->
+  <script>
+  /* ── Maximize / Modal ── */
+  function wsvMaximize(btn) {
+    var card = btn.closest('.wsv-lcard-inner');
+    var iframe = card.querySelector('.wsv-lcard-viewport iframe');
+    if (iframe && iframe.src) {
+      window.open(iframe.src, '_blank');
+    }
+  }
+  function wsvCloseModal() {
+    var overlay = document.getElementById('wsvModal');
+    overlay.classList.remove('wsv-modal--open');
+    document.body.style.overflow = '';
+    // slight delay so animation plays before clearing src
+    setTimeout(function() {
+      document.getElementById('wsvModalFrame').src = '';
+    }, 350);
+  }
+  function wsvModalClickOutside(e) {
+    if (e.target === document.getElementById('wsvModal')) wsvCloseModal();
+  }
+  // Close on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') wsvCloseModal();
+  });
+  </script>
+
+  <script>
+  (function() {
+    function initLiveSection() {
+      var cards = document.querySelectorAll('.wsv-lcard');
+      if (!cards.length) return;
+
+      // Assign stagger delays by index (nth-child won't work inside .wsv-live-pair)
+      cards.forEach(function(card, i) {
+        card.style.transitionDelay = (i * 0.12) + 's';
+      });
+
+      // Smooth scroll reveal
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('wsv-lcard--visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      cards.forEach(function(card) { observer.observe(card); });
+
+      // Iframe shimmer — fade out once loaded, with 3s fallback for cross-origin iframes
+      document.querySelectorAll('.wsv-lcard-viewport').forEach(function(vp) {
+        var iframe = vp.querySelector('iframe');
+        if (!iframe) { vp.classList.add('wsv-loaded'); return; }
+        var done = false;
+        function markLoaded() {
+          if (done) return; done = true;
+          vp.classList.add('wsv-loaded');
+        }
+        iframe.addEventListener('load', markLoaded);
+        // Cross-origin iframes often don't fire load reliably — force after 3s
+        setTimeout(markLoaded, 3000);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initLiveSection);
+    } else {
+      initLiveSection();
+    }
+  })();
+  </script>
 
   <!-- ═══ MARQUEE TICKER ═══ -->
   <div class="wsv-marquee-section" aria-hidden="true">
@@ -1628,152 +3385,646 @@
     </div>
   </div>
 
-  <!-- ═══ CINEMATIC PROCESS: 50/50 STEPS ═══ -->
-  <div class="wsv-process-outer" id="wsv-process">
-    <div class="wsv-process-header">
-      <div class="section-tag" style="justify-content:center;color:var(--orange);">How We Work</div>
-      <h2 class="wsv-process-title">Our <span>Process</span></h2>
+  <!-- ═══ COMBINED: PROCESS + PREVIEW ═══ -->
+  <section class="wsv-process-preview-combined" id="wsv-process">
+    <style>
+    /* ── COMBINED PROCESS + PREVIEW SECTION ── */
+    .wsv-process-preview-combined {
+      background: var(--black, #0a0a0a);
+      padding: 100px 0 0;
+      position: relative;
+      overflow: visible;
+    }
+    .wsv-process-preview-combined::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 40% at 50% 0%, rgba(255,92,0,.06) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 60% at 10% 50%, rgba(255,92,0,.03) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── SECTION HEADER ── */
+    .wsv-ppc-header {
+      text-align: center;
+      padding: 0 60px 60px;
+    }
+    .wsv-ppc-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 6vw, 88px);
+      color: #fff;
+      line-height: .93;
+      letter-spacing: -.01em;
+      margin-bottom: 14px;
+    }
+    .wsv-ppc-title span { color: var(--orange, #ff5c00); }
+    .wsv-ppc-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: rgba(255,255,255,.38);
+      max-width: 440px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* strip styles moved to creative cards block below */
+
+    /* ══ CREATIVE PROCESS CARDS — FULL ORANGE THEME ══ */
+    /* Scroll wrapper handles horizontal overflow; strip itself is overflow:visible so hover scale isn't clipped */
+    .wsv-ppc-scroll-outer {
+      overflow-x: auto;
+      overflow-y: visible;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      max-width: 1380px;
+      margin: 0 auto;
+    }
+    .wsv-ppc-scroll-outer::-webkit-scrollbar { display: none; }
+    .wsv-ppc-strip {
+      display: flex;
+      align-items: stretch;
+      overflow: visible;
+      padding: 16px 60px 70px;
+      gap: 22px;
+    }
+
+    /* ── BASE CARD ── */
+    .wsv-ppc-card {
+      flex: 1;
+      min-width: 210px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      border-radius: 22px;
+      cursor: default;
+      overflow: hidden;
+      /* Orange gradient base */
+      background: linear-gradient(145deg, #ff5c00 0%, #cc3e00 55%, #8b2200 100%);
+      border: 1px solid rgba(255,140,60,.35);
+      box-shadow:
+        0 8px 32px rgba(255,92,0,.25),
+        inset 0 1px 0 rgba(255,200,140,.18);
+      transition: transform .45s cubic-bezier(.23,1,.32,1),
+                  box-shadow .45s ease,
+                  border-color .3s;
+      transform-style: preserve-3d;
+      opacity: 0;
+      transform: translateY(44px);
+    }
+
+    /* Visible state after intersection */
+    .wsv-ppc-card.ppc-visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity .75s ease, transform .75s cubic-bezier(.23,1,.32,1),
+                  box-shadow .45s ease, border-color .3s;
+    }
+
+    /* Hover lift */
+    .wsv-ppc-card.ppc-visible:hover {
+      transform: translateY(-12px) scale(1.03);
+      box-shadow:
+        0 32px 72px rgba(255,92,0,.45),
+        0 0 0 1px rgba(255,140,60,.6),
+        inset 0 1px 0 rgba(255,220,160,.25);
+      border-color: rgba(255,180,80,.55);
+      z-index: 2;
+    }
+
+    /* ── TOP GLOW BAND (always on) ── */
+    .wsv-ppc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 55%;
+      background: linear-gradient(180deg, rgba(255,210,140,.18) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 1;
+      border-radius: 22px 22px 0 0;
+    }
+
+    /* ── SCAN-LINE SHIMMER on hover ── */
+    .wsv-ppc-card::after {
+      content: '';
+      position: absolute;
+      top: -120%;
+      left: -20%;
+      width: 140%;
+      height: 60%;
+      background: linear-gradient(160deg, transparent 30%, rgba(255,255,255,.11) 50%, transparent 70%);
+      transform: skewY(-8deg);
+      pointer-events: none;
+      z-index: 2;
+      transition: top 0s;
+    }
+    .wsv-ppc-card:hover::after {
+      animation: wsv-orange-shimmer .65s cubic-bezier(.23,1,.32,1) forwards;
+    }
+    @keyframes wsv-orange-shimmer {
+      0%   { top: -120%; }
+      100% { top: 160%; }
+    }
+
+    /* ── CARD INNER CONTENT ── */
+    .wsv-ppc-card-content {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 32px 26px 28px;
+    }
+
+    /* ── BIG GHOST NUMBER ── */
+    .wsv-ppc-ghost-num {
+      position: absolute;
+      bottom: -10px;
+      right: 12px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 120px;
+      line-height: 1;
+      color: rgba(0,0,0,.18);
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+      transition: color .4s, transform .4s;
+    }
+    .wsv-ppc-card:hover .wsv-ppc-ghost-num {
+      color: rgba(0,0,0,.28);
+      transform: scale(1.06);
+    }
+
+    /* ── PHASE LABEL ── */
+    .wsv-ppc-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10px;
+      letter-spacing: .28em;
+      color: rgba(255,255,255,.65);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .wsv-ppc-num::before {
+      content: '';
+      display: block;
+      width: 18px; height: 1px;
+      background: rgba(255,255,255,.5);
+    }
+
+    /* ── ICON BOX ── */
+    .wsv-ppc-icon-wrap {
+      width: 58px; height: 58px;
+      border-radius: 16px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 22px;
+      flex-shrink: 0;
+      position: relative;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.12);
+      transition: transform .45s cubic-bezier(.34,1.56,.64,1),
+                  background .3s, box-shadow .3s;
+    }
+    .wsv-ppc-card:hover .wsv-ppc-icon-wrap {
+      transform: scale(1.15) rotate(-5deg);
+      background: rgba(0,0,0,.32);
+      box-shadow: 0 8px 28px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.2);
+    }
+    /* Ping ring on icon */
+    .wsv-ppc-icon-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.18);
+      opacity: 0;
+      transform: scale(.85);
+      transition: opacity .35s, transform .35s;
+    }
+    .wsv-ppc-card:hover .wsv-ppc-icon-wrap::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ── CARD TITLE ── */
+    .wsv-ppc-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 21px;
+      color: #fff;
+      letter-spacing: .03em;
+      line-height: 1.08;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 8px rgba(0,0,0,.3);
+    }
+
+    /* ── DESCRIPTION ── */
+    .wsv-ppc-desc {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12.5px;
+      color: rgba(255,255,255,.72);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    /* ── TAG CHIPS ── */
+    .wsv-ppc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 18px;
+    }
+    .wsv-ppc-tag {
+      font-family: monospace;
+      font-size: 9px;
+      letter-spacing: .06em;
+      color: rgba(255,255,255,.8);
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 5px;
+      padding: 4px 9px;
+      transition: background .25s, border-color .25s, color .25s;
+    }
+    .wsv-ppc-card:hover .wsv-ppc-tag {
+      background: rgba(0,0,0,.35);
+      border-color: rgba(255,255,255,.35);
+      color: #fff;
+    }
+
+    /* ── BOTTOM PROGRESS BAR ── */
+    .wsv-ppc-bar-wrap {
+      margin-top: 22px;
+      height: 3px;
+      background: rgba(0,0,0,.25);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .wsv-ppc-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, rgba(255,255,255,.5), rgba(255,255,255,.9));
+      border-radius: 3px;
+      width: 30%;
+      transition: width .65s cubic-bezier(.23,1,.32,1);
+    }
+    .wsv-ppc-card:hover .wsv-ppc-bar-fill { width: 100%; }
+
+    /* ── BOTTOM ACCENT LINE ── */
+    .wsv-ppc-card-bottom-line {
+      height: 3px;
+      background: linear-gradient(90deg, rgba(255,180,80,.0), rgba(255,220,140,.7), rgba(255,180,80,.0));
+      margin-top: auto;
+      opacity: 0;
+      transition: opacity .4s;
+      flex-shrink: 0;
+    }
+    .wsv-ppc-card:hover .wsv-ppc-card-bottom-line { opacity: 1; }
+
+    @media (max-width: 900px) {
+      .wsv-ppc-strip { padding: 0 20px 48px; }
+      .wsv-ppc-card  { min-width: 200px; flex: none; }
+    }
+
+    /* ── DIVIDER ── */
+    .wsv-ppc-divider {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,92,0,.15), transparent);
+    }
+
+    /* ── PREVIEW GENERATOR WRAPPER ── */
+    .wsv-ppc-gen {
+      padding: 80px 60px 100px;
+      max-width: 1380px;
+      margin: 0 auto;
+    }
+    .wsv-ppc-gen-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .wsv-ppc-gen-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(44px, 5vw, 76px);
+      color: #fff;
+      line-height: .93;
+      margin-bottom: 14px;
+    }
+    .wsv-ppc-gen-title span { color: var(--orange, #ff5c00); }
+    .wsv-ppc-gen-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: rgba(255,255,255,.38);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 900px) {
+      .wsv-ppc-strip { padding: 0 20px 40px; }
+      .wsv-ppc-card { min-width: 180px; flex: none; }
+      .wsv-ppc-header, .wsv-ppc-gen { padding-left: 20px; padding-right: 20px; }
+    }
+    </style>
+
+    <!-- SECTION HEADER -->
+    <div class="wsv-ppc-header">
+      <div class="section-tag" style="justify-content:center;color:var(--orange,#ff5c00);margin-bottom:20px;">How We Work</div>
+      <h2 class="wsv-ppc-title">Our <span>Process</span></h2>
+      <p class="wsv-ppc-sub">Five focused phases — from first conversation to live, converting website.</p>
     </div>
-    <div class="wsv-process-steps">
 
-      <!-- STEP 1: Discovery -->
-      <div class="wsv-step-row">
-        <div class="wsv-step-left">
-          <div class="wsv-step-num-bg">01</div>
-          <div class="wsv-step-phase">Phase One</div>
-          <h3 class="wsv-step-heading">Discovery &amp;<br><span>Strategy</span></h3>
-          <p class="wsv-step-body">We dive deep into your brand, audience, and competitive landscape before writing a single line of code. Strategy is where great websites are born.</p>
-          <div class="wsv-step-chips">
-            <span class="wsv-step-chip">Brand Audit</span>
-            <span class="wsv-step-chip">Competitor Analysis</span>
-            <span class="wsv-step-chip">User Personas</span>
-            <span class="wsv-step-chip">Sitemap</span>
-            <span class="wsv-step-chip">Goal Mapping</span>
+    <!-- HORIZONTAL PROCESS CARDS -->
+    <div class="wsv-ppc-scroll-outer">
+    <div class="wsv-ppc-strip" id="wsvPpcStrip">
+
+      <div class="wsv-ppc-card" style="--cd:.0s">
+        <span class="wsv-ppc-ghost-num">01</span>
+        <div class="wsv-ppc-card-content">
+          <div class="wsv-ppc-num">01 · PHASE ONE</div>
+          <div class="wsv-ppc-icon-wrap">🔍</div>
+          <div class="wsv-ppc-name">Discovery &amp; Strategy</div>
+          <div class="wsv-ppc-desc">Brand audit, competitor research, goal mapping &amp; sitemap architecture.</div>
+          <div class="wsv-ppc-tags">
+            <span class="wsv-ppc-tag">Brand Audit</span>
+            <span class="wsv-ppc-tag">Sitemap</span>
+            <span class="wsv-ppc-tag">Research</span>
           </div>
+          <div class="wsv-ppc-bar-wrap"><div class="wsv-ppc-bar-fill"></div></div>
         </div>
-        <div class="wsv-step-right">
-          <div class="wsv-step-artboard">
-            <div class="wsv-artboard-bar">
-              <div class="wsv-artboard-bar-dot"></div><div class="wsv-artboard-bar-dot"></div><div class="wsv-artboard-bar-dot"></div>
-            </div>
-            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;padding-top:36px;box-sizing:border-box;">
-              <source src="https://cdn.cosmos.so/74eaa492-31ae-4550-b5a1-40917d873af5.mp4" type="video/mp4">
-              <img src="https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=900&q=80" alt="Discovery phase" style="width:100%;height:100%;object-fit:cover;">
-            </video>
-            <div class="wsv-artboard-overlay"></div>
-            <div class="wsv-artboard-badge">PHASE 01 · DISCOVERY</div>
+        <div class="wsv-ppc-card-bottom-line"></div>
+      </div>
+
+      <div class="wsv-ppc-card" style="--cd:.12s">
+        <span class="wsv-ppc-ghost-num">02</span>
+        <div class="wsv-ppc-card-content">
+          <div class="wsv-ppc-num">02 · PHASE TWO</div>
+          <div class="wsv-ppc-icon-wrap">🎨</div>
+          <div class="wsv-ppc-name">UX Design &amp; Wireframes</div>
+          <div class="wsv-ppc-desc">Figma prototypes, design system &amp; CRO-optimised layout mapping.</div>
+          <div class="wsv-ppc-tags">
+            <span class="wsv-ppc-tag">Figma</span>
+            <span class="wsv-ppc-tag">CRO</span>
+            <span class="wsv-ppc-tag">UI System</span>
           </div>
+          <div class="wsv-ppc-bar-wrap"><div class="wsv-ppc-bar-fill"></div></div>
+        </div>
+        <div class="wsv-ppc-card-bottom-line"></div>
+      </div>
+
+      <div class="wsv-ppc-card" style="--cd:.24s">
+        <span class="wsv-ppc-ghost-num">03</span>
+        <div class="wsv-ppc-card-content">
+          <div class="wsv-ppc-num">03 · PHASE THREE</div>
+          <div class="wsv-ppc-icon-wrap">⚡</div>
+          <div class="wsv-ppc-name">Development &amp; Engineering</div>
+          <div class="wsv-ppc-desc">Clean code, GSAP animations, CMS build &amp; full API integrations.</div>
+          <div class="wsv-ppc-tags">
+            <span class="wsv-ppc-tag">React</span>
+            <span class="wsv-ppc-tag">GSAP</span>
+            <span class="wsv-ppc-tag">API</span>
+          </div>
+          <div class="wsv-ppc-bar-wrap"><div class="wsv-ppc-bar-fill"></div></div>
+        </div>
+        <div class="wsv-ppc-card-bottom-line"></div>
+      </div>
+
+      <div class="wsv-ppc-card" style="--cd:.36s">
+        <span class="wsv-ppc-ghost-num">04</span>
+        <div class="wsv-ppc-card-content">
+          <div class="wsv-ppc-num">04 · PHASE FOUR</div>
+          <div class="wsv-ppc-icon-wrap">🧪</div>
+          <div class="wsv-ppc-name">QA &amp; Performance</div>
+          <div class="wsv-ppc-desc">95+ PageSpeed, cross-device testing &amp; full Lighthouse audit pass.</div>
+          <div class="wsv-ppc-tags">
+            <span class="wsv-ppc-tag">Lighthouse</span>
+            <span class="wsv-ppc-tag">PageSpeed</span>
+            <span class="wsv-ppc-tag">A11y</span>
+          </div>
+          <div class="wsv-ppc-bar-wrap"><div class="wsv-ppc-bar-fill"></div></div>
+        </div>
+        <div class="wsv-ppc-card-bottom-line"></div>
+      </div>
+
+      <div class="wsv-ppc-card" style="--cd:.48s">
+        <span class="wsv-ppc-ghost-num">05</span>
+        <div class="wsv-ppc-card-content">
+          <div class="wsv-ppc-num">05 · PHASE FIVE</div>
+          <div class="wsv-ppc-icon-wrap">🚀</div>
+          <div class="wsv-ppc-name">Launch &amp; Optimise</div>
+          <div class="wsv-ppc-desc">CDN deploy, analytics setup &amp; 30-day post-launch growth support.</div>
+          <div class="wsv-ppc-tags">
+            <span class="wsv-ppc-tag">CDN</span>
+            <span class="wsv-ppc-tag">Analytics</span>
+            <span class="wsv-ppc-tag">30-Day Care</span>
+          </div>
+          <div class="wsv-ppc-bar-wrap"><div class="wsv-ppc-bar-fill"></div></div>
+        </div>
+        <div class="wsv-ppc-card-bottom-line"></div>
+      </div>
+
+    </div><!-- /strip -->
+    </div><!-- /wsv-ppc-scroll-outer -->
+
+    <script>
+    /* Entrance animation for process cards */
+    (function() {
+      var cards = document.querySelectorAll('#wsvPpcStrip .wsv-ppc-card');
+      if (!cards.length) return;
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            var delay = parseFloat(e.target.style.getPropertyValue('--cd') || '0') * 1000;
+            setTimeout(function() { e.target.classList.add('ppc-visible'); }, delay);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      cards.forEach(function(c) { io.observe(c); });
+    })();
+    </script>
+
+    <div class="wsv-ppc-divider"></div>
+
+    <!-- PREVIEW GENERATOR -->
+    <div class="wsv-ppc-gen" id="wsv-gen-section-anchor">
+      <div class="wsv-ppc-gen-header">
+        <div class="section-tag" style="justify-content:center;color:var(--orange,#ff5c00);margin-bottom:20px;">Interactive Tool</div>
+        <h2 class="wsv-ppc-gen-title">PREVIEW YOUR <span>WEBSITE</span></h2>
+        <p class="wsv-ppc-gen-sub">Enter your brand details and get an instant, full-fidelity preview — live, scrollable, real-time.</p>
+      </div>
+      <div class="wsv-gen-v2-wrap">
+      <div class="gen-box" id="genBox">
+
+    <!-- LEFT PANEL -->
+    <div class="panel-left" style="position:relative;">
+      <div class="panel-topbar">
+        <div class="panel-topbar-logo">✦</div>
+        <span class="panel-topbar-text">EDIT MY WEBSITE</span>
+      </div>
+      <div class="panel-body" id="panelBody">
+
+        <!-- Brand Info -->
+        <div class="sec-label">Brand Info</div>
+        <div class="field">
+          <label for="inp-brand">Business Name</label>
+          <input type="text" id="inp-brand" class="inp" placeholder="e.g. Nexus Foods" maxlength="40" autocomplete="off" oninput="liveUpdate()">
+        </div>
+        <div class="field">
+          <label for="inp-tagline">Tagline</label>
+          <input type="text" id="inp-tagline" class="inp" placeholder="e.g. Healthy meals, daily" maxlength="60" autocomplete="off" oninput="liveUpdate()">
+        </div>
+
+        <!-- Industry -->
+        <div class="sec-label">Industry</div>
+        <div class="field">
+          <select id="inp-industry" class="inp inp-select" onchange="liveUpdate()">
+            <option value="">Select industry…</option>
+            <option value="food">Food &amp; Beverage</option>
+            <option value="fashion">Fashion &amp; Lifestyle</option>
+            <option value="health">Health &amp; Wellness</option>
+            <option value="finance">Finance</option>
+            <option value="real-estate">Real Estate</option>
+            <option value="ecommerce">E-Commerce</option>
+            <option value="hospitality">Hospitality &amp; Travel</option>
+            <option value="tech">Technology &amp; SaaS</option>
+            <option value="education">Education</option>
+          </select>
+        </div>
+
+        <!-- Accent Colour -->
+        <div class="sec-label">Accent Colour</div>
+        <div class="colour-grid" id="colourGrid">
+          <button class="colour-swatch active" style="background:#ff5c00;" data-c="#ff5c00" onclick="setColour(this)" title="Orange"></button>
+          <button class="colour-swatch" style="background:#7c3aed;" data-c="#7c3aed" onclick="setColour(this)" title="Purple"></button>
+          <button class="colour-swatch" style="background:#0ea5e9;" data-c="#0ea5e9" onclick="setColour(this)" title="Sky Blue"></button>
+          <button class="colour-swatch" style="background:#10b981;" data-c="#10b981" onclick="setColour(this)" title="Emerald"></button>
+          <button class="colour-swatch" style="background:#e11d48;" data-c="#e11d48" onclick="setColour(this)" title="Rose"></button>
+          <button class="colour-swatch" style="background:#f59e0b;" data-c="#f59e0b" onclick="setColour(this)" title="Amber"></button>
+          <button class="colour-swatch" style="background:#06b6d4;" data-c="#06b6d4" onclick="setColour(this)" title="Cyan"></button>
+          <button class="colour-swatch" style="background:#ec4899;" data-c="#ec4899" onclick="setColour(this)" title="Pink"></button>
+          <button class="colour-swatch" style="background:#1d4ed8;" data-c="#1d4ed8" onclick="setColour(this)" title="Blue"></button>
+          <button class="colour-swatch" style="background:#111111;" data-c="#111111" onclick="setColour(this)" title="Black"></button>
+        </div>
+
+        <!-- Style Theme -->
+        <div class="sec-label">Site Theme</div>
+        <div class="style-grid" id="styleGrid">
+          <button class="style-btn" data-s="dark" onclick="setStyle(this)">Dark Bold</button>
+          <button class="style-btn active" data-s="minimal" onclick="setStyle(this)">Minimal</button>
+          <button class="style-btn" data-s="vibrant" onclick="setStyle(this)">Vibrant</button>
+          <button class="style-btn" data-s="corporate" onclick="setStyle(this)">Corporate</button>
+        </div>
+
+        <!-- Typography -->
+        <div class="sec-label">Typography</div>
+        <div class="font-btns" id="fontBtns">
+          <button class="font-btn active" data-f="bebas" onclick="setFont(this)">Bebas Neue <span class="font-preview" style="font-family:'Bebas Neue',sans-serif;">Aa</span></button>
+          <button class="font-btn" data-f="playfair" onclick="setFont(this)">Playfair Display <span class="font-preview" style="font-family:Georgia,serif;">Aa</span></button>
+          <button class="font-btn" data-f="syne" onclick="setFont(this)">Syne Bold <span class="font-preview" style="font-family:'Syne',sans-serif;font-weight:800;">Aa</span></button>
+          <button class="font-btn" data-f="dm" onclick="setFont(this)">DM Sans Modern <span class="font-preview" style="font-family:'DM Sans',sans-serif;">Aa</span></button>
+        </div>
+
+        <!-- Hidden toggles for code compatibility -->
+        <input type="checkbox" id="tog-anim" checked style="display:none">
+        <input type="checkbox" id="tog-stats" checked style="display:none">
+        <input type="checkbox" id="tog-photos" checked style="display:none">
+        <input type="checkbox" id="tog-feature" checked style="display:none">
+        <input type="range" id="rng-radius" value="8" style="display:none">
+        <input type="range" id="rng-spacing" value="100" style="display:none">
+        <input type="range" id="rng-hero" value="340" style="display:none">
+        <span id="rng-radius-val" style="display:none"></span>
+        <span id="rng-spacing-val" style="display:none"></span>
+        <span id="rng-hero-val" style="display:none"></span>
+
+      </div><!-- /panel-body -->
+
+      <!-- Generate button fixed at bottom -->
+      <div class="gen-btn-wrap">
+        <button class="gen-btn" onclick="generatePreview()" id="genBtn">
+          ✦ GENERATE PREVIEW
+        </button>
+      </div>
+    </div><!-- /panel-left -->
+
+    <!-- RIGHT PANE -->
+    <div class="panel-right">
+      <!-- Browser chrome -->
+      <div class="browser-chrome">
+        <div class="chrome-dots"><span></span><span></span><span></span></div>
+        <div class="chrome-url">
+          <span class="chrome-url-dot"></span>
+          <span class="chrome-url-text" id="chromeUrl">yourwebsite.com — fill in details and click Generate</span>
+        </div>
+        <div class="chrome-device-btns">
+          <button class="chrome-device-btn active" onclick="setDevice('desktop',this)">🖥 Desktop</button>
+          <button class="chrome-device-btn" onclick="setDevice('tablet',this)">📱 Tablet</button>
+          <button class="chrome-device-btn" onclick="setDevice('mobile',this)">📱 Mobile</button>
+        </div>
+        <div class="chrome-live-badge" id="liveBadge">
+          <div class="chrome-live-dot"></div>LIVE
         </div>
       </div>
 
-      <!-- STEP 2: Design -->
-      <div class="wsv-step-row">
-        <div class="wsv-step-left">
-          <div class="wsv-step-num-bg">02</div>
-          <div class="wsv-step-phase">Phase Two</div>
-          <h3 class="wsv-step-heading">UX Design &amp;<br><span>Wireframing</span></h3>
-          <p class="wsv-step-body">Every layout, interaction, and flow is prototyped in Figma before a single line of code is written. You see and approve everything — no surprises.</p>
-          <div class="wsv-step-chips">
-            <span class="wsv-step-chip">Figma Wireframes</span>
-            <span class="wsv-step-chip">Interactive Prototype</span>
-            <span class="wsv-step-chip">CRO Mapping</span>
-            <span class="wsv-step-chip">Design System</span>
-          </div>
-        </div>
-        <div class="wsv-step-right">
-          <div class="wsv-step-artboard">
-            <div class="wsv-artboard-bar">
-              <div class="wsv-artboard-bar-dot"></div><div class="wsv-artboard-bar-dot"></div><div class="wsv-artboard-bar-dot"></div>
-            </div>
-            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80" alt="UX Design wireframing" style="width:100%;height:100%;object-fit:cover;padding-top:36px;box-sizing:border-box;">
-            <div class="wsv-artboard-overlay"></div>
-            <div class="wsv-artboard-badge">PHASE 02 · UX DESIGN</div>
-          </div>
-        </div>
+      <!-- Toolbar -->
+      <div class="browser-toolbar">
+        <span class="toolbar-label">Tools</span>
+        <div class="toolbar-divider"></div>
+        <button class="toolbar-btn" onclick="scrollPreview('top')">
+          <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 10V2M2 6l4-4 4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          Top
+        </button>
+        <button class="toolbar-btn" onclick="scrollPreview('bottom')">
+          <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 2v8M10 6L6 10 2 6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          Bottom
+        </button>
+        <button class="toolbar-btn" onclick="scrollPreview('services')">Services</button>
+        <button class="toolbar-btn" onclick="scrollPreview('footer')">Footer</button>
+        <div class="toolbar-divider"></div>
+        <button class="toolbar-btn" onclick="refreshPreview()">
+          <svg width="12" height="12" viewBox="0 0 12 12"><path d="M10 6A4 4 0 0 1 2.3 8.5M2 6A4 4 0 0 1 9.7 3.5M10 2v2H8M4 10H2V8" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+          Refresh
+        </button>
+        <span class="zoom-indicator" id="zoomIndicator">1440px desktop</span>
       </div>
 
-      <!-- STEP 3: Development -->
-      <div class="wsv-step-row">
-        <div class="wsv-step-left">
-          <div class="wsv-step-num-bg">03</div>
-          <div class="wsv-step-phase">Phase Three</div>
-          <h3 class="wsv-step-heading">Development &amp;<br><span>Engineering</span></h3>
-          <p class="wsv-step-body">Clean, semantic, performant code. Every site is built for speed, SEO, and scale from day one — not bolted on after the fact.</p>
-          <div class="wsv-step-chips">
-            <span class="wsv-step-chip">React / Next.js</span>
-            <span class="wsv-step-chip">GSAP Animations</span>
-            <span class="wsv-step-chip">API Integrations</span>
-            <span class="wsv-step-chip">CMS Setup</span>
+      <!-- Viewport -->
+      <div class="viewport-wrap" id="viewportWrap">
+        <div class="viewport-inner device-desktop" id="viewportInner">
+          <!-- Empty state -->
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">🌐</div>
+            <div class="empty-title">YOUR SITE PREVIEW</div>
+            <p class="empty-sub">Fill in your brand details and click Generate Preview to see a scrollable desktop preview.</p>
           </div>
-        </div>
-        <div class="wsv-step-right">
-          <div class="wsv-step-artboard">
-            <div class="wsv-artboard-bar">
-              <div class="wsv-artboard-bar-dot"></div><div class="wsv-artboard-bar-dot"></div><div class="wsv-artboard-bar-dot"></div>
-            </div>
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&q=80" alt="Web Development" style="width:100%;height:100%;object-fit:cover;padding-top:36px;box-sizing:border-box;">
-            <div class="wsv-artboard-overlay"></div>
-            <div class="wsv-artboard-badge">PHASE 03 · DEVELOPMENT</div>
+          <!-- Spinner -->
+          <div class="spinner" id="spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-text">BUILDING YOUR PREVIEW…</div>
           </div>
+          <!-- Output -->
+          <div class="gen-output" id="genOutput"></div>
         </div>
       </div>
-
-      <!-- STEP 4: QA -->
-      <div class="wsv-step-row">
-        <div class="wsv-step-left">
-          <div class="wsv-step-num-bg">04</div>
-          <div class="wsv-step-phase">Phase Four</div>
-          <h3 class="wsv-step-heading">Quality &amp;<br><span>Performance QA</span></h3>
-          <p class="wsv-step-body">Every pixel scrutinised. Every flow stress-tested across devices and browsers. We don't ship until the PageSpeed score is 90+.</p>
-          <div class="wsv-step-chips">
-            <span class="wsv-step-chip">PageSpeed 95+</span>
-            <span class="wsv-step-chip">Cross-Browser QA</span>
-            <span class="wsv-step-chip">Mobile Testing</span>
-            <span class="wsv-step-chip">Lighthouse Audit</span>
-          </div>
-        </div>
-        <div class="wsv-step-right">
-          <div class="wsv-step-artboard">
-            <div class="wsv-artboard-bar">
-              <div class="wsv-artboard-bar-dot"></div><div class="wsv-artboard-bar-dot"></div><div class="wsv-artboard-bar-dot"></div>
-            </div>
-            <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=900&q=80" alt="Quality Assurance" style="width:100%;height:100%;object-fit:cover;padding-top:36px;box-sizing:border-box;">
-            <div class="wsv-artboard-overlay"></div>
-            <div class="wsv-artboard-badge">PHASE 04 · QA TESTING</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- STEP 5: Launch -->
-      <div class="wsv-step-row">
-        <div class="wsv-step-left">
-          <div class="wsv-step-num-bg">05</div>
-          <div class="wsv-step-phase">Phase Five</div>
-          <h3 class="wsv-step-heading">Launch &amp;<br><span>Optimise</span></h3>
-          <p class="wsv-step-body">Zero-downtime deployment, CDN configuration, analytics setup, and a 30-day post-launch optimisation sprint — all included.</p>
-          <div class="wsv-step-chips">
-            <span class="wsv-step-chip">Cloud Deployment</span>
-            <span class="wsv-step-chip">CDN Setup</span>
-            <span class="wsv-step-chip">Analytics Config</span>
-            <span class="wsv-step-chip">30-Day Support</span>
-          </div>
-        </div>
-        <div class="wsv-step-right">
-          <div class="wsv-step-artboard">
-            <div class="wsv-artboard-bar">
-              <div class="wsv-artboard-bar-dot"></div><div class="wsv-artboard-bar-dot"></div><div class="wsv-artboard-bar-dot"></div>
-            </div>
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80" alt="Launch analytics" style="width:100%;height:100%;object-fit:cover;padding-top:36px;box-sizing:border-box;">
-            <div class="wsv-artboard-overlay"></div>
-            <div class="wsv-artboard-badge">PHASE 05 · LAUNCH</div>
-          </div>
-        </div>
-      </div>
-
+    </div><!-- /panel-right -->
+      </div><!-- /gen-box -->
+    </div><!-- /gen-v2-wrap -->
+    <!-- CTA below preview -->
+    <div id="wsvPreviewCta" style="display:none;margin-top:32px;padding:28px 32px;background:#111;border:1px solid rgba(255,92,0,.2);border-radius:16px;">
+      <div style="font-family:var(--font-heading,\'Bebas Neue\',sans-serif);font-size:20px;color:#fff;margin-bottom:8px;">Love what you see?</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px;line-height:1.6;">This is just a glimpse. Let\'s build the real thing — engineered for performance and conversion.</div>
+      <a href="#" onclick="navigate(\'contact\');return false;" class="btn-p" style="font-size:13px;">Start Your Project →</a>
     </div>
-  </div>
+    </div><!-- /ppc-gen -->
 
-  <!-- ═══ CAPABILITIES 3D TILT GRID ═══ -->
+  </section>
+
+  <!-- ═══ FULL-STACK CAPABILITIES 3D TILT GRID ═══ -->
   <section class="wsv-caps-section" id="wsv-caps">
     <div class="wsv-caps-header">
       <div>
@@ -1783,169 +4034,229 @@
       <div class="wsv-caps-right-text">From a simple landing page to a complex enterprise platform — we have the stack, the talent, and the obsession to build it right. Every capability below is done in-house, never outsourced.</div>
     </div>
     <div class="wsv-caps-grid" id="wsvCapsGrid">
-      <div class="wsv-cap-card"><span class="wsv-cap-icon">⚡</span><div class="wsv-cap-title">BLAZING PERFORMANCE</div><div class="wsv-cap-desc">Sub-2 second load times guaranteed. Optimised code, CDN delivery, next-gen image formats, lazy loading, and more.</div><div class="wsv-cap-bottom"><span class="wsv-cap-badge">Core Web Vitals</span><div class="wsv-cap-arrow">→</div></div></div>
-      <div class="wsv-cap-card"><span class="wsv-cap-icon">🎨</span><div class="wsv-cap-title">CUSTOM UI/UX DESIGN</div><div class="wsv-cap-desc">Zero templates. Every pixel crafted for your unique brand and target audience. Figma-first design system included.</div><div class="wsv-cap-bottom"><span class="wsv-cap-badge">Design System</span><div class="wsv-cap-arrow">→</div></div></div>
-      <div class="wsv-cap-card"><span class="wsv-cap-icon">📱</span><div class="wsv-cap-title">MOBILE-FIRST RESPONSIVE</div><div class="wsv-cap-desc">60%+ of your visitors are on mobile. We design and develop mobile-first, then scale up — not the other way.</div><div class="wsv-cap-bottom"><span class="wsv-cap-badge">Responsive</span><div class="wsv-cap-arrow">→</div></div></div>
-      <div class="wsv-cap-card"><span class="wsv-cap-icon">🔒</span><div class="wsv-cap-title">SECURE &amp; SCALABLE</div><div class="wsv-cap-desc">SSL, DDoS protection, WAF firewall, cloud hosting with auto-scaling. Your site handles traffic spikes without breaking.</div><div class="wsv-cap-bottom"><span class="wsv-cap-badge">Enterprise Security</span><div class="wsv-cap-arrow">→</div></div></div>
-      <div class="wsv-cap-card"><span class="wsv-cap-icon">📊</span><div class="wsv-cap-title">CRO ARCHITECTURE</div><div class="wsv-cap-desc">Every CTA position, above-the-fold layout, and user flow is engineered around conversion psychology — not aesthetics alone.</div><div class="wsv-cap-bottom"><span class="wsv-cap-badge">A/B Testing</span><div class="wsv-cap-arrow">→</div></div></div>
-      <div class="wsv-cap-card"><span class="wsv-cap-icon">🔗</span><div class="wsv-cap-title">CMS &amp; INTEGRATIONS</div><div class="wsv-cap-desc">WordPress, Webflow, custom headless CMS — you own your content. CRM, payment, analytics integrations included.</div><div class="wsv-cap-bottom"><span class="wsv-cap-badge">Headless CMS</span><div class="wsv-cap-arrow">→</div></div></div>
-    </div>
-  </section>
-
-  <!-- ═══ WEBSITE PREVIEW GENERATOR ═══ -->
-  <section class="wsv-gen-section" id="wsv-gen-section-anchor">
-    <div class="wsv-gen-header">
-      <div class="section-tag" style="justify-content:center;color:var(--orange);margin-bottom:20px;">Interactive Tool</div>
-      <h2 class="wsv-gen-title">PREVIEW YOUR <span>WEBSITE</span></h2>
-      <p class="wsv-gen-sub">Enter your brand details and get an instant AI-generated preview of what your website could look like. Real concepts, real fast.</p>
-    </div>
-    <div class="wsv-gen-ui" id="wsvGenUi">
-      <div class="wsv-gen-panel">
-        <div class="wsv-gen-panel-logo">
-          <img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779787887/favicon_oalxfi.png" alt="The Sonic Media">
-          <span class="wsv-gen-panel-logo-text">THE SONIC MEDIA · SITE PREVIEW</span>
-        </div>
-        <div class="wsv-gen-panel-title">Your Brand Details</div>
-        <div class="wsv-field">
-          <label for="wsv-brand-name">Brand / Business Name</label>
-          <input type="text" id="wsv-brand-name" class="wsv-input" placeholder="e.g. Nexus Foods" maxlength="40" aria-label="Brand name" autocomplete="off">
-        </div>
-        <div class="wsv-field">
-          <label for="wsv-tagline">Tagline / What You Do</label>
-          <input type="text" id="wsv-tagline" class="wsv-input" placeholder="e.g. Healthy meals, delivered daily" maxlength="60" aria-label="Tagline" autocomplete="off">
-        </div>
-        <div class="wsv-field">
-          <label for="wsv-industry">Industry</label>
-          <select id="wsv-industry" class="wsv-input wsv-select" aria-label="Industry">
-            <option value="" style="background:#1a1a1a;color:#fff;">Select your industry…</option>
-            <option value="food" style="background:#1a1a1a;color:#fff;">Food &amp; Beverage</option>
-            <option value="tech" style="background:#1a1a1a;color:#fff;">Technology / SaaS</option>
-            <option value="fashion" style="background:#1a1a1a;color:#fff;">Fashion &amp; Lifestyle</option>
-            <option value="health" style="background:#1a1a1a;color:#fff;">Health &amp; Wellness</option>
-            <option value="finance" style="background:#1a1a1a;color:#fff;">Finance / Fintech</option>
-            <option value="real-estate" style="background:#1a1a1a;color:#fff;">Real Estate</option>
-            <option value="education" style="background:#1a1a1a;color:#fff;">Education / EdTech</option>
-            <option value="ecommerce" style="background:#1a1a1a;color:#fff;">E-Commerce / Retail</option>
-            <option value="agency" style="background:#1a1a1a;color:#fff;">Agency / Services</option>
-            <option value="hospitality" style="background:#1a1a1a;color:#fff;">Hospitality / Travel</option>
-          </select>
-        </div>
-        <div class="wsv-field">
-          <label>Website Style</label>
-          <div class="wsv-style-grid" id="wsvStyleGrid">
-            <button class="wsv-style-btn active" data-style="dark" onclick="wsv_selectStyle(this)" type="button">Dark &amp; Bold</button>
-            <button class="wsv-style-btn" data-style="minimal" onclick="wsv_selectStyle(this)" type="button">Clean Minimal</button>
-            <button class="wsv-style-btn" data-style="vibrant" onclick="wsv_selectStyle(this)" type="button">Deep Vibrant</button>
-            <button class="wsv-style-btn" data-style="corporate" onclick="wsv_selectStyle(this)" type="button">Corporate Pro</button>
-          </div>
-        </div>
-        <button class="wsv-gen-btn" onclick="wsv_generatePreview()" id="wsvGenBtn" aria-label="Generate website preview" type="button">
-          GENERATE MY PREVIEW →
-        </button>
+      <div class="wsv-cap-card">
+        <span class="wsv-cap-icon">⚡</span>
+        <div class="wsv-cap-title">BLAZING PERFORMANCE</div>
+        <div class="wsv-cap-desc">Sub-2 second load times guaranteed. Optimised code, CDN delivery, next-gen image formats, lazy loading, and more.</div>
+        <div class="wsv-cap-bottom"><span class="wsv-cap-badge">Core Web Vitals</span><div class="wsv-cap-arrow">→</div></div>
       </div>
-
-      <div class="wsv-preview-display">
-        <div class="wsv-preview-browser">
-          <div class="wsv-preview-topbar">
-            <div class="wsv-dots"><span></span><span></span><span></span></div>
-            <div class="wsv-preview-url" id="wsvPreviewUrl">yourwebsite.com — Fill in details to preview</div>
-          </div>
-          <div class="wsv-preview-area" id="wsvPreviewArea">
-            <!-- Empty state -->
-            <div class="wsv-preview-empty" id="wsvEmptyState">
-              <div class="wsv-empty-icon">🌐</div>
-              <strong>Your Site Preview</strong>
-              <p>Fill in your brand details on the left and click Generate to see an instant preview concept.</p>
-            </div>
-            <!-- Spinner -->
-            <div class="wsv-spinner" id="wsvSpinner" role="status" aria-live="polite">
-              <div class="wsv-spinner-ring"></div>
-              <div class="wsv-spinner-text">BUILDING YOUR PREVIEW…</div>
-            </div>
-            <!-- Generated preview -->
-            <div class="wsv-generated" id="wsvGenerated"></div>
-          </div>
-        </div>
-        <!-- CTA below preview -->
-        <div id="wsvPreviewCta" style="display:none;margin-top:24px;padding:28px 32px;background:#111;border:1px solid rgba(255,92,0,.2);border-radius:16px;">
-          <div style="font-family:var(--font-heading,'Bebas Neue',sans-serif);font-size:20px;color:#fff;margin-bottom:8px;">Love what you see?</div>
-          <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px;line-height:1.6;">This is just a glimpse. Let's build the real thing — engineered for performance and conversion.</div>
-          <a href="#" onclick="navigate('contact');return false;" class="btn-p" style="font-size:13px;">Start Your Project →</a>
-        </div>
+      <div class="wsv-cap-card">
+        <span class="wsv-cap-icon">🎨</span>
+        <div class="wsv-cap-title">CUSTOM UI/UX DESIGN</div>
+        <div class="wsv-cap-desc">Zero templates. Every pixel crafted for your unique brand and target audience. Figma-first design system included.</div>
+        <div class="wsv-cap-bottom"><span class="wsv-cap-badge">Design System</span><div class="wsv-cap-arrow">→</div></div>
+      </div>
+      <div class="wsv-cap-card">
+        <span class="wsv-cap-icon">📱</span>
+        <div class="wsv-cap-title">MOBILE-FIRST RESPONSIVE</div>
+        <div class="wsv-cap-desc">60%+ of your visitors are on mobile. We design and develop mobile-first, then scale up — not the other way.</div>
+        <div class="wsv-cap-bottom"><span class="wsv-cap-badge">Responsive</span><div class="wsv-cap-arrow">→</div></div>
+      </div>
+      <div class="wsv-cap-card">
+        <span class="wsv-cap-icon">🔒</span>
+        <div class="wsv-cap-title">SECURE &amp; SCALABLE</div>
+        <div class="wsv-cap-desc">SSL, DDoS protection, WAF firewall, cloud hosting with auto-scaling. Your site handles traffic spikes without breaking.</div>
+        <div class="wsv-cap-bottom"><span class="wsv-cap-badge">Enterprise Security</span><div class="wsv-cap-arrow">→</div></div>
+      </div>
+      <div class="wsv-cap-card">
+        <span class="wsv-cap-icon">📊</span>
+        <div class="wsv-cap-title">CRO ARCHITECTURE</div>
+        <div class="wsv-cap-desc">Every CTA position, above-the-fold layout, and user flow is engineered around conversion psychology — not aesthetics alone.</div>
+        <div class="wsv-cap-bottom"><span class="wsv-cap-badge">A/B Testing</span><div class="wsv-cap-arrow">→</div></div>
+      </div>
+      <div class="wsv-cap-card">
+        <span class="wsv-cap-icon">🔗</span>
+        <div class="wsv-cap-title">CMS &amp; INTEGRATIONS</div>
+        <div class="wsv-cap-desc">WordPress, Webflow, custom headless CMS — you own your content. CRM, payment, analytics integrations included.</div>
+        <div class="wsv-cap-bottom"><span class="wsv-cap-badge">Headless CMS</span><div class="wsv-cap-arrow">→</div></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ TESTIMONIALS ═══ -->
-  <section class="wsv-testimonials" id="wsv-testimonials">
-    <div class="wsv-test-header">
-      <div class="section-tag" style="justify-content:center;color:var(--orange);margin-bottom:16px;">Client Results</div>
-      <h2 class="wsv-test-title">What Our <span>Clients</span> Say</h2>
-    </div>
-    <div class="wsv-test-grid">
-      <div class="wsv-test-card">
-        <div class="wsv-test-quote">"</div>
-        <div class="wsv-test-text">The Sonic Media didn't just build us a website — they built us a sales machine. Our leads went up 3× in the first month alone. The attention to speed and mobile UX was exceptional.</div>
-        <div class="wsv-test-author">
-          <div class="wsv-test-avatar">RK</div>
-          <div><div class="wsv-test-name">RAHUL KAPOOR</div><div class="wsv-test-role">Founder, NexaFin Technologies</div><div class="wsv-test-stars">★★★★★</div></div>
-        </div>
-      </div>
-      <div class="wsv-test-card">
-        <div class="wsv-test-quote">"</div>
-        <div class="wsv-test-text">We've had 4 different agencies build websites for us over the years. This is the first time we're actually proud to show our URL. Conversion rate jumped from 1.2% to 4.8% within 60 days.</div>
-        <div class="wsv-test-author">
-          <div class="wsv-test-avatar">PM</div>
-          <div><div class="wsv-test-name">PRIYA MEHTA</div><div class="wsv-test-role">CMO, Verdant Organics</div><div class="wsv-test-stars">★★★★★</div></div>
-        </div>
-      </div>
-      <div class="wsv-test-card">
-        <div class="wsv-test-quote">"</div>
-        <div class="wsv-test-text">PageSpeed score went from 34 to 97. Bounce rate dropped 40%. Our Google rankings improved within weeks of launch. These guys genuinely understand the connection between performance and SEO.</div>
-        <div class="wsv-test-author">
-          <div class="wsv-test-avatar">AS</div>
-          <div><div class="wsv-test-name">ARJUN SHAH</div><div class="wsv-test-role">CEO, ZenithHR Platform</div><div class="wsv-test-stars">★★★★★</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ BRAND ORBIT SECTION ═══ -->
-  <section class="wsv-orbit-section" id="wsv-tech">
-    <div class="wsv-orbit-header">
-      <div class="section-tag" style="justify-content:center;color:var(--orange);margin-bottom:16px;">Our Stack</div>
-      <h2 class="wsv-orbit-title">Your Brand at the<br><span>Center of Everything</span></h2>
-      <p class="wsv-orbit-sub">Type your company name and watch our entire tech stack orbit around your brand — because every tool we use exists to serve your vision.</p>
-    </div>
-    <div class="wsv-orbit-wrap">
-      <canvas class="wsv-orbit-canvas" id="wsvOrbitCanvas"></canvas>
-      <div class="wsv-orbit-center">
-        <div class="wsv-orbit-brand-ring" id="wsvOrbitRing">
-          <img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779787887/favicon_oalxfi.png" class="wsv-orbit-logo-img" alt="The Sonic Media" id="wsvOrbitLogoImg">
-          <div class="wsv-orbit-brand-name" id="wsvOrbitBrandName">YOUR BRAND</div>
-          <div class="wsv-orbit-brand-sub">POWERED BY US</div>
-        </div>
-      </div>
-    </div>
-    <div class="wsv-orbit-input-row">
-      <input type="text" class="wsv-orbit-input" id="wsvOrbitInput" placeholder="Enter your company name…" maxlength="24" aria-label="Company name for orbit">
-      <button class="wsv-orbit-go" onclick="wsv_setOrbitBrand()" aria-label="Set brand name">ORBIT MY BRAND →</button>
-    </div>
-  </section>
-
-  <!-- ═══ FINAL CTA WITH PARTICLE CANVAS ═══ -->
+  <!-- ═══ FINAL CTA — PROPOSAL FORM ═══ -->
   <section class="wsv-final-cta" id="wsv-final-cta">
     <canvas class="wsv-cta-canvas" id="wsvCtaCanvas"></canvas>
     <div class="wsv-final-inner">
-      <div class="wsv-final-tag">🚀 30-Day Launch Guarantee</div>
-      <h2 class="wsv-final-h" id="wsvFinalH">LET'S BUILD<br>YOUR <span>DREAM</span><br>SITE.</h2>
-      <p class="wsv-final-p">Partner with a team obsessed with performance, design, and results. Your #1 salesperson is a great website — let's engineer it.</p>
-      <div class="wsv-final-btns">
-        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start The Conversation →</a>
-        <a href="#" onclick="navigate('studio');return false;" class="btn-s">View Web Portfolio</a>
+
+      <!-- LEFT: Headline -->
+      <div class="wsv-final-left">
+        <div class="wsv-final-tag">🚀 Let's Build Your Dream Site</div>
+        <h2 class="wsv-final-h" id="wsvFinalH">LET'S BUILD<br>YOUR <span>DREAM</span><br>SITE.</h2>
+        <p class="wsv-final-p">Partner with a team obsessed with performance, design, and results. Your&nbsp;#1 salesperson is a great website — let's engineer it.</p>
       </div>
+
+      <!-- RIGHT: Proposal Form -->
+      <div class="wsv-proposal-form-wrap">
+        <div class="wsv-proposal-form">
+
+          <!-- Website Type -->
+          <div class="wsv-pf-field">
+            <label class="wsv-pf-label" for="pfWebsiteType">Website Type</label>
+            <select class="wsv-input wsv-select wsv-pf-input" id="pfWebsiteType" name="website_type">
+              <option value="" disabled selected>Select Website Type ▼</option>
+              <option value="basic">Basic Website</option>
+              <option value="creative">Creative Experience Website</option>
+              <option value="ecommerce">E-Commerce</option>
+              <option value="custom">Custom Website</option>
+            </select>
+          </div>
+
+          <!-- Name + Mobile (2 col) -->
+          <div class="wsv-pf-row">
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfName">Your Name</label>
+              <input class="wsv-input wsv-pf-input" type="text" id="pfName" name="name" placeholder="Enter Name">
+            </div>
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfMobile">Mobile Number</label>
+              <input class="wsv-input wsv-pf-input" type="tel" id="pfMobile" name="mobile" placeholder="Enter Mobile Number">
+            </div>
+          </div>
+
+          <!-- Email + Budget (2 col) -->
+          <div class="wsv-pf-row">
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfEmail">Email Address</label>
+              <input class="wsv-input wsv-pf-input" type="email" id="pfEmail" name="email" placeholder="Enter Email">
+            </div>
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfBudget">Project Budget</label>
+              <select class="wsv-input wsv-select wsv-pf-input" id="pfBudget" name="budget">
+                <option value="" disabled selected>Select Budget ▼</option>
+                <option value="under-25k">Under ₹25,000</option>
+                <option value="25k-50k">₹25,000 – ₹50,000</option>
+                <option value="50k-1l">₹50,000 – ₹1,00,000</option>
+                <option value="1l-3l">₹1,00,000 – ₹3,00,000</option>
+                <option value="3l+">₹3,00,000+</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Hidden auto-fill -->
+          <input type="hidden" name="service" value="Website Development">
+
+          <!-- Submit -->
+          <button class="wsv-pf-btn" type="button" onclick="wsvSubmitProposal()">
+            Get My Proposal →
+          </button>
+
+        </div>
+      </div>
+
     </div>
   </section>
+
+  <style>
+  /* ── PROPOSAL FORM STYLES ── */
+  .wsv-proposal-form-wrap {
+    display: flex;
+    align-items: stretch;
+  }
+  .wsv-proposal-form {
+    width: 100%;
+    background: #ff5c00;
+    border: none;
+    border-radius: 20px;
+    padding: 36px 36px 32px;
+    box-shadow: 0 24px 60px rgba(255,92,0,.35), 0 40px 80px rgba(0,0,0,.4);
+    text-align: left;
+  }
+  .wsv-pf-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .wsv-pf-field {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .wsv-pf-label {
+    font-family: var(--font-heading, 'Bebas Neue', sans-serif);
+    font-size: 10px;
+    letter-spacing: .14em;
+    color: rgba(255,255,255,.75);
+    text-transform: uppercase;
+  }
+  .wsv-pf-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 16px;
+    font-size: 13px;
+    background: #ffffff !important;
+    border: 1px solid rgba(255,255,255,.3) !important;
+    color: #1a1a1a !important;
+    border-radius: 10px;
+  }
+  .wsv-pf-input::placeholder { color: #bbb !important; }
+  .wsv-pf-input:focus {
+    border-color: rgba(255,255,255,.9) !important;
+    background: #ffffff !important;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255,255,255,.25);
+  }
+  .wsv-pf-input option {
+    background: #fff;
+    color: #1a1a1a;
+  }
+  .wsv-pf-btn {
+    width: 100%;
+    margin-top: 6px;
+    padding: 14px;
+    background: #1a1a1a;
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-heading, 'Bebas Neue', sans-serif);
+    font-size: 16px;
+    letter-spacing: .1em;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background .25s, transform .2s, box-shadow .25s;
+  }
+  .wsv-pf-btn:hover {
+    background: #000;
+    box-shadow: 0 8px 32px rgba(0,0,0,.5);
+    transform: translateY(-2px);
+  }
+  @media (max-width: 1024px) {
+    .wsv-final-inner { grid-template-columns: 1fr; gap: 48px; }
+    .wsv-final-left { text-align: center; }
+    .wsv-final-p { margin: 0 auto; }
+  }
+  @media (max-width: 600px) {
+    .wsv-final-cta { padding: 60px 24px; }
+    .wsv-proposal-form { padding: 24px 18px; }
+    .wsv-pf-row { grid-template-columns: 1fr; }
+  }
+  </style>
+
+  <script>
+  function wsvSubmitProposal() {
+    var type    = document.getElementById('pfWebsiteType').value;
+    var name    = document.getElementById('pfName').value.trim();
+    var mobile  = document.getElementById('pfMobile').value.trim();
+    var email   = document.getElementById('pfEmail').value.trim();
+    var budget  = document.getElementById('pfBudget').value;
+
+    if (!type || !name || !mobile || !email || !budget) {
+      alert('Please fill in all fields before submitting.');
+      return;
+    }
+
+    // Encode for WhatsApp
+    var msg = '🚀 *New Website Proposal Request*\n\n'
+      + '*Service:* Website Development\n'
+      + '*Website Type:* ' + document.getElementById('pfWebsiteType').options[document.getElementById('pfWebsiteType').selectedIndex].text + '\n'
+      + '*Name:* ' + name + '\n'
+      + '*Mobile:* ' + mobile + '\n'
+      + '*Email:* ' + email + '\n'
+      + '*Budget:* ' + document.getElementById('pfBudget').options[document.getElementById('pfBudget').selectedIndex].text;
+
+    var waUrl = 'https://wa.me/918733087249?text=' + encodeURIComponent(msg);
+    window.open(waUrl, '_blank');
+  }
+  </script>
 
   <div class="page-footer-slot"></div>
 </div><!-- /page-svc-web -->
@@ -2557,7 +4868,7 @@ function wsvInit() {
   }
 
   /* ── 10. GSAP reveal for gen section ── */
-  gsap.from('#wsvGenUi', {
+  gsap.from('.wsv-gen-v2-wrap', {
     opacity: 0, y: 40, duration: .9, ease: 'power3.out',
     scrollTrigger: { trigger: '#wsv-gen-section-anchor', start: 'top 75%', once: true }
   });
@@ -2581,190 +4892,7 @@ window.wsv_setOrbitBrand = function() {
   if (typeof window._wsvOrbitSetBrand === 'function') window._wsvOrbitSetBrand(display);
 };
 
-/* ══════════════════════════════════
-   PREVIEW GENERATOR
-══════════════════════════════════ */
-let wsvSelectedStyle = 'dark';
-
-window.wsv_selectStyle = function(btn) {
-  document.querySelectorAll('.wsv-style-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  wsvSelectedStyle = btn.dataset.style;
-};
-
-window.wsv_generatePreview = function() {
-  const brand = document.getElementById('wsv-brand-name').value.trim();
-  const tagline = document.getElementById('wsv-tagline').value.trim();
-  const industry = document.getElementById('wsv-industry').value;
-  const style = wsvSelectedStyle;
-
-  if (!brand) {
-    const inp = document.getElementById('wsv-brand-name');
-    inp.focus();
-    inp.style.borderColor = 'rgba(255,92,0,.8)';
-    inp.style.animation = 'none';
-    setTimeout(() => { inp.style.borderColor = ''; }, 2000);
-    return;
-  }
-
-  const urlSlug = brand.toLowerCase().replace(/[^a-z0-9]/g, '') + '.com';
-  document.getElementById('wsvPreviewUrl').textContent = '🔒 ' + urlSlug;
-  document.getElementById('wsvEmptyState').style.display = 'none';
-  document.getElementById('wsvGenerated').classList.remove('active');
-  document.getElementById('wsvPreviewCta').style.display = 'none';
-
-  const spinner = document.getElementById('wsvSpinner');
-  spinner.classList.add('active');
-
-  setTimeout(() => {
-    spinner.classList.remove('active');
-    const gen = document.getElementById('wsvGenerated');
-    gen.innerHTML = wsv_buildPreview(brand, tagline || 'Premium quality. Exceptional results.', industry, style);
-    gen.classList.add('active');
-    document.getElementById('wsvPreviewCta').style.display = 'block';
-    if (typeof gsap !== 'undefined') {
-      gsap.from(gen, { opacity: 0, y: 20, duration: .6, ease: 'power3.out' });
-      gsap.from('#wsvPreviewCta', { opacity: 0, y: 16, duration: .5, delay: .25, ease: 'power2.out' });
-    }
-  }, 1500);
-};
-
-function wsv_buildPreview(brand, tagline, industry, style) {
-  const short = s => s.length > 16 ? s.slice(0, 16) + '…' : s;
-  const shortTag = s => s.length > 55 ? s.slice(0, 55) + '…' : s;
-  const B = short(brand).toUpperCase();
-  const T = shortTag(tagline);
-  const heroLine = { tech:'NEXT-GEN PLATFORM', food:'CRAFTED WITH CARE', fashion:'WEAR THE FUTURE', health:'LIVE BETTER DAILY', finance:'GROW YOUR WEALTH', 'real-estate':'FIND YOUR HOME', education:'LEARN WITHOUT LIMITS', ecommerce:'SHOP THE FUTURE', agency:'WE BUILD BRANDS', hospitality:'TRAVEL IN STYLE' }[industry] || 'BUILT TO CONVERT';
-  const icons = { food:['🍽️','🥗','🍳'], tech:['💻','⚡','🔗'], fashion:['👗','✨','🎨'], health:['💪','🌿','❤️'], finance:['📈','💰','🏦'], 'real-estate':['🏠','🔑','🏗️'], education:['📚','🎓','💡'], ecommerce:['🛒','📦','⭐'], agency:['🚀','🎯','📊'], hospitality:['✈️','🌟','🏨'] }[industry] || ['⚡','🎨','📱'];
-  const cardTitles = { food:['Fresh Ingredients','Fast Delivery','100% Organic'], tech:['High Performance','Secure & Scalable','API-First'], fashion:['Premium Quality','Fast Shipping','Easy Returns'], health:['Certified Safe','Proven Results','Expert Support'], finance:['Low Fees','Instant Transfers','Bank-Grade Security'], 'real-estate':['500+ Listings','Expert Agents','Easy Finance'], education:['Expert Tutors','Live Classes','Certification'], ecommerce:['Free Shipping','Easy Returns','Best Price'], agency:['Strategy First','Award-Winning','On-Time Delivery'], hospitality:['Best Rates','Curated Hotels','24/7 Support'] }[industry] || ['Premium Quality','Fast Delivery','Trusted Globally'];
-
-  // Four truly distinct theme layouts
-  const themes = {
-    dark: () => `
-      <div style="background:#080808;min-height:460px;font-family:'DM Sans',sans-serif;overflow:hidden;">
-        <div style="background:#0f0f0f;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,92,0,.12);">
-          <span style="font-family:'Bebas Neue',sans-serif;font-size:17px;color:#fff;letter-spacing:.06em;">${B}</span>
-          <div style="display:flex;gap:20px;font-size:11px;color:rgba(255,255,255,.3);">About Services Work</div>
-          <span style="background:#ff5c00;color:#fff;padding:6px 14px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.06em;">CONTACT</span>
-        </div>
-        <div style="padding:44px 28px 24px;position:relative;overflow:hidden;">
-          <div style="position:absolute;right:-40px;top:-40px;width:280px;height:280px;background:radial-gradient(circle,rgba(255,92,0,.08),transparent 70%);border-radius:50%;pointer-events:none;"></div>
-          <div style="display:inline-block;background:rgba(255,92,0,.1);border:1px solid rgba(255,92,0,.2);padding:4px 12px;border-radius:4px;font-size:9px;letter-spacing:.15em;color:#ff5c00;margin-bottom:16px;">${(industry||'BRAND').toUpperCase()}</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:44px;color:#fff;line-height:.95;margin-bottom:6px;">${B}</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:#ff5c00;line-height:1;margin-bottom:14px;">${heroLine}</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.4);max-width:320px;line-height:1.6;margin-bottom:20px;">${T}</div>
-          <div style="display:flex;gap:10px;">
-            <span style="background:#ff5c00;color:#fff;padding:9px 18px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.06em;">GET STARTED →</span>
-            <span style="border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);padding:9px 18px;border-radius:4px;font-size:11px;">View Work</span>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:0 24px 24px;">
-          ${icons.map((ic,i)=>`<div style="background:#111;border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:16px 14px;">
-            <div style="font-size:20px;margin-bottom:8px;">${ic}</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;color:#fff;margin-bottom:4px;">${cardTitles[i]}</div>
-            <div style="font-size:9px;color:rgba(255,255,255,.3);line-height:1.5;">Trusted by 1000+ brands.</div>
-          </div>`).join('')}
-        </div>
-      </div>`,
-
-    minimal: () => `
-      <div style="background:#fafafa;min-height:460px;font-family:'DM Sans',sans-serif;overflow:hidden;">
-        <div style="background:#fff;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ebebeb;box-shadow:0 1px 0 #f0f0f0;">
-          <span style="font-family:'Bebas Neue',sans-serif;font-size:17px;color:#0a0a0a;letter-spacing:.06em;">${B}</span>
-          <div style="display:flex;gap:20px;font-size:11px;color:#aaa;">About Services Work</div>
-          <span style="border:1.5px solid #0a0a0a;color:#0a0a0a;padding:6px 14px;border-radius:3px;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.06em;">CONTACT</span>
-        </div>
-        <div style="padding:52px 32px 28px;display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center;">
-          <div>
-            <div style="width:36px;height:3px;background:#ff5c00;margin-bottom:20px;"></div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:46px;color:#0a0a0a;line-height:.95;margin-bottom:10px;">${B}<br><span style="color:#ff5c00;font-size:26px;">${heroLine}</span></div>
-            <div style="font-size:11px;color:#888;line-height:1.7;margin-bottom:22px;max-width:260px;">${T}</div>
-            <div style="display:flex;gap:10px;">
-              <span style="background:#0a0a0a;color:#fff;padding:9px 18px;border-radius:2px;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.06em;">GET STARTED →</span>
-              <span style="color:#ff5c00;font-size:11px;padding:9px 0;border-bottom:1px solid #ff5c00;">Learn More →</span>
-            </div>
-          </div>
-          <div style="background:#f0f0f0;border-radius:12px;height:160px;display:flex;align-items:center;justify-content:center;font-size:42px;">${icons[0]}</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:#e8e8e8;margin:0 28px 24px;">
-          ${icons.map((ic,i)=>`<div style="background:#fff;padding:18px 16px;">
-            <div style="font-size:18px;margin-bottom:6px;">${ic}</div>
-            <div style="font-size:12px;font-weight:600;color:#0a0a0a;margin-bottom:3px;">${cardTitles[i]}</div>
-            <div style="font-size:9px;color:#aaa;line-height:1.5;">Excellence guaranteed.</div>
-          </div>`).join('')}
-        </div>
-      </div>`,
-
-    vibrant: () => `
-      <div style="background:linear-gradient(135deg,#06001a 0%,#0d0628 60%,#1a0a00 100%);min-height:460px;font-family:'DM Sans',sans-serif;overflow:hidden;position:relative;">
-        <div style="position:absolute;top:-60px;left:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(255,92,0,.12),transparent 70%);border-radius:50%;pointer-events:none;"></div>
-        <div style="position:absolute;bottom:-40px;right:-40px;width:250px;height:250px;background:radial-gradient(circle,rgba(120,40,255,.1),transparent 70%);border-radius:50%;pointer-events:none;"></div>
-        <div style="padding:12px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);">
-          <span style="font-family:'Bebas Neue',sans-serif;font-size:17px;background:linear-gradient(90deg,#ff5c00,#ff9500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.06em;">${B}</span>
-          <div style="display:flex;gap:20px;font-size:11px;color:rgba(255,255,255,.3);">About Services Work</div>
-          <span style="background:linear-gradient(135deg,#ff5c00,#ff8c00);color:#fff;padding:6px 14px;border-radius:20px;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.06em;">CONTACT</span>
-        </div>
-        <div style="padding:44px 28px 20px;">
-          <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,92,0,.12);border:1px solid rgba(255,92,0,.2);padding:4px 12px;border-radius:20px;font-size:9px;letter-spacing:.15em;color:#ff5c00;margin-bottom:14px;">✦ ${(industry||'BRAND').toUpperCase()}</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:.92;margin-bottom:8px;">
-            <span style="background:linear-gradient(135deg,#fff,rgba(255,255,255,.7));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${B}</span><br>
-            <span style="background:linear-gradient(90deg,#ff5c00,#ff9500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${heroLine}</span>
-          </div>
-          <div style="font-size:11px;color:rgba(255,255,255,.45);max-width:300px;line-height:1.65;margin-bottom:20px;">${T}</div>
-          <div style="display:flex;gap:10px;">
-            <span style="background:linear-gradient(135deg,#ff5c00,#ff8c00);color:#fff;padding:9px 18px;border-radius:20px;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.06em;box-shadow:0 4px 20px rgba(255,92,0,.3);">GET STARTED →</span>
-            <span style="border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);padding:9px 18px;border-radius:20px;font-size:11px;">View Work</span>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:0 24px 24px;">
-          ${icons.map((ic,i)=>`<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,92,0,.12);border-radius:12px;padding:16px 14px;backdrop-filter:blur(8px);">
-            <div style="font-size:20px;margin-bottom:8px;">${ic}</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;color:#fff;margin-bottom:4px;">${cardTitles[i]}</div>
-            <div style="font-size:9px;color:rgba(255,255,255,.3);line-height:1.5;">Excellence delivered.</div>
-          </div>`).join('')}
-        </div>
-      </div>`,
-
-    corporate: () => `
-      <div style="background:#f4f5f7;min-height:460px;font-family:'DM Sans',sans-serif;overflow:hidden;">
-        <div style="background:#1a1a2e;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <div style="width:28px;height:28px;background:#ff5c00;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:14px;color:#fff;">${B[0]}</div>
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:15px;color:#fff;letter-spacing:.06em;">${B}</span>
-          </div>
-          <div style="display:flex;gap:20px;font-size:11px;color:rgba(255,255,255,.4);">Solutions Services About</div>
-          <span style="background:#ff5c00;color:#fff;padding:7px 16px;border-radius:3px;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.06em;">REQUEST DEMO</span>
-        </div>
-        <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:44px 32px 32px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;">
-          <div>
-            <div style="font-size:9px;letter-spacing:.2em;color:#ff5c00;margin-bottom:14px;text-transform:uppercase;">${(industry||'ENTERPRISE').toUpperCase()} SOLUTIONS</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:#fff;line-height:.95;margin-bottom:10px;">${B}<br><span style="color:#ff5c00;font-size:22px;">${heroLine}</span></div>
-            <div style="font-size:10px;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:20px;">${T}</div>
-            <div style="display:flex;gap:10px;">
-              <span style="background:#ff5c00;color:#fff;padding:8px 16px;border-radius:3px;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.06em;">GET DEMO →</span>
-              <span style="border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:8px 16px;border-radius:3px;font-size:10px;">Learn More</span>
-            </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-            ${[['98%','Uptime SLA'],['10×','ROI Average'],['500+','Clients'],['24/7','Support']].map(([n,l])=>`
-            <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:14px 12px;text-align:center;">
-              <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#ff5c00;">${n}</div>
-              <div style="font-size:8px;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;margin-top:2px;">${l}</div>
-            </div>`).join('')}
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:16px 24px 20px;background:#f4f5f7;">
-          ${icons.map((ic,i)=>`<div style="background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:16px 14px;border-top:3px solid #ff5c00;">
-            <div style="font-size:20px;margin-bottom:8px;">${ic}</div>
-            <div style="font-size:12px;font-weight:700;color:#0a0a0a;margin-bottom:3px;">${cardTitles[i]}</div>
-            <div style="font-size:9px;color:#888;line-height:1.5;">Enterprise-grade reliability.</div>
-          </div>`).join('')}
-        </div>
-      </div>`
-  };
-
-  return (themes[style] || themes.dark)();
-}
+/* preview generator replaced by v2 */
 
 })();
 
@@ -2776,5 +4904,67 @@ function wsv_buildPreview(brand, tagline, industry, style) {
 })();
 </script>
 <script src="../assets/js/app.js"></script>
+
+  <!-- ─── IFRAME FIT SCALER ─── -->
+  <script>
+  (function() {
+    var IFRAME_W = 1440;
+
+    function scaleIframes() {
+      document.querySelectorAll('.wsv-lcard-viewport').forEach(function(vp) {
+        var scale = vp.offsetWidth / IFRAME_W;
+        var iframe = vp.querySelector('iframe');
+        if (!iframe) return;
+
+        // Use zoom — unlike transform:scale, zoom resizes the actual hit area
+        // so mouse events land correctly without any overlay hack
+        iframe.style.zoom = scale;
+        iframe.style.transform = '';
+
+        // Remove any leftover relay overlay from previous approach
+        var old = vp.querySelector('.wsv-mouse-relay');
+        if (old) old.remove();
+      });
+    }
+
+    function init() {
+      scaleIframes();
+      window.addEventListener('resize', scaleIframes);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+  </script>
+
+<script>
+/* ── Reliable scroll-to helper — works inside SPA wrappers ── */
+function wsvFindScroller(el) {
+  var node = el.parentElement;
+  while (node && node !== document.body) {
+    var style = window.getComputedStyle(node);
+    var overflow = style.overflow + style.overflowY;
+    if (/auto|scroll/.test(overflow) && node.scrollHeight > node.clientHeight) return node;
+    node = node.parentElement;
+  }
+  return window;
+}
+function wsvScrollToAnchor(id) {
+  var target = document.getElementById(id);
+  if (!target) return;
+  var scroller = wsvFindScroller(target);
+  if (scroller === window) {
+    target.scrollIntoView({behavior: 'smooth', block: 'start'});
+  } else {
+    var scrollerRect = scroller.getBoundingClientRect ? scroller.getBoundingClientRect() : {top:0};
+    var targetRect = target.getBoundingClientRect();
+    var offset = targetRect.top - scrollerRect.top + scroller.scrollTop - 80;
+    scroller.scrollTo({top: offset, behavior: 'smooth'});
+  }
+}
+</script>
 </body>
 </html>
