@@ -357,10 +357,10 @@
   padding: 120px 0 0;
 }
 .wsv-process-header {
-  text-align: center;
+  text-align: left;
   padding: 0 60px 80px;
 }
-.wsv-process-header .section-tag { justify-content: center; margin-bottom: 20px; }
+.wsv-process-header .section-tag { justify-content: flex-start; margin-bottom: 20px; }
 .wsv-process-title {
   font-family: var(--font-heading, 'Bebas Neue', sans-serif);
   font-size: clamp(48px, 6vw, 90px);
@@ -569,14 +569,11 @@
   pointer-events: none;
 }
 .wsv-caps-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: end;
+  display: block;
   margin-bottom: 80px;
 }
 .wsv-caps-title {
-  font-family: var(--font-heading, 'Bebas Neue', sans-serif);
+  font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(52px, 6vw, 90px);
   color: #fff;
   line-height: .95;
@@ -587,6 +584,8 @@
   line-height: 1.7;
   color: rgba(255,255,255,.5);
   padding-bottom: 10px;
+  max-width: 600px;
+  margin-top: 16px;
 }
 .wsv-caps-grid {
   display: grid;
@@ -677,7 +676,7 @@
   pointer-events: none;
 }
 .wsv-gen-header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 80px;
 }
 .wsv-gen-title {
@@ -692,7 +691,7 @@
   font-size: 15px;
   color: rgba(255,255,255,.45);
   max-width: 500px;
-  margin: 0 auto;
+  margin: 0;
   line-height: 1.7;
 }
 
@@ -1284,7 +1283,7 @@
 .wsv-final-inner {
   position: relative;
   z-index: 2;
-  max-width: 1000px;
+  max-width: 1380px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 420px 1fr;
@@ -1314,8 +1313,8 @@
   width: fit-content;
 }
 .wsv-final-h {
-  font-family: var(--font-heading, 'Bebas Neue', sans-serif);
-  font-size: clamp(36px, 3.8vw, 56px);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 6vw, 90px);
   color: #fff;
   line-height: .95;
   margin-bottom: 14px;
@@ -1335,7 +1334,7 @@
 @media (max-width: 1024px) {
   .wsv-hero-inner { grid-template-columns: 1fr; padding: 140px 40px 80px; }
   .wsv-hero-right { display: none; }
-  .wsv-caps-header { grid-template-columns: 1fr; }
+  /* wsv-caps-header is already block, no reset needed */
   .wsv-caps-grid { grid-template-columns: 1fr 1fr; }
   .wsv-gen-ui { grid-template-columns: 1fr; }
   .wsv-test-grid { grid-template-columns: 1fr; }
@@ -1360,7 +1359,7 @@
 }
 .wsv-gen-v2-wrap .gen-box{
   max-width:100%;
-  height:clamp(420px,42vw,680px);
+  height:clamp(540px,55vw,760px);
 }
 
 
@@ -1378,11 +1377,10 @@
 .gen-box{
   background:#ffffff;
   border-radius:16px;
-  overflow:hidden;
+  overflow:visible;
   box-shadow:0 0 0 1px rgba(0,0,0,.12),0 60px 120px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.04) inset;
   display:flex;
-  aspect-ratio:16/9;
-  height:clamp(380px,38vw,620px);
+  height:clamp(520px,52vw,740px);
   max-width:1100px;
   margin:0 auto;
 }
@@ -1396,6 +1394,7 @@
   display:flex;
   flex-direction:column;
   overflow:hidden;
+  border-radius:16px 0 0 16px;
 }
 .panel-topbar{
   padding:14px 16px;
@@ -1557,6 +1556,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
   flex-direction:column;
   min-width:0;
   overflow:hidden;
+  border-radius:0 16px 16px 0;
 }
 
 /* Browser chrome */
@@ -2656,7 +2656,7 @@ function buildPreview(brand, tagline, industry) {
   <!-- ═══ LIVE PREVIEW SHOWCASE ═══ -->
   <section class="wsv-live-section" id="wsv-live">
     <div class="wsv-live-header">
-      <div class="section-tag" style="justify-content:center;color:var(--orange);margin-bottom:20px;">
+      <div class="section-tag" style="justify-content:flex-start;color:var(--orange);margin-bottom:20px;">
         <span class="wsv-eyebrow-dot" style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--orange);margin-right:10px;animation:wsv-pulse 2s infinite;"></span>
         OUR WORK — LIVE
       </div>
@@ -2862,9 +2862,9 @@ function buildPreview(brand, tagline, industry) {
 
   /* ── HEADER ── */
   .wsv-live-header {
-    text-align: center;
+    text-align: left;
     margin-bottom: 70px;
-    padding: 0 40px;
+    padding: 0 60px;
   }
   .wsv-live-title {
     font-family: 'Bebas Neue', sans-serif;
@@ -2880,7 +2880,7 @@ function buildPreview(brand, tagline, industry) {
     font-size: 15px;
     color: rgba(255,255,255,.38);
     max-width: 420px;
-    margin: 0 auto;
+    margin: 0;
     line-height: 1.7;
   }
 
@@ -3407,7 +3407,7 @@ function buildPreview(brand, tagline, industry) {
 
     /* ── SECTION HEADER ── */
     .wsv-ppc-header {
-      text-align: center;
+      text-align: left;
       padding: 0 60px 60px;
     }
     .wsv-ppc-title {
@@ -3424,7 +3424,7 @@ function buildPreview(brand, tagline, industry) {
       font-size: 15px;
       color: rgba(255,255,255,.38);
       max-width: 440px;
-      margin: 0 auto;
+      margin: 0;
       line-height: 1.7;
     }
 
@@ -3701,11 +3701,9 @@ function buildPreview(brand, tagline, industry) {
     /* ── PREVIEW GENERATOR WRAPPER ── */
     .wsv-ppc-gen {
       padding: 80px 60px 100px;
-      max-width: 1380px;
-      margin: 0 auto;
     }
     .wsv-ppc-gen-header {
-      text-align: center;
+      text-align: left;
       margin-bottom: 52px;
     }
     .wsv-ppc-gen-title {
@@ -3721,7 +3719,7 @@ function buildPreview(brand, tagline, industry) {
       font-size: 15px;
       color: rgba(255,255,255,.38);
       max-width: 480px;
-      margin: 0 auto;
+      margin: 0;
       line-height: 1.7;
     }
 
@@ -3734,7 +3732,7 @@ function buildPreview(brand, tagline, industry) {
 
     <!-- SECTION HEADER -->
     <div class="wsv-ppc-header">
-      <div class="section-tag" style="justify-content:center;color:var(--orange,#ff5c00);margin-bottom:20px;">How We Work</div>
+      <div class="section-tag" style="justify-content:flex-start;color:var(--orange,#ff5c00);margin-bottom:20px;">How We Work</div>
       <h2 class="wsv-ppc-title">Our <span>Process</span></h2>
       <p class="wsv-ppc-sub">Five focused phases — from first conversation to live, converting website.</p>
     </div>
@@ -3854,7 +3852,7 @@ function buildPreview(brand, tagline, industry) {
     <!-- PREVIEW GENERATOR -->
     <div class="wsv-ppc-gen" id="wsv-gen-section-anchor">
       <div class="wsv-ppc-gen-header">
-        <div class="section-tag" style="justify-content:center;color:var(--orange,#ff5c00);margin-bottom:20px;">Interactive Tool</div>
+        <div class="section-tag" style="justify-content:flex-start;color:var(--orange,#ff5c00);margin-bottom:20px;">Interactive Tool</div>
         <h2 class="wsv-ppc-gen-title">PREVIEW YOUR <span>WEBSITE</span></h2>
         <p class="wsv-ppc-gen-sub">Enter your brand details and get an instant, full-fidelity preview — live, scrollable, real-time.</p>
       </div>
