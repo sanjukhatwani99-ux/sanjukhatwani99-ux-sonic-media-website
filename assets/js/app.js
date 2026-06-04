@@ -58,7 +58,7 @@ function pageUrl(page) {
       return 'services/' + PAGE_FILE_MAP[page];
     } else {
       const f = PAGE_FILE_MAP[page].replace('../', '');
-      return f === 'index.html' ? './' : f;
+      return f;
     }
   }
 }
@@ -240,6 +240,20 @@ function reinitHomeAnimations() {
   ScrollTrigger.refresh();
 }
 
+
+/* ── Navigate Hook System ──
+   Instead of wrapping window.navigate repeatedly (which causes stacking bugs),
+   modules register post-navigate callbacks here.
+*/
+window._navigateHooks = [];
+window._addNavHook = function(fn) { window._navigateHooks.push(fn); };
+
+const _coreNavigate = navigate;
+window.navigate = function(page) {
+  _coreNavigate(page);
+  window._navigateHooks.forEach(function(fn){ try { fn(page); } catch(e){} });
+};
+
 /* ─ Cursor ─ */
 const cursor = document.getElementById('cursor');
 const cursorFollower = document.getElementById('cursor-follower');
@@ -332,15 +346,11 @@ hamBtn.addEventListener('click',function(){ mobNav.classList.contains('open') ? 
 document.getElementById('mobClose').addEventListener('click',closeMob);
 
 // Update active state in mobile nav when page changes
-const _origNavigate=window.navigate;
-if(_origNavigate){
-  window.navigate = function(page){
-    _origNavigate(page);
-    document.querySelectorAll('[data-mob-page]').forEach(btn=>{
-      btn.classList.toggle('active-mob', btn.dataset.mobPage===page);
-    });
-  };
-}
+window._addNavHook(function(page){
+  document.querySelectorAll('[data-mob-page]').forEach(btn=>{
+    btn.classList.toggle('active-mob', btn.dataset.mobPage===page);
+  });
+});
 // Also patch post-script navigate calls
 document.querySelectorAll('[data-mob-page]').forEach(btn=>{
   btn.classList.toggle('active-mob', btn.dataset.mobPage==='home');
@@ -494,6 +504,20 @@ function buildFAQPage() {
 
 // Build home FAQ on load (show only 5)
 buildFAQList('faqList', 5);
+
+// Build full FAQ list if landing directly on faq.html
+(function() {
+  function maybeInitFaqPage() {
+    if (window.__INITIAL_PAGE__ === 'faq') {
+      buildFAQList('faqListPage');
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', maybeInitFaqPage);
+  } else {
+    maybeInitFaqPage();
+  }
+})();
 
 function toggleFaqPro(btn){
   const item=btn.closest('.faq-item-pro');
@@ -2284,13 +2308,11 @@ buildCoverflowInstance({
   }
 
   // Hook into navigate
-  const _origNavSvc = window.navigate;
-  window.navigate = function(page) {
-    _origNavSvc(page);
+  window._addNavHook(function(page) {
     if (page === 'services') {
       requestAnimationFrame(() => setTimeout(maybeInitSvc, 50));
     }
-  };
+  });
 
   document.addEventListener('DOMContentLoaded', () => setTimeout(maybeInitSvc, 200));
 })();
@@ -2474,13 +2496,11 @@ buildCoverflowInstance({
   }
 
   // Hook into navigate
-  const _origNavAboutTV = window.navigate;
-  window.navigate = function(page) {
-    _origNavAboutTV(page);
+  window._addNavHook(function(page) {
     if (page === 'about') {
       requestAnimationFrame(() => setTimeout(buildAboutTV, 80));
     }
-  };
+  });
 
   // In case the page loads directly on about
   document.addEventListener('DOMContentLoaded', () => setTimeout(buildAboutTV, 200));
@@ -2623,15 +2643,13 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
     }
   }
 
-  const _origNavigate = window.navigate;
-  window.navigate = function(page) {
-    _origNavigate(page);
+  window._addNavHook(function(page) {
     if (page === 'future') {
       // Always reset so images re-initialise each visit
       pageInited = false;
       requestAnimationFrame(() => setTimeout(maybeInit, 50));
     }
-  };
+  });
 
   document.addEventListener('DOMContentLoaded', () => setTimeout(maybeInit, 200));
 })();
@@ -2816,13 +2834,11 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
   }
 
   /* Hook into navigate */
-  var _origNavPageSvc = window.navigate;
-  window.navigate = function(page) {
-    _origNavPageSvc(page);
+  window._addNavHook(function(page) {
     if (page === 'services') {
       requestAnimationFrame(function(){ setTimeout(maybeShow, 60); });
     }
-  };
+  });
 
   document.addEventListener('DOMContentLoaded', function(){ setTimeout(maybeShow, 300); });
   window.addEventListener('resize', function(){
@@ -2916,13 +2932,11 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
   });
 
   /* Also rebuild page FV when navigating to future page on mobile */
-  var _origNav = window.navigate;
-  window.navigate = function(page) {
-    if (_origNav) _origNav(page);
+  window._addNavHook(function(page) {
     if (page === 'future' && window.innerWidth <= 768) {
       requestAnimationFrame(function(){ setTimeout(buildPageMobFv, 100); });
     }
-  };
+  });
 })();
 
 /* ═══════════════════════════════════════════════════
@@ -3206,24 +3220,18 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
   });
   document.body.appendChild(pageOverlay);
 
-  // Wrap the navigate function with a smooth transition
-  const _originalNavigate = window.navigate;
-  window.navigate = function(page) {
-    // Flash the overlay
+  // Page transition via hook
+  window._addNavHook(function(page) {
+    // Flash overlay
     pageOverlay.style.opacity = '0.45';
     setTimeout(() => {
-      _originalNavigate(page);
-      // Re-run annotation on new page
-      setTimeout(() => {
-        autoAnnotate();
-        initRevealObserver();
-        observeImages();
-        observeCounters();
-        // Fade out overlay
-        pageOverlay.style.opacity = '0';
-      }, 50);
-    }, 180);
-  };
+      autoAnnotate();
+      initRevealObserver();
+      observeImages();
+      observeCounters();
+      pageOverlay.style.opacity = '0';
+    }, 230);
+  });
 
   /* ── 10. Initial boot ── */
   function boot() {
@@ -3268,11 +3276,9 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
     injectFooters();
   }
   // Re-inject when navigate() activates a new page
-  var _origNavigate = window.navigate;
-  window.navigate = function(page) {
-    if (_origNavigate) _origNavigate(page);
+  window._addNavHook(function(page) {
     requestAnimationFrame(injectFooters);
-  };
+  });
 })();
 
 /* ═══════════════════════════════════════════════════
