@@ -1375,10 +1375,10 @@
 
 /* ══ MAIN BOX — CINEMATIC ══ */
 .gen-box{
-  background:#ffffff;
+  background:#111;
   border-radius:16px;
   overflow:visible;
-  box-shadow:0 0 0 1px rgba(0,0,0,.12),0 60px 120px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.04) inset;
+  box-shadow:0 0 0 1px rgba(255,255,255,.05),0 60px 120px rgba(0,0,0,.8),0 0 80px rgba(255,92,0,.04);
   display:flex;
   height:clamp(520px,52vw,740px);
   max-width:1100px;
@@ -1551,7 +1551,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
 /* ══ RIGHT PANE ══ */
 .panel-right{
   flex:1;
-  background:#f0f0f0;
+  background:#111;
   display:flex;
   flex-direction:column;
   min-width:0;
@@ -1561,8 +1561,8 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
 
 /* Browser chrome */
 .browser-chrome{
-  background:#e8e8e8;
-  border-bottom:1px solid #d5d5d5;
+  background: linear-gradient(180deg, #1a1a1a 0%, #151515 100%);
+  border-bottom:1px solid #252525;
   padding:10px 14px;
   display:flex;align-items:center;gap:10px;
   flex-shrink:0;
@@ -1573,21 +1573,22 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
 .chrome-dots span:nth-child(2){background:#febc2e;}
 .chrome-dots span:nth-child(3){background:#28c840;}
 .chrome-url{
-  flex:1;background:#fff;border-radius:6px;
-  padding:5px 12px;font-size:11px;color:#888;
+  flex:1;background:#0d0d0d;border-radius:6px;
+  padding:5px 12px;font-size:11px;color:#666;
   font-family:monospace;
   display:flex;align-items:center;gap:6px;
-  border:1px solid #d8d8d8;
+  border:1px solid #282828;
 }
 .chrome-url-dot{width:7px;height:7px;border-radius:50%;background:#28c840;box-shadow:0 0 6px #28c840;flex-shrink:0;}
 .chrome-url-text{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;flex:1;}
 .chrome-device-btns{display:flex;gap:4px;}
 .chrome-device-btn{
-  padding:4px 8px;border-radius:5px;background:transparent;
-  border:1px solid #d5d5d5;cursor:pointer;font-size:10px;color:#888;
+  padding:5px 9px;border-radius:6px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);cursor:pointer;font-size:10px;color:rgba(255,255,255,.4);
   transition:all .2s;font-family:'DM Sans',sans-serif;
+  display:flex;align-items:center;gap:3px;
 }
-.chrome-device-btn:hover,.chrome-device-btn.active{background:#ff5c00;color:#fff;border-color:#ff5c00;}
+.chrome-device-btn:hover,.chrome-device-btn.active{background:rgba(255,92,0,.15);color:#ff5c00;border-color:rgba(255,92,0,.3);}
 .chrome-live-badge{
   display:none;align-items:center;gap:5px;
   font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.1em;color:#28c840;
@@ -1614,44 +1615,214 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
 .zoom-indicator{margin-left:auto;font-size:10px;color:#555;font-family:monospace;}
 
 /* Viewport area */
+/* Viewport area */
 .viewport-wrap{
   flex:1;
   overflow:auto;
   position:relative;
-  background:#e8e8e8;
-  padding:16px;
+  background: #1a1a1a;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+  padding:28px 20px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
 }
 .viewport-wrap::-webkit-scrollbar{width:8px;height:8px;}
-.viewport-wrap::-webkit-scrollbar-track{background:#e0e0e0;}
-.viewport-wrap::-webkit-scrollbar-thumb{background:#bbb;border-radius:4px;}
-.viewport-wrap::-webkit-scrollbar-thumb:hover{background:#999;}
+.viewport-wrap::-webkit-scrollbar-track{background:#111;}
+.viewport-wrap::-webkit-scrollbar-thumb{background:#333;border-radius:4px;}
+.viewport-wrap::-webkit-scrollbar-thumb:hover{background:#555;}
 
-.viewport-inner{
-  background:#fff;
-  border-radius:6px;
-  box-shadow:0 4px 30px rgba(0,0,0,.12),0 0 0 1px rgba(0,0,0,.06);
-  min-height:700px;
-  overflow:visible;
-  transition:width .4s ease,margin .4s ease;
-  margin:0 auto;
+/* ── DEVICE FRAME SHELLS ── */
+.device-shell {
+  position: relative;
+  flex-shrink: 0;
+  transition: all .5s cubic-bezier(.23,1,.32,1);
 }
 
-/* Desktop default = full width */
-.viewport-inner.device-desktop{width:100%;max-width:1440px;}
-.viewport-inner.device-tablet{width:768px;}
-.viewport-inner.device-mobile{width:390px;}
+/* Desktop shell — realistic monitor bezel */
+.device-shell.shell-desktop {
+  width: 100%;
+  max-width: 100%;
+}
+.device-shell.shell-desktop .device-bezel {
+  background: linear-gradient(160deg, #2c2c2c 0%, #1a1a1a 100%);
+  border-radius: 10px 10px 0 0;
+  padding: 14px 14px 0;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 -2px 0 0 #3a3a3a,
+    0 40px 80px rgba(0,0,0,0.7);
+  position: relative;
+}
+.device-shell.shell-desktop .device-bezel::before {
+  content: '';
+  position: absolute;
+  top: 9px; left: 50%; transform: translateX(-50%);
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #333;
+  border: 1px solid #444;
+}
+.device-shell.shell-desktop .device-screen-wrap {
+  background: #000;
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+  position: relative;
+}
+.device-shell.shell-desktop .device-stand {
+  height: 18px;
+  background: linear-gradient(180deg, #1e1e1e, #151515);
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+  position: relative;
+}
+.device-shell.shell-desktop .device-stand::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 80px; height: 4px;
+  background: linear-gradient(180deg, #252525, #111);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+/* Tablet shell — iPad-like */
+
+/* Mobile shell — iPhone-like */
+.device-shell.shell-mobile {
+  width: 280px;
+  max-width: 100%;
+}
+.device-shell.shell-mobile .device-bezel {
+  background: linear-gradient(160deg, #2e2e2e 0%, #1a1a1a 100%);
+  border-radius: 40px;
+  padding: 16px 10px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 40px 80px rgba(0,0,0,0.85),
+    0 0 0 7px #0d0d0d;
+  position: relative;
+}
+/* Dynamic island */
+.device-shell.shell-mobile .device-bezel::before {
+  content: '';
+  position: absolute;
+  top: 9px; left: 50%; transform: translateX(-50%);
+  width: 80px; height: 20px; border-radius: 14px;
+  background: #000;
+  z-index: 10;
+}
+/* Side buttons */
+.device-shell.shell-mobile .device-bezel::after {
+  content: '';
+  position: absolute;
+  top: 90px; right: -3px;
+  width: 3px; height: 50px;
+  background: #2a2a2a;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 -60px 0 #2a2a2a;
+}
+.device-shell.shell-mobile .device-screen-wrap {
+  background: #000;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+}
+/* Home indicator */
+.device-shell.shell-mobile .device-home-bar {
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  border-radius: 0 0 30px 30px;
+}
+.device-shell.shell-mobile .device-home-bar::after {
+  content: '';
+  width: 100px; height: 4px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 3px;
+}
+
+/* Screen inner (shared) */
+.device-screen-inner {
+  background: #fff;
+  overflow-y: scroll;  /* always show scrollbar so user knows it's scrollable */
+  overflow-x: hidden;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+.device-screen-inner::-webkit-scrollbar { width: 5px; }
+.device-screen-inner::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+.device-screen-inner::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 3px; }
+.device-screen-inner::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.35); }
+
+/* Heights for each device screen */
+.shell-desktop .device-screen-inner { height: clamp(480px, 44vw, 660px); }
+.shell-mobile  .device-screen-inner { height: 520px; }
+
+/* The old viewport-inner — keep for now but override */
+.viewport-inner {
+  background: transparent;
+  box-shadow: none;
+  min-height: unset;
+  overflow: visible;
+  transition: none;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.viewport-inner.device-desktop { width: 100% !important; }
+.viewport-inner.device-mobile  { width: 100% !important; }
+
+/* Label badge below device */
+.device-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: rgba(255,255,255,.2);
+  text-transform: uppercase;
+}
+.device-label-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,92,0,.5); }
+
+/* Responsive: on small screens collapse left panel and make device shells narrower */
+@media (max-width: 900px) {
+  .gen-box { flex-direction: column; height: auto; min-height: 600px; }
+  .panel-left { width: 100%; height: 220px; border-right: none; border-bottom: 1px solid #222; border-radius: 16px 16px 0 0; flex-direction: row; }
+  .panel-body { flex-direction: row; flex-wrap: wrap; gap: 8px; padding: 10px 14px 10px; overflow-x: auto; overflow-y: hidden; }
+  .panel-topbar { display: none; }
+  .gen-btn-wrap { position: static; border-top: 1px solid #222; }
+  .device-shell.shell-mobile { width: 220px; }
+}
+@media (max-width: 600px) {
+  .viewport-wrap { padding: 16px 10px; }
+  .device-shell.shell-desktop .device-screen-inner { height: 280px; }
+  .device-shell.shell-mobile { width: 200px; }
+  .device-shell.shell-mobile .device-screen-inner { height: 380px; }
+}
+
 
 /* Empty state */
 .empty-state{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  min-height:600px;gap:14px;color:#aaa;text-align:center;padding:40px;
+  min-height:300px;gap:14px;color:#aaa;text-align:center;padding:40px;
 }
 .empty-icon{font-size:52px;filter:grayscale(1) opacity(.3);}
 .empty-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;color:#bbb;}
 .empty-sub{font-size:13px;line-height:1.6;max-width:260px;color:#c0c0c0;}
 
 /* Spinner */
-.spinner{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:600px;gap:18px;}
+.spinner{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:300px;gap:18px;}
 .spinner.active{display:flex;}
 .spinner-ring{width:48px;height:48px;border:3px solid rgba(255,92,0,.15);border-top-color:#ff5c00;border-radius:50%;animation:spin .8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -1736,7 +1907,221 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
 /* ══ LOGO STYLES ══ */
 .logo-svg-wrap{display:flex;align-items:center;gap:8px;}
 
+
+/* ══════════════════════
+   NEW HERO SECTION
+══════════════════════ */
+#wsv-hero-new {
+  --orange: #ff5c00;
+  --glow: #4fc3f7;
+}
+#wsv-hero-new .hero-left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 64px 0 72px;
+  background: #000;
+  z-index: 5;
+  height: 100%;
+}
+#wsv-hero-new .hero-left::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,92,0,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,92,0,0.025) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+}
+#wsv-hero-new .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  margin-bottom: 22px;
+  opacity: 0;
+  transform: translateY(12px);
+}
+#wsv-hero-new .hero-h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 7vw, 116px);
+  line-height: .87;
+  letter-spacing: -.01em;
+  color: #fff;
+  margin-bottom: 28px;
+}
+#wsv-hero-new .line-wrap {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+#wsv-hero-new .line {
+  display: block;
+  transform: translateY(110%);
+}
+#wsv-hero-new .or { color: var(--orange); }
+#wsv-hero-new .hero-sub {
+  font-size: 14px;
+  line-height: 1.82;
+  color: rgba(255,255,255,.44);
+  max-width: 420px;
+  margin-bottom: 38px;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(18px);
+}
+#wsv-hero-new .hero-btns {
+  display: flex;
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(18px);
+}
+#wsv-hero-new .btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px;
+  background: var(--orange);
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase;
+  border: none; cursor: pointer; text-decoration: none;
+  clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 0 100%);
+  transition: all .25s;
+}
+#wsv-hero-new .btn-primary:hover { filter: brightness(1.15); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(255,92,0,.38); }
+#wsv-hero-new .btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px;
+  background: transparent;
+  color: rgba(255,255,255,.55);
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,.1);
+  cursor: pointer; text-decoration: none;
+  transition: all .25s;
+}
+#wsv-hero-new .btn-ghost:hover { border-color: rgba(255,255,255,.28); color: #fff; transform: translateY(-2px); }
+#wsv-hero-new .hero-right {
+  position: relative;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#wsv-hero-new .hero-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 55% at 50% 50%, rgba(79,195,247,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+#wsv-hero-new .monitor-wrap {
+  position: relative;
+  z-index: 2;
+  width: 86%;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  filter: drop-shadow(0 24px 80px rgba(0,0,0,.85)) drop-shadow(0 0 40px rgba(79,195,247,0.08));
+}
+#wsv-hero-new .screen-area {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+}
+#wsv-hero-new .screen-dark {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  z-index: 1;
+}
+#wsv-hero-new .screen-code {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  clip-path: inset(0 0 100% 0);
+  transition: none;
+}
+#wsv-hero-new .vscode-frame {
+  width: 100%; height: 100%;
+  border: none;
+  display: block;
+  pointer-events: none;
+}
+#wsv-hero-new .screen-site {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  clip-path: inset(0 100% 0 0);
+  transition: none;
+}
+#wsv-hero-new .site-iframe-wrap {
+  width: 100%; height: 100%;
+  position: relative;
+}
+#wsv-hero-new .site-iframe-wrap iframe {
+  width: 1440px;
+  height: 900px;
+  border: none;
+  display: block;
+  transform-origin: top left;
+  pointer-events: none;
+}
+#wsv-hero-new .rod-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+#wsv-hero-new .stage-label {
+  position: absolute;
+  bottom: 18px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .18em;
+  color: rgba(255,255,255,.2);
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+#wsv-hero-new .stage-label-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(79,195,247,.5);
+  box-shadow: 0 0 6px rgba(79,195,247,.8);
+}
+/* New hero layout */
+#wsv-hero-new .hero-inner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+}
+@media (max-width: 900px) {
+  #wsv-hero-new .hero-inner-grid { grid-template-columns: 1fr; }
+  #wsv-hero-new .hero-right { min-height: 50vh; }
+  #wsv-hero-new .hero-left { padding: 60px 32px; }
+}
+
 </style>
+  <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -1909,101 +2294,433 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
 <div id="page-svc-web" class="page active">
 
   <!-- ═══ HERO ═══ -->
-  <section class="wsv-hero" id="wsv-hero">
-    <!-- Code rain background -->
-    <canvas class="wsv-code-rain" id="wsvCodeRain"></canvas>
-    <!-- Vignette overlay -->
-    <div class="wsv-hero-vignette"></div>
+  <section id="wsv-hero-new" style="min-height:100vh;overflow:hidden;background:#000;">
+    <div class="hero-inner-grid">
 
-    <div class="wsv-hero-inner">
-      <!-- LEFT: Copy -->
-      <div class="wsv-hero-left">
-        <div class="wsv-eyebrow" id="wsvEyebrow">
-          <span class="wsv-eyebrow-dot"></span>
-          SERVICE · 01 · WEBSITE DEVELOPMENT
-        </div>
-        <h1 class="wsv-hero-h1" id="wsvH1">
-          <span class="line-wrap"><span class="line-inner">WEBSITES</span></span>
-          <span class="line-wrap"><span class="line-inner">THAT DON'T</span></span>
-          <span class="line-wrap"><span class="line-inner or">JUST EXIST.</span></span>
+      <!-- LEFT: CONTENT -->
+      <div class="hero-left">
+        <div class="eyebrow" id="nhEyebrow">PREMIUM WEB DESIGN STUDIO · AHMEDABAD</div>
+        <h1 class="hero-h1">
+          <span class="line-wrap"><span class="line">WE BUILD</span></span>
+          <span class="line-wrap"><span class="line">WEBSITES</span></span>
+          <span class="line-wrap"><span class="line">THAT <span class="or">CONVERT.</span></span></span>
         </h1>
-        <p class="wsv-hero-sub" id="wsvSub">Revenue machines engineered from the ground up — blazing-fast, pixel-perfect, and built to turn every visitor into a customer.</p>
-        <div class="wsv-hero-btns" id="wsvBtns">
-          <a href="#" onclick="navigate('contact');return false;" class="btn-p">Start Your Project →</a>
-          <a href="#wsv-gen-section-anchor" class="btn-s" onclick="wsvScrollToAnchor('wsv-gen-section-anchor');return false;">Preview Your Site ↓</a>
-        </div>
-        <div class="wsv-hero-stats" id="wsvStats">
-          <div><div class="wsv-stat-num" data-count="280">0</div><div class="wsv-stat-lbl">% Conversion Lift</div></div>
-          <div><div class="wsv-stat-num" data-count="1.8" data-suffix="s">0</div><div class="wsv-stat-lbl">Avg Load Time</div></div>
-          <div><div class="wsv-stat-num" data-count="150" data-suffix="+">0</div><div class="wsv-stat-lbl">Sites Delivered</div></div>
+        <p class="hero-sub" id="nhSub">
+          From concept to launch — we craft high-performance digital experiences that captivate audiences and drive measurable growth for ambitious brands.
+        </p>
+        <div class="hero-btns" id="nhBtns">
+          <a href="#" onclick="wsvScrollToAnchor('wsv-final-cta');return false;" class="btn-primary">
+            Start Your Project
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+              <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#" onclick="wsvScrollToAnchor('wsv-gen-section-anchor');return false;" class="btn-ghost">Preview Your Website</a>
         </div>
       </div>
 
-      <!-- RIGHT: Premium interactive card -->
-      <div class="wsv-hero-right" id="wsvHeroRight">
-        <div class="wsv-hcard-outer">
-          <div class="wsv-hcard" id="wsvHcard">
-            <!-- Bar -->
-            <div class="wsv-hcard-bar">
-              <div class="wsv-hcard-dots"><span></span><span></span><span></span></div>
-              <div class="wsv-hcard-url">
-                <span class="wsv-hcard-url-dot"></span>
-                thesonicmedia.com/your-project
+      <!-- RIGHT: CINEMA STAGE -->
+      <div class="hero-right">
+        <div class="monitor-wrap">
+          <div class="screen-area" id="nhScreenArea">
+            <div class="screen-dark"></div>
+            <div class="screen-code" id="nhScreenCode">
+              <canvas id="nhVsCodeCanvas" style="width:100%;height:100%;display:block;"></canvas>
+            </div>
+            <div class="screen-site" id="nhScreenSite">
+              <div class="site-iframe-wrap" id="nhIframeWrap">
+                <iframe
+                  id="nhSiteFrame"
+                  src="https://thesonicmedia.com"
+                  title="The Sonic Media"
+                  scrolling="no"
+                  sandbox="allow-scripts allow-same-origin"
+                ></iframe>
               </div>
             </div>
-            <!-- Interactive canvas scene -->
-            <div class="wsv-hcard-body">
-              <canvas class="wsv-hcard-canvas" id="wsvHcardCanvas"></canvas>
-              <!-- Floating metric chips -->
-              <div class="wsv-hcard-chips">
-                <!-- Performance -->
-                <div class="wsv-chip wsv-chip-perf">
-                  <div class="wsv-chip-icon" style="background:rgba(255,92,0,.15);border:1px solid rgba(255,92,0,.2);">⚡</div>
-                  <div class="wsv-chip-text">
-                    <div class="wsv-chip-label">Performance</div>
-                    <div class="wsv-chip-val"><span class="hi" id="wsvPerfNum">98</span>/100</div>
-                  </div>
-                </div>
-                <!-- Speed -->
-                <div class="wsv-chip wsv-chip-speed">
-                  <div class="wsv-chip-icon" style="background:rgba(40,200,64,.1);border:1px solid rgba(40,200,64,.2);">🚀</div>
-                  <div class="wsv-chip-text">
-                    <div class="wsv-chip-label">Load Speed</div>
-                    <div class="wsv-chip-val"><span class="hi" id="wsvSpeedNum">1.4</span>s</div>
-                  </div>
-                </div>
-                <!-- Mobile -->
-                <div class="wsv-chip wsv-chip-mob">
-                  <div class="wsv-chip-icon" style="background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.25);">📱</div>
-                  <div class="wsv-chip-text">
-                    <div class="wsv-chip-label">Mobile Score</div>
-                    <div class="wsv-chip-val"><span class="hi" id="wsvMobNum">96</span>/100</div>
-                  </div>
-                </div>
-                <!-- Conversion -->
-                <div class="wsv-chip wsv-chip-conv">
-                  <div class="wsv-chip-icon" style="background:rgba(255,200,0,.1);border:1px solid rgba(255,200,0,.2);">📈</div>
-                  <div class="wsv-chip-text">
-                    <div class="wsv-chip-label">Conversions</div>
-                    <div class="wsv-chip-val">+<span class="hi" id="wsvConvNum">280</span>%</div>
-                  </div>
-                </div>
-              </div>
-              <!-- Footer bar -->
-              <div class="wsv-hcard-footer">
-                <div class="wsv-hcard-status">
-                  <span class="wsv-hcard-status-dot"></span>
-                  <span id="wsvBuildStatus">Building your site…</span>
-                </div>
-                <div class="wsv-hcard-build" id="wsvBuildLine">npm run build</div>
-              </div>
-            </div>
+            <canvas class="rod-canvas" id="nhRodCanvas"></canvas>
           </div>
-          <div class="wsv-hcard-shadow"></div>
+        </div>
+        <div class="stage-label">
+          <span class="stage-label-dot"></span>
+          <span id="nhStageLbl">Initializing</span>
         </div>
       </div>
+
     </div>
   </section>
+
+  <script>
+  /* ── NEW HERO SECTION SCRIPTS ── */
+  (function () {
+  'use strict';
+
+  function nhInit() {
+    // Scale iframe
+    function scaleIframe() {
+      var wrap = document.getElementById('nhIframeWrap');
+      var iframe = document.getElementById('nhSiteFrame');
+      if (!wrap || !iframe) return;
+      var scale = wrap.offsetWidth / 1440;
+      iframe.style.transform = 'scale(' + scale + ')';
+      iframe.style.height = (wrap.offsetHeight / scale) + 'px';
+    }
+    window.addEventListener('resize', scaleIframe);
+    scaleIframe();
+    setTimeout(scaleIframe, 200);
+
+    // Rod canvas setup
+    var rodCanvas = document.getElementById('nhRodCanvas');
+    var rCtx = rodCanvas.getContext('2d');
+    var RW, RH;
+    function resizeRod() {
+      var area = document.getElementById('nhScreenArea');
+      if (!area) return;
+      RW = rodCanvas.width = area.offsetWidth;
+      RH = rodCanvas.height = area.offsetHeight;
+    }
+    resizeRod();
+    window.addEventListener('resize', function(){ resizeRod(); scaleIframe(); });
+
+    // VS Code canvas
+    var vsCanvas = document.getElementById('nhVsCodeCanvas');
+    var vsCtx = vsCanvas.getContext('2d');
+    function resizeVS() {
+      var area = document.getElementById('nhScreenArea');
+      if (!area) return;
+      vsCanvas.width = area.offsetWidth;
+      vsCanvas.height = area.offsetHeight;
+    }
+    resizeVS();
+    window.addEventListener('resize', resizeVS);
+
+    function buildLineTokens() {
+      return [
+        [],
+        [{t:'#c792ea',v:'import '},{t:'#82aaff',v:'React '},{t:'#89ddff',v:'from '},{t:'#c3e88d',v:"'react'"},{t:'#bfc7d5',v:';'}],
+        [],
+        [{t:'#546e7a',v:'// Hero Section — The Sonic Media'}],
+        [{t:'#c792ea',v:'const '},{t:'#82aaff',v:'Hero '},{t:'#bfc7d5',v:'= () => {'}],
+        [{t:'#c792ea',v:'  return '},{ t:'#bfc7d5',v:'('}],
+        [{t:'#bfc7d5',v:'    <'},{t:'#f07178',v:'section '},{t:'#f78c6c',v:'className'},{t:'#bfc7d5',v:'='},{t:'#c3e88d',v:'"hero"'},{t:'#bfc7d5',v:'>'}],
+        [{t:'#bfc7d5',v:'      <'},{t:'#f07178',v:'div '},{t:'#f78c6c',v:'className'},{t:'#bfc7d5',v:'='},{t:'#c3e88d',v:'"hero__inner"'},{t:'#bfc7d5',v:'>'}],
+        [{t:'#bfc7d5',v:'        <'},{t:'#f07178',v:'span '},{t:'#f78c6c',v:'className'},{t:'#bfc7d5',v:'='},{t:'#c3e88d',v:'"eyebrow"'},{t:'#bfc7d5',v:'>'}],
+        [{t:'#c3e88d',v:'          Premium Web Studio'}],
+        [{t:'#bfc7d5',v:'        </'},{t:'#f07178',v:'span'},{t:'#bfc7d5',v:'>'}],
+        [{t:'#bfc7d5',v:'        <'},{t:'#f07178',v:'h1'},{t:'#bfc7d5',v:'>'}],
+        [{t:'#c3e88d',v:'          WE BUILD WEBSITES THAT CONVERT.'}],
+        [{t:'#bfc7d5',v:'        </'},{t:'#f07178',v:'h1'},{t:'#bfc7d5',v:'>'}],
+        [{t:'#bfc7d5',v:'        <'},{t:'#82aaff',v:'Button '},{t:'#f78c6c',v:'variant'},{t:'#bfc7d5',v:'='},{t:'#c3e88d',v:'"primary"'},{t:'#bfc7d5',v:'>'}],
+        [{t:'#c3e88d',v:'          Start Your Project'}],
+        [{t:'#bfc7d5',v:'        </'},{t:'#82aaff',v:'Button'},{t:'#bfc7d5',v:'>'}],
+        [{t:'#bfc7d5',v:'      </'},{t:'#f07178',v:'div'},{t:'#bfc7d5',v:'>'}],
+        [{t:'#bfc7d5',v:'    </'},{t:'#f07178',v:'section'},{t:'#bfc7d5',v:'>'}],
+        [{t:'#bfc7d5',v:'  );'}],
+        [{t:'#bfc7d5',v:'};'}],
+        [],
+        [{t:'#c792ea',v:'export '},{t:'#c792ea',v:'default '},{t:'#82aaff',v:'Hero'},{t:'#bfc7d5',v:';'}],
+      ];
+    }
+
+    var cursorOn = true;
+    setInterval(function(){ cursorOn = !cursorOn; }, 530);
+
+    function drawVSCode() {
+      var W = vsCanvas.width, H = vsCanvas.height;
+      vsCtx.clearRect(0, 0, W, H);
+      vsCtx.fillStyle = '#1e1e2e';
+      vsCtx.fillRect(0, 0, W, H);
+      var actW = Math.floor(W * 0.06);
+      vsCtx.fillStyle = '#181825';
+      vsCtx.fillRect(0, 0, actW, H);
+      var sideW = Math.floor(W * 0.22);
+      vsCtx.fillStyle = '#1a1a2a';
+      vsCtx.fillRect(actW, 0, sideW, H);
+      vsCtx.fillStyle = 'rgba(255,255,255,0.3)';
+      vsCtx.font = Math.floor(W*0.018) + 'px "JetBrains Mono", monospace';
+      vsCtx.fillText('EXPLORER', actW + 8, 20);
+      var files = ['▼ src','  ▼ components','    Hero.jsx ●','    Button.jsx','  ▼ styles','    hero.css','  App.jsx','package.json'];
+      var fSize = Math.max(9, Math.floor(W * 0.017));
+      files.forEach(function(f, i) {
+        var isActive = f.indexOf('Hero.jsx') !== -1;
+        if (isActive) {
+          vsCtx.fillStyle = 'rgba(255,92,0,0.14)';
+          vsCtx.fillRect(actW, 36 + i * (fSize + 6), sideW, fSize + 6);
+          vsCtx.fillStyle = '#fff';
+        } else {
+          vsCtx.fillStyle = f.startsWith('  ') ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.6)';
+        }
+        vsCtx.font = fSize + 'px "JetBrains Mono", monospace';
+        vsCtx.fillText(f, actW + 8, 36 + i * (fSize + 6) + fSize);
+      });
+      var edX = actW + sideW;
+      var edW = W - edX;
+      var titleH = Math.floor(H * 0.06);
+      vsCtx.fillStyle = '#181825';
+      vsCtx.fillRect(edX, 0, edW, titleH);
+      vsCtx.fillStyle = '#1e1e2e';
+      vsCtx.fillRect(edX, 0, edW * 0.28, titleH);
+      vsCtx.strokeStyle = '#ff5c00';
+      vsCtx.lineWidth = 2;
+      vsCtx.beginPath();
+      vsCtx.moveTo(edX, titleH - 1);
+      vsCtx.lineTo(edX + edW * 0.28, titleH - 1);
+      vsCtx.stroke();
+      vsCtx.fillStyle = 'rgba(255,255,255,0.65)';
+      var tabSize = Math.max(9, Math.floor(W * 0.018));
+      vsCtx.font = tabSize + 'px "JetBrains Mono", monospace';
+      vsCtx.fillText('Hero.jsx', edX + 12, titleH * 0.65);
+      vsCtx.strokeStyle = 'rgba(255,255,255,0.05)';
+      vsCtx.lineWidth = 1;
+      vsCtx.beginPath();
+      vsCtx.moveTo(edX, titleH);
+      vsCtx.lineTo(W, titleH);
+      vsCtx.stroke();
+      var codeY = titleH;
+      var codeH = H - titleH - Math.floor(H * 0.04);
+      var gutterW = Math.floor(edW * 0.06);
+      var lineH = Math.floor(codeH / 24);
+      var codeSize = Math.max(8, Math.floor(lineH * 0.58));
+      var tokens = buildLineTokens();
+      vsCtx.fillStyle = '#181825';
+      vsCtx.fillRect(edX, codeY, gutterW, codeH);
+      var visLines = Math.floor(codeH / lineH);
+      for (var i = 0; i < Math.min(visLines, tokens.length); i++) {
+        var ly = codeY + lineH * i + lineH * 0.72;
+        if (i === 12) {
+          vsCtx.fillStyle = 'rgba(255,255,255,0.04)';
+          vsCtx.fillRect(edX, codeY + lineH * i, edW, lineH);
+        }
+        vsCtx.fillStyle = 'rgba(255,255,255,0.18)';
+        vsCtx.font = codeSize + 'px "JetBrains Mono", monospace';
+        vsCtx.textAlign = 'right';
+        vsCtx.fillText(i + 1, edX + gutterW - 4, ly);
+        vsCtx.textAlign = 'left';
+        var lx = edX + gutterW + 8;
+        tokens[i].forEach(function(tok) {
+          vsCtx.fillStyle = tok.t;
+          vsCtx.font = codeSize + 'px "JetBrains Mono", monospace';
+          vsCtx.fillText(tok.v, lx, ly);
+          lx += vsCtx.measureText(tok.v).width;
+        });
+        if (i === 12 && cursorOn) {
+          vsCtx.fillStyle = '#528bff';
+          vsCtx.fillRect(lx + 2, codeY + lineH * i + 3, 2, lineH - 4);
+        }
+      }
+      var statusH = Math.floor(H * 0.04);
+      vsCtx.fillStyle = '#ff5c00';
+      vsCtx.fillRect(0, H - statusH, W, statusH);
+      vsCtx.fillStyle = 'rgba(0,0,0,0.75)';
+      var statusSize = Math.max(8, Math.floor(statusH * 0.5));
+      vsCtx.font = statusSize + 'px "JetBrains Mono", monospace';
+      vsCtx.fillText('  ⎇ main   Hero.jsx   JSX   Ln 13, Col 38   UTF-8', 0, H - statusH * 0.28);
+    }
+
+    function eio(t) { return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2; }
+    function eout(t) { return 1-Math.pow(1-t,3); }
+    function ein(t) { return t*t*t; }
+
+    function drawRodV(cx, headY) {
+      var rodLen = Math.min(RH * 0.10, 55);
+      var tailY = headY - rodLen;
+      var bloom = rCtx.createLinearGradient(cx, tailY - 50, cx, headY + 20);
+      bloom.addColorStop(0, 'rgba(79,195,247,0)');
+      bloom.addColorStop(0.4, 'rgba(79,195,247,0.05)');
+      bloom.addColorStop(0.8, 'rgba(150,220,255,0.12)');
+      bloom.addColorStop(1, 'rgba(79,195,247,0)');
+      rCtx.fillStyle = bloom;
+      rCtx.fillRect(cx - 40, tailY - 50, 80, rodLen + 70);
+      var rod = rCtx.createLinearGradient(cx, tailY, cx, headY);
+      rod.addColorStop(0, 'rgba(79,195,247,0)');
+      rod.addColorStop(0.5, 'rgba(180,230,255,0.55)');
+      rod.addColorStop(0.88, 'rgba(255,255,255,0.92)');
+      rod.addColorStop(1, 'rgba(255,255,255,0.15)');
+      rCtx.fillStyle = rod;
+      rCtx.fillRect(cx - 1.5, tailY, 3, rodLen);
+      var inner = rCtx.createLinearGradient(cx, tailY, cx, headY);
+      inner.addColorStop(0, 'rgba(255,255,255,0)');
+      inner.addColorStop(0.8, 'rgba(255,255,255,0.85)');
+      inner.addColorStop(1, 'rgba(255,255,255,0)');
+      rCtx.fillStyle = inner;
+      rCtx.fillRect(cx - 0.6, tailY, 1.2, rodLen);
+      var flare = rCtx.createRadialGradient(cx, headY, 0, cx, headY, 24);
+      flare.addColorStop(0, 'rgba(255,255,255,0.95)');
+      flare.addColorStop(0.18, 'rgba(180,230,255,0.65)');
+      flare.addColorStop(0.45, 'rgba(79,195,247,0.25)');
+      flare.addColorStop(1, 'rgba(79,195,247,0)');
+      rCtx.fillStyle = flare;
+      rCtx.beginPath(); rCtx.arc(cx, headY, 24, 0, Math.PI*2); rCtx.fill();
+    }
+
+    function drawRodVUp(cx, headY) {
+      var rodLen = Math.min(RH * 0.10, 55);
+      var tailY = headY + rodLen;
+      var bloom = rCtx.createLinearGradient(cx, headY - 20, cx, tailY + 50);
+      bloom.addColorStop(0, 'rgba(79,195,247,0)');
+      bloom.addColorStop(0.4, 'rgba(79,195,247,0.05)');
+      bloom.addColorStop(0.8, 'rgba(150,220,255,0.12)');
+      bloom.addColorStop(1, 'rgba(79,195,247,0)');
+      rCtx.fillStyle = bloom;
+      rCtx.fillRect(cx - 40, headY - 20, 80, rodLen + 70);
+      var rod = rCtx.createLinearGradient(cx, headY, cx, tailY);
+      rod.addColorStop(0, 'rgba(255,255,255,0.15)');
+      rod.addColorStop(0.12, 'rgba(255,255,255,0.92)');
+      rod.addColorStop(0.5, 'rgba(180,230,255,0.55)');
+      rod.addColorStop(1, 'rgba(79,195,247,0)');
+      rCtx.fillStyle = rod;
+      rCtx.fillRect(cx - 1.5, headY, 3, rodLen);
+      var flare = rCtx.createRadialGradient(cx, headY, 0, cx, headY, 24);
+      flare.addColorStop(0, 'rgba(255,255,255,0.95)');
+      flare.addColorStop(0.18, 'rgba(180,230,255,0.65)');
+      flare.addColorStop(0.45, 'rgba(79,195,247,0.25)');
+      flare.addColorStop(1, 'rgba(79,195,247,0)');
+      rCtx.fillStyle = flare;
+      rCtx.beginPath(); rCtx.arc(cx, headY, 24, 0, Math.PI*2); rCtx.fill();
+    }
+
+    function drawRodH(headX, cy) {
+      var rodLen = Math.min(RW * 0.09, 50);
+      var tailX = headX - rodLen;
+      var bloom = rCtx.createLinearGradient(tailX - 40, cy, headX + 20, cy);
+      bloom.addColorStop(0, 'rgba(79,195,247,0)');
+      bloom.addColorStop(0.4, 'rgba(79,195,247,0.06)');
+      bloom.addColorStop(0.8, 'rgba(150,220,255,0.14)');
+      bloom.addColorStop(1, 'rgba(79,195,247,0)');
+      rCtx.fillStyle = bloom;
+      rCtx.fillRect(tailX - 40, cy - 40, rodLen + 60, 80);
+      var rod = rCtx.createLinearGradient(tailX, cy, headX, cy);
+      rod.addColorStop(0, 'rgba(79,195,247,0)');
+      rod.addColorStop(0.5, 'rgba(180,230,255,0.55)');
+      rod.addColorStop(0.88, 'rgba(255,255,255,0.92)');
+      rod.addColorStop(1, 'rgba(255,255,255,0.15)');
+      rCtx.fillStyle = rod;
+      rCtx.fillRect(tailX, cy - 1.5, rodLen, 3);
+      var flare = rCtx.createRadialGradient(headX, cy, 0, headX, cy, 24);
+      flare.addColorStop(0, 'rgba(255,255,255,0.95)');
+      flare.addColorStop(0.18, 'rgba(180,230,255,0.65)');
+      flare.addColorStop(0.45, 'rgba(79,195,247,0.25)');
+      flare.addColorStop(1, 'rgba(79,195,247,0)');
+      rCtx.fillStyle = flare;
+      rCtx.beginPath(); rCtx.arc(headX, cy, 24, 0, Math.PI*2); rCtx.fill();
+    }
+
+    var T = { darkHold:700, rise:1500, codeHold:500, sweep:1600, siteHold:1000, wipe:650, resetHold:300 };
+    var TOTAL = Object.values(T).reduce(function(a,b){return a+b;},0);
+    var PHASES = ['darkHold','rise','codeHold','sweep','siteHold','wipe','resetHold'];
+    var LABELS = {
+      darkHold:'Initializing…', rise:'▲ Revealing source code',
+      codeHold:'◉ Source code loaded', sweep:'⚡ Compiling to live site',
+      siteHold:'✓ thesonicmedia.com — Live', wipe:'↺ Resetting', resetHold:'Initializing…'
+    };
+
+    function getPhase(t) {
+      var acc = 0;
+      for (var i=0; i<PHASES.length; i++) {
+        var ph = PHASES[i];
+        var dur = T[ph];
+        if (t < acc + dur) return { ph: ph, p: (t - acc) / dur };
+        acc += dur;
+      }
+      return { ph: PHASES[0], p: 0 };
+    }
+
+    var screenCode = document.getElementById('nhScreenCode');
+    var screenSite = document.getElementById('nhScreenSite');
+    var stageLbl = document.getElementById('nhStageLbl');
+
+    var ambPts = Array.from({length:22},function(){return {
+      x:Math.random(), y:Math.random(),
+      r:Math.random()*1.1+0.3,
+      ph:Math.random()*Math.PI*2,
+      sp:Math.random()*0.0009+0.0003,
+    };});
+    function drawAmbient(ts) {
+      ambPts.forEach(function(d) {
+        var a = Math.sin(ts * d.sp + d.ph) * 0.5 + 0.5;
+        rCtx.beginPath();
+        rCtx.arc(d.x*RW, d.y*RH, d.r, 0, Math.PI*2);
+        rCtx.fillStyle = 'rgba(79,195,247,' + (a*0.12) + ')';
+        rCtx.fill();
+      });
+    }
+
+    var nhStart = null;
+    function nhFrame(ts) {
+      if (!nhStart) nhStart = ts;
+      var elapsed = (ts - nhStart) % TOTAL;
+      var phase = getPhase(elapsed);
+      var ph = phase.ph, p = phase.p;
+      stageLbl.textContent = LABELS[ph] || '';
+      rCtx.clearRect(0, 0, RW, RH);
+      var ep_io = eio(p);
+      var ep_in = ein(p);
+      drawVSCode();
+
+      if (ph === 'darkHold' || ph === 'resetHold') {
+        screenCode.style.clipPath = 'inset(0 0 100% 0)';
+        screenSite.style.clipPath = 'inset(0 100% 0 0)';
+        drawAmbient(ts);
+      } else if (ph === 'rise') {
+        screenSite.style.clipPath = 'inset(0 100% 0 0)';
+        var overshootV = RH * 0.18;
+        var headY = -overshootV + (RH + overshootV * 2) * ep_io;
+        var revealPct = Math.max(0, Math.min(100, Math.floor((headY / RH) * 100)));
+        screenCode.style.clipPath = 'inset(0 0 ' + (100 - revealPct) + '% 0)';
+        drawRodV(RW / 2, headY);
+      } else if (ph === 'codeHold') {
+        screenCode.style.clipPath = 'inset(0 0 0% 0)';
+        screenSite.style.clipPath = 'inset(0 100% 0 0)';
+      } else if (ph === 'sweep') {
+        var overshootH = RW * 0.12;
+        var headX = -overshootH + (RW + overshootH * 2) * ep_io;
+        screenCode.style.clipPath = 'inset(0 0 0 0)';
+        var sweepPct = Math.max(0, Math.min(100, Math.floor((headX / RW) * 100)));
+        screenSite.style.clipPath = 'inset(0 ' + (100 - sweepPct) + '% 0 0)';
+        drawRodH(headX, RH / 2);
+      } else if (ph === 'siteHold') {
+        screenCode.style.clipPath = 'inset(0 0 0 0)';
+        screenSite.style.clipPath = 'inset(0 0 0 0)';
+        var shimY = ((ts % 3500) / 3500) * RH;
+        var shimG = rCtx.createLinearGradient(0, shimY - 70, 0, shimY + 70);
+        shimG.addColorStop(0, 'rgba(79,195,247,0)');
+        shimG.addColorStop(0.5, 'rgba(79,195,247,0.022)');
+        shimG.addColorStop(1, 'rgba(79,195,247,0)');
+        rCtx.fillStyle = shimG;
+        rCtx.fillRect(0, shimY - 70, RW, 140);
+      } else if (ph === 'wipe') {
+        screenSite.style.clipPath = 'inset(0 0 0 0)';
+        var overshootW = RH * 0.18;
+        var wipeHead = (RH + overshootW) - (RH + overshootW * 2) * ep_in;
+        rCtx.fillStyle = '#000';
+        rCtx.fillRect(0, wipeHead, RW, RH);
+        drawRodVUp(RW / 2, wipeHead);
+        var wipeHeadPct = Math.max(0, Math.min(100, Math.floor((1 - wipeHead / RH) * 100)));
+        screenSite.style.clipPath = 'inset(0 0 ' + wipeHeadPct + '% 0)';
+      }
+      requestAnimationFrame(nhFrame);
+    }
+    requestAnimationFrame(nhFrame);
+
+    // GSAP entrance for left panel
+    if (typeof gsap !== 'undefined') {
+      var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      tl.to('#wsv-hero-new .eyebrow', { opacity:1, y:0, duration:0.7, delay:0.15 })
+        .to('#wsv-hero-new .line', { y:'0%', duration:0.9, stagger:0.12, ease:'power4.out' }, '-=0.3')
+        .to('#wsv-hero-new .hero-sub', { opacity:1, y:0, duration:0.7 }, '-=0.4')
+        .to('#wsv-hero-new .hero-btns', { opacity:1, y:0, duration:0.6 }, '-=0.45');
+    }
+  }
+
+  // Init when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', nhInit);
+  } else {
+    nhInit();
+  }
+  })();
+  </script>
+
   <script>
 (function(){
 'use strict';
@@ -2160,19 +2877,39 @@ window.setRange = function(key, val) {
   liveUpdate();
 };
 
-/* ── DEVICE ── */
+/* ── DEVICE SWITCHER ── */
 window.setDevice = function(dev, btn) {
-  document.querySelectorAll('.chrome-device-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.chrome-device-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const vi = document.getElementById('viewportInner');
-  vi.className = 'viewport-inner device-' + dev;
-  const labels = {desktop:'1440px desktop',tablet:'768px tablet',mobile:'390px mobile'};
-  document.getElementById('zoomIndicator').textContent = labels[dev];
+
+  const shell = document.getElementById('deviceShell');
+  const stand = document.getElementById('deviceStand');
+  const screen = document.getElementById('deviceScreen');
+  const labelText = document.getElementById('deviceLabelText');
+
+  // Remove all shell classes
+  shell.classList.remove('shell-desktop', 'shell-mobile');
+
+  if (dev === 'desktop') {
+    shell.classList.add('shell-desktop');
+    shell.style.width = '100%';
+    if (stand) { stand.style.display = 'block'; stand.className = 'device-stand'; }
+    if (screen) { screen.style.height = ''; } // let CSS clamp handle it
+    if (labelText) labelText.textContent = '1440px — Desktop';
+    document.getElementById('zoomIndicator').textContent = '1440px desktop';
+  } else if (dev === 'mobile') {
+    shell.classList.add('shell-mobile');
+    shell.style.width = '280px';
+    if (stand) { stand.style.display = 'none'; }
+    if (screen) { screen.style.height = '520px'; }
+    if (labelText) labelText.textContent = '390px — iPhone 15';
+    document.getElementById('zoomIndicator').textContent = '390px mobile';
+  }
 };
 
 /* ── SCROLL ── */
 window.scrollPreview = function(to) {
-  const vw = document.getElementById('viewportWrap');
+  const vw = document.getElementById('deviceScreen') || document.getElementById('viewportWrap');
   if (!vw) return;
   if (to === 'top') {
     vw.scrollTo({top: 0, behavior: 'smooth'});
@@ -2231,12 +2968,13 @@ window.generatePreview = function() {
     out.classList.add('active');
     observeReveal();
     document.getElementById('viewportWrap').scrollTop = 0;
+    var ds = document.getElementById('deviceScreen'); if(ds) ds.scrollTop = 0;
     var ctaEl = document.getElementById('wsvPreviewCta'); if(ctaEl) ctaEl.style.display='block';
   }, 1100);
 };
 
 function observeReveal() {
-  const vw = document.getElementById('viewportWrap');
+  const vw = document.getElementById('deviceScreen') || document.getElementById('viewportWrap');
   const sections = document.querySelectorAll('#genOutput .pv-section');
   const obs = new IntersectionObserver(entries=>{
     entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);} });
@@ -3105,11 +3843,12 @@ function buildPreview(brand, tagline, industry) {
     flex-shrink: 0;
   }
   .wsv-lcard-title-text {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: .08em;
-    color: rgba(255,255,255,.75);
-    line-height: 1;
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: rgba(255,255,255,.85);
+    line-height: 1.2;
   }
   .wsv-lcard-title-wrap::after {
     content: '';
@@ -3365,710 +4104,503 @@ function buildPreview(brand, tagline, industry) {
   })();
   </script>
 
-  <!-- ═══ MARQUEE TICKER ═══ -->
-  <div class="wsv-marquee-section" aria-hidden="true">
-    <div class="wsv-marquee-track" id="wsvMarquee">
-      <span class="wsv-marquee-item">PIXEL-PERFECT ENGINEERING <span class="sep">✦</span></span>
-      <span class="wsv-marquee-item">SUB-2S LOAD TIMES <span class="sep">✦</span></span>
-      <span class="wsv-marquee-item">CONVERSION-FOCUSED ARCHITECTURE <span class="sep">✦</span></span>
-      <span class="wsv-marquee-item">MOBILE-FIRST DESIGN <span class="sep">✦</span></span>
-      <span class="wsv-marquee-item">150+ SITES DELIVERED <span class="sep">✦</span></span>
-      <span class="wsv-marquee-item">CUSTOM UI/UX <span class="sep">✦</span></span>
-      <span class="wsv-marquee-item">REVENUE MACHINES <span class="sep">✦</span></span>
-      <span class="wsv-marquee-item">PIXEL-PERFECT ENGINEERING <span class="sep">✦</span></span>
-      <span class="wsv-marquee-item">SUB-2S LOAD TIMES <span class="sep">✦</span></span>
-      <span class="wsv-marquee-item">CONVERSION-FOCUSED ARCHITECTURE <span class="sep">✦</span></span>
-      <span class="wsv-marquee-item">MOBILE-FIRST DESIGN <span class="sep">✦</span></span>
-      <span class="wsv-marquee-item">150+ SITES DELIVERED <span class="sep">✦</span></span>
-      <span class="wsv-marquee-item">CUSTOM UI/UX <span class="sep">✦</span></span>
-      <span class="wsv-marquee-item">REVENUE MACHINES <span class="sep">✦</span></span>
-    </div>
-  </div>
+
 
   <!-- ═══ COMBINED: PROCESS + PREVIEW ═══ -->
-  <section class="wsv-process-preview-combined" id="wsv-process">
-    <style>
-    /* ── COMBINED PROCESS + PREVIEW SECTION ── */
-    .wsv-process-preview-combined {
-      background: var(--black, #0a0a0a);
-      padding: 100px 0 0;
-      position: relative;
-      overflow: visible;
-    }
-    .wsv-process-preview-combined::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 50% 40% at 50% 0%, rgba(255,92,0,.06) 0%, transparent 70%),
-        radial-gradient(ellipse 30% 60% at 10% 50%, rgba(255,92,0,.03) 0%, transparent 70%);
-      pointer-events: none;
-    }
+  <!-- ═══ OUR PROCESS — INTERACTIVE TIMELINE ═══ -->
+  <section class="wsv-process-tl-section" id="wsv-process">
+  <style>
+  /* ══════════════════════════════════════
+     OUR PROCESS — TIMELINE SECTION
+  ══════════════════════════════════════ */
+  .wsv-process-tl-section {
+    background: #07080c;
+    padding: 100px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .wsv-process-tl-section::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse, rgba(255,92,0,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
 
-    /* ── SECTION HEADER ── */
-    .wsv-ppc-header {
-      text-align: left;
-      padding: 0 60px 60px;
-    }
-    .wsv-ppc-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(52px, 6vw, 88px);
-      color: #fff;
-      line-height: .93;
-      letter-spacing: -.01em;
-      margin-bottom: 14px;
-    }
-    .wsv-ppc-title span { color: var(--orange, #ff5c00); }
-    .wsv-ppc-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      color: rgba(255,255,255,.38);
-      max-width: 440px;
-      margin: 0;
-      line-height: 1.7;
-    }
+  /* ── Header ── */
+  .wsv-ptl-header {
+    text-align: center;
+    padding: 0 40px 72px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .wsv-ptl-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: #ff5c00; background: rgba(255,92,0,.08);
+    border: 1px solid rgba(255,92,0,.2); padding: 7px 16px;
+    border-radius: 100px; margin-bottom: 24px;
+  }
+  .wsv-ptl-eyebrow-dot {
+    width: 5px; height: 5px; border-radius: 50%; background: #ff5c00;
+    animation: wsv-ptl-pulse 2s infinite;
+  }
+  @keyframes wsv-ptl-pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(255,92,0,.6); }
+    50% { box-shadow: 0 0 0 7px rgba(255,92,0,0); }
+  }
+  .wsv-ptl-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 5.5vw, 80px);
+    color: #fff; line-height: .93; letter-spacing: -.01em;
+    margin-bottom: 18px;
+  }
+  .wsv-ptl-title span { color: #ff5c00; }
+  .wsv-ptl-sub {
+    font-size: 15px; line-height: 1.75;
+    color: rgba(255,255,255,.42);
+    font-family: 'DM Sans', sans-serif;
+  }
 
-    /* strip styles moved to creative cards block below */
+  /* ── Timeline Inner ── */
+  .wsv-ptl-inner {
+    max-width: 1380px; margin: 0 auto;
+    padding: 0 60px 100px;
+  }
 
-    /* ══ CREATIVE PROCESS CARDS — FULL ORANGE THEME ══ */
-    /* Scroll wrapper handles horizontal overflow; strip itself is overflow:visible so hover scale isn't clipped */
-    .wsv-ppc-scroll-outer {
-      overflow-x: auto;
-      overflow-y: visible;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      max-width: 1380px;
-      margin: 0 auto;
-    }
-    .wsv-ppc-scroll-outer::-webkit-scrollbar { display: none; }
-    .wsv-ppc-strip {
-      display: flex;
-      align-items: stretch;
-      overflow: visible;
-      padding: 16px 60px 70px;
-      gap: 22px;
-    }
+  /* Track */
+  .wsv-ptl-track {
+    position: relative;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+    margin-bottom: 0;
+  }
+  .wsv-ptl-track::before {
+    content: '';
+    position: absolute;
+    top: 36px; left: calc(100% / 10); right: calc(100% / 10);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,92,0,.4) 15%, rgba(255,92,0,.4) 85%, transparent);
+    z-index: 0;
+  }
+  .wsv-ptl-step {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 0 8px;
+    position: relative; z-index: 1;
+    cursor: pointer;
+  }
+  .wsv-ptl-node {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: #111; border: 2px solid rgba(255,255,255,.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; margin-bottom: 20px;
+    transition: all .3s; flex-shrink: 0;
+    position: relative;
+  }
+  .wsv-ptl-node::before {
+    content: '';
+    position: absolute; inset: -5px; border-radius: 50%;
+    border: 1px solid transparent;
+    transition: border-color .3s;
+  }
+  .wsv-ptl-step.active .wsv-ptl-node,
+  .wsv-ptl-step:hover .wsv-ptl-node {
+    background: #ff5c00;
+    border-color: #ff5c00;
+    box-shadow: 0 0 30px rgba(255,92,0,.5);
+    transform: scale(1.1);
+  }
+  .wsv-ptl-step.active .wsv-ptl-node::before,
+  .wsv-ptl-step:hover .wsv-ptl-node::before {
+    border-color: rgba(255,92,0,.3);
+  }
+  .wsv-ptl-step-num {
+    position: absolute; top: -8px; right: -4px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #ff5c00; border: 2px solid #0a0a0a;
+    font-family: 'Syne', sans-serif; font-size: 9px; font-weight: 700;
+    color: #fff; display: flex; align-items: center; justify-content: center;
+  }
+  .wsv-ptl-step.active .wsv-ptl-step-num { background: #fff; color: #ff5c00; }
+  .wsv-ptl-step-label {
+    font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    color: rgba(255,255,255,.35); line-height: 1.4; transition: color .3s;
+  }
+  .wsv-ptl-step.active .wsv-ptl-step-label,
+  .wsv-ptl-step:hover .wsv-ptl-step-label { color: #fff; }
 
-    /* ── BASE CARD ── */
-    .wsv-ppc-card {
-      flex: 1;
-      min-width: 210px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      padding: 0;
-      border-radius: 22px;
-      cursor: default;
-      overflow: hidden;
-      /* Orange gradient base */
-      background: linear-gradient(145deg, #ff5c00 0%, #cc3e00 55%, #8b2200 100%);
-      border: 1px solid rgba(255,140,60,.35);
-      box-shadow:
-        0 8px 32px rgba(255,92,0,.25),
-        inset 0 1px 0 rgba(255,200,140,.18);
-      transition: transform .45s cubic-bezier(.23,1,.32,1),
-                  box-shadow .45s ease,
-                  border-color .3s;
-      transform-style: preserve-3d;
-      opacity: 0;
-      transform: translateY(44px);
-    }
+  /* Detail card */
+  .wsv-ptl-detail {
+    margin-top: 48px;
+    background: linear-gradient(135deg, #111316 0%, #0d0f14 100%);
+    border: 1px solid rgba(255,92,0,.2);
+    border-radius: 20px; padding: 36px 40px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    animation: wsv-ptl-panel-in .3s ease;
+    margin-bottom: 0;
+  }
+  @keyframes wsv-ptl-panel-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .wsv-ptl-detail-step-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,92,0,.1); border: 1px solid rgba(255,92,0,.25);
+    padding: 5px 14px; border-radius: 100px; margin-bottom: 16px;
+    font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: #ff5c00;
+  }
+  .wsv-ptl-detail-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: 40px; line-height: 1;
+    color: #fff; margin-bottom: 14px;
+  }
+  .wsv-ptl-detail-desc {
+    font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.75;
+    color: rgba(255,255,255,.45); margin-bottom: 24px;
+  }
+  .wsv-ptl-detail-tasks { display: flex; flex-direction: column; gap: 8px; }
+  .wsv-ptl-detail-task {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+    color: rgba(255,255,255,.6);
+  }
+  .wsv-ptl-detail-task::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: #ff5c00; flex-shrink: 0;
+  }
+  .wsv-ptl-detail-right {
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .wsv-ptl-mock-card {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+    border-radius: 12px; padding: 16px 18px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .wsv-ptl-mock-icon {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    background: rgba(255,92,0,.12); border: 1px solid rgba(255,92,0,.2);
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  .wsv-ptl-mock-label {
+    font-family: 'Syne', sans-serif; font-size: 9px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(255,255,255,.3); margin-bottom: 3px;
+  }
+  .wsv-ptl-mock-val {
+    font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(255,255,255,.7);
+  }
+  .wsv-ptl-mock-bar {
+    height: 4px; border-radius: 2px; background: rgba(255,255,255,.06);
+    margin-top: 8px; overflow: hidden;
+  }
+  .wsv-ptl-mock-bar-fill {
+    height: 100%; border-radius: 2px; background: #ff5c00;
+    transition: width .6s ease;
+  }
 
-    /* Visible state after intersection */
-    .wsv-ppc-card.ppc-visible {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity .75s ease, transform .75s cubic-bezier(.23,1,.32,1),
-                  box-shadow .45s ease, border-color .3s;
-    }
+  @media (max-width: 900px) {
+    .wsv-ptl-inner { padding: 0 20px 72px; }
+    .wsv-ptl-track { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .wsv-ptl-track::before { display: none; }
+    .wsv-ptl-detail { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
+    .wsv-ptl-node { width: 56px; height: 56px; font-size: 20px; }
+  }
+  @media (max-width: 500px) {
+    .wsv-ptl-track { grid-template-columns: repeat(3, 1fr); }
+  }
+  </style>
 
-    /* Hover lift */
-    .wsv-ppc-card.ppc-visible:hover {
-      transform: translateY(-12px) scale(1.03);
-      box-shadow:
-        0 32px 72px rgba(255,92,0,.45),
-        0 0 0 1px rgba(255,140,60,.6),
-        inset 0 1px 0 rgba(255,220,160,.25);
-      border-color: rgba(255,180,80,.55);
-      z-index: 2;
-    }
+  <div class="wsv-ptl-header">
+    <div class="wsv-ptl-eyebrow"><span class="wsv-ptl-eyebrow-dot"></span>How We Work</div>
+    <h2 class="wsv-ptl-title">OUR WEB DEVELOPMENT<br><span>PROCESS IN ACTION</span></h2>
+    <p class="wsv-ptl-sub">Five precision phases — from discovery to launch — engineered to deliver high-performance websites on time, every time.</p>
+  </div>
 
-    /* ── TOP GLOW BAND (always on) ── */
-    .wsv-ppc-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 55%;
-      background: linear-gradient(180deg, rgba(255,210,140,.18) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-      border-radius: 22px 22px 0 0;
-    }
-
-    /* ── SCAN-LINE SHIMMER on hover ── */
-    .wsv-ppc-card::after {
-      content: '';
-      position: absolute;
-      top: -120%;
-      left: -20%;
-      width: 140%;
-      height: 60%;
-      background: linear-gradient(160deg, transparent 30%, rgba(255,255,255,.11) 50%, transparent 70%);
-      transform: skewY(-8deg);
-      pointer-events: none;
-      z-index: 2;
-      transition: top 0s;
-    }
-    .wsv-ppc-card:hover::after {
-      animation: wsv-orange-shimmer .65s cubic-bezier(.23,1,.32,1) forwards;
-    }
-    @keyframes wsv-orange-shimmer {
-      0%   { top: -120%; }
-      100% { top: 160%; }
-    }
-
-    /* ── CARD INNER CONTENT ── */
-    .wsv-ppc-card-content {
-      position: relative;
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      padding: 32px 26px 28px;
-    }
-
-    /* ── BIG GHOST NUMBER ── */
-    .wsv-ppc-ghost-num {
-      position: absolute;
-      bottom: -10px;
-      right: 12px;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 120px;
-      line-height: 1;
-      color: rgba(0,0,0,.18);
-      pointer-events: none;
-      user-select: none;
-      z-index: 1;
-      transition: color .4s, transform .4s;
-    }
-    .wsv-ppc-card:hover .wsv-ppc-ghost-num {
-      color: rgba(0,0,0,.28);
-      transform: scale(1.06);
-    }
-
-    /* ── PHASE LABEL ── */
-    .wsv-ppc-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 10px;
-      letter-spacing: .28em;
-      color: rgba(255,255,255,.65);
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .wsv-ppc-num::before {
-      content: '';
-      display: block;
-      width: 18px; height: 1px;
-      background: rgba(255,255,255,.5);
-    }
-
-    /* ── ICON BOX ── */
-    .wsv-ppc-icon-wrap {
-      width: 58px; height: 58px;
-      border-radius: 16px;
-      background: rgba(0,0,0,.22);
-      border: 1px solid rgba(255,255,255,.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      margin-bottom: 22px;
-      flex-shrink: 0;
-      position: relative;
-      box-shadow: 0 4px 16px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.12);
-      transition: transform .45s cubic-bezier(.34,1.56,.64,1),
-                  background .3s, box-shadow .3s;
-    }
-    .wsv-ppc-card:hover .wsv-ppc-icon-wrap {
-      transform: scale(1.15) rotate(-5deg);
-      background: rgba(0,0,0,.32);
-      box-shadow: 0 8px 28px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.2);
-    }
-    /* Ping ring on icon */
-    .wsv-ppc-icon-wrap::before {
-      content: '';
-      position: absolute;
-      inset: -5px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,.18);
-      opacity: 0;
-      transform: scale(.85);
-      transition: opacity .35s, transform .35s;
-    }
-    .wsv-ppc-card:hover .wsv-ppc-icon-wrap::before {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    /* ── CARD TITLE ── */
-    .wsv-ppc-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 21px;
-      color: #fff;
-      letter-spacing: .03em;
-      line-height: 1.08;
-      margin-bottom: 12px;
-      text-shadow: 0 2px 8px rgba(0,0,0,.3);
-    }
-
-    /* ── DESCRIPTION ── */
-    .wsv-ppc-desc {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12.5px;
-      color: rgba(255,255,255,.72);
-      line-height: 1.65;
-      flex: 1;
-    }
-
-    /* ── TAG CHIPS ── */
-    .wsv-ppc-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 18px;
-    }
-    .wsv-ppc-tag {
-      font-family: monospace;
-      font-size: 9px;
-      letter-spacing: .06em;
-      color: rgba(255,255,255,.8);
-      background: rgba(0,0,0,.22);
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 5px;
-      padding: 4px 9px;
-      transition: background .25s, border-color .25s, color .25s;
-    }
-    .wsv-ppc-card:hover .wsv-ppc-tag {
-      background: rgba(0,0,0,.35);
-      border-color: rgba(255,255,255,.35);
-      color: #fff;
-    }
-
-    /* ── BOTTOM PROGRESS BAR ── */
-    .wsv-ppc-bar-wrap {
-      margin-top: 22px;
-      height: 3px;
-      background: rgba(0,0,0,.25);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .wsv-ppc-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, rgba(255,255,255,.5), rgba(255,255,255,.9));
-      border-radius: 3px;
-      width: 30%;
-      transition: width .65s cubic-bezier(.23,1,.32,1);
-    }
-    .wsv-ppc-card:hover .wsv-ppc-bar-fill { width: 100%; }
-
-    /* ── BOTTOM ACCENT LINE ── */
-    .wsv-ppc-card-bottom-line {
-      height: 3px;
-      background: linear-gradient(90deg, rgba(255,180,80,.0), rgba(255,220,140,.7), rgba(255,180,80,.0));
-      margin-top: auto;
-      opacity: 0;
-      transition: opacity .4s;
-      flex-shrink: 0;
-    }
-    .wsv-ppc-card:hover .wsv-ppc-card-bottom-line { opacity: 1; }
-
-    @media (max-width: 900px) {
-      .wsv-ppc-strip { padding: 0 20px 48px; }
-      .wsv-ppc-card  { min-width: 200px; flex: none; }
-    }
-
-    /* ── DIVIDER ── */
-    .wsv-ppc-divider {
-      max-width: 1380px;
-      margin: 0 auto;
-      padding: 0 60px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,92,0,.15), transparent);
-    }
-
-    /* ── PREVIEW GENERATOR WRAPPER ── */
-    .wsv-ppc-gen {
-      padding: 80px 60px 100px;
-    }
-    .wsv-ppc-gen-header {
-      text-align: left;
-      margin-bottom: 52px;
-    }
-    .wsv-ppc-gen-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(44px, 5vw, 76px);
-      color: #fff;
-      line-height: .93;
-      margin-bottom: 14px;
-    }
-    .wsv-ppc-gen-title span { color: var(--orange, #ff5c00); }
-    .wsv-ppc-gen-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      color: rgba(255,255,255,.38);
-      max-width: 480px;
-      margin: 0;
-      line-height: 1.7;
-    }
-
-    @media (max-width: 900px) {
-      .wsv-ppc-strip { padding: 0 20px 40px; }
-      .wsv-ppc-card { min-width: 180px; flex: none; }
-      .wsv-ppc-header, .wsv-ppc-gen { padding-left: 20px; padding-right: 20px; }
-    }
-    </style>
-
-    <!-- SECTION HEADER -->
-    <div class="wsv-ppc-header">
-      <div class="section-tag" style="justify-content:flex-start;color:var(--orange,#ff5c00);margin-bottom:20px;">How We Work</div>
-      <h2 class="wsv-ppc-title">Our <span>Process</span></h2>
-      <p class="wsv-ppc-sub">Five focused phases — from first conversation to live, converting website.</p>
+  <div class="wsv-ptl-inner">
+    <div class="wsv-ptl-track" id="wsvPtlTrack">
+      <div class="wsv-ptl-step active" data-step="0">
+        <div class="wsv-ptl-node">🔍<span class="wsv-ptl-step-num">1</span></div>
+        <div class="wsv-ptl-step-label">Discovery &<br>Strategy</div>
+      </div>
+      <div class="wsv-ptl-step" data-step="1">
+        <div class="wsv-ptl-node">🎨<span class="wsv-ptl-step-num">2</span></div>
+        <div class="wsv-ptl-step-label">UX Design &<br>Wireframes</div>
+      </div>
+      <div class="wsv-ptl-step" data-step="2">
+        <div class="wsv-ptl-node">⚡<span class="wsv-ptl-step-num">3</span></div>
+        <div class="wsv-ptl-step-label">Development &<br>Engineering</div>
+      </div>
+      <div class="wsv-ptl-step" data-step="3">
+        <div class="wsv-ptl-node">🧪<span class="wsv-ptl-step-num">4</span></div>
+        <div class="wsv-ptl-step-label">QA &<br>Performance</div>
+      </div>
+      <div class="wsv-ptl-step" data-step="4">
+        <div class="wsv-ptl-node">🚀<span class="wsv-ptl-step-num">5</span></div>
+        <div class="wsv-ptl-step-label">Launch &<br>Optimise</div>
+      </div>
     </div>
+    <div class="wsv-ptl-detail" id="wsvPtlDetail"></div>
+  </div>
 
-    <!-- HORIZONTAL PROCESS CARDS -->
-    <div class="wsv-ppc-scroll-outer">
-    <div class="wsv-ppc-strip" id="wsvPpcStrip">
+  <script>
+  (function() {
+    var steps = [
+      {
+        label: 'Discovery & Strategy',
+        desc: 'We deep-dive into your brand, audience, competitors, and business goals to architect a conversion-focused website strategy tailored to your market.',
+        tasks: ['Brand & competitor audit', 'Target audience research', 'Sitemap architecture', 'Goal & KPI mapping', 'Technology stack selection'],
+        mocks: [
+          { icon: '🔬', label: 'Competitors Analysed', val: '8 brands audited', bar: 80 },
+          { icon: '📋', label: 'Sitemap Pages', val: '14 pages planned', bar: 65 },
+          { icon: '🎯', label: 'Primary Goal', val: 'Leads & conversions', bar: 90 }
+        ]
+      },
+      {
+        label: 'UX Design & Wireframes',
+        desc: 'Our designers create Figma prototypes, a full design system, and CRO-optimised layouts — all reviewed and approved by you before a single line of code is written.',
+        tasks: ['Figma wireframes & prototypes', 'Design system & components', 'Mobile-first layout planning', 'CRO-focused UX decisions', 'Client review & approval'],
+        mocks: [
+          { icon: '🎨', label: 'Screens Designed', val: '22 Figma frames', bar: 88 },
+          { icon: '📱', label: 'Breakpoints', val: 'Mobile / Tablet / Desktop', bar: 100 },
+          { icon: '✅', label: 'Client Approval', val: 'Sign-off received', bar: 75 }
+        ]
+      },
+      {
+        label: 'Development & Engineering',
+        desc: 'Clean, semantic code with GSAP animations, CMS integration, and full API connectivity. Built for speed, scalability, and seamless content management.',
+        tasks: ['Semantic HTML & CSS architecture', 'GSAP & scroll animations', 'CMS / headless CMS build', 'API & third-party integrations', 'SEO-optimised code structure'],
+        mocks: [
+          { icon: '⚡', label: 'Components Built', val: '34 reusable blocks', bar: 92 },
+          { icon: '🔗', label: 'APIs Integrated', val: 'CRM, Analytics, Payment', bar: 78 },
+          { icon: '📦', label: 'Page Speed Score', val: 'Target 95+', bar: 70 }
+        ]
+      },
+      {
+        label: 'QA & Performance',
+        desc: 'Every page is stress-tested across devices and browsers. We target 95+ PageSpeed, pass every Lighthouse audit, and fix every edge case before launch.',
+        tasks: ['Cross-device & browser testing', 'Lighthouse full audit pass', '95+ PageSpeed target', 'Form & flow QA', 'Accessibility (WCAG) review'],
+        mocks: [
+          { icon: '🧪', label: 'Lighthouse Score', val: '97 / 100 avg', bar: 97 },
+          { icon: '📱', label: 'Devices Tested', val: '12+ screen sizes', bar: 100 },
+          { icon: '🐛', label: 'Bugs Resolved', val: '100% before launch', bar: 100 }
+        ]
+      },
+      {
+        label: 'Launch & Optimise',
+        desc: 'CDN deployment, analytics setup, and 30-day post-launch support. We monitor performance, fix anything that surfaces, and refine for maximum conversions.',
+        tasks: ['CDN & hosting deployment', 'Google Analytics 4 setup', 'Search Console integration', '30-day post-launch care', 'Performance iteration'],
+        mocks: [
+          { icon: '🚀', label: 'Launch Status', val: 'Live in < 48hrs', bar: 100 },
+          { icon: '📊', label: 'Analytics Active', val: 'GA4 + Heatmaps', bar: 90 },
+          { icon: '📈', label: 'Post-Launch Growth', val: 'Tracked & optimised', bar: 82 }
+        ]
+      }
+    ];
 
-      <div class="wsv-ppc-card" style="--cd:.0s">
-        <span class="wsv-ppc-ghost-num">01</span>
-        <div class="wsv-ppc-card-content">
-          <div class="wsv-ppc-num">01 · PHASE ONE</div>
-          <div class="wsv-ppc-icon-wrap">🔍</div>
-          <div class="wsv-ppc-name">Discovery &amp; Strategy</div>
-          <div class="wsv-ppc-desc">Brand audit, competitor research, goal mapping &amp; sitemap architecture.</div>
-          <div class="wsv-ppc-tags">
-            <span class="wsv-ppc-tag">Brand Audit</span>
-            <span class="wsv-ppc-tag">Sitemap</span>
-            <span class="wsv-ppc-tag">Research</span>
-          </div>
-          <div class="wsv-ppc-bar-wrap"><div class="wsv-ppc-bar-fill"></div></div>
-        </div>
-        <div class="wsv-ppc-card-bottom-line"></div>
-      </div>
+    var track  = document.getElementById('wsvPtlTrack');
+    var detail = document.getElementById('wsvPtlDetail');
+    if (!track || !detail) return;
 
-      <div class="wsv-ppc-card" style="--cd:.12s">
-        <span class="wsv-ppc-ghost-num">02</span>
-        <div class="wsv-ppc-card-content">
-          <div class="wsv-ppc-num">02 · PHASE TWO</div>
-          <div class="wsv-ppc-icon-wrap">🎨</div>
-          <div class="wsv-ppc-name">UX Design &amp; Wireframes</div>
-          <div class="wsv-ppc-desc">Figma prototypes, design system &amp; CRO-optimised layout mapping.</div>
-          <div class="wsv-ppc-tags">
-            <span class="wsv-ppc-tag">Figma</span>
-            <span class="wsv-ppc-tag">CRO</span>
-            <span class="wsv-ppc-tag">UI System</span>
-          </div>
-          <div class="wsv-ppc-bar-wrap"><div class="wsv-ppc-bar-fill"></div></div>
-        </div>
-        <div class="wsv-ppc-card-bottom-line"></div>
-      </div>
+    function renderDetail(i) {
+      var s = steps[i];
+      var tasksHtml = s.tasks.map(function(t) {
+        return '<div class="wsv-ptl-detail-task">' + t + '</div>';
+      }).join('');
+      var mocksHtml = s.mocks.map(function(m) {
+        return '<div class="wsv-ptl-mock-card">'
+          + '<div class="wsv-ptl-mock-icon">' + m.icon + '</div>'
+          + '<div class="wsv-ptl-mock-text">'
+          + '<div class="wsv-ptl-mock-label">' + m.label + '</div>'
+          + '<div class="wsv-ptl-mock-val">' + m.val + '</div>'
+          + '<div class="wsv-ptl-mock-bar"><div class="wsv-ptl-mock-bar-fill" style="width:0%" data-w="' + m.bar + '%"></div></div>'
+          + '</div></div>';
+      }).join('');
 
-      <div class="wsv-ppc-card" style="--cd:.24s">
-        <span class="wsv-ppc-ghost-num">03</span>
-        <div class="wsv-ppc-card-content">
-          <div class="wsv-ppc-num">03 · PHASE THREE</div>
-          <div class="wsv-ppc-icon-wrap">⚡</div>
-          <div class="wsv-ppc-name">Development &amp; Engineering</div>
-          <div class="wsv-ppc-desc">Clean code, GSAP animations, CMS build &amp; full API integrations.</div>
-          <div class="wsv-ppc-tags">
-            <span class="wsv-ppc-tag">React</span>
-            <span class="wsv-ppc-tag">GSAP</span>
-            <span class="wsv-ppc-tag">API</span>
-          </div>
-          <div class="wsv-ppc-bar-wrap"><div class="wsv-ppc-bar-fill"></div></div>
-        </div>
-        <div class="wsv-ppc-card-bottom-line"></div>
-      </div>
+      detail.innerHTML =
+        '<div class="wsv-ptl-detail-left">'
+        + '<div class="wsv-ptl-detail-step-badge">Phase ' + (i + 1) + ' of 5</div>'
+        + '<div class="wsv-ptl-detail-title">' + s.label.toUpperCase() + '</div>'
+        + '<div class="wsv-ptl-detail-desc">' + s.desc + '</div>'
+        + '<div class="wsv-ptl-detail-tasks">' + tasksHtml + '</div>'
+        + '</div>'
+        + '<div class="wsv-ptl-detail-right">' + mocksHtml + '</div>';
 
-      <div class="wsv-ppc-card" style="--cd:.36s">
-        <span class="wsv-ppc-ghost-num">04</span>
-        <div class="wsv-ppc-card-content">
-          <div class="wsv-ppc-num">04 · PHASE FOUR</div>
-          <div class="wsv-ppc-icon-wrap">🧪</div>
-          <div class="wsv-ppc-name">QA &amp; Performance</div>
-          <div class="wsv-ppc-desc">95+ PageSpeed, cross-device testing &amp; full Lighthouse audit pass.</div>
-          <div class="wsv-ppc-tags">
-            <span class="wsv-ppc-tag">Lighthouse</span>
-            <span class="wsv-ppc-tag">PageSpeed</span>
-            <span class="wsv-ppc-tag">A11y</span>
-          </div>
-          <div class="wsv-ppc-bar-wrap"><div class="wsv-ppc-bar-fill"></div></div>
-        </div>
-        <div class="wsv-ppc-card-bottom-line"></div>
-      </div>
-
-      <div class="wsv-ppc-card" style="--cd:.48s">
-        <span class="wsv-ppc-ghost-num">05</span>
-        <div class="wsv-ppc-card-content">
-          <div class="wsv-ppc-num">05 · PHASE FIVE</div>
-          <div class="wsv-ppc-icon-wrap">🚀</div>
-          <div class="wsv-ppc-name">Launch &amp; Optimise</div>
-          <div class="wsv-ppc-desc">CDN deploy, analytics setup &amp; 30-day post-launch growth support.</div>
-          <div class="wsv-ppc-tags">
-            <span class="wsv-ppc-tag">CDN</span>
-            <span class="wsv-ppc-tag">Analytics</span>
-            <span class="wsv-ppc-tag">30-Day Care</span>
-          </div>
-          <div class="wsv-ppc-bar-wrap"><div class="wsv-ppc-bar-fill"></div></div>
-        </div>
-        <div class="wsv-ppc-card-bottom-line"></div>
-      </div>
-
-    </div><!-- /strip -->
-    </div><!-- /wsv-ppc-scroll-outer -->
-
-    <script>
-    /* Entrance animation for process cards */
-    (function() {
-      var cards = document.querySelectorAll('#wsvPpcStrip .wsv-ppc-card');
-      if (!cards.length) return;
-      var io = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) {
-            var delay = parseFloat(e.target.style.getPropertyValue('--cd') || '0') * 1000;
-            setTimeout(function() { e.target.classList.add('ppc-visible'); }, delay);
-            io.unobserve(e.target);
-          }
+      setTimeout(function() {
+        detail.querySelectorAll('.wsv-ptl-mock-bar-fill').forEach(function(bar) {
+          bar.style.width = bar.getAttribute('data-w');
         });
-      }, { threshold: 0.1 });
-      cards.forEach(function(c) { io.observe(c); });
-    })();
-    </script>
+      }, 50);
+    }
 
-    <div class="wsv-ppc-divider"></div>
+    track.querySelectorAll('.wsv-ptl-step').forEach(function(step) {
+      step.addEventListener('click', function() {
+        track.querySelectorAll('.wsv-ptl-step').forEach(function(s) { s.classList.remove('active'); });
+        step.classList.add('active');
+        renderDetail(parseInt(step.getAttribute('data-step')));
+      });
+    });
 
-    <!-- PREVIEW GENERATOR -->
-    <div class="wsv-ppc-gen" id="wsv-gen-section-anchor">
-      <div class="wsv-ppc-gen-header">
-        <div class="section-tag" style="justify-content:flex-start;color:var(--orange,#ff5c00);margin-bottom:20px;">Interactive Tool</div>
-        <h2 class="wsv-ppc-gen-title">PREVIEW YOUR <span>WEBSITE</span></h2>
-        <p class="wsv-ppc-gen-sub">Enter your brand details and get an instant, full-fidelity preview — live, scrollable, real-time.</p>
-      </div>
-      <div class="wsv-gen-v2-wrap">
-      <div class="gen-box" id="genBox">
-
-    <!-- LEFT PANEL -->
-    <div class="panel-left" style="position:relative;">
-      <div class="panel-topbar">
-        <div class="panel-topbar-logo">✦</div>
-        <span class="panel-topbar-text">EDIT MY WEBSITE</span>
-      </div>
-      <div class="panel-body" id="panelBody">
-
-        <!-- Brand Info -->
-        <div class="sec-label">Brand Info</div>
-        <div class="field">
-          <label for="inp-brand">Business Name</label>
-          <input type="text" id="inp-brand" class="inp" placeholder="e.g. Nexus Foods" maxlength="40" autocomplete="off" oninput="liveUpdate()">
-        </div>
-        <div class="field">
-          <label for="inp-tagline">Tagline</label>
-          <input type="text" id="inp-tagline" class="inp" placeholder="e.g. Healthy meals, daily" maxlength="60" autocomplete="off" oninput="liveUpdate()">
-        </div>
-
-        <!-- Industry -->
-        <div class="sec-label">Industry</div>
-        <div class="field">
-          <select id="inp-industry" class="inp inp-select" onchange="liveUpdate()">
-            <option value="">Select industry…</option>
-            <option value="food">Food &amp; Beverage</option>
-            <option value="fashion">Fashion &amp; Lifestyle</option>
-            <option value="health">Health &amp; Wellness</option>
-            <option value="finance">Finance</option>
-            <option value="real-estate">Real Estate</option>
-            <option value="ecommerce">E-Commerce</option>
-            <option value="hospitality">Hospitality &amp; Travel</option>
-            <option value="tech">Technology &amp; SaaS</option>
-            <option value="education">Education</option>
-          </select>
-        </div>
-
-        <!-- Accent Colour -->
-        <div class="sec-label">Accent Colour</div>
-        <div class="colour-grid" id="colourGrid">
-          <button class="colour-swatch active" style="background:#ff5c00;" data-c="#ff5c00" onclick="setColour(this)" title="Orange"></button>
-          <button class="colour-swatch" style="background:#7c3aed;" data-c="#7c3aed" onclick="setColour(this)" title="Purple"></button>
-          <button class="colour-swatch" style="background:#0ea5e9;" data-c="#0ea5e9" onclick="setColour(this)" title="Sky Blue"></button>
-          <button class="colour-swatch" style="background:#10b981;" data-c="#10b981" onclick="setColour(this)" title="Emerald"></button>
-          <button class="colour-swatch" style="background:#e11d48;" data-c="#e11d48" onclick="setColour(this)" title="Rose"></button>
-          <button class="colour-swatch" style="background:#f59e0b;" data-c="#f59e0b" onclick="setColour(this)" title="Amber"></button>
-          <button class="colour-swatch" style="background:#06b6d4;" data-c="#06b6d4" onclick="setColour(this)" title="Cyan"></button>
-          <button class="colour-swatch" style="background:#ec4899;" data-c="#ec4899" onclick="setColour(this)" title="Pink"></button>
-          <button class="colour-swatch" style="background:#1d4ed8;" data-c="#1d4ed8" onclick="setColour(this)" title="Blue"></button>
-          <button class="colour-swatch" style="background:#111111;" data-c="#111111" onclick="setColour(this)" title="Black"></button>
-        </div>
-
-        <!-- Style Theme -->
-        <div class="sec-label">Site Theme</div>
-        <div class="style-grid" id="styleGrid">
-          <button class="style-btn" data-s="dark" onclick="setStyle(this)">Dark Bold</button>
-          <button class="style-btn active" data-s="minimal" onclick="setStyle(this)">Minimal</button>
-          <button class="style-btn" data-s="vibrant" onclick="setStyle(this)">Vibrant</button>
-          <button class="style-btn" data-s="corporate" onclick="setStyle(this)">Corporate</button>
-        </div>
-
-        <!-- Typography -->
-        <div class="sec-label">Typography</div>
-        <div class="font-btns" id="fontBtns">
-          <button class="font-btn active" data-f="bebas" onclick="setFont(this)">Bebas Neue <span class="font-preview" style="font-family:'Bebas Neue',sans-serif;">Aa</span></button>
-          <button class="font-btn" data-f="playfair" onclick="setFont(this)">Playfair Display <span class="font-preview" style="font-family:Georgia,serif;">Aa</span></button>
-          <button class="font-btn" data-f="syne" onclick="setFont(this)">Syne Bold <span class="font-preview" style="font-family:'Syne',sans-serif;font-weight:800;">Aa</span></button>
-          <button class="font-btn" data-f="dm" onclick="setFont(this)">DM Sans Modern <span class="font-preview" style="font-family:'DM Sans',sans-serif;">Aa</span></button>
-        </div>
-
-        <!-- Hidden toggles for code compatibility -->
-        <input type="checkbox" id="tog-anim" checked style="display:none">
-        <input type="checkbox" id="tog-stats" checked style="display:none">
-        <input type="checkbox" id="tog-photos" checked style="display:none">
-        <input type="checkbox" id="tog-feature" checked style="display:none">
-        <input type="range" id="rng-radius" value="8" style="display:none">
-        <input type="range" id="rng-spacing" value="100" style="display:none">
-        <input type="range" id="rng-hero" value="340" style="display:none">
-        <span id="rng-radius-val" style="display:none"></span>
-        <span id="rng-spacing-val" style="display:none"></span>
-        <span id="rng-hero-val" style="display:none"></span>
-
-      </div><!-- /panel-body -->
-
-      <!-- Generate button fixed at bottom -->
-      <div class="gen-btn-wrap">
-        <button class="gen-btn" onclick="generatePreview()" id="genBtn">
-          ✦ GENERATE PREVIEW
-        </button>
-      </div>
-    </div><!-- /panel-left -->
-
-    <!-- RIGHT PANE -->
-    <div class="panel-right">
-      <!-- Browser chrome -->
-      <div class="browser-chrome">
-        <div class="chrome-dots"><span></span><span></span><span></span></div>
-        <div class="chrome-url">
-          <span class="chrome-url-dot"></span>
-          <span class="chrome-url-text" id="chromeUrl">yourwebsite.com — fill in details and click Generate</span>
-        </div>
-        <div class="chrome-device-btns">
-          <button class="chrome-device-btn active" onclick="setDevice('desktop',this)">🖥 Desktop</button>
-          <button class="chrome-device-btn" onclick="setDevice('tablet',this)">📱 Tablet</button>
-          <button class="chrome-device-btn" onclick="setDevice('mobile',this)">📱 Mobile</button>
-        </div>
-        <div class="chrome-live-badge" id="liveBadge">
-          <div class="chrome-live-dot"></div>LIVE
-        </div>
-      </div>
-
-      <!-- Toolbar -->
-      <div class="browser-toolbar">
-        <span class="toolbar-label">Tools</span>
-        <div class="toolbar-divider"></div>
-        <button class="toolbar-btn" onclick="scrollPreview('top')">
-          <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 10V2M2 6l4-4 4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
-          Top
-        </button>
-        <button class="toolbar-btn" onclick="scrollPreview('bottom')">
-          <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 2v8M10 6L6 10 2 6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
-          Bottom
-        </button>
-        <button class="toolbar-btn" onclick="scrollPreview('services')">Services</button>
-        <button class="toolbar-btn" onclick="scrollPreview('footer')">Footer</button>
-        <div class="toolbar-divider"></div>
-        <button class="toolbar-btn" onclick="refreshPreview()">
-          <svg width="12" height="12" viewBox="0 0 12 12"><path d="M10 6A4 4 0 0 1 2.3 8.5M2 6A4 4 0 0 1 9.7 3.5M10 2v2H8M4 10H2V8" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
-          Refresh
-        </button>
-        <span class="zoom-indicator" id="zoomIndicator">1440px desktop</span>
-      </div>
-
-      <!-- Viewport -->
-      <div class="viewport-wrap" id="viewportWrap">
-        <div class="viewport-inner device-desktop" id="viewportInner">
-          <!-- Empty state -->
-          <div class="empty-state" id="emptyState">
-            <div class="empty-icon">🌐</div>
-            <div class="empty-title">YOUR SITE PREVIEW</div>
-            <p class="empty-sub">Fill in your brand details and click Generate Preview to see a scrollable desktop preview.</p>
-          </div>
-          <!-- Spinner -->
-          <div class="spinner" id="spinner">
-            <div class="spinner-ring"></div>
-            <div class="spinner-text">BUILDING YOUR PREVIEW…</div>
-          </div>
-          <!-- Output -->
-          <div class="gen-output" id="genOutput"></div>
-        </div>
-      </div>
-    </div><!-- /panel-right -->
-      </div><!-- /gen-box -->
-    </div><!-- /gen-v2-wrap -->
-    <!-- CTA below preview -->
-    <div id="wsvPreviewCta" style="display:none;margin-top:32px;padding:28px 32px;background:#111;border:1px solid rgba(255,92,0,.2);border-radius:16px;">
-      <div style="font-family:var(--font-heading,\'Bebas Neue\',sans-serif);font-size:20px;color:#fff;margin-bottom:8px;">Love what you see?</div>
-      <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px;line-height:1.6;">This is just a glimpse. Let\'s build the real thing — engineered for performance and conversion.</div>
-      <a href="#" onclick="navigate(\'contact\');return false;" class="btn-p" style="font-size:13px;">Start Your Project →</a>
-    </div>
-    </div><!-- /ppc-gen -->
+    renderDetail(0);
+  })();
+  </script>
 
   </section>
 
-  <!-- ═══ FULL-STACK CAPABILITIES 3D TILT GRID ═══ -->
-  <section class="wsv-caps-section" id="wsv-caps">
-    <div class="wsv-caps-header">
-      <div>
-        <div class="section-tag" style="color:var(--orange);margin-bottom:20px;">What We Engineer</div>
-        <h2 class="wsv-caps-title">Full-Stack <span>Capabilities</span></h2>
-      </div>
-      <div class="wsv-caps-right-text">From a simple landing page to a complex enterprise platform — we have the stack, the talent, and the obsession to build it right. Every capability below is done in-house, never outsourced.</div>
+  <!-- ═══ FULL-STACK CAPABILITIES — DELIVERABLES GRID ═══ -->
+  <section class="wsv-caps-deliv-section" id="wsv-caps">
+  <style>
+  /* ══════════════════════════════════════
+     FULL-STACK CAPABILITIES — DELIVERABLES GRID
+  ══════════════════════════════════════ */
+  .wsv-caps-deliv-section {
+    background: #07080c;
+    padding: 100px 0;
+    position: relative; overflow: hidden;
+  }
+  .wsv-caps-deliv-inner {
+    max-width: 1380px; margin: 0 auto; padding: 0 60px;
+  }
+  .wsv-caps-deliv-header {
+    text-align: center; margin-bottom: 64px;
+  }
+  .wsv-caps-deliv-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: #ff5c00; background: rgba(255,92,0,.08);
+    border: 1px solid rgba(255,92,0,.2); padding: 7px 16px;
+    border-radius: 100px; margin-bottom: 22px;
+  }
+  .wsv-caps-deliv-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 5.5vw, 82px);
+    color: #fff; line-height: .93; letter-spacing: -.01em;
+    margin-bottom: 14px;
+  }
+  .wsv-caps-deliv-title span { color: #ff5c00; }
+  .wsv-caps-deliv-subtitle {
+    font-size: 14px; color: rgba(255,255,255,.38);
+    font-family: 'DM Sans', sans-serif;
+    max-width: 540px; margin: 0 auto;
+  }
+
+  /* Cards grid */
+  .wsv-caps-deliv-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 60px;
+  }
+  .wsv-caps-deliv-card {
+    background: linear-gradient(135deg, #111418 0%, #0c0e13 100%);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 16px; padding: 24px 22px;
+    position: relative; overflow: hidden;
+    transition: all .3s; cursor: default;
+  }
+  .wsv-caps-deliv-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, #ff5c00, transparent);
+    opacity: 0; transition: opacity .3s;
+  }
+  .wsv-caps-deliv-card:hover {
+    border-color: rgba(255,92,0,.3);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 48px rgba(0,0,0,.5), 0 0 0 1px rgba(255,92,0,.1);
+  }
+  .wsv-caps-deliv-card:hover::before { opacity: 1; }
+  .wsv-caps-deliv-card-icon {
+    font-size: 28px; margin-bottom: 14px; display: block;
+  }
+  .wsv-caps-deliv-card-title {
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: .04em; color: #fff; margin-bottom: 6px;
+  }
+  .wsv-caps-deliv-card-desc {
+    font-family: 'DM Sans', sans-serif; font-size: 12px; line-height: 1.6;
+    color: rgba(255,255,255,.38);
+  }
+  .wsv-caps-deliv-card-check {
+    position: absolute; top: 18px; right: 18px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #22c55e;
+  }
+
+  /* Bottom strip */
+  .wsv-caps-deliv-strip {
+    background: linear-gradient(135deg, #ff5c00 0%, #e04e00 100%);
+    border-radius: 20px; padding: 40px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 32px; flex-wrap: wrap;
+  }
+  .wsv-caps-deliv-strip-tag {
+    font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(255,255,255,.65); margin-bottom: 8px;
+  }
+  .wsv-caps-deliv-strip-heading {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 4vw, 52px);
+    color: #fff; line-height: 1; letter-spacing: .01em;
+  }
+  .wsv-caps-deliv-strip-right {
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .wsv-caps-deliv-strip-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(0,0,0,.2); border: 1px solid rgba(255,255,255,.2);
+    color: #fff; padding: 8px 16px; border-radius: 100px;
+    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: .04em;
+  }
+  .wsv-caps-deliv-strip-pill-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: rgba(255,255,255,.7); flex-shrink: 0;
+  }
+
+  @media (max-width: 1100px) {
+    .wsv-caps-deliv-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .wsv-caps-deliv-grid { grid-template-columns: 1fr; }
+    .wsv-caps-deliv-inner { padding: 0 20px; }
+    .wsv-caps-deliv-strip { padding: 28px 24px; }
+  }
+  </style>
+
+  <div class="wsv-caps-deliv-inner">
+    <div class="wsv-caps-deliv-header">
+      <div class="wsv-caps-deliv-eyebrow">🔧 What We Engineer</div>
+      <h2 class="wsv-caps-deliv-title">FULL-STACK<br><span>CAPABILITIES</span></h2>
+      <p class="wsv-caps-deliv-subtitle">From a simple landing page to a complex enterprise platform — here's exactly what we bring to every project, in-house, no outsourcing.</p>
     </div>
-    <div class="wsv-caps-grid" id="wsvCapsGrid">
-      <div class="wsv-cap-card">
-        <span class="wsv-cap-icon">⚡</span>
-        <div class="wsv-cap-title">BLAZING PERFORMANCE</div>
-        <div class="wsv-cap-desc">Sub-2 second load times guaranteed. Optimised code, CDN delivery, next-gen image formats, lazy loading, and more.</div>
-        <div class="wsv-cap-bottom"><span class="wsv-cap-badge">Core Web Vitals</span><div class="wsv-cap-arrow">→</div></div>
+    <div class="wsv-caps-deliv-grid">
+      <div class="wsv-caps-deliv-card"><div class="wsv-caps-deliv-card-check">✓</div><span class="wsv-caps-deliv-card-icon">⚡</span><div class="wsv-caps-deliv-card-title">Blazing Performance</div><div class="wsv-caps-deliv-card-desc">Sub-2 second load times guaranteed. Optimised code, CDN delivery, next-gen image formats, and lazy loading.</div></div>
+      <div class="wsv-caps-deliv-card"><div class="wsv-caps-deliv-card-check">✓</div><span class="wsv-caps-deliv-card-icon">🎨</span><div class="wsv-caps-deliv-card-title">Custom UI/UX Design</div><div class="wsv-caps-deliv-card-desc">Zero templates. Every pixel crafted for your brand. Figma-first design system included with every project.</div></div>
+      <div class="wsv-caps-deliv-card"><div class="wsv-caps-deliv-card-check">✓</div><span class="wsv-caps-deliv-card-icon">📱</span><div class="wsv-caps-deliv-card-title">Mobile-First Responsive</div><div class="wsv-caps-deliv-card-desc">60%+ of your visitors are mobile. We design mobile-first and scale up — never the other way around.</div></div>
+      <div class="wsv-caps-deliv-card"><div class="wsv-caps-deliv-card-check">✓</div><span class="wsv-caps-deliv-card-icon">🔒</span><div class="wsv-caps-deliv-card-title">Secure & Scalable</div><div class="wsv-caps-deliv-card-desc">SSL, DDoS protection, WAF firewall, and cloud auto-scaling. Your site handles traffic spikes without breaking.</div></div>
+      <div class="wsv-caps-deliv-card"><div class="wsv-caps-deliv-card-check">✓</div><span class="wsv-caps-deliv-card-icon">📊</span><div class="wsv-caps-deliv-card-title">CRO Architecture</div><div class="wsv-caps-deliv-card-desc">Every CTA position, above-the-fold layout, and user flow is engineered around conversion psychology.</div></div>
+      <div class="wsv-caps-deliv-card"><div class="wsv-caps-deliv-card-check">✓</div><span class="wsv-caps-deliv-card-icon">🔗</span><div class="wsv-caps-deliv-card-title">CMS & Integrations</div><div class="wsv-caps-deliv-card-desc">WordPress, Webflow, or custom headless CMS. CRM, payment gateway, and analytics integrations included.</div></div>
+      <div class="wsv-caps-deliv-card"><div class="wsv-caps-deliv-card-check">✓</div><span class="wsv-caps-deliv-card-icon">🎞️</span><div class="wsv-caps-deliv-card-title">GSAP Animations</div><div class="wsv-caps-deliv-card-desc">Cinematic scroll-triggered animations, smooth transitions, and micro-interactions that make your site unforgettable.</div></div>
+      <div class="wsv-caps-deliv-card"><div class="wsv-caps-deliv-card-check">✓</div><span class="wsv-caps-deliv-card-icon">📈</span><div class="wsv-caps-deliv-card-title">SEO Foundation</div><div class="wsv-caps-deliv-card-desc">Semantic HTML, schema markup, Core Web Vitals compliance, and Google Search Console setup from day one.</div></div>
+    </div>
+    <div class="wsv-caps-deliv-strip">
+      <div class="wsv-caps-deliv-strip-left">
+        <div class="wsv-caps-deliv-strip-tag">Everything, in-house:</div>
+        <div class="wsv-caps-deliv-strip-heading">ALL OF THIS — IN EVERY PROJECT.</div>
       </div>
-      <div class="wsv-cap-card">
-        <span class="wsv-cap-icon">🎨</span>
-        <div class="wsv-cap-title">CUSTOM UI/UX DESIGN</div>
-        <div class="wsv-cap-desc">Zero templates. Every pixel crafted for your unique brand and target audience. Figma-first design system included.</div>
-        <div class="wsv-cap-bottom"><span class="wsv-cap-badge">Design System</span><div class="wsv-cap-arrow">→</div></div>
-      </div>
-      <div class="wsv-cap-card">
-        <span class="wsv-cap-icon">📱</span>
-        <div class="wsv-cap-title">MOBILE-FIRST RESPONSIVE</div>
-        <div class="wsv-cap-desc">60%+ of your visitors are on mobile. We design and develop mobile-first, then scale up — not the other way.</div>
-        <div class="wsv-cap-bottom"><span class="wsv-cap-badge">Responsive</span><div class="wsv-cap-arrow">→</div></div>
-      </div>
-      <div class="wsv-cap-card">
-        <span class="wsv-cap-icon">🔒</span>
-        <div class="wsv-cap-title">SECURE &amp; SCALABLE</div>
-        <div class="wsv-cap-desc">SSL, DDoS protection, WAF firewall, cloud hosting with auto-scaling. Your site handles traffic spikes without breaking.</div>
-        <div class="wsv-cap-bottom"><span class="wsv-cap-badge">Enterprise Security</span><div class="wsv-cap-arrow">→</div></div>
-      </div>
-      <div class="wsv-cap-card">
-        <span class="wsv-cap-icon">📊</span>
-        <div class="wsv-cap-title">CRO ARCHITECTURE</div>
-        <div class="wsv-cap-desc">Every CTA position, above-the-fold layout, and user flow is engineered around conversion psychology — not aesthetics alone.</div>
-        <div class="wsv-cap-bottom"><span class="wsv-cap-badge">A/B Testing</span><div class="wsv-cap-arrow">→</div></div>
-      </div>
-      <div class="wsv-cap-card">
-        <span class="wsv-cap-icon">🔗</span>
-        <div class="wsv-cap-title">CMS &amp; INTEGRATIONS</div>
-        <div class="wsv-cap-desc">WordPress, Webflow, custom headless CMS — you own your content. CRM, payment, analytics integrations included.</div>
-        <div class="wsv-cap-bottom"><span class="wsv-cap-badge">Headless CMS</span><div class="wsv-cap-arrow">→</div></div>
+      <div class="wsv-caps-deliv-strip-right">
+        <span class="wsv-caps-deliv-strip-pill"><span class="wsv-caps-deliv-strip-pill-dot"></span>No Outsourcing</span>
+        <span class="wsv-caps-deliv-strip-pill"><span class="wsv-caps-deliv-strip-pill-dot"></span>Dedicated Project Manager</span>
+        <span class="wsv-caps-deliv-strip-pill"><span class="wsv-caps-deliv-strip-pill-dot"></span>Live in 4–6 Weeks</span>
       </div>
     </div>
+  </div>
   </section>
 
   <!-- ═══ FINAL CTA — PROPOSAL FORM ═══ -->
@@ -4097,6 +4629,30 @@ function buildPreview(brand, tagline, industry) {
               <option value="ecommerce">E-Commerce</option>
               <option value="custom">Custom Website</option>
             </select>
+          </div>
+
+          <!-- Company Name + Industry (2 col) -->
+          <div class="wsv-pf-row">
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfCompany">Company Name</label>
+              <input class="wsv-input wsv-pf-input" type="text" id="pfCompany" name="company_name" placeholder="Enter Company Name">
+            </div>
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfIndustry">Industry</label>
+              <select class="wsv-input wsv-select wsv-pf-input" id="pfIndustry" name="industry">
+                <option value="" disabled selected>Select Industry ▼</option>
+                <option value="food">Food &amp; Beverage</option>
+                <option value="fashion">Fashion &amp; Lifestyle</option>
+                <option value="health">Health &amp; Wellness</option>
+                <option value="finance">Finance</option>
+                <option value="real-estate">Real Estate</option>
+                <option value="ecommerce">E-Commerce / Retail</option>
+                <option value="hospitality">Hospitality &amp; Travel</option>
+                <option value="tech">Technology &amp; SaaS</option>
+                <option value="education">Education</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
           </div>
 
           <!-- Name + Mobile (2 col) -->
@@ -4276,16 +4832,82 @@ function buildPreview(brand, tagline, industry) {
 
 <!-- ═══════ SHARED FOOTER TEMPLATE ═══════ -->
 <template id="shared-footer-tpl">
-  <footer>
-  <!-- HOME FOOTER PARALLAX ANIMATION -->
-  <div class="footer-parallax">
-    <div class="fp-layer fp-trees"></div>
-    <div class="fp-moto"></div>
-    <div class="fp-layer fp-second"></div>
-    <div class="fp-layer fp-premier"></div>
-    <div class="fp-voiture"></div>
+<footer>
+  <div class="footer-card">
+
+    <div class="footer-top">
+      <div class="footer-nav">
+        <a href="#"><span class="txt-default">ABOUT</span><span class="txt-hover">ABOUT</span></a>
+        <a href="#"><span class="txt-default">SERVICES</span><span class="txt-hover">SERVICES</span></a>
+        <a href="#"><span class="txt-default">CONTACT</span><span class="txt-hover">CONTACT</span></a>
+      </div>
+      <div class="social-icons">
+        <div class="social-icon">
+          <span class="ico-default"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></span>
+          <span class="ico-hover"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></span>
+        </div>
+        <div class="social-icon">
+          <span class="ico-default"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span>
+          <span class="ico-hover"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span>
+        </div>
+        <div class="social-icon">
+          <span class="ico-default"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>
+          <span class="ico-hover"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>
+        </div>
+        <div class="social-icon">
+          <span class="ico-default"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
+          <span class="ico-hover"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom-row">
+      <div class="enquiry-form">
+        <input type="text" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID">
+        <button class="enquiry-btn">Enquiry</button>
+      </div>
+      <div class="legal-links">
+        <span class="legal-title">Legal Links</span>
+        <a href="#" onclick="openLegalPage('privacy');return false;"><span class="txt-default">Privacy Policy</span><span class="txt-hover">Privacy Policy</span></a>
+        <a href="#" onclick="openLegalPage('terms');return false;"><span class="txt-default">Terms of Service</span><span class="txt-hover">Terms of Service</span></a>
+        <a href="#" onclick="openLegalPage('cookie');return false;"><span class="txt-default">Cookie Policy</span><span class="txt-hover">Cookie Policy</span></a>
+      </div>
+    </div>
+
+    <div class="brand-name-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9743 968" width="100%" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="wg" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0"    stop-color="#3a3a3a"/>
+            <stop offset="0.20" stop-color="#666"/>
+            <stop offset="0.45" stop-color="#999"/>
+            <stop offset="0.65" stop-color="#bebebe"/>
+            <stop offset="0.82" stop-color="#dedede"/>
+            <stop offset="1.0"  stop-color="#ffffff"/>
+          </linearGradient>
+          <mask id="tm">
+            <rect width="9743" height="968" fill="black"/>
+            <path fill="white" transform="translate(0,968) scale(1,-1)" d="M445 0V517H650V700H4V517H209V0Z"/>
+            <path fill="white" transform="translate(654,968) scale(1,-1)" d="M511 452H293V700H57V0H293V258H511V0H747V700H511Z"/>
+            <path fill="white" transform="translate(1458,968) scale(1,-1)" d="M289 270H585V440H289V522H626V700H57V0H639V178H289Z"/>
+            <path fill="white" transform="translate(2431,968) scale(1,-1)" d="M318 -16C535 -16 644 92 644 220C644 478 257 408 257 492C257 516 279 536 348 536C409 536 474 519 543 484L614 655C541 696 444 716 350 716C133 716 24 610 24 480C24 219 411 290 411 202C411 178 387 164 320 164C243 164 155 189 89 228L13 56C83 13 201 -16 318 -16Z"/>
+            <path fill="white" transform="translate(3088,968) scale(1,-1)" d="M424 -16C652 -16 819 138 819 350C819 562 652 716 424 716C196 716 29 562 29 350C29 138 196 -16 424 -16ZM424 175C337 175 267 241 267 350C267 459 337 525 424 525C511 525 581 459 581 350C581 241 511 175 424 175Z"/>
+            <path fill="white" transform="translate(3936,968) scale(1,-1)" d="M517 382 251 700H57V0H287V318L553 0H747V700H517Z"/>
+            <path fill="white" transform="translate(4740,968) scale(1,-1)" d="M293 0V700H57V0Z"/>
+            <path fill="white" transform="translate(5090,968) scale(1,-1)" d="M419 -16C556 -16 664 34 733 124L584 257C543 205 494 175 431 175C333 175 267 243 267 350C267 457 333 525 431 525C494 525 543 495 584 443L733 576C664 666 556 716 419 716C194 716 29 565 29 350C29 135 194 -16 419 -16Z"/>
+            <path fill="white" transform="translate(6134,968) scale(1,-1)" d="M895 700H701L479 327L251 700H57V0H272V308L424 63H528L680 319L682 0H897Z"/>
+            <path fill="white" transform="translate(7088,968) scale(1,-1)" d="M289 270H585V440H289V522H626V700H57V0H639V178H289Z"/>
+            <path fill="white" transform="translate(7761,968) scale(1,-1)" d="M402 0C636 0 797 133 797 350C797 567 636 700 402 700H57V0ZM293 516H392C491 516 559 457 559 350C559 243 491 184 392 184H293Z"/>
+            <path fill="white" transform="translate(8587,968) scale(1,-1)" d="M293 0V700H57V0Z"/>
+            <path fill="white" transform="translate(8937,968) scale(1,-1)" d="M825 0 519 700H287L-19 0H221L268 122H534L581 0ZM401 468 469 292H333Z"/>
+          </mask>
+        </defs>
+        <rect width="9743" height="968" fill="url(#wg)" mask="url(#tm)"/>
+      </svg>
+    </div>
+
   </div>
-<div class="footer-top"><div class="footer-brand"><div class="footer-logo"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779787887/favicon_oalxfi.png" alt="The Sonic Media Logo" style="width:36px;height:36px;object-fit:contain;flex-shrink:0;" /><div class="footer-logo-name">THE SONIC MEDIA</div></div><p class="footer-desc">Transform your brand into a cultural movement — through data-driven strategy, cinematic content & technology that actually converts.</p><div class="footer-socials"><a href="https://www.instagram.com/thesonicmedia" target="_blank" class="fsoc" title="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="https://www.facebook.com/people/The-Sonic-Media/61588527764890/" target="_blank" class="fsoc" title="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="https://linkedin.com/company/the-sonic-media/" target="_blank" class="fsoc" title="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://x.com/thesonicmedia" target="_blank" class="fsoc" title="X / Twitter"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></a></div></div><div><div class="footer-col-title">Services</div><ul class="footer-links"><li><button onclick="navigate('svc-web')">Website Development</button></li><li><button onclick="navigate('svc-app')">Mobile App Development</button></li><li><button onclick="navigate('svc-seo')">SEO Optimization</button></li><li><button onclick="navigate('svc-smm')">Social Media Management</button></li><li><button onclick="navigate('svc-perf')">Performance Marketing</button></li><li><button onclick="navigate('svc-inf')">Influencer Marketing</button></li><li><button onclick="navigate('svc-ecom')">E-Commerce Marketing</button></li><li><button onclick="navigate('svc-content')">Content Production</button></li><li><button onclick="navigate('svc-brand')">Branding &amp; Design</button></li><li><button onclick="navigate('svc-ai')">AI Doodling/Editing</button></li></ul></div><div><div class="footer-col-title">Company</div><ul class="footer-links"><li><button onclick="navigate('about')">About</button></li><li><button onclick="navigate('services')">All Services</button></li><li><button onclick="navigate('studio')">Portfolio</button></li><li><button onclick="navigate('casestudies')">Case Studies</button></li><li><button onclick="navigate('journal')">Journal</button></li><li><button onclick="navigate('future')">Future Vision</button></li><li><button onclick="navigate('faq')">FAQ</button></li></ul></div><div><div class="footer-col-title">Contact</div><ul class="footer-links"><li><a href="mailto:info@thesonicmedia.com">info@thesonicmedia.com</a></li><li><a href="tel:+918733087249">+91 87330 87249</a></li><li><a href="tel:+919157707249">+91 91577 07249</a></li><li><a href="#">Ahmedabad, Gujarat, India</a></li></ul><div style="margin-top:28px;"><a href="#" onclick="navigate('contact');return false;" class="btn-p" style="font-size:13px;padding:12px 24px;width:fit-content;">Get In Touch →</a></div></div></div><div class="footer-bottom"><div class="footer-copy">© 2026 <span>The Sonic Media</span>. All rights reserved. Built with ❤️ for growth.</div><div class="footer-bl"><a href="#" onclick="openLegalPage('privacy');return false;">Privacy Policy</a><a href="#" onclick="openLegalPage('terms');return false;">Terms of Service</a><a href="#" onclick="openLegalPage('cookie');return false;">Cookie Policy</a></div></div></footer>
+</footer>
 </template>
 
 <!-- ═══════ FUTURE VISION DETAIL MODAL ═══════ -->
@@ -4425,7 +5047,7 @@ function wsvInit() {
     tick();
   })();
 
-  /* ── 4. HCARD INTERACTIVE CANVAS ── */
+  /* ── 4. HCARD CINEMATIC LIGHT-ROD ANIMATION ── */
   (function() {
     const canvas = document.getElementById('wsvHcardCanvas');
     if (!canvas) return;
@@ -4439,189 +5061,448 @@ function wsvInit() {
     resize();
     window.addEventListener('resize', resize);
 
-    // Build phases — a mini website being constructed live
-    const phases = [
-      { label: 'Scaffolding project…',  cmd: 'npx create-next-app@latest',  pct: 0  },
-      { label: 'Installing packages…',  cmd: 'npm install gsap framer-motion',pct: 18 },
-      { label: 'Designing layout…',     cmd: 'Building UI components',        pct: 35 },
-      { label: 'Adding animations…',    cmd: 'gsap.timeline().from(hero)',     pct: 52 },
-      { label: 'Optimising assets…',    cmd: 'next/image + CDN config',       pct: 68 },
-      { label: 'Running QA tests…',     cmd: 'Lighthouse: 98 · 97 · 100',     pct: 82 },
-      { label: 'Deploying to cloud…',   cmd: 'vercel deploy --prod',           pct: 93 },
-      { label: '✓ Site is live!',        cmd: 'thesonicmedia.com/your-project', pct: 100 },
-    ];
+    /* ─── SCENE RENDERERS ─── */
 
-    let phaseIdx = 0;
-    let progress = 0;
-    let targetProgress = 0;
-    let lastPhaseTime = Date.now();
-    const PHASE_DURATION = 1800;
+    // CODE SCENE — dark IDE with syntax-highlighted code
+    function drawCodeScene(ctx, W, H, revealMask, maskAxis) {
+      // Background
+      ctx.fillStyle = '#0d1117';
+      ctx.fillRect(0, 0, W, H);
 
-    // Node graph — website architecture nodes
-    const nodeColors = ['#ff5c00','#ff8c00','rgba(255,255,255,.6)','rgba(255,255,255,.4)'];
-    const nodes = [
-      { x:.5,  y:.38, label:'HOME',     size:9, color:'#ff5c00',  connections:[1,2,3] },
-      { x:.22, y:.62, label:'ABOUT',    size:6, color:'#ff7a00',  connections:[0,4]   },
-      { x:.5,  y:.65, label:'SERVICES', size:6, color:'#ff7a00',  connections:[0,4,5] },
-      { x:.78, y:.62, label:'WORK',     size:6, color:'#ff7a00',  connections:[0,5]   },
-      { x:.28, y:.82, label:'BLOG',     size:5, color:'rgba(255,255,255,.5)', connections:[1,2] },
-      { x:.72, y:.82, label:'CONTACT',  size:5, color:'rgba(255,255,255,.5)', connections:[2,3] },
-    ];
-    // Animated node offsets
-    const nOff = nodes.map(() => ({
-      ox: (Math.random()-.5)*2, oy: (Math.random()-.5)*2,
-      vx: (Math.random()-.5)*.4, vy: (Math.random()-.5)*.4
-    }));
+      // Tab bar
+      ctx.fillStyle = '#161b22';
+      ctx.fillRect(0, 0, W, 28);
+      const tabs = [
+        { label: 'index.tsx', active: true, color: '#79c0ff' },
+        { label: 'styles.css', active: false, color: '#f0883e' },
+        { label: 'api/data.ts', active: false, color: '#56d364' },
+      ];
+      let tx = 10;
+      tabs.forEach(t => {
+        ctx.fillStyle = t.active ? '#0d1117' : 'transparent';
+        ctx.fillRect(tx, 4, t.label.length * 7.2 + 20, 24);
+        ctx.font = '9px monospace';
+        ctx.fillStyle = t.active ? t.color : 'rgba(255,255,255,0.3)';
+        ctx.fillText(t.label, tx + 10, 19);
+        tx += t.label.length * 7.2 + 28;
+      });
+
+      // Line numbers gutter
+      ctx.fillStyle = '#161b22';
+      ctx.fillRect(0, 28, 32, H - 28);
+
+      // Code lines data
+      const lines = [
+        { indent: 0, tokens: [{ t: 'import', c: '#ff7b72' }, { t: ' { useState } ', c: '#e6edf3' }, { t: 'from', c: '#ff7b72' }, { t: " 'react'", c: '#a5d6ff' }] },
+        { indent: 0, tokens: [] },
+        { indent: 0, tokens: [{ t: 'const', c: '#ff7b72' }, { t: ' Hero ', c: '#ffa657' }, { t: '= () => {', c: '#e6edf3' }] },
+        { indent: 1, tokens: [{ t: 'const', c: '#ff7b72' }, { t: ' [active, setActive] = ', c: '#e6edf3' }, { t: 'useState', c: '#d2a8ff' }, { t: '(', c: '#e6edf3' }, { t: 'false', c: '#79c0ff' }, { t: ')', c: '#e6edf3' }] },
+        { indent: 1, tokens: [] },
+        { indent: 1, tokens: [{ t: 'return', c: '#ff7b72' }, { t: ' (', c: '#e6edf3' }] },
+        { indent: 2, tokens: [{ t: '<section', c: '#7ee787' }, { t: ' className=', c: '#e6edf3' }, { t: '"hero"', c: '#a5d6ff' }, { t: '>', c: '#7ee787' }] },
+        { indent: 3, tokens: [{ t: '<h1', c: '#7ee787' }, { t: ' style=', c: '#e6edf3' }, { t: '{{', c: '#e6edf3' }, { t: ' color: ', c: '#e6edf3' }, { t: "'#ff5c00'", c: '#a5d6ff' }, { t: ' }}', c: '#e6edf3' }, { t: '>', c: '#7ee787' }] },
+        { indent: 4, tokens: [{ t: 'WEBSITES', c: '#e6edf3' }, { t: ' THAT', c: '#ffa657' }, { t: " DON'T JUST", c: '#e6edf3' }, { t: ' EXIST.', c: '#ff7b72' }] },
+        { indent: 3, tokens: [{ t: '</h1>', c: '#7ee787' }] },
+        { indent: 3, tokens: [{ t: '<button', c: '#7ee787' }, { t: ' onClick=', c: '#e6edf3' }, { t: '{() => ', c: '#d2a8ff' }, { t: 'setActive(', c: '#e6edf3' }, { t: 'true', c: '#79c0ff' }, { t: ')}>', c: '#e6edf3' }] },
+        { indent: 4, tokens: [{ t: 'Start Project', c: '#a5d6ff' }] },
+        { indent: 3, tokens: [{ t: '</button>', c: '#7ee787' }] },
+        { indent: 2, tokens: [{ t: '</section>', c: '#7ee787' }] },
+        { indent: 1, tokens: [{ t: ')', c: '#e6edf3' }] },
+        { indent: 0, tokens: [{ t: '}', c: '#e6edf3' }] },
+      ];
+
+      const lineH = (H - 28 - 20) / Math.max(lines.length, 1);
+      const t = Date.now() * 0.001;
+      const cursorLine = Math.floor(((Math.sin(t * 0.4) + 1) / 2) * (lines.length - 1));
+      const cursorBlink = Math.floor(t * 2) % 2 === 0;
+
+      lines.forEach((line, li) => {
+        const y = 28 + 10 + li * lineH;
+        // Line number
+        ctx.font = '8px monospace';
+        ctx.fillStyle = li === cursorLine ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.15)';
+        ctx.textAlign = 'right';
+        ctx.fillText(li + 1, 28, y + 4);
+
+        // Active line highlight
+        if (li === cursorLine) {
+          ctx.fillStyle = 'rgba(255,92,0,0.04)';
+          ctx.fillRect(32, y - 2, W - 32, lineH - 1);
+        }
+
+        // Tokens
+        let cx = 38 + line.indent * 14;
+        ctx.textAlign = 'left';
+        line.tokens.forEach(tok => {
+          ctx.font = '9px monospace';
+          ctx.fillStyle = tok.c;
+          ctx.fillText(tok.t, cx, y + 5);
+          cx += ctx.measureText(tok.t).width;
+        });
+
+        // Cursor
+        if (li === cursorLine && cursorBlink) {
+          ctx.fillStyle = '#ff5c00';
+          ctx.fillRect(cx, y - 1, 1.5, lineH - 2);
+        }
+      });
+
+      // Bottom terminal strip
+      const termH = 44;
+      ctx.fillStyle = '#010409';
+      ctx.fillRect(0, H - termH, W, termH);
+      ctx.fillStyle = '#21262d';
+      ctx.fillRect(0, H - termH, W, 1);
+      ctx.font = '8px monospace';
+      ctx.fillStyle = '#56d364';
+      ctx.textAlign = 'left';
+      ctx.fillText('▸ npm run dev', 8, H - termH + 13);
+      ctx.fillStyle = 'rgba(255,255,255,0.35)';
+      ctx.fillText('ready in 847ms — http://localhost:3000', 8, H - termH + 27);
+      ctx.fillStyle = 'rgba(255,92,0,0.6)';
+      ctx.fillText('› compiling...', 8, H - termH + 39);
+    }
+
+    // WEBSITE SCENE — polished live website
+    function drawWebScene(ctx, W, H) {
+      // Body bg
+      ctx.fillStyle = '#fafafa';
+      ctx.fillRect(0, 0, W, H);
+
+      // Nav bar
+      const navH = 36;
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, W, navH);
+      ctx.fillStyle = 'rgba(0,0,0,0.06)';
+      ctx.fillRect(0, navH - 1, W, 1);
+      // Logo mark
+      ctx.fillStyle = '#ff5c00';
+      ctx.beginPath(); ctx.roundRect(10, 9, 18, 18, 4); ctx.fill();
+      ctx.font = 'bold 8px monospace';
+      ctx.fillStyle = '#fff';
+      ctx.textAlign = 'center';
+      ctx.fillText('S', 19, 21);
+      ctx.font = 'bold 9px sans-serif';
+      ctx.fillStyle = '#111';
+      ctx.textAlign = 'left';
+      ctx.fillText('THE SONIC MEDIA', 34, 21);
+      // Nav links
+      const navLinks = ['Home', 'Services', 'Work', 'Contact'];
+      let nlx = W - 10;
+      navLinks.forEach(nl => {
+        ctx.font = '8px sans-serif';
+        ctx.fillStyle = 'rgba(0,0,0,0.45)';
+        ctx.textAlign = 'right';
+        ctx.fillText(nl, nlx, 21);
+        nlx -= ctx.measureText(nl).width + 18;
+      });
+
+      // Hero block — dark
+      const heroH = Math.round(H * 0.34);
+      const grad = ctx.createLinearGradient(0, navH, W, navH + heroH);
+      grad.addColorStop(0, '#0a0a0a');
+      grad.addColorStop(1, '#1a0500');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, navH, W, heroH);
+      // Subtle orange orb
+      const orb = ctx.createRadialGradient(W * 0.62, navH + heroH * 0.5, 0, W * 0.62, navH + heroH * 0.5, W * 0.35);
+      orb.addColorStop(0, 'rgba(255,92,0,0.12)');
+      orb.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = orb;
+      ctx.fillRect(0, navH, W, heroH);
+      // Headline
+      ctx.font = `bold ${Math.round(W * 0.085)}px sans-serif`;
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'left';
+      const heroY = navH + heroH * 0.36;
+      ctx.fillText('WEBSITES', 14, heroY);
+      ctx.fillStyle = '#ff5c00';
+      ctx.fillText("THAT DON'T", 14, heroY + Math.round(W * 0.09));
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      ctx.font = `${Math.round(W * 0.06)}px sans-serif`;
+      ctx.fillText('JUST EXIST.', 14, heroY + Math.round(W * 0.175));
+      // CTA button
+      const btnY = navH + heroH - 30;
+      ctx.fillStyle = '#ff5c00';
+      ctx.beginPath(); ctx.roundRect(14, btnY, 80, 20, 4); ctx.fill();
+      ctx.font = 'bold 8px sans-serif';
+      ctx.fillStyle = '#fff';
+      ctx.textAlign = 'center';
+      ctx.fillText('Start Project →', 54, btnY + 13);
+
+      // Services section
+      const secY = navH + heroH + 12;
+      ctx.font = 'bold 10px sans-serif';
+      ctx.fillStyle = '#111';
+      ctx.textAlign = 'left';
+      ctx.fillText('OUR CAPABILITIES', 14, secY + 11);
+      // Service cards row
+      const cards = ['⚡ Performance', '🎨 UI/UX', '📱 Mobile', '🔗 CMS'];
+      const cardW = (W - 28 - 9 * 3) / 4;
+      cards.forEach((c, ci) => {
+        const cx2 = 14 + ci * (cardW + 9);
+        const cy2 = secY + 20;
+        const ch = Math.round(H * 0.18);
+        ctx.fillStyle = '#fff';
+        ctx.beginPath(); ctx.roundRect(cx2, cy2, cardW, ch, 6); ctx.fill();
+        ctx.strokeStyle = 'rgba(0,0,0,0.07)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        // Colored top stripe
+        ctx.fillStyle = '#ff5c00';
+        ctx.beginPath(); ctx.roundRect(cx2, cy2, cardW, 3, [6, 6, 0, 0]); ctx.fill();
+        ctx.font = '7.5px sans-serif';
+        ctx.fillStyle = '#333';
+        ctx.textAlign = 'left';
+        ctx.fillText(c, cx2 + 5, cy2 + 18);
+      });
+
+      // Stats row
+      const statsY = secY + 20 + Math.round(H * 0.18) + 10;
+      const stats = [['98', 'Perf Score'], ['1.4s', 'Load Time'], ['150+', 'Sites Live'], ['+280%', 'Conversion']];
+      const sw = (W - 28) / 4;
+      stats.forEach((s, si) => {
+        const sx = 14 + si * sw;
+        ctx.fillStyle = '#fff';
+        ctx.beginPath(); ctx.roundRect(sx, statsY, sw - 6, 28, 5); ctx.fill();
+        ctx.font = `bold ${Math.round(W * 0.038)}px sans-serif`;
+        ctx.fillStyle = '#ff5c00';
+        ctx.textAlign = 'center';
+        ctx.fillText(s[0], sx + (sw - 6) / 2, statsY + 13);
+        ctx.font = '6px sans-serif';
+        ctx.fillStyle = 'rgba(0,0,0,0.4)';
+        ctx.fillText(s[1], sx + (sw - 6) / 2, statsY + 23);
+      });
+    }
+
+    /* ─── LIGHT ROD ENGINE ─── */
+    // Easing helpers
+    function easeInOut(t) {
+      return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    }
+    function easeOut(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+    function easeIn(t) {
+      return t * t * t;
+    }
+
+    // Draw a vertical glowing rod at position y (from top = 0)
+    function drawVRod(ctx, W, y, opacity) {
+      const rodW = 3;
+      const glowSpread = 48;
+      // Core rod
+      const cg = ctx.createLinearGradient(W / 2 - rodW, y, W / 2 + rodW, y);
+      cg.addColorStop(0, `rgba(150,220,255,${opacity * 0.7})`);
+      cg.addColorStop(0.5, `rgba(220,240,255,${opacity})`);
+      cg.addColorStop(1, `rgba(150,220,255,${opacity * 0.7})`);
+      ctx.fillStyle = cg;
+      ctx.fillRect(0, y - 1, W, 2.5);
+      // Glow halo — vertical
+      const vg = ctx.createLinearGradient(0, y - glowSpread, 0, y + glowSpread);
+      vg.addColorStop(0, 'rgba(0,0,0,0)');
+      vg.addColorStop(0.3, `rgba(100,180,255,${opacity * 0.18})`);
+      vg.addColorStop(0.5, `rgba(180,220,255,${opacity * 0.35})`);
+      vg.addColorStop(0.7, `rgba(100,180,255,${opacity * 0.18})`);
+      vg.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = vg;
+      ctx.fillRect(0, y - glowSpread, W, glowSpread * 2);
+      // Bright core flash at rod center
+      const bloom = ctx.createLinearGradient(0, y - 4, 0, y + 4);
+      bloom.addColorStop(0, 'rgba(255,255,255,0)');
+      bloom.addColorStop(0.5, `rgba(255,255,255,${opacity * 0.7})`);
+      bloom.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = bloom;
+      ctx.fillRect(0, y - 4, W, 8);
+    }
+
+    // Draw a horizontal glowing rod at position x (from left = 0)
+    function drawHRod(ctx, H, x, opacity) {
+      const glowSpread = 48;
+      // Core rod
+      ctx.fillStyle = `rgba(220,240,255,${opacity})`;
+      ctx.fillRect(x - 1, 0, 2.5, H);
+      // Glow halo — horizontal
+      const hg = ctx.createLinearGradient(x - glowSpread, 0, x + glowSpread, 0);
+      hg.addColorStop(0, 'rgba(0,0,0,0)');
+      hg.addColorStop(0.3, `rgba(100,180,255,${opacity * 0.18})`);
+      hg.addColorStop(0.5, `rgba(180,220,255,${opacity * 0.35})`);
+      hg.addColorStop(0.7, `rgba(100,180,255,${opacity * 0.18})`);
+      hg.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = hg;
+      ctx.fillRect(x - glowSpread, 0, glowSpread * 2, H);
+      // Bright core
+      const bloom = ctx.createLinearGradient(x - 4, 0, x + 4, 0);
+      bloom.addColorStop(0, 'rgba(255,255,255,0)');
+      bloom.addColorStop(0.5, `rgba(255,255,255,${opacity * 0.7})`);
+      bloom.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = bloom;
+      ctx.fillRect(x - 4, 0, 8, H);
+    }
+
+    /* ─── TIMELINE ───
+       Total loop: ~7s at 60fps ≈ 420 frames
+       Scene 1 reveal  (up):   0   → 150  (2.5s)
+       Scene 2 reveal  (right):160 → 290  (2.2s)
+       Scene 3 dereveal(down): 310 → 420  (1.8s, slightly faster)
+    */
+    const LOOP = 420;
+    const S1_START = 0,   S1_END = 150;
+    const S2_START = 160, S2_END = 290;
+    const S3_START = 300, S3_END = 420;
 
     let frame = 0;
-    // Pulsing rings on HOME node
-    const rings = [{ r:0, a:1 },{ r:0, a:.7 },{ r:0, a:.4 }];
-    rings.forEach((r,i) => { r.r = i * 16; });
-
-    // Scanline Y
-    let scanY = 0;
 
     function drawScene() {
       ctx.clearRect(0, 0, W, H);
-      frame++;
 
-      // Background gradient
-      const grad = ctx.createRadialGradient(W*.5, H*.4, 0, W*.5, H*.4, W*.7);
-      grad.addColorStop(0, 'rgba(255,92,0,.06)');
-      grad.addColorStop(1, 'rgba(8,8,8,0)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, W, H);
+      const f = frame % LOOP;
 
-      // Scanline sweep
-      scanY = (scanY + .8) % H;
-      const slGrad = ctx.createLinearGradient(0, scanY - 40, 0, scanY + 2);
-      slGrad.addColorStop(0, 'rgba(255,92,0,0)');
-      slGrad.addColorStop(1, 'rgba(255,92,0,.04)');
-      ctx.fillStyle = slGrad;
-      ctx.fillRect(0, scanY - 40, W, 42);
-
-      // Phase progress bar
-      const barH = 3, barY = H - 36;
-      ctx.fillStyle = 'rgba(255,255,255,.05)';
-      ctx.beginPath(); ctx.roundRect(20, barY, W-40, barH, 2); ctx.fill();
-      // Animated fill
-      progress += (targetProgress - progress) * .04;
-      const fillW = ((W-40) * progress / 100);
-      const barGrad = ctx.createLinearGradient(20, 0, 20 + fillW, 0);
-      barGrad.addColorStop(0,'#ff5c00'); barGrad.addColorStop(1,'#ff9500');
-      ctx.fillStyle = barGrad;
-      ctx.beginPath(); ctx.roundRect(20, barY, Math.max(0, fillW), barH, 2); ctx.fill();
-      // Progress % text
-      ctx.font = 'bold 10px monospace';
-      ctx.fillStyle = 'rgba(255,92,0,.7)';
-      ctx.textAlign = 'right';
-      ctx.fillText(Math.round(progress) + '%', W - 20, barY - 5);
-      ctx.textAlign = 'left';
-
-      // Update phase
-      if (Date.now() - lastPhaseTime > PHASE_DURATION) {
-        phaseIdx = (phaseIdx + 1) % phases.length;
-        lastPhaseTime = Date.now();
-        targetProgress = phases[phaseIdx].pct;
-        const statusEl = document.getElementById('wsvBuildStatus');
-        const buildEl = document.getElementById('wsvBuildLine');
-        if (statusEl) statusEl.textContent = phases[phaseIdx].label;
-        if (buildEl) buildEl.textContent = phases[phaseIdx].cmd;
-        // Animate metric numbers occasionally
-        if (phaseIdx === 7) {
-          const perf = document.getElementById('wsvPerfNum');
-          const mob  = document.getElementById('wsvMobNum');
-          if (perf) gsap.from(perf.parentElement, { scale:.8, duration:.4, ease:'back.out(2)' });
-        }
+      /* ── determine scene blend ── */
+      // codeReveal: fraction of canvas revealed bottom→top by rod 1
+      let codeReveal = 0;
+      if (f >= S1_START && f < S1_END) {
+        codeReveal = easeInOut((f - S1_START) / (S1_END - S1_START));
+      } else if (f >= S1_END) {
+        codeReveal = 1;
       }
 
-      // Node graph
-      nodes.forEach((n, i) => {
-        // Gently drift
-        nOff[i].vx += (Math.random()-.5)*.04;
-        nOff[i].vy += (Math.random()-.5)*.04;
-        nOff[i].vx = Math.max(-1, Math.min(1, nOff[i].vx));
-        nOff[i].vy = Math.max(-1, Math.min(1, nOff[i].vy));
-        nOff[i].ox += nOff[i].vx * .15;
-        nOff[i].oy += nOff[i].vy * .15;
-        nOff[i].ox = Math.max(-10, Math.min(10, nOff[i].ox));
-        nOff[i].oy = Math.max(-10, Math.min(10, nOff[i].oy));
-        n._rx = n.x * W + nOff[i].ox;
-        n._ry = n.y * H + nOff[i].oy;
-      });
+      // webReveal: fraction revealed left→right by rod 2
+      let webReveal = 0;
+      if (f >= S2_START && f < S2_END) {
+        webReveal = easeInOut((f - S2_START) / (S2_END - S2_START));
+      } else if (f >= S2_END && f < S3_END) {
+        webReveal = 1;
+      }
 
-      // Connections
-      nodes.forEach((n, i) => {
-        n.connections.forEach(j => {
-          if (j > i) {
-            const nx = nodes[j]._rx, ny = nodes[j]._ry;
+      // dereveal: fraction dissolved top→bottom by rod 3
+      let dereveal = 0;
+      if (f >= S3_START && f < S3_END) {
+        dereveal = easeIn((f - S3_START) / (S3_END - S3_START));
+      }
+
+      /* ── render base ── */
+      // Empty dark base
+      ctx.fillStyle = '#050810';
+      ctx.fillRect(0, 0, W, H);
+
+      // Ambient glow behind everything
+      const ambientGlow = ctx.createRadialGradient(W * 0.5, H * 0.5, 0, W * 0.5, H * 0.5, W * 0.7);
+      ambientGlow.addColorStop(0, 'rgba(30,60,120,0.15)');
+      ambientGlow.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = ambientGlow;
+      ctx.fillRect(0, 0, W, H);
+
+      /* ── SCENE 1: Code scene with vertical reveal mask ── */
+      if (codeReveal > 0 && dereveal < 1) {
+        // The rod moves bottom→top, revealing code above it
+        const rodY = H - H * codeReveal; // rod starts at H, moves to 0
+        const revealedH = H - rodY; // height revealed (from bottom of canvas upward)
+        // We reveal from BOTTOM to TOP, so clip is: bottom portion up to rodY
+        // Actually: rod sweeps UP, revealing content as it passes.
+        // Revealed region: from rodY to H (everything below rod is revealed... no, ABOVE rod is revealed)
+        // Rod at Y=rodY means: above the rod (0..rodY) is revealed as rod travels from H→0
+        const clipTop = rodY;
+        const clipH = H - clipTop;
+        // Actually for upward reveal: as rod goes from H to 0, content above rod is progressively exposed
+        // So revealed region = 0 to (H - rodY) from top? Let's think: rod starts at H (bottom).
+        // As t → 1, rodY → 0, full canvas is revealed.
+        // Revealed area: y from 0 to H*(codeReveal) from the top.
+        // i.e., top portion grows downward... that's TOP reveal, not bottom-up.
+        // For proper BOTTOM-UP reveal (rod travels up):
+        // revealed = from (H * (1 - codeReveal)) to H — i.e., bottom portion
+        // But we want: rod sweeps from bottom, and as it goes up, it REVEALS content BEHIND it.
+        // Content is revealed in the area the rod HAS ALREADY PASSED = above the rod.
+        // So: revealed area = 0..rodY is dark/empty, rodY..H is code content? No —
+        // Rod moves UP (rodY decreases). Revealed = above rod = 0..rodY.
+        // So we draw code scene clipped to 0..rodY (everything the rod has passed over).
+
+        // Alpha fade during dereveal
+        const sceneAlpha = dereveal > 0 ? Math.max(0, 1 - dereveal * 1.5) : 1;
+
+        ctx.save();
+        ctx.globalAlpha = sceneAlpha;
+
+        if (webReveal > 0) {
+          // Blend code→web horizontally
+          const blendX = W * webReveal;
+
+          // Code scene left of blend boundary
+          if (blendX < W) {
+            ctx.save();
             ctx.beginPath();
-            ctx.moveTo(n._rx, n._ry);
-            ctx.lineTo(nx, ny);
-            const alpha = .08 + .06 * Math.sin(frame * .03 + i);
-            ctx.strokeStyle = `rgba(255,92,0,${alpha})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-            // Travelling dot
-            const t = ((frame * .008 + i * .3) % 1);
-            const dx = n._rx + (nx - n._rx) * t;
-            const dy = n._ry + (ny - n._ry) * t;
-            ctx.beginPath();
-            ctx.arc(dx, dy, 1.5, 0, Math.PI*2);
-            ctx.fillStyle = `rgba(255,92,0,${.5 + .3*Math.sin(frame*.1+i)})`;
-            ctx.fill();
+            ctx.rect(0, 0, blendX, H);
+            ctx.clip();
+            // Draw web scene (revealed part)
+            drawWebScene(ctx, W, H);
+            ctx.restore();
           }
-        });
-      });
 
-      // Nodes
-      nodes.forEach((n, i) => {
-        // Pulse ring on HOME
-        if (i === 0) {
-          rings.forEach((r,ri) => {
-            r.r += .25;
-            if (r.r > 44) r.r = 0;
-            const a = (1 - r.r/44) * .25;
-            ctx.beginPath();
-            ctx.arc(n._rx, n._ry, r.r, 0, Math.PI*2);
-            ctx.strokeStyle = `rgba(255,92,0,${a})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          });
+          // Web scene (fully revealed left portion)
+          ctx.save();
+          ctx.beginPath();
+          ctx.rect(blendX, 0, W - blendX, H);
+          ctx.clip();
+          drawCodeScene(ctx, W, H);
+          ctx.restore();
+
+        } else {
+          // Only code scene, clipped to revealed portion (rod has swept over)
+          const clipLine = H * (1 - codeReveal); // top of revealed area
+          ctx.save();
+          ctx.beginPath();
+          ctx.rect(0, clipLine, W, H - clipLine);
+          ctx.clip();
+          drawCodeScene(ctx, W, H);
+          ctx.restore();
         }
-        // Node circle
-        const pulse = 1 + .08 * Math.sin(frame * .05 + i * 1.2);
-        const r = n.size * pulse;
-        // Glow
-        const glow = ctx.createRadialGradient(n._rx, n._ry, 0, n._rx, n._ry, r*3);
-        glow.addColorStop(0, n.color.startsWith('rgba') ? 'rgba(255,92,0,.15)' : 'rgba(255,92,0,.2)');
-        glow.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = glow;
-        ctx.beginPath(); ctx.arc(n._rx, n._ry, r*3, 0, Math.PI*2); ctx.fill();
-        // Fill
-        ctx.beginPath(); ctx.arc(n._rx, n._ry, r, 0, Math.PI*2);
-        ctx.fillStyle = n.color; ctx.fill();
-        // Border
-        ctx.strokeStyle = 'rgba(255,255,255,.15)'; ctx.lineWidth = 1; ctx.stroke();
-        // Label
-        ctx.font = `bold ${i===0?10:9}px monospace`;
-        ctx.fillStyle = i===0 ? '#fff' : 'rgba(255,255,255,.5)';
-        ctx.textAlign = 'center';
-        ctx.fillText(n.label, n._rx, n._ry + r + 12);
-      });
 
-      // Top label
-      ctx.font = '10px monospace';
-      ctx.fillStyle = 'rgba(255,92,0,.45)';
-      ctx.textAlign = 'left';
-      ctx.fillText('// SITE ARCHITECTURE', 20, 28);
-      ctx.fillStyle = 'rgba(255,255,255,.18)';
-      ctx.fillText('— LIVE BUILD PREVIEW', 20, 42);
+        ctx.restore(); // globalAlpha
+      }
 
+      /* ── RODS ── */
+
+      // ROD 1 — vertical, bottom→top
+      if (f >= S1_START && f < S1_END) {
+        const rodT = easeInOut((f - S1_START) / (S1_END - S1_START));
+        const rodY = H - H * rodT; // H → 0
+        const rodOpacity = 0.92;
+        drawVRod(ctx, W, rodY, rodOpacity);
+      }
+
+      // ROD 2 — horizontal, left→right
+      if (f >= S2_START && f < S2_END) {
+        const rodT = easeInOut((f - S2_START) / (S2_END - S2_START));
+        const rodX = W * rodT; // 0 → W
+        const rodOpacity = 0.92;
+        drawHRod(ctx, H, rodX, rodOpacity);
+      }
+
+      // ROD 3 — vertical, top→bottom (faster)
+      if (f >= S3_START && f < S3_END) {
+        const rodT = easeOut((f - S3_START) / (S3_END - S3_START));
+        const rodY = H * rodT; // 0 → H
+        const rodOpacity = 0.85;
+        drawVRod(ctx, W, rodY, rodOpacity);
+      }
+
+      /* ── Update status bar ── */
+      const statusEl = document.getElementById('wsvBuildStatus');
+      const buildEl  = document.getElementById('wsvBuildLine');
+      if (f < S1_END) {
+        if (statusEl) statusEl.textContent = 'Scanning codebase…';
+        if (buildEl)  buildEl.textContent  = 'npm run build';
+      } else if (f < S2_END) {
+        if (statusEl) statusEl.textContent = 'Compiling to website…';
+        if (buildEl)  buildEl.textContent  = 'vercel deploy --prod';
+      } else {
+        if (statusEl) statusEl.textContent = '✓ Site is live!';
+        if (buildEl)  buildEl.textContent  = 'thesonicmedia.com/your-project';
+      }
+
+      frame++;
       requestAnimationFrame(drawScene);
     }
-    // Set initial progress
-    targetProgress = phases[0].pct;
     drawScene();
 
     // Hcard 3D mouse tilt
