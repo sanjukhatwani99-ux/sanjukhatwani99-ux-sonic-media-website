@@ -3261,6 +3261,10 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
 
 /* ═══════════════════════════════════════════════════
    FOOTER INJECTOR
+   Reads the shared-footer-tpl <template> embedded in
+   this page and clones it into every .page-footer-slot.
+   To update the footer: edit assets/footer.html (the
+   master), then run the build script to sync all pages.
 ═══════════════════════════════════════════════════ */
 (function() {
   function injectFooters() {

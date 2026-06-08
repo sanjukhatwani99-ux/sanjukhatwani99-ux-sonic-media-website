@@ -4227,3 +4227,55 @@ footer {
   .brand-name-wrap { margin-left: -18px !important; margin-right: -18px !important; }
 }
 /* ═══════════════════════════════════════════════════════════ */
+
+/* ── Footer: anchor-as-social-icon normalization ── */
+/* social-icon is now an <a> tag — reset link defaults */
+a.social-icon {
+  display: flex !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Footer nav + social icon: keyboard focus states ── */
+.footer-nav a:focus-visible {
+  outline: 2px solid #ff5c00 !important;
+  outline-offset: 3px !important;
+  border-radius: 2px !important;
+}
+a.social-icon:focus-visible {
+  outline: 2px solid #ff5c00 !important;
+  outline-offset: 3px !important;
+}
+
+/* ── Enquiry button: touch target & focus ── */
+.enquiry-btn:focus-visible {
+  outline: 2px solid #ff5c00;
+  outline-offset: 2px;
+}
+
+/* ── Mobile: ensure touch targets meet 44px minimum ── */
+@media (max-width: 900px) {
+  .footer-nav a {
+    min-height: 44px;
+    display: flex !important;
+    align-items: center;
+  }
+  a.social-icon {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+  .enquiry-btn {
+    min-height: 44px !important;
+  }
+}
+@media (max-width: 480px) {
+  .footer-nav a {
+    min-height: 40px;
+  }
+  a.social-icon {
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+}
+

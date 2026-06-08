@@ -4829,88 +4829,6 @@ function buildPreview(brand, tagline, industry) {
   </svg>
 </a>
 
-<!-- SHARED FOOTER TEMPLATE (single source of truth) -->
-
-<!-- ═══════ SHARED FOOTER TEMPLATE ═══════ -->
-<template id="shared-footer-tpl">
-<footer>
-  <div class="footer-card">
-
-    <div class="footer-top">
-      <div class="footer-nav">
-        <a href="#"><span class="txt-default">ABOUT</span><span class="txt-hover">ABOUT</span></a>
-        <a href="#"><span class="txt-default">SERVICES</span><span class="txt-hover">SERVICES</span></a>
-        <a href="#"><span class="txt-default">CONTACT</span><span class="txt-hover">CONTACT</span></a>
-      </div>
-      <div class="social-icons">
-        <div class="social-icon">
-          <span class="ico-default"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></span>
-          <span class="ico-hover"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></span>
-        </div>
-        <div class="social-icon">
-          <span class="ico-default"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span>
-          <span class="ico-hover"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span>
-        </div>
-        <div class="social-icon">
-          <span class="ico-default"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>
-          <span class="ico-hover"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>
-        </div>
-        <div class="social-icon">
-          <span class="ico-default"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
-          <span class="ico-hover"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom-row">
-      <div class="enquiry-form">
-        <input type="text" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID">
-        <button class="enquiry-btn">Enquiry</button>
-      </div>
-      <div class="legal-links">
-        <span class="legal-title">Legal Links</span>
-        <a href="#" onclick="openLegalPage('privacy');return false;"><span class="txt-default">Privacy Policy</span><span class="txt-hover">Privacy Policy</span></a>
-        <a href="#" onclick="openLegalPage('terms');return false;"><span class="txt-default">Terms of Service</span><span class="txt-hover">Terms of Service</span></a>
-        <a href="#" onclick="openLegalPage('cookie');return false;"><span class="txt-default">Cookie Policy</span><span class="txt-hover">Cookie Policy</span></a>
-      </div>
-    </div>
-
-    <div class="brand-name-wrap">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9743 968" width="100%" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="wg" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
-            <stop offset="0"    stop-color="#3a3a3a"/>
-            <stop offset="0.20" stop-color="#666"/>
-            <stop offset="0.45" stop-color="#999"/>
-            <stop offset="0.65" stop-color="#bebebe"/>
-            <stop offset="0.82" stop-color="#dedede"/>
-            <stop offset="1.0"  stop-color="#ffffff"/>
-          </linearGradient>
-          <mask id="tm">
-            <rect width="9743" height="968" fill="black"/>
-            <path fill="white" transform="translate(0,968) scale(1,-1)" d="M445 0V517H650V700H4V517H209V0Z"/>
-            <path fill="white" transform="translate(654,968) scale(1,-1)" d="M511 452H293V700H57V0H293V258H511V0H747V700H511Z"/>
-            <path fill="white" transform="translate(1458,968) scale(1,-1)" d="M289 270H585V440H289V522H626V700H57V0H639V178H289Z"/>
-            <path fill="white" transform="translate(2431,968) scale(1,-1)" d="M318 -16C535 -16 644 92 644 220C644 478 257 408 257 492C257 516 279 536 348 536C409 536 474 519 543 484L614 655C541 696 444 716 350 716C133 716 24 610 24 480C24 219 411 290 411 202C411 178 387 164 320 164C243 164 155 189 89 228L13 56C83 13 201 -16 318 -16Z"/>
-            <path fill="white" transform="translate(3088,968) scale(1,-1)" d="M424 -16C652 -16 819 138 819 350C819 562 652 716 424 716C196 716 29 562 29 350C29 138 196 -16 424 -16ZM424 175C337 175 267 241 267 350C267 459 337 525 424 525C511 525 581 459 581 350C581 241 511 175 424 175Z"/>
-            <path fill="white" transform="translate(3936,968) scale(1,-1)" d="M517 382 251 700H57V0H287V318L553 0H747V700H517Z"/>
-            <path fill="white" transform="translate(4740,968) scale(1,-1)" d="M293 0V700H57V0Z"/>
-            <path fill="white" transform="translate(5090,968) scale(1,-1)" d="M419 -16C556 -16 664 34 733 124L584 257C543 205 494 175 431 175C333 175 267 243 267 350C267 457 333 525 431 525C494 525 543 495 584 443L733 576C664 666 556 716 419 716C194 716 29 565 29 350C29 135 194 -16 419 -16Z"/>
-            <path fill="white" transform="translate(6134,968) scale(1,-1)" d="M895 700H701L479 327L251 700H57V0H272V308L424 63H528L680 319L682 0H897Z"/>
-            <path fill="white" transform="translate(7088,968) scale(1,-1)" d="M289 270H585V440H289V522H626V700H57V0H639V178H289Z"/>
-            <path fill="white" transform="translate(7761,968) scale(1,-1)" d="M402 0C636 0 797 133 797 350C797 567 636 700 402 700H57V0ZM293 516H392C491 516 559 457 559 350C559 243 491 184 392 184H293Z"/>
-            <path fill="white" transform="translate(8587,968) scale(1,-1)" d="M293 0V700H57V0Z"/>
-            <path fill="white" transform="translate(8937,968) scale(1,-1)" d="M825 0 519 700H287L-19 0H221L268 122H534L581 0ZM401 468 469 292H333Z"/>
-          </mask>
-        </defs>
-        <rect width="9743" height="968" fill="url(#wg)" mask="url(#tm)"/>
-      </svg>
-    </div>
-
-  </div>
-</footer>
-</template>
-
 <!-- ═══════ FUTURE VISION DETAIL MODAL ═══════ -->
 <!-- ═══════ FUTURE VISION DETAIL MODAL ═══════ -->
 <div id="fv-modal-overlay" onclick="if(event.target===this)closeFvDetail()">
@@ -5846,5 +5764,90 @@ function wsvScrollToAnchor(id) {
   }
 }
 </script>
+
+<!-- ═══════ SHARED FOOTER TEMPLATE ═══════ -->
+<template id="shared-footer-tpl">
+<footer>
+  <div class="footer-card">
+
+    <div class="footer-top">
+      <div class="footer-nav">
+        <a href="#" onclick="navigate('about');return false;" aria-label="About page"><span class="txt-default">ABOUT</span><span class="txt-hover">ABOUT</span></a>
+        <a href="#" onclick="navigate('services');return false;" aria-label="All services page"><span class="txt-default">SERVICES</span><span class="txt-hover">SERVICES</span></a>
+        <a href="#" onclick="navigate('contact');return false;" aria-label="Contact page"><span class="txt-default">CONTACT</span><span class="txt-hover">CONTACT</span></a>
+      </div>
+      <div class="social-icons">
+        <!-- Instagram -->
+        <a class="social-icon" href="https://www.instagram.com/thesonicmedia/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+          <span class="ico-default"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></span>
+          <span class="ico-hover"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></span>
+        </a>
+        <!-- Facebook -->
+        <a class="social-icon" href="https://www.facebook.com/people/The-Sonic-Media/61588527764890/?mibextid=wwXIfr&rdid=IFEcTVxzaiIAchzT&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1B78d65Kuv%2F%3Fmibextid%3DwwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
+          <span class="ico-default"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span>
+          <span class="ico-hover"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span>
+        </a>
+        <!-- LinkedIn -->
+        <a class="social-icon" href="https://www.linkedin.com/company/the-sonic-media/?lipi=urn%3Ali%3Apage%3Amessaging_thread%3Bee6641e9-a42c-4ad9-8915-b2a24a0163d4" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn">
+          <span class="ico-default"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>
+          <span class="ico-hover"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>
+        </a>
+        <!-- X / Twitter -->
+        <a class="social-icon" href="https://x.com/thesonicmedia?s=21" target="_blank" rel="noopener noreferrer" aria-label="Follow us on X (Twitter)">
+          <span class="ico-default"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
+          <span class="ico-hover"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom-row">
+      <div class="enquiry-form">
+        <input type="text" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID">
+        <button class="enquiry-btn" onclick="navigate('contact')" aria-label="Submit enquiry and go to contact page">Enquiry</button>
+      </div>
+      <div class="legal-links">
+        <span class="legal-title">Legal Links</span>
+        <a href="#" onclick="openLegalPage('privacy');return false;"><span class="txt-default">Privacy Policy</span><span class="txt-hover">Privacy Policy</span></a>
+        <a href="#" onclick="openLegalPage('terms');return false;"><span class="txt-default">Terms of Service</span><span class="txt-hover">Terms of Service</span></a>
+        <a href="#" onclick="openLegalPage('cookie');return false;"><span class="txt-default">Cookie Policy</span><span class="txt-hover">Cookie Policy</span></a>
+      </div>
+    </div>
+
+    <div class="brand-name-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9743 968" width="100%" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="wg" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0"    stop-color="#3a3a3a"/>
+            <stop offset="0.20" stop-color="#666"/>
+            <stop offset="0.45" stop-color="#999"/>
+            <stop offset="0.65" stop-color="#bebebe"/>
+            <stop offset="0.82" stop-color="#dedede"/>
+            <stop offset="1.0"  stop-color="#ffffff"/>
+          </linearGradient>
+          <mask id="tm">
+            <rect width="9743" height="968" fill="black"/>
+            <path fill="white" transform="translate(0,968) scale(1,-1)" d="M445 0V517H650V700H4V517H209V0Z"/>
+            <path fill="white" transform="translate(654,968) scale(1,-1)" d="M511 452H293V700H57V0H293V258H511V0H747V700H511Z"/>
+            <path fill="white" transform="translate(1458,968) scale(1,-1)" d="M289 270H585V440H289V522H626V700H57V0H639V178H289Z"/>
+            <path fill="white" transform="translate(2431,968) scale(1,-1)" d="M318 -16C535 -16 644 92 644 220C644 478 257 408 257 492C257 516 279 536 348 536C409 536 474 519 543 484L614 655C541 696 444 716 350 716C133 716 24 610 24 480C24 219 411 290 411 202C411 178 387 164 320 164C243 164 155 189 89 228L13 56C83 13 201 -16 318 -16Z"/>
+            <path fill="white" transform="translate(3088,968) scale(1,-1)" d="M424 -16C652 -16 819 138 819 350C819 562 652 716 424 716C196 716 29 562 29 350C29 138 196 -16 424 -16ZM424 175C337 175 267 241 267 350C267 459 337 525 424 525C511 525 581 459 581 350C581 241 511 175 424 175Z"/>
+            <path fill="white" transform="translate(3936,968) scale(1,-1)" d="M517 382 251 700H57V0H287V318L553 0H747V700H517Z"/>
+            <path fill="white" transform="translate(4740,968) scale(1,-1)" d="M293 0V700H57V0Z"/>
+            <path fill="white" transform="translate(5090,968) scale(1,-1)" d="M419 -16C556 -16 664 34 733 124L584 257C543 205 494 175 431 175C333 175 267 243 267 350C267 457 333 525 431 525C494 525 543 495 584 443L733 576C664 666 556 716 419 716C194 716 29 565 29 350C29 135 194 -16 419 -16Z"/>
+            <path fill="white" transform="translate(6134,968) scale(1,-1)" d="M895 700H701L479 327L251 700H57V0H272V308L424 63H528L680 319L682 0H897Z"/>
+            <path fill="white" transform="translate(7088,968) scale(1,-1)" d="M289 270H585V440H289V522H626V700H57V0H639V178H289Z"/>
+            <path fill="white" transform="translate(7761,968) scale(1,-1)" d="M402 0C636 0 797 133 797 350C797 567 636 700 402 700H57V0ZM293 516H392C491 516 559 457 559 350C559 243 491 184 392 184H293Z"/>
+            <path fill="white" transform="translate(8587,968) scale(1,-1)" d="M293 0V700H57V0Z"/>
+            <path fill="white" transform="translate(8937,968) scale(1,-1)" d="M825 0 519 700H287L-19 0H221L268 122H534L581 0ZM401 468 469 292H333Z"/>
+          </mask>
+        </defs>
+        <rect width="9743" height="968" fill="url(#wg)" mask="url(#tm)"/>
+      </svg>
+    </div>
+
+  </div>
+</footer>
+</template>
+
 </body>
 </html>
