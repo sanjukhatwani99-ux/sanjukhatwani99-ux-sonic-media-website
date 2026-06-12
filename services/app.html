@@ -1751,7 +1751,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
   flex-direction: column;
   justify-content: center;
   padding: 0 64px 0 72px;
-  background: #000;
+  background: transparent;
   z-index: 5;
   height: 100%;
 }
@@ -1760,8 +1760,8 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,92,0,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,92,0,0.025) 1px, transparent 1px);
+    linear-gradient(rgba(255,92,0,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,92,0,0.055) 1px, transparent 1px);
   background-size: 52px 52px;
   pointer-events: none;
 }
@@ -1840,7 +1840,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
 #wsv-hero-new .btn-ghost:hover { border-color: rgba(255,255,255,.28); color: #fff; transform: translateY(-2px); }
 #wsv-hero-new .hero-right {
   position: relative;
-  background: #000;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2271,7 +2271,46 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
 <div id="page-svc-app" class="page active">
 
   <!-- ═══ HERO ═══ -->
+  <style>
+  /* ── PERF-STYLE HERO BACKGROUND OVERLAYS ── */
+  .pm-hero-noise {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: .85;
+  }
+  .pm-hero-grid-bg {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,92,0,.18) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,92,0,.18) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 60% 50%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 60% 50%, black 30%, transparent 80%);
+  }
+  .pm-hero-glow-1 {
+    position: absolute; top: -10%; right: 5%; width: 55vw; height: 55vw;
+    background: radial-gradient(ellipse, rgba(255,92,0,.22) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; animation: pm-glow-breathe 6s ease-in-out infinite;
+  }
+  .pm-hero-glow-2 {
+    position: absolute; bottom: -20%; left: -10%; width: 40vw; height: 40vw;
+    background: radial-gradient(ellipse, rgba(255,92,0,.12) 0%, transparent 65%);
+    pointer-events: none; z-index: 0;
+  }
+  @keyframes pm-glow-breathe {
+    0%,100% { opacity: .7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.06); }
+  }
+  #wsv-hero-new { position: relative; }
+  #wsv-hero-new .hero-inner-grid { position: relative; z-index: 2; }
+  </style>
+
   <section id="wsv-hero-new" style="min-height:100vh;overflow:hidden;background:#000;">
+    <!-- PERF-STYLE BACKGROUND LAYERS -->
+    <div class="pm-hero-noise"></div>
+    <div class="pm-hero-grid-bg"></div>
+    <div class="pm-hero-glow-1"></div>
+    <div class="pm-hero-glow-2"></div>
     <div class="hero-inner-grid">
 
       <!-- LEFT: CONTENT -->
@@ -4114,9 +4153,9 @@ function buildPreview(brand, tagline, industry) {
 
   /* ── Header ── */
   .app-ptl-header {
-    text-align: center;
-    padding: 0 40px 72px;
-    max-width: 780px;
+    text-align: left;
+    padding: 0 60px 72px;
+    max-width: 1380px;
     margin: 0 auto;
   }
   .app-ptl-eyebrow {
@@ -4442,7 +4481,7 @@ function buildPreview(brand, tagline, industry) {
     max-width: 1380px; margin: 0 auto; padding: 0 60px;
   }
   .app-caps-deliv-header {
-    text-align: center; margin-bottom: 64px;
+    text-align: left; margin-bottom: 64px;
   }
   .app-caps-deliv-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
@@ -4462,7 +4501,7 @@ function buildPreview(brand, tagline, industry) {
   .app-caps-deliv-subtitle {
     font-size: 14px; color: rgba(255,255,255,.38);
     font-family: 'DM Sans', sans-serif;
-    max-width: 540px; margin: 0 auto;
+    max-width: 540px; margin: 0;
   }
 
   /* Cards grid */

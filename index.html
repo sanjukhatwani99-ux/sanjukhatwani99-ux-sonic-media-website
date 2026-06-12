@@ -267,7 +267,7 @@
       playsinline
       preload="auto"
     >
-      <source src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1779437141/44748-439982672_medium_ot7bbh.mp4" type="video/mp4">
+      <source src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1781273380/Index_Video_gpnvoa.mp4" type="video/mp4">
     </video>
   </section>
 
@@ -277,7 +277,7 @@
     <div class="tsm-video-wrapper">
       <div id="tsm-vc">
         <video id="tsm-vid" loop muted playsinline>
-          <source src="https://cdn.cosmos.so/74eaa492-31ae-4550-b5a1-40917d873af5.mp4" type="video/mp4" />
+          <source src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1781273490/6562012-uhd_3840_2160_25fps_1_vasydj.mp4" type="video/mp4" />
         </video>
         <div id="tsm-dark-overlay"></div>
         <div class="tsm-vid-overlay" id="tsmVidOverlay">
@@ -296,15 +296,13 @@
     <div class="hcf-scroll-wrapper" id="homeSvcScrollWrapper">
       <div class="hcf-gallery" id="homeSvcGallery" style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0;padding:32px 24px 28px;">
         <!-- Heading sits at top of the pinned viewport -->
-        <div style="width:100%;flex-shrink:0;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-          <div style="text-align:left;">
+        <div class="journal-header" style="width:100%;flex-shrink:0;margin-bottom:20px;">
+          <div>
             <div class="section-tag" style="color:var(--orange);margin-bottom:10px;">All 10 Services</div>
-            <h2 class="section-title" style="font-size:clamp(32px,4vw,60px);text-align:left;line-height:1;">Scroll Through <span style="color:var(--orange);">What We Do</span></h2>
+            <h2 class="section-title">Scroll Through <span>What We Do</span></h2>
             <p class="hcf-sub" style="margin:10px 0 0;text-align:left;">Every discipline. One agency. Built to dominate your entire digital ecosystem.</p>
           </div>
-          <div style="flex-shrink:0;">
-            <a href="#" onclick="navigate('services');return false;" class="btn-p">Explore All Services →</a>
-          </div>
+          <a href="#" onclick="navigate('services');return false;" class="btn-p">Explore All Services →</a>
         </div>
         <!-- Card list -->
         <ul class="hcf-list" id="homeSvcList" style="position:relative;top:auto;left:auto;transform:none;flex-shrink:0;"></ul>
@@ -359,7 +357,7 @@
   <section class="journal">
     <div class="journal-header">
       <div><div class="section-tag" id="home-casestudies-tag">Case Studies</div><h2 class="section-title" id="home-casestudies-title">Insights &amp; <span id="home-casestudies-title-span">Ideas</span></h2></div>
-      <a href="#" onclick="navigate('casestudies');return false;" class="cs-view-all" style="color:var(--orange);">All Case Studies →</a>
+      <a href="#" onclick="navigate('casestudies');return false;" class="btn-p">All Case Studies →</a>
     </div>
     <div class="jnl-grid reveal" id="home-casestudies-grid"></div>
   </section>
@@ -389,15 +387,9 @@
   <!-- FUTURE VISION — Pinned Split-Screen Mask Reveal -->
   <section id="futureSplitSection" style="background:var(--black);padding-top:0;">
     <!-- Section header — sticky until section ends -->
-    <div id="fv-home-header" style="position:sticky;top:72px;z-index:100;background:var(--black);padding:14px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;max-width:100%;margin:0 auto;border-bottom:1px solid rgba(255,255,255,.05);">
-      <div style="text-align:left;">
-        <div class="section-tag" style="color:var(--orange);margin-bottom:4px;font-size:10px;">What's Next</div>
-        <h2 class="section-title" style="font-size:clamp(22px,2.4vw,38px);text-align:left;line-height:1;color:var(--white);">The <span style="color:var(--orange);">Future</span> We're Building</h2>
-        <p style="font-family:var(--font-body);font-size:12px;color:rgba(245,240,235,.45);margin-top:4px;font-weight:300;letter-spacing:.02em;">Scroll to explore the innovations and expansions we're building towards.</p>
-      </div>
-      <div style="flex-shrink:0;">
-        <a href="#" onclick="navigate('future');return false;" class="btn-p" style="font-size:12px;padding:10px 22px;">Explore Our Vision →</a>
-      </div>
+    <div id="fv-home-header" class="journal-header" style="position:sticky;top:72px;z-index:100;background:var(--black);border-bottom:1px solid rgba(255,255,255,.05);padding:30px 60px;margin-bottom:0;">
+      <div><div class="section-tag">What's Next</div><h2 class="section-title">The <span>Future</span> We're Building</h2></div>
+      <a href="#" onclick="navigate('future');return false;" class="btn-p">Explore Our Vision →</a>
     </div>
 
     <!-- Pinned split-screen container (desktop) -->
@@ -416,16 +408,16 @@
 
   <!-- BLOGS & NEWSLETTER -->
   <div class="blogs-newsletter">
-    <div class="blogs-half">
-      <div class="section-tag" id="home-journal-tag">Journal</div>
-      <h2 class="section-title" id="home-journal-title" style="font-size:clamp(36px,4vw,60px);">Fresh <span id="home-journal-span">Reads</span></h2>
-      <div style="margin-top:12px;margin-bottom:8px;"><a href="#" onclick="navigate('journal');return false;" class="cs-view-all" style="color:var(--orange);">View All →</a></div>
-      <div class="blog-list" id="home-journal-list">
-        <div class="blog-item"><div class="blog-num">01</div><div class="blog-info"><div class="bt">How Google AI Overviews Are Changing SEO in India — And What to Do About It</div><div class="bm"><span>SEO</span>· 7 min read · May 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-google-ai-seo');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
-        <div class="blog-item"><div class="blog-num">02</div><div class="blog-info"><div class="bt">How to Achieve 10× ROAS on Meta Ads for Indian D2C Brands in 2026</div><div class="bm"><span>Performance</span>· 8 min read · May 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-meta-roas');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
-        <div class="blog-item"><div class="blog-num">03</div><div class="blog-info"><div class="bt">What Makes Indian Consumers Trust a Brand Online? The 2026 Playbook</div><div class="bm"><span>Branding</span>· 6 min read · Apr 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-brand-trust');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
-        <div class="blog-item"><div class="blog-num">04</div><div class="blog-info"><div class="bt">Instagram Reels Algorithm 2026: How to Get Organic Reach Without Paid Ads</div><div class="bm"><span>Social Media</span>· 6 min read · Apr 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-reels-algorithm');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
-        <div class="blog-item"><div class="blog-num">05</div><div class="blog-info"><div class="bt">Why Your Website Gets Traffic But Zero Leads — And How to Fix It Today</div><div class="bm"><span>Web Dev</span>· 5 min read · Mar 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-website-conversion');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+    <div class="blogs-half" style="background:#ffffff;color:#1a1a1a;">
+      <div class="section-tag" id="home-journal-tag" style="color:var(--orange);">Journal</div>
+      <h2 class="section-title" id="home-journal-title" style="font-size:clamp(36px,4vw,60px);color:#1a1a1a;">Fresh <span id="home-journal-span" style="color:var(--orange);">Reads</span></h2>
+      <div style="margin-top:12px;margin-bottom:8px;"><a href="#" onclick="navigate('journal');return false;" class="cs-view-all fresh-reads-btn">View All →</a></div>
+      <div class="blog-list" id="home-journal-list" style="--blog-num-color:#1a1a1a;--blog-title-color:#1a1a1a;--blog-meta-color:#555;">
+        <div class="blog-item" style="border-color:rgba(0,0,0,.1);"><div class="blog-num" style="color:rgba(0,0,0,.18);">01</div><div class="blog-info"><div class="bt" style="color:#1a1a1a;">How Google AI Overviews Are Changing SEO in India — And What to Do About It</div><div class="bm" style="color:#666;"><span style="color:var(--orange);background:rgba(255,92,0,.08);">SEO</span>· 7 min read · May 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-google-ai-seo');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item" style="border-color:rgba(0,0,0,.1);"><div class="blog-num" style="color:rgba(0,0,0,.18);">02</div><div class="blog-info"><div class="bt" style="color:#1a1a1a;">How to Achieve 10× ROAS on Meta Ads for Indian D2C Brands in 2026</div><div class="bm" style="color:#666;"><span style="color:var(--orange);background:rgba(255,92,0,.08);">Performance</span>· 8 min read · May 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-meta-roas');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item" style="border-color:rgba(0,0,0,.1);"><div class="blog-num" style="color:rgba(0,0,0,.18);">03</div><div class="blog-info"><div class="bt" style="color:#1a1a1a;">What Makes Indian Consumers Trust a Brand Online? The 2026 Playbook</div><div class="bm" style="color:#666;"><span style="color:var(--orange);background:rgba(255,92,0,.08);">Branding</span>· 6 min read · Apr 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-brand-trust');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item" style="border-color:rgba(0,0,0,.1);"><div class="blog-num" style="color:rgba(0,0,0,.18);">04</div><div class="blog-info"><div class="bt" style="color:#1a1a1a;">Instagram Reels Algorithm 2026: How to Get Organic Reach Without Paid Ads</div><div class="bm" style="color:#666;"><span style="color:var(--orange);background:rgba(255,92,0,.08);">Social Media</span>· 6 min read · Apr 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-reels-algorithm');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
+        <div class="blog-item" style="border-color:rgba(0,0,0,.1);"><div class="blog-num" style="color:rgba(0,0,0,.18);">05</div><div class="blog-info"><div class="bt" style="color:#1a1a1a;">Why Your Website Gets Traffic But Zero Leads — And How to Fix It Today</div><div class="bm" style="color:#666;"><span style="color:var(--orange);background:rgba(255,92,0,.08);">Web Dev</span>· 5 min read · Mar 2026</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('blog-website-conversion');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Read Full Article →</a></div></div></div>
       </div>
     </div>
     <div class="newsletter-half">
@@ -518,18 +510,291 @@
     <div class="cta-inner">
       <div class="cta-tag reveal">Ready to Grow?</div>
       <h2 class="cta-h reveal d1">LET'S BUILD<br>SOMETHING <span>ICONIC.</span></h2>
-      <p class="cta-p reveal d2">Connect with our experts to explore tailored strategies designed to strengthen your brand presence, attract the right audience, and drive measurable business growth.</p>
-      <div class="cta-btns reveal d3">
-        <a href="#" onclick="navigate('contact');return false;" class="btn-p">Let’s Build Your Brand →</a>
-        <a href="#" onclick="navigate('studio');return false;" class="btn-s">See Our Work</a>
+
+      <!-- CTA Proposal Form -->
+      <div class="cta-proposal-form-wrap reveal d2">
+        <div class="cta-proposal-form">
+
+          <!-- Service + Company (2 col) -->
+          <div class="cta-pf-row">
+            <div class="cta-pf-field">
+              <label class="cta-pf-label">Service Needed</label>
+              <!-- Custom multi-select dropdown -->
+              <div class="cta-ms-wrap" id="ctaServiceWrap">
+                <button type="button" class="cta-pf-input cta-ms-trigger" id="ctaServiceTrigger" onclick="toggleCtaMs(event)">
+                  <span id="ctaServiceLabel">Select Services &#9660;</span>
+                </button>
+                <div class="cta-ms-dropdown" id="ctaServiceDropdown">
+                  <!-- Select All / Deselect All row -->
+                  <div class="cta-ms-actions">
+                    <button type="button" class="cta-ms-action-btn" onclick="ctaMsSelectAll()">Select All</button>
+                    <button type="button" class="cta-ms-action-btn" onclick="ctaMsDeselectAll()">Deselect All</button>
+                  </div>
+                  <div class="cta-ms-divider"></div>
+                  <label class="cta-ms-item"><input type="checkbox" value="Website Development" onchange="ctaMsUpdate()"><span>Website Development</span></label>
+                  <label class="cta-ms-item"><input type="checkbox" value="Mobile App Development" onchange="ctaMsUpdate()"><span>Mobile App Development</span></label>
+                  <label class="cta-ms-item"><input type="checkbox" value="Search Engine Optimization" onchange="ctaMsUpdate()"><span>Search Engine Optimization</span></label>
+                  <label class="cta-ms-item"><input type="checkbox" value="Social Media Management" onchange="ctaMsUpdate()"><span>Social Media Management</span></label>
+                  <label class="cta-ms-item"><input type="checkbox" value="Performance Marketing &amp; Paid Ads" onchange="ctaMsUpdate()"><span>Performance Marketing &amp; Paid Ads</span></label>
+                  <label class="cta-ms-item"><input type="checkbox" value="Influencer Marketing" onchange="ctaMsUpdate()"><span>Influencer Marketing</span></label>
+                  <label class="cta-ms-item"><input type="checkbox" value="E-Commerce Marketing" onchange="ctaMsUpdate()"><span>E-Commerce Marketing</span></label>
+                  <label class="cta-ms-item"><input type="checkbox" value="Content Production &amp; Photo/Video" onchange="ctaMsUpdate()"><span>Content Production &amp; Photo/Video</span></label>
+                  <label class="cta-ms-item"><input type="checkbox" value="Branding &amp; Creative Design" onchange="ctaMsUpdate()"><span>Branding &amp; Creative Design</span></label>
+                  <label class="cta-ms-item"><input type="checkbox" value="AI Doodling / Editing" onchange="ctaMsUpdate()"><span>AI Doodling / Editing</span></label>
+                </div>
+              </div>
+            </div>
+            <div class="cta-pf-field">
+              <label class="cta-pf-label" for="ctaCompany">Company Name</label>
+              <input class="cta-pf-input" type="text" id="ctaCompany" name="company_name" placeholder="Enter Company Name">
+            </div>
+          </div>
+
+          <!-- Name + Mobile (2 col) -->
+          <div class="cta-pf-row">
+            <div class="cta-pf-field">
+              <label class="cta-pf-label" for="ctaName">Your Name</label>
+              <input class="cta-pf-input" type="text" id="ctaName" name="name" placeholder="Enter Your Name">
+            </div>
+            <div class="cta-pf-field">
+              <label class="cta-pf-label" for="ctaMobile">Mobile Number</label>
+              <input class="cta-pf-input" type="tel" id="ctaMobile" name="mobile" placeholder="Enter Mobile Number">
+            </div>
+          </div>
+
+          <!-- Email + Budget (2 col) -->
+          <div class="cta-pf-row">
+            <div class="cta-pf-field">
+              <label class="cta-pf-label" for="ctaEmail">Email Address</label>
+              <input class="cta-pf-input" type="email" id="ctaEmail" name="email" placeholder="Enter Email Address">
+            </div>
+            <div class="cta-pf-field">
+              <label class="cta-pf-label" for="ctaBudget">Project Budget</label>
+              <select class="cta-pf-input cta-pf-select" id="ctaBudget" name="budget">
+                <option value="" disabled selected>Select Budget ▼</option>
+                <option value="under-25k">Under ₹25,000</option>
+                <option value="25k-50k">₹25,000 – ₹50,000</option>
+                <option value="50k-1l">₹50,000 – ₹1,00,000</option>
+                <option value="1l-3l">₹1,00,000 – ₹3,00,000</option>
+                <option value="3l+">₹3,00,000+</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button class="cta-pf-btn" type="button" onclick="ctaSubmitProposal()">
+            Get My Free Proposal →
+          </button>
+
+        </div>
       </div>
-      <div class="cta-cards reveal d4">
-        <div class="cta-card cta-card-b"><div class="cc-icon">🚀</div><div class="cc-title">Launch in 30 Days</div><div class="cc-desc">From zero to market-ready with our rapid launch framework.</div><span class="cc-arrow"></span></div>
-        <div class="cta-card cta-card-a"><div class="cc-icon">📈</div><div class="cc-title">End-To-End Brand Support</div><div class="cc-desc">From strategy to execution, we help your brand move forward with confidence.</div><span class="cc-arrow"></span></div>
-        <div class="cta-card cta-card-c"><div class="cc-icon">🎯</div><div class="cc-title">ROI-First Always</div><div class="cc-desc">Every rupee tracked. Every decision data-driven. No vanity metrics.</div><span class="cc-arrow"></span></div>
-      </div>
+
     </div>
   </section>
+
+  <style>
+  /* ── MULTI-SELECT DROPDOWN ── */
+  .cta-ms-wrap { position: relative; width: 100%; }
+  .cta-ms-trigger {
+    width: 100%;
+    text-align: left;
+    padding: 11px 16px;
+    font-size: 13px;
+    background: #ffffff !important;
+    border: 1px solid rgba(255,255,255,.3) !important;
+    color: #1a1a1a !important;
+    border-radius: 10px;
+    font-family: var(--font-body, 'DM Sans', sans-serif);
+    cursor: pointer !important;
+    transition: border-color .2s, box-shadow .2s;
+    box-sizing: border-box;
+  }
+  .cta-ms-trigger:focus { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.25); border-color: rgba(255,255,255,.9) !important; }
+  .cta-ms-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0; right: 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    z-index: 9999;
+    overflow: hidden;
+  }
+  .cta-ms-dropdown.open { display: block; }
+  .cta-ms-actions {
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px 8px;
+  }
+  .cta-ms-action-btn {
+    flex: 1;
+    padding: 7px 0;
+    font-size: 11px;
+    font-family: var(--font-heading, 'Syne', sans-serif);
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    border-radius: 6px;
+    border: 1.5px solid #ff5c00;
+    background: transparent;
+    color: #ff5c00 !important;
+    cursor: pointer !important;
+    transition: background .18s, color .18s;
+  }
+  .cta-ms-action-btn:hover { background: #ff5c00; color: #fff !important; }
+  .cta-ms-divider { height: 1px; background: #f0ece7; margin: 0 12px; }
+  .cta-ms-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    cursor: pointer !important;
+    transition: background .15s;
+    color: #1a1a1a;
+    font-size: 13px;
+    font-family: var(--font-body, 'DM Sans', sans-serif);
+  }
+  .cta-ms-item:hover { background: #fff5f0; }
+  .cta-ms-item input[type=checkbox] {
+    width: 15px; height: 15px;
+    accent-color: #ff5c00;
+    cursor: pointer !important;
+    flex-shrink: 0;
+  }
+
+  /* ── CTA PROPOSAL FORM ── */
+  .cta-proposal-form-wrap {
+    width: 100%;
+    max-width: 760px;
+    margin: 40px auto 0;
+  }
+  .cta-proposal-form {
+    background: #ff5c00;
+    border-radius: 20px;
+    padding: 36px 36px 32px;
+    box-shadow: 0 24px 60px rgba(255,92,0,.35), 0 40px 80px rgba(0,0,0,.4);
+    text-align: left;
+  }
+  .cta-pf-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .cta-pf-field {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .cta-pf-label {
+    font-family: var(--font-heading, 'Bebas Neue', sans-serif);
+    font-size: 10px;
+    letter-spacing: .14em;
+    color: rgba(255,255,255,.8);
+    text-transform: uppercase;
+  }
+  .cta-pf-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 16px;
+    font-size: 13px;
+    background: #ffffff !important;
+    border: 1px solid rgba(255,255,255,.3) !important;
+    color: #1a1a1a !important;
+    border-radius: 10px;
+    font-family: var(--font-body, 'DM Sans', sans-serif);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .cta-pf-input::placeholder { color: #bbb !important; }
+  .cta-pf-input:focus {
+    border-color: rgba(255,255,255,.9) !important;
+    background: #ffffff !important;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255,255,255,.25);
+  }
+  .cta-pf-select option { background: #fff; color: #1a1a1a; }
+  .cta-pf-btn {
+    width: 100%;
+    margin-top: 6px;
+    padding: 15px;
+    background: #1a1a1a;
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-heading, 'Bebas Neue', sans-serif);
+    font-size: 17px;
+    letter-spacing: .1em;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background .25s, transform .2s, box-shadow .25s;
+  }
+  .cta-pf-btn:hover {
+    background: #000;
+    box-shadow: 0 8px 32px rgba(0,0,0,.5);
+    transform: translateY(-2px);
+  }
+  @media (max-width: 600px) {
+    .cta-proposal-form { padding: 24px 18px; }
+    .cta-pf-row { grid-template-columns: 1fr; }
+  }
+  </style>
+
+  <script>
+  /* ── Multi-select helpers ── */
+  function toggleCtaMs(e) {
+    e.stopPropagation();
+    var dd = document.getElementById('ctaServiceDropdown');
+    dd.classList.toggle('open');
+  }
+  function ctaMsUpdate() {
+    var checked = Array.from(document.querySelectorAll('#ctaServiceDropdown input[type=checkbox]:checked')).map(function(c){return c.value;});
+    var lbl = document.getElementById('ctaServiceLabel');
+    if (checked.length === 0) lbl.textContent = 'Select Services \u25BC';
+    else if (checked.length === 1) lbl.textContent = checked[0];
+    else lbl.textContent = checked.length + ' Services Selected';
+  }
+  function ctaMsSelectAll() {
+    document.querySelectorAll('#ctaServiceDropdown input[type=checkbox]').forEach(function(c){c.checked=true;});
+    ctaMsUpdate();
+  }
+  function ctaMsDeselectAll() {
+    document.querySelectorAll('#ctaServiceDropdown input[type=checkbox]').forEach(function(c){c.checked=false;});
+    ctaMsUpdate();
+  }
+  /* Close dropdown when clicking outside */
+  document.addEventListener('click', function(e) {
+    var wrap = document.getElementById('ctaServiceWrap');
+    if (wrap && !wrap.contains(e.target)) {
+      var dd = document.getElementById('ctaServiceDropdown');
+      if (dd) dd.classList.remove('open');
+    }
+  });
+
+  function ctaSubmitProposal() {
+    var services = Array.from(document.querySelectorAll('#ctaServiceDropdown input[type=checkbox]:checked')).map(function(c){return c.value;});
+    var company = document.getElementById('ctaCompany').value.trim();
+    var name    = document.getElementById('ctaName').value.trim();
+    var mobile  = document.getElementById('ctaMobile').value.trim();
+    var email   = document.getElementById('ctaEmail').value.trim();
+    var budget  = document.getElementById('ctaBudget').value;
+    if (!services.length || !name || !mobile || !email || !budget) {
+      alert('Please fill in all required fields before submitting.');
+      return;
+    }
+    var budgetText = document.getElementById('ctaBudget').options[document.getElementById('ctaBudget').selectedIndex].text;
+    var msg = '🚀 *New Proposal Request — The Sonic Media*\n\n'
+      + '*Services:* ' + services.join(', ') + '\n'
+      + (company ? '*Company:* ' + company + '\n' : '')
+      + '*Name:* ' + name + '\n'
+      + '*Mobile:* ' + mobile + '\n'
+      + '*Email:* ' + email + '\n'
+      + '*Budget:* ' + budgetText;
+    var waURL = 'https://wa.me/918733087249?text=' + encodeURIComponent(msg);
+    window.open(waURL, '_blank');
+  }
+  </script>
+
+
 
   <!-- FOOTER -->
   <div class="page-footer-slot"></div>

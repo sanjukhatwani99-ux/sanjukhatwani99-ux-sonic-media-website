@@ -1922,7 +1922,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
   flex-direction: column;
   justify-content: center;
   padding: 0 64px 0 72px;
-  background: #000;
+  background: transparent;
   z-index: 5;
   height: 100%;
 }
@@ -1931,8 +1931,8 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,92,0,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,92,0,0.025) 1px, transparent 1px);
+    linear-gradient(rgba(255,92,0,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,92,0,0.055) 1px, transparent 1px);
   background-size: 52px 52px;
   pointer-events: none;
 }
@@ -2011,7 +2011,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
 #wsv-hero-new .btn-ghost:hover { border-color: rgba(255,255,255,.28); color: #fff; transform: translateY(-2px); }
 #wsv-hero-new .hero-right {
   position: relative;
-  background: #000;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2295,7 +2295,46 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
 <div id="page-svc-web" class="page active">
 
   <!-- ═══ HERO ═══ -->
+  <style>
+  /* ── PERF-STYLE HERO BACKGROUND OVERLAYS ── */
+  .pm-hero-noise {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: .85;
+  }
+  .pm-hero-grid-bg {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,92,0,.18) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,92,0,.18) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 60% 50%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 60% 50%, black 30%, transparent 80%);
+  }
+  .pm-hero-glow-1 {
+    position: absolute; top: -10%; right: 5%; width: 55vw; height: 55vw;
+    background: radial-gradient(ellipse, rgba(255,92,0,.22) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; animation: pm-glow-breathe 6s ease-in-out infinite;
+  }
+  .pm-hero-glow-2 {
+    position: absolute; bottom: -20%; left: -10%; width: 40vw; height: 40vw;
+    background: radial-gradient(ellipse, rgba(255,92,0,.12) 0%, transparent 65%);
+    pointer-events: none; z-index: 0;
+  }
+  @keyframes pm-glow-breathe {
+    0%,100% { opacity: .7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.06); }
+  }
+  #wsv-hero-new { position: relative; }
+  #wsv-hero-new .hero-inner-grid { position: relative; z-index: 2; }
+  </style>
+
   <section id="wsv-hero-new" style="min-height:100vh;overflow:hidden;background:#000;">
+    <!-- PERF-STYLE BACKGROUND LAYERS -->
+    <div class="pm-hero-noise"></div>
+    <div class="pm-hero-grid-bg"></div>
+    <div class="pm-hero-glow-1"></div>
+    <div class="pm-hero-glow-2"></div>
     <div class="hero-inner-grid">
 
       <!-- LEFT: CONTENT -->
@@ -3505,9 +3544,9 @@ function buildPreview(brand, tagline, industry) {
               </div>
               <div class="wsv-lcard-url">
                 <span class="wsv-lcard-url-dot"></span>
-                lcpladvisory.com
+                nuvellanoir.com
               </div>
-              <div class="wsv-lcard-meta">LCPL Advisory</div>
+              <div class="wsv-lcard-meta">Nuvella Noir</div>
               <button class="wsv-lcard-maximize" onclick="wsvMaximize(this)" title="Maximize">
                 <svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1 5V1H5M9 1H13V5M13 9V13H9M5 13H1V9" stroke="#888" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -3516,8 +3555,8 @@ function buildPreview(brand, tagline, industry) {
             </div>
             <div class="wsv-lcard-viewport">
               <iframe
-                src="https://www.lcpladvisory.com"
-                title="LCPL Advisory — Live Preview 2"
+                src="https://nuvellanoir.com/"
+                title="Nuvella Noir — Live Preview 2"
                 loading="lazy"
                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                 scrolling="yes"
@@ -3536,8 +3575,8 @@ function buildPreview(brand, tagline, industry) {
 
       <!-- PAIR 4: Custom Website -->
       <div class="wsv-live-pair">
-        <div class="wsv-lcard-title-wrap"><span class="wsv-lcard-title-badge">04</span><span class="wsv-lcard-title-text">Custom Website</span></div>
-        <div class="wsv-lcard" data-index="3">
+        <div class="wsv-lcard-title-wrap"><span class="wsv-lcard-title-badge">02</span><span class="wsv-lcard-title-text">Custom Website</span></div>
+        <div class="wsv-lcard" data-index="1">
           <div class="wsv-lcard-glow"></div>
           <div class="wsv-lcard-inner">
             <div class="wsv-lcard-bar">
@@ -3546,9 +3585,9 @@ function buildPreview(brand, tagline, industry) {
               </div>
               <div class="wsv-lcard-url">
                 <span class="wsv-lcard-url-dot"></span>
-                zomato.com
+                thesonicmedia.com
               </div>
-              <div class="wsv-lcard-meta">Zomato</div>
+              <div class="wsv-lcard-meta">The Sonic Media</div>
               <button class="wsv-lcard-maximize" onclick="wsvMaximize(this)" title="Maximize">
                 <svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1 5V1H5M9 1H13V5M13 9V13H9M5 13H1V9" stroke="#888" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -3557,8 +3596,8 @@ function buildPreview(brand, tagline, industry) {
             </div>
             <div class="wsv-lcard-viewport">
               <iframe
-                src="https://www.zomato.com"
-                title="Zomato — Food Industry Preview"
+                src="https://www.thesonicmedia.com"
+                title="The Sonic Media — Live Preview"
                 loading="lazy"
                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                 scrolling="yes"
@@ -3569,7 +3608,7 @@ function buildPreview(brand, tagline, industry) {
                 <span class="wsv-lcard-live-dot"></span>
                 LIVE
               </div>
-              <span class="wsv-lcard-type">Food &amp; Restaurant Industry</span>
+              <span class="wsv-lcard-type">Creative Agency</span>
             </div>
           </div>
         </div>
@@ -4132,9 +4171,9 @@ function buildPreview(brand, tagline, industry) {
 
   /* ── Header ── */
   .wsv-ptl-header {
-    text-align: center;
-    padding: 0 40px 72px;
-    max-width: 780px;
+    text-align: left;
+    padding: 0 60px 72px;
+    max-width: 1380px;
     margin: 0 auto;
   }
   .wsv-ptl-eyebrow {
@@ -4144,6 +4183,7 @@ function buildPreview(brand, tagline, industry) {
     color: #ff5c00; background: rgba(255,92,0,.08);
     border: 1px solid rgba(255,92,0,.2); padding: 7px 16px;
     border-radius: 100px; margin-bottom: 24px;
+    margin-left: 0;
   }
   .wsv-ptl-eyebrow-dot {
     width: 5px; height: 5px; border-radius: 50%; background: #ff5c00;
@@ -4465,7 +4505,7 @@ function buildPreview(brand, tagline, industry) {
     max-width: 1380px; margin: 0 auto; padding: 0 60px;
   }
   .wsv-caps-deliv-header {
-    text-align: center; margin-bottom: 64px;
+    text-align: left; margin-bottom: 64px;
   }
   .wsv-caps-deliv-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
@@ -4485,7 +4525,7 @@ function buildPreview(brand, tagline, industry) {
   .wsv-caps-deliv-subtitle {
     font-size: 14px; color: rgba(255,255,255,.38);
     font-family: 'DM Sans', sans-serif;
-    max-width: 540px; margin: 0 auto;
+    max-width: 540px; margin: 0;
   }
 
   /* Cards grid */

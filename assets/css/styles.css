@@ -921,18 +921,25 @@ section{position:relative;z-index:2;}
   padding:13px 26px;
   border:1.5px solid #0D0D0D;
   border-radius:0;
-  transition:all .3s;
+  transition:color .3s;
   position:relative;overflow:hidden;
+  isolation:isolate;
 }
 .cs-view-all::before{
   content:'';position:absolute;inset:0;
   background:#0D0D0D;
   transform:scaleX(0);transform-origin:left;
   transition:transform .4s cubic-bezier(.77,0,.175,1);
+  z-index:-1;
 }
 .cs-view-all:hover::before{transform:scaleX(1);}
 .cs-view-all:hover{color:#fff;}
 .cs-view-all span{position:relative;z-index:1;}
+
+/* ── Fresh Reads: View All — orange border/fill, white text on hover ── */
+.fresh-reads-btn { color: var(--orange); border-color: var(--orange); }
+.fresh-reads-btn::before { background: var(--orange); }
+.fresh-reads-btn:hover { color: #fff; }
 
 /* ── Work list rows ── */
 .fw-list{
@@ -1404,6 +1411,23 @@ section{position:relative;z-index:2;}
 ═══════════════════════════════════════════════════ */
 .blogs-newsletter{display:grid;grid-template-columns:1fr 1fr;min-height:600px;}
 .blogs-half{padding:100px 60px;background:var(--black);}
+/* ── Fresh Reads: fix text colors on white background ── */
+.blogs-half[style*="background:#ffffff"] .blog-item,
+.blogs-half[style*="background: #ffffff"] .blog-item {
+  border-bottom-color: rgba(0,0,0,.08) !important;
+}
+.blogs-half[style*="background:#ffffff"] .blog-info .bt,
+.blogs-half[style*="background: #ffffff"] .blog-info .bt {
+  color: #1a1a1a !important;
+}
+.blogs-half[style*="background:#ffffff"] .blog-info .bt:hover,
+.blogs-half[style*="background: #ffffff"] .blog-item:hover .bt {
+  color: var(--orange) !important;
+}
+.blogs-half[style*="background:#ffffff"] .blog-num,
+.blogs-half[style*="background: #ffffff"] .blog-num {
+  color: rgba(0,0,0,.18) !important;
+}
 .blog-list{margin-top:40px;}
 .blog-item{display:flex;gap:20px;align-items:flex-start;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;transition:all .3s;}
 .blog-item:hover{padding-left:10px;}
