@@ -697,25 +697,7 @@
             { type:'img', url:'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=711&fit=crop&crop=faces', label:'Content' },
             { type:'img', url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=711&fit=crop&crop=faces', label:'Creative' },
             { type:'img', url:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=711&fit=crop&crop=faces', label:'Portrait' },
-            { type:'img', url:'https://images.unsplash.com/photo-1488161628813-04466f872be2?w=400&h=711&fit=crop&crop=faces', label:'Brand' },
-            { type:'img', url:'https://images.unsplash.com/photo-1488161628813-04466f872be2?w=400&h=711&fit=crop&crop=faces', label:'Fitness' },
-            { type:'img', url:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=711&fit=crop&crop=faces', label:'Business' },
-            { type:'img', url:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=711&fit=crop&crop=faces', label:'Wellness' },
-            { type:'img', url:'https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&h=711&fit=crop&crop=faces', label:'Travel' },
-            { type:'img', url:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=711&fit=crop&crop=faces', label:'Elegance' },
-            { type:'img', url:'https://images.unsplash.com/photo-1552058544-f2b08422138a?w=400&h=711&fit=crop&crop=faces', label:'Style' },
-            { type:'img', url:'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=400&h=711&fit=crop&crop=faces', label:'Influencer' },
-            { type:'img', url:'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=400&h=711&fit=crop&crop=faces', label:'Luxury' },
-            { type:'img', url:'https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=400&h=711&fit=crop&crop=faces', label:'Authentic' },
-            { type:'img', url:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=711&fit=crop&crop=faces', label:'Lifestyle' },
-            { type:'img', url:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=711&fit=crop&crop=faces', label:'Fashion' },
-            { type:'img', url:'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=400&h=711&fit=crop&crop=faces', label:'Beauty' },
-            { type:'img', url:'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&h=711&fit=crop&crop=faces', label:'Editorial' },
-            { type:'img', url:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=711&fit=crop&crop=faces', label:'Runway' },
-            { type:'img', url:'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=711&fit=crop&crop=faces', label:'Content' },
-            { type:'img', url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=711&fit=crop&crop=faces', label:'Creative' },
-            { type:'img', url:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=711&fit=crop&crop=faces', label:'Portrait' },
-            { type:'img', url:'https://images.unsplash.com/photo-1488161628813-04466f872be2?w=400&h=711&fit=crop&crop=faces', label:'Brand' },
+            { type:'img', url:'https://images.unsplash.com/photo-1500048993953-d23a436266cf?w=400&h=711&fit=crop&crop=faces', label:'Brand' },
             { type:'img', url:'https://images.unsplash.com/photo-1488161628813-04466f872be2?w=400&h=711&fit=crop&crop=faces', label:'Fitness' },
             { type:'img', url:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=711&fit=crop&crop=faces', label:'Business' },
             { type:'img', url:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=711&fit=crop&crop=faces', label:'Wellness' },
@@ -727,6 +709,29 @@
             { type:'img', url:'https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=400&h=711&fit=crop&crop=faces', label:'Authentic' },
           ];
 
+          // Additional featured images — portrait format (9:16 friendly)
+          // Row 1 uses imagesSET_A, Row 2 uses SET_B, Row 3 uses SET_C
+          var INF_IMGS_A = [
+            { type:'img', url:'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=711&fit=crop&crop=faces', label:'Beauty' },
+            { type:'img', url:'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&h=711&fit=crop&crop=faces', label:'Fashion' },
+            { type:'img', url:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=711&fit=crop&crop=faces', label:'Lifestyle' },
+          ];
+          var INF_IMGS_B = [
+            { type:'img', url:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=711&fit=crop&crop=faces', label:'Fitness' },
+            { type:'img', url:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=711&fit=crop&crop=faces', label:'Content' },
+            { type:'img', url:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=711&fit=crop&crop=faces', label:'E-Commerce' },
+          ];
+          var INF_IMGS_C = [
+            { type:'img', url:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=711&fit=crop&crop=faces', label:'Creator' },
+            { type:'img', url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=711&fit=crop&crop=faces', label:'Vlog' },
+            { type:'img', url:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=711&fit=crop&crop=faces', label:'Social' },
+          ];
+
+          var ROW_CONFIG = [
+            { id:'infStrip1', dir:'ltr', count:10, extraImgs: INF_IMGS_A },
+            { id:'infStrip2', dir:'rtl', count:12, extraImgs: INF_IMGS_B },
+            { id:'infStrip3', dir:'ltr', count:9,  extraImgs: INF_IMGS_C },
+          ];
 
           function shuffle(arr){
             var a=arr.slice();
@@ -734,23 +739,16 @@
             return a;
           }
 
-          // Interleave: every 3rd card is a video, rest are images
-          function buildMixedList(imgs, vids, count) {
-            var imgPool = shuffle(imgs);
-            var vidPool = shuffle(vids);
+          // Build list with all images (mix base images with extra featured images)
+          function buildMixedList(baseImgs, extraImgs, count) {
+            var allImgs = baseImgs.concat(extraImgs);
+            var imgPool = shuffle(allImgs);
             var result = [];
-            var imgIdx = 0, vidIdx = 0;
+            var imgIdx = 0;
             for (var i = 0; i < count; i++) {
-              if ((i + 1) % 3 === 0 && vids.length > 0) {
-                // every 3rd slot: video
-                result.push(vidPool[vidIdx % vidPool.length]);
-                vidIdx++;
-              } else {
-                // otherwise: image
-                if (imgIdx >= imgPool.length) imgPool = shuffle(imgs);
-                result.push(imgPool[imgIdx % imgPool.length]);
-                imgIdx++;
-              }
+              if (imgIdx >= imgPool.length) imgPool = shuffle(allImgs);
+              result.push(imgPool[imgIdx % imgPool.length]);
+              imgIdx++;
             }
             return result;
           }
@@ -758,21 +756,14 @@
           ROW_CONFIG.forEach(function(row){
             var strip = document.getElementById(row.id);
             if(!strip) return;
-            var mixed = buildMixedList(INF_IMGS, row.vids, row.count);
+            var mixed = buildMixedList(INF_IMGS, row.extraImgs, row.count);
             var doubled = mixed.concat(mixed); // seamless loop
             doubled.forEach(function(item){
               var card = document.createElement('div');
               card.className = 'inf-mq-card';
-              if (item.type === 'vid') {
-                card.innerHTML =
-                  '<video src="'+item.src+'" autoplay muted loop playsinline preload="none" '+
-                  'style="display:block;width:100%;height:100%;object-fit:cover;"></video>'+
-                  '<div class="inf-mq-label">'+item.label+'</div>';
-              } else {
-                card.innerHTML =
-                  '<img src="'+item.url+'" alt="'+item.label+'" loading="lazy" decoding="async">'+
-                  '<div class="inf-mq-label">'+item.label+'</div>';
-              }
+              card.innerHTML =
+                '<img src="'+item.url+'" alt="'+item.label+'" loading="lazy" decoding="async">'+
+                '<div class="inf-mq-label">'+item.label+'</div>';
               strip.appendChild(card);
             });
           });
