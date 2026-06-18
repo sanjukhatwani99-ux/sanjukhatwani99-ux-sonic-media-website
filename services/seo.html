@@ -495,7 +495,7 @@
           Technical SEO, content strategy, and link building that drives compounding organic traffic — month after month. Rank #1 and stay there.
         </p>
         <div class="hero-btns">
-          <a href="#" onclick="navigate('contact');return false;" class="btn-primary">
+          <a href="#wsv-final-cta" onclick="document.getElementById('wsv-final-cta').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary">
             Get a Free SEO Audit
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
               <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1931,6 +1931,29 @@
 
             </select>
           </div>
+          <!-- Company Information -->
+          <div class="wsv-pf-row">
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfSeoCompany">Company Name *</label>
+              <input class="wsv-input wsv-pf-input" type="text" id="pfSeoCompany" name="company_name" placeholder="Enter Company Name">
+            </div>
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfSeoIndustry">Industry *</label>
+              <select class="wsv-input wsv-select wsv-pf-input" id="pfSeoIndustry" name="industry">
+                <option value="" disabled selected>Select Industry ▼</option>
+                <option value="food">Food &amp; Beverage</option>
+                <option value="fashion">Fashion &amp; Lifestyle</option>
+                <option value="health">Health &amp; Wellness</option>
+                <option value="finance">Finance</option>
+                <option value="real-estate">Real Estate</option>
+                <option value="ecommerce">E-Commerce / Retail</option>
+                <option value="hospitality">Hospitality &amp; Travel</option>
+                <option value="tech">Technology &amp; SaaS</option>
+                <option value="education">Education</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
           <div class="wsv-pf-row">
             <div class="wsv-pf-field">
               <label class="wsv-pf-label" for="pfSeoName">Your Name</label>
@@ -2113,29 +2136,63 @@
     tick();
   })();
 
-  function wsvSubmitProposalSeo() {
-    
+  async function wsvSubmitProposalSeo() {
     var type    = document.getElementById('pfSeoType').value;
+    var company = document.getElementById('pfSeoCompany').value.trim();
+    var industry = document.getElementById('pfSeoIndustry').value;
     var name    = document.getElementById('pfSeoName').value.trim();
     var mobile  = document.getElementById('pfSeoMobile').value.trim();
     var email   = document.getElementById('pfSeoEmail').value.trim();
     var budget  = document.getElementById('pfSeoBudget').value;
 
-    if (!type || !name || !mobile || !email || !budget) {
+    if (!type || !company || !industry || !name || !mobile || !email || !budget) {
       alert('Please fill in all fields before submitting.');
       return;
     }
 
-    var msg = '🔍 *New SEO Services Request*\n\n'
-      + '*Service:* SEO Services\n'
-      + '*Type:* ' + document.getElementById('pfSeoType').options[document.getElementById('pfSeoType').selectedIndex].text + '\n'
-      + '*Name:* ' + name + '\n'
-      + '*Mobile:* ' + mobile + '\n'
-      + '*Email:* ' + email + '\n'
-      + '*Budget:* ' + document.getElementById('pfSeoBudget').options[document.getElementById('pfSeoBudget').selectedIndex].text;
+    var btn = document.querySelector('#wsv-final-cta .wsv-pf-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
 
-    var waUrl = 'https://wa.me/918733087249?text=' + encodeURIComponent(msg);
-    window.open(waUrl, '_blank');
+    var industryText = document.getElementById('pfSeoIndustry').options[document.getElementById('pfSeoIndustry').selectedIndex].text;
+    var budgetText   = document.getElementById('pfSeoBudget').options[document.getElementById('pfSeoBudget').selectedIndex].text;
+    var typeText     = document.getElementById('pfSeoType').options[document.getElementById('pfSeoType').selectedIndex].text;
+
+    var body = '🔍 New SEO Services Request\n\n'
+      + 'Service: SEO Services\n'
+      + 'SEO Focus: ' + typeText + '\n'
+      + 'Company Name: ' + company + '\n'
+      + 'Industry: ' + industryText + '\n'
+      + 'Name: ' + name + '\n'
+      + 'Mobile: ' + mobile + '\n'
+      + 'Email: ' + email + '\n'
+      + 'Budget: ' + budgetText;
+
+    try {
+      var response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '66f90d59-83e7-4136-8823-1bfeb38deb41',
+          subject: 'New SEO Proposal Request – ' + company,
+          from_name: name,
+          email: email,
+          message: body
+        })
+      });
+      var result = await response.json();
+      if (result.success) {
+        btn.textContent = '✓ Proposal Sent!';
+        btn.style.background = '#1a5c1a';
+        setTimeout(function() { btn.textContent = 'Get My Proposal →'; btn.style.background = ''; btn.disabled = false; }, 4000);
+      } else {
+        throw new Error(result.message || 'Submission failed');
+      }
+    } catch(e) {
+      btn.textContent = 'Get My Proposal →';
+      btn.disabled = false;
+      alert('Submission failed. Please try again or email us directly at info@thesonicmedia.com');
+    }
   }
   </script>
 

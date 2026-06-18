@@ -192,28 +192,19 @@
 .pm-hero {
   position: relative;
   min-height: 100vh;
-  background: #000000;
+  background: #080a0f;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  padding: 120px 0 80px;
-}
-.pm-hero-noise {
-  position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  opacity: .4;
 }
 .pm-hero-grid-bg {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
   background-image:
-    linear-gradient(rgba(255,92,0,.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,92,0,.09) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse 80% 80% at 60% 50%, black 30%, transparent 80%);
+    linear-gradient(rgba(255,92,0,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,92,0,0.025) 1px, transparent 1px);
+  background-size: 52px 52px;
 }
 .pm-hero-glow-1 {
   position: absolute; top: -10%; right: 5%; width: 55vw; height: 55vw;
-  background: radial-gradient(ellipse, rgba(255,92,0,.12) 0%, transparent 65%);
+  background: radial-gradient(ellipse, rgba(255,92,0,.10) 0%, transparent 65%);
   pointer-events: none; z-index: 0; animation: pm-glow-breathe 6s ease-in-out infinite;
 }
 .pm-hero-glow-2 {
@@ -225,83 +216,105 @@
   0%,100% { opacity: .7; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.06); }
 }
+
+/* ── True 50/50 full-bleed grid — same as SMM ── */
 .pm-hero-inner {
   position: relative; z-index: 2;
-  max-width: 1380px; margin: 0 auto; padding: 0 60px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  min-height: 100vh;
 }
 
-/* LEFT */
-.pm-hero-left { display: flex; flex-direction: column; gap: 0; }
+/* LEFT — matches SMM .hero-left exactly */
+.pm-hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 56px 80px 72px;
+  position: relative;
+  z-index: 20;
+}
+
+/* Eyebrow — plain text, no pill — matches SMM .eyebrow */
 .pm-hero-label {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(255,92,0,.08); border: 1px solid rgba(255,92,0,.25);
-  padding: 7px 16px; border-radius: 100px; width: fit-content;
-  font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700;
-  letter-spacing: .2em; text-transform: uppercase; color: #ff5c00;
-  margin-bottom: 28px;
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  margin-bottom: 22px;
   animation: pm-fade-up .6s ease both;
 }
 .pm-hero-label-dot {
-  width: 6px; height: 6px; border-radius: 50%; background: #ff5c00;
+  width: 5px; height: 5px; border-radius: 50%; background: #ff5c00;
+  margin-right: 8px;
   animation: pm-pulse 2s ease-in-out infinite;
 }
 @keyframes pm-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,92,0,.6); } 50% { box-shadow: 0 0 0 6px rgba(255,92,0,0); } }
+
+/* H1 — matches SMM .hero-h1 */
 .pm-hero-h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(52px, 6.5vw, 100px);
-  line-height: .9; color: #ffffff;
-  letter-spacing: -.01em; margin-bottom: 24px;
-  animation: pm-fade-up .65s .1s ease both;
+  font-size: clamp(64px, 7vw, 116px);
+  line-height: .87;
+  letter-spacing: -.01em;
+  color: #fff;
+  margin-bottom: 28px;
+  animation: pm-fade-up 1s .4s ease both;
 }
-.pm-hero-h1 em { color: #ff5c00; font-style: normal; }
+.pm-hero-h1 .pm-or { color: #ff5c00; font-style: normal; }
+.pm-hero-h1 .pm-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+/* Subtitle — matches SMM .hero-sub */
 .pm-hero-desc {
-  font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.75;
-  color: rgba(255,255,255,.55); max-width: 460px; margin-bottom: 36px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.82;
+  color: rgba(255,255,255,.44);
+  max-width: 420px;
+  margin-bottom: 38px;
+  font-weight: 300;
   animation: pm-fade-up .65s .2s ease both;
 }
+
+/* Buttons — angular clip-path, matches SMM .btn-primary / .btn-ghost */
 .pm-hero-btns {
-  display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px;
+  display: flex; gap: 14px; flex-wrap: wrap;
   animation: pm-fade-up .65s .3s ease both;
 }
 .pm-btn-primary {
   display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px;
   background: #ff5c00; color: #fff;
-  font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700;
-  letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
-  padding: 14px 28px; border-radius: 100px; cursor: pointer; border: none;
-  box-shadow: 0 0 36px rgba(255,92,0,.4);
-  transition: all .3s cubic-bezier(.34,1.56,.64,1);
+  font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase;
+  border: none; cursor: pointer; text-decoration: none;
+  clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 0 100%);
+  transition: all .25s;
 }
-.pm-btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 50px rgba(255,92,0,.6); }
+.pm-btn-primary:hover { filter: brightness(1.15); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(255,92,0,.38); }
 .pm-btn-secondary {
   display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(255,255,255,.07); color: rgba(255,255,255,.8);
-  font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700;
-  letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
-  padding: 14px 28px; border-radius: 100px; cursor: pointer;
-  border: 1px solid rgba(255,255,255,.18);
-  transition: all .3s;
+  padding: 13px 26px;
+  background: transparent; color: rgba(255,255,255,.55);
+  font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,.1);
+  cursor: pointer; text-decoration: none;
+  transition: all .25s;
 }
-.pm-btn-secondary:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.35); transform: translateY(-2px); }
-.pm-hero-trust {
-  display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center;
-  animation: pm-fade-up .65s .4s ease both;
-}
-.pm-trust-label {
-  font-family: 'Syne', sans-serif; font-size: 9px; font-weight: 700;
-  letter-spacing: .18em; color: rgba(255,255,255,.35); text-transform: uppercase; width: 100%;
-  margin-bottom: 2px;
-}
-.pm-trust-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.13);
-  padding: 6px 12px; border-radius: 100px;
-  font-family: 'DM Sans', sans-serif; font-size: 11px; color: rgba(255,255,255,.55);
-  transition: all .3s;
-}
-.pm-trust-pill:hover { background: rgba(255,92,0,.12); border-color: rgba(255,92,0,.35); color: #ff5c00; }
-.pm-trust-pill-dot { width: 5px; height: 5px; border-radius: 50%; background: #ff5c00; opacity: .7; }
+.pm-btn-secondary:hover { border-color: rgba(255,255,255,.28); color: #fff; transform: translateY(-2px); }
+
+/* Trust pills — hidden to match SMM */
+.pm-hero-trust { display: none; }
 
 @keyframes pm-fade-up {
   from { opacity: 0; transform: translateY(24px); }
@@ -310,12 +323,26 @@
 
 /* ─── RIGHT DASHBOARD ───────────────────────── */
 .pm-hero-right {
-  position: relative; height: 580px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 100vh;
+  padding: 60px 56px 60px 40px;
   animation: pm-fade-right .8s .15s ease both;
 }
 @keyframes pm-fade-right {
   from { opacity: 0; transform: translateX(40px); }
   to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Dashboard wrapper — sized container inside the right column */
+.pm-dash-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  height: 520px;
 }
 
 /* Main dashboard glass card */
@@ -493,16 +520,17 @@ canvas.pm-dash-particles {
 }
 
 /* ─── RESPONSIVE ─────── */
-@media (max-width: 1100px) {
-  .pm-hero-inner { grid-template-columns: 1fr; gap: 56px; padding: 0 40px; }
-  .pm-hero-right { height: 460px; }
+@media (max-width: 900px) {
+  .pm-hero-inner { grid-template-columns: 1fr; }
+  .pm-hero-right { min-height: 55vh; padding: 40px 32px; }
+  .pm-dash-wrapper { max-width: 100%; height: 420px; }
   .pm-float-chip-1 { right: 10px; }
   .pm-float-chip-2 { left: 0; }
 }
 @media (max-width: 640px) {
-  .pm-hero { padding: 100px 0 60px; }
-  .pm-hero-inner { padding: 0 20px; gap: 40px; }
-  .pm-hero-right { height: 380px; }
+  .pm-hero-left { padding: 80px 32px 60px; }
+  .pm-hero-right { padding: 32px 20px; }
+  .pm-dash-wrapper { height: 360px; }
   .pm-hero-btns { flex-direction: column; }
   .pm-btn-primary, .pm-btn-secondary { justify-content: center; }
   .pm-kpi-val { font-size: 20px; }
@@ -510,7 +538,6 @@ canvas.pm-dash-particles {
 </style>
 
 <section class="pm-hero" id="pm-hero">
-  <div class="pm-hero-noise"></div>
   <div class="pm-hero-grid-bg"></div>
   <div class="pm-hero-glow-1"></div>
   <div class="pm-hero-glow-2"></div>
@@ -522,10 +549,13 @@ canvas.pm-dash-particles {
         <span class="pm-hero-label-dot"></span>
         Performance Marketing &amp; Paid Ads
       </div>
-      <h1 class="pm-hero-h1">Turn Ad Spend<br>Into <em>Predictable</em><br>Revenue</h1>
+      <h1 class="pm-hero-h1"><span class="pm-line">Turn Ad Spend</span><span class="pm-line">Into <span class="pm-or">Predictable</span></span><span class="pm-line">Revenue</span></h1>
       <p class="pm-hero-desc">We build data-driven Meta, Google, YouTube, and LinkedIn ad campaigns focused on generating qualified leads, sales, and measurable business growth.</p>
       <div class="pm-hero-btns">
-        <a href="#" onclick="navigate('contact');return false;" class="pm-btn-primary">Book Strategy Call →</a>
+        <a href="#wsv-final-cta" onclick="document.getElementById('wsv-final-cta').scrollIntoView({behavior:'smooth'});return false;" class="pm-btn-primary">
+          Book Strategy Call
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
         <a href="#" onclick="navigate('casestudies');return false;" class="pm-btn-secondary">View Case Studies</a>
       </div>
       <div class="pm-hero-trust">
@@ -534,6 +564,7 @@ canvas.pm-dash-particles {
         <span class="pm-trust-pill"><span class="pm-trust-pill-dot"></span>Google Ads</span>
         <span class="pm-trust-pill"><span class="pm-trust-pill-dot"></span>YouTube Ads</span>
         <span class="pm-trust-pill"><span class="pm-trust-pill-dot"></span>LinkedIn Ads</span>
+        <span style="width:100%;height:0;display:block;"></span>
         <span class="pm-trust-pill"><span class="pm-trust-pill-dot"></span>Conversion Tracking</span>
         <span class="pm-trust-pill"><span class="pm-trust-pill-dot"></span>Analytics</span>
       </div>
@@ -541,6 +572,7 @@ canvas.pm-dash-particles {
 
     <!-- RIGHT DASHBOARD -->
     <div class="pm-hero-right">
+      <div class="pm-dash-wrapper">
       <!-- Floating chips -->
       <div class="pm-float-chip pm-float-chip-1">
         <div class="fc-label">Revenue Today</div>
@@ -633,6 +665,7 @@ canvas.pm-dash-particles {
           </div>
         </div>
       </div>
+      </div><!-- /pm-dash-wrapper -->
     </div>
   </div>
 </section>
@@ -1208,6 +1241,29 @@ canvas.pm-dash-particles {
 
             </select>
           </div>
+          <!-- Company Information -->
+          <div class="wsv-pf-row">
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfPerfCompany">Company Name *</label>
+              <input class="wsv-input wsv-pf-input" type="text" id="pfPerfCompany" name="company_name" placeholder="Enter Company Name">
+            </div>
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfPerfIndustry">Industry *</label>
+              <select class="wsv-input wsv-select wsv-pf-input" id="pfPerfIndustry" name="industry">
+                <option value="" disabled selected>Select Industry ▼</option>
+                <option value="food">Food &amp; Beverage</option>
+                <option value="fashion">Fashion &amp; Lifestyle</option>
+                <option value="health">Health &amp; Wellness</option>
+                <option value="finance">Finance</option>
+                <option value="real-estate">Real Estate</option>
+                <option value="ecommerce">E-Commerce / Retail</option>
+                <option value="hospitality">Hospitality &amp; Travel</option>
+                <option value="tech">Technology &amp; SaaS</option>
+                <option value="education">Education</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
           <div class="wsv-pf-row">
             <div class="wsv-pf-field">
               <label class="wsv-pf-label" for="pfPerfName">Your Name</label>
@@ -1239,6 +1295,13 @@ canvas.pm-dash-particles {
           <button class="wsv-pf-btn" type="button" onclick="wsvSubmitProposalPerf()">
             Get My Proposal →
           </button>
+          <div class="wsv-pf-divider">
+            <span>or</span>
+          </div>
+          <a href="#" onclick="navigate('contact');return false;" class="wsv-pf-strategy-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+            Book a Strategy Call
+          </a>
         </div>
       </div>
     </div>
@@ -1348,6 +1411,39 @@ canvas.pm-dash-particles {
     background: #000; box-shadow: 0 8px 32px rgba(0,0,0,.5);
     transform: translateY(-2px);
   }
+  .wsv-pf-divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 14px 0 12px;
+  }
+  .wsv-pf-divider::before,
+  .wsv-pf-divider::after {
+    content: ''; flex: 1;
+    height: 1px; background: rgba(255,255,255,.25);
+  }
+  .wsv-pf-divider span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; color: rgba(255,255,255,.55);
+    letter-spacing: .08em; text-transform: uppercase;
+  }
+  .wsv-pf-strategy-btn {
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    width: 100%; padding: 13px;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: #fff; text-decoration: none;
+    transition: all .25s;
+    box-sizing: border-box;
+  }
+  .wsv-pf-strategy-btn:hover {
+    background: rgba(255,255,255,.22);
+    border-color: rgba(255,255,255,.6);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,.3);
+  }
   @media (max-width: 1024px) {
     .wsv-final-inner { grid-template-columns: 1fr; gap: 48px; }
     .wsv-final-left { text-align: center; }
@@ -1390,29 +1486,64 @@ canvas.pm-dash-particles {
     tick();
   })();
 
-  function wsvSubmitProposalPerf() {
+  async function wsvSubmitProposalPerf() {
     
-    var type    = document.getElementById('pfPerfType').value;
-    var name    = document.getElementById('pfPerfName').value.trim();
-    var mobile  = document.getElementById('pfPerfMobile').value.trim();
-    var email   = document.getElementById('pfPerfEmail').value.trim();
-    var budget  = document.getElementById('pfPerfBudget').value;
+    var type     = document.getElementById('pfPerfType').value;
+    var company  = document.getElementById('pfPerfCompany').value.trim();
+    var industry = document.getElementById('pfPerfIndustry').value;
+    var name     = document.getElementById('pfPerfName').value.trim();
+    var mobile   = document.getElementById('pfPerfMobile').value.trim();
+    var email    = document.getElementById('pfPerfEmail').value.trim();
+    var budget   = document.getElementById('pfPerfBudget').value;
 
-    if (!type || !name || !mobile || !email || !budget) {
+    if (!type || !company || !industry || !name || !mobile || !email || !budget) {
       alert('Please fill in all fields before submitting.');
       return;
     }
 
-    var msg = '📊 *New Performance Marketing Request*\n\n'
-      + '*Service:* Performance Marketing\n'
-      + '*Type:* ' + document.getElementById('pfPerfType').options[document.getElementById('pfPerfType').selectedIndex].text + '\n'
-      + '*Name:* ' + name + '\n'
-      + '*Mobile:* ' + mobile + '\n'
-      + '*Email:* ' + email + '\n'
-      + '*Budget:* ' + document.getElementById('pfPerfBudget').options[document.getElementById('pfPerfBudget').selectedIndex].text;
+    var btn = document.querySelector('#wsv-final-cta .wsv-pf-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
 
-    var waUrl = 'https://wa.me/918733087249?text=' + encodeURIComponent(msg);
-    window.open(waUrl, '_blank');
+    var typeText     = document.getElementById('pfPerfType').options[document.getElementById('pfPerfType').selectedIndex].text;
+    var industryText = document.getElementById('pfPerfIndustry').options[document.getElementById('pfPerfIndustry').selectedIndex].text;
+    var budgetText   = document.getElementById('pfPerfBudget').options[document.getElementById('pfPerfBudget').selectedIndex].text;
+
+    var body = '📊 New Performance Marketing Request\n\n'
+      + 'Service: Performance Marketing\n'
+      + 'Type: ' + typeText + '\n'
+      + 'Company Name: ' + company + '\n'
+      + 'Industry: ' + industryText + '\n'
+      + 'Name: ' + name + '\n'
+      + 'Mobile: ' + mobile + '\n'
+      + 'Email: ' + email + '\n'
+      + 'Budget: ' + budgetText;
+
+    try {
+      var response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '66f90d59-83e7-4136-8823-1bfeb38deb41',
+          subject: 'New Performance Marketing Request – ' + name,
+          from_name: name,
+          email: email,
+          message: body
+        })
+      });
+      var result = await response.json();
+      if (result.success) {
+        btn.textContent = '✓ Proposal Sent!';
+        btn.style.background = '#1a5c1a';
+        setTimeout(function() { btn.textContent = 'Get My Proposal →'; btn.style.background = ''; btn.disabled = false; }, 4000);
+      } else {
+        throw new Error(result.message || 'Submission failed');
+      }
+    } catch(e) {
+      btn.textContent = 'Get My Proposal →';
+      btn.disabled = false;
+      alert('Submission failed. Please try again or email us directly at info@thesonicmedia.com');
+    }
   }
   </script>
 

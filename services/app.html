@@ -3585,7 +3585,7 @@ function buildPreview(brand, tagline, industry) {
             <div class="wsv-phone-screen">
               <div class="wsv-phone-shimmer"></div>
               <iframe
-                src="https://www.zomato.com"
+                src="https://nuvella-noir.myshopify.com/"
                 title="E-Commerce App Preview"
                 loading="lazy"
                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
@@ -3598,15 +3598,15 @@ function buildPreview(brand, tagline, industry) {
           <div class="wsv-phone-glow" style="--gc:rgba(255,92,0,.2)"></div>
         </div>
         <div class="wsv-phone-meta">
-          <span class="wsv-phone-type">Food &amp; Delivery</span>
+          <span class="wsv-phone-type">Fashion &amp; Luxury</span>
         </div>
       </div>
 
       <!-- PHONE 4: Custom Platform App -->
-      <div class="wsv-phone-wrap" style="--pd:.3s">
+      <div class="wsv-phone-wrap" style="--pd:.1s">
         <div class="wsv-phone-label-wrap">
           <span class="wsv-phone-badge">04</span>
-          <span class="wsv-phone-label-text">Custom Platform</span>
+          <span class="wsv-phone-label-text">Custom Platform App</span>
         </div>
         <div class="wsv-phone-device">
           <div class="wsv-phone-shell">
@@ -3640,8 +3640,8 @@ function buildPreview(brand, tagline, industry) {
             <div class="wsv-phone-screen">
               <div class="wsv-phone-shimmer"></div>
               <iframe
-                src="https://www.swiggy.com"
-                title="Custom Platform App Preview"
+                src="https://www.thesonicmedia.com"
+                title="Premium App Preview"
                 loading="lazy"
                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                 scrolling="yes"
@@ -3650,7 +3650,7 @@ function buildPreview(brand, tagline, industry) {
             </div>
             <div class="wsv-phone-bar"></div>
           </div>
-          <div class="wsv-phone-glow" style="--gc:rgba(255,92,0,.22)"></div>
+          <div class="wsv-phone-glow" style="--gc:rgba(255,92,0,.3)"></div>
         </div>
         <div class="wsv-phone-meta">
           <span class="wsv-phone-type">On-Demand Platform</span>
@@ -3659,6 +3659,7 @@ function buildPreview(brand, tagline, industry) {
 
     </div><!-- /wsv-phones-row -->
   </section>
+
 
   <!-- ─── PHONE MOCKUP STYLES ─── -->
   <style>
@@ -4803,29 +4804,63 @@ function buildPreview(brand, tagline, industry) {
   </style>
 
   <script>
-  function wsvSubmitProposal() {
-    var type    = document.getElementById('pfAppType').value;
-    var name    = document.getElementById('pfName').value.trim();
-    var mobile  = document.getElementById('pfMobile').value.trim();
-    var email   = document.getElementById('pfEmail').value.trim();
-    var budget  = document.getElementById('pfBudget').value;
+  async function wsvSubmitProposal() {
+    var type     = document.getElementById('pfAppType').value;
+    var company  = document.getElementById('pfCompany').value.trim();
+    var industry = document.getElementById('pfIndustry').value;
+    var name     = document.getElementById('pfName').value.trim();
+    var mobile   = document.getElementById('pfMobile').value.trim();
+    var email    = document.getElementById('pfEmail').value.trim();
+    var budget   = document.getElementById('pfBudget').value;
 
-    if (!type || !name || !mobile || !email || !budget) {
+    if (!type || !company || !industry || !name || !mobile || !email || !budget) {
       alert('Please fill in all fields before submitting.');
       return;
     }
 
-    // Encode for WhatsApp
-    var msg = '📱 *New App Development Request*\n\n'
-      + '*Service:* Mobile App Development\n'
-      + '*App Type:* ' + document.getElementById('pfAppType').options[document.getElementById('pfAppType').selectedIndex].text + '\n'
-      + '*Name:* ' + name + '\n'
-      + '*Mobile:* ' + mobile + '\n'
-      + '*Email:* ' + email + '\n'
-      + '*Budget:* ' + document.getElementById('pfBudget').options[document.getElementById('pfBudget').selectedIndex].text;
+    var btn = document.querySelector('#wsv-final-cta .wsv-pf-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
 
-    var waUrl = 'https://wa.me/918733087249?text=' + encodeURIComponent(msg);
-    window.open(waUrl, '_blank');
+    var typeText     = document.getElementById('pfAppType').options[document.getElementById('pfAppType').selectedIndex].text;
+    var industryText = document.getElementById('pfIndustry').options[document.getElementById('pfIndustry').selectedIndex].text;
+    var budgetText   = document.getElementById('pfBudget').options[document.getElementById('pfBudget').selectedIndex].text;
+
+    var body = '📱 New App Development Request\n\n'
+      + 'Service: Mobile App Development\n'
+      + 'App Type: ' + typeText + '\n'
+      + 'Company Name: ' + company + '\n'
+      + 'Industry: ' + industryText + '\n'
+      + 'Name: ' + name + '\n'
+      + 'Mobile: ' + mobile + '\n'
+      + 'Email: ' + email + '\n'
+      + 'Budget: ' + budgetText;
+
+    try {
+      var response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '66f90d59-83e7-4136-8823-1bfeb38deb41',
+          subject: 'New App Development Request – ' + company,
+          from_name: name,
+          email: email,
+          message: body
+        })
+      });
+      var result = await response.json();
+      if (result.success) {
+        btn.textContent = '✓ Proposal Sent!';
+        btn.style.background = '#1a5c1a';
+        setTimeout(function() { btn.textContent = 'Get My Proposal →'; btn.style.background = ''; btn.disabled = false; }, 4000);
+      } else {
+        throw new Error(result.message || 'Submission failed');
+      }
+    } catch(e) {
+      btn.textContent = 'Get My Proposal →';
+      btn.disabled = false;
+      alert('Submission failed. Please try again or email us directly at info@thesonicmedia.com');
+    }
   }
   </script>
 

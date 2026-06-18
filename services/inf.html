@@ -1530,6 +1530,29 @@
 
             </select>
           </div>
+          <!-- Company Information -->
+          <div class="wsv-pf-row">
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfInfCompany">Company Name *</label>
+              <input class="wsv-input wsv-pf-input" type="text" id="pfInfCompany" name="company_name" placeholder="Enter Company Name">
+            </div>
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfInfIndustry">Industry *</label>
+              <select class="wsv-input wsv-select wsv-pf-input" id="pfInfIndustry" name="industry">
+                <option value="" disabled selected>Select Industry ▼</option>
+                <option value="food">Food &amp; Beverage</option>
+                <option value="fashion">Fashion &amp; Lifestyle</option>
+                <option value="health">Health &amp; Wellness</option>
+                <option value="finance">Finance</option>
+                <option value="real-estate">Real Estate</option>
+                <option value="ecommerce">E-Commerce / Retail</option>
+                <option value="hospitality">Hospitality &amp; Travel</option>
+                <option value="tech">Technology &amp; SaaS</option>
+                <option value="education">Education</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
           <div class="wsv-pf-row">
             <div class="wsv-pf-field">
               <label class="wsv-pf-label" for="pfInfName">Your Name</label>
@@ -1712,29 +1735,64 @@
     tick();
   })();
 
-  function wsvSubmitProposalInf() {
+  async function wsvSubmitProposalInf() {
     
-    var type    = document.getElementById('pfInfType').value;
-    var name    = document.getElementById('pfInfName').value.trim();
-    var mobile  = document.getElementById('pfInfMobile').value.trim();
-    var email   = document.getElementById('pfInfEmail').value.trim();
-    var budget  = document.getElementById('pfInfBudget').value;
+    var type     = document.getElementById('pfInfType').value;
+    var company  = document.getElementById('pfInfCompany').value.trim();
+    var industry = document.getElementById('pfInfIndustry').value;
+    var name     = document.getElementById('pfInfName').value.trim();
+    var mobile   = document.getElementById('pfInfMobile').value.trim();
+    var email    = document.getElementById('pfInfEmail').value.trim();
+    var budget   = document.getElementById('pfInfBudget').value;
 
-    if (!type || !name || !mobile || !email || !budget) {
+    if (!type || !company || !industry || !name || !mobile || !email || !budget) {
       alert('Please fill in all fields before submitting.');
       return;
     }
 
-    var msg = '🌟 *New Influencer Marketing Request*\n\n'
-      + '*Service:* Influencer Marketing\n'
-      + '*Type:* ' + document.getElementById('pfInfType').options[document.getElementById('pfInfType').selectedIndex].text + '\n'
-      + '*Name:* ' + name + '\n'
-      + '*Mobile:* ' + mobile + '\n'
-      + '*Email:* ' + email + '\n'
-      + '*Budget:* ' + document.getElementById('pfInfBudget').options[document.getElementById('pfInfBudget').selectedIndex].text;
+    var btn = document.querySelector('#wsv-final-cta .wsv-pf-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
 
-    var waUrl = 'https://wa.me/918733087249?text=' + encodeURIComponent(msg);
-    window.open(waUrl, '_blank');
+    var typeText     = document.getElementById('pfInfType').options[document.getElementById('pfInfType').selectedIndex].text;
+    var industryText = document.getElementById('pfInfIndustry').options[document.getElementById('pfInfIndustry').selectedIndex].text;
+    var budgetText   = document.getElementById('pfInfBudget').options[document.getElementById('pfInfBudget').selectedIndex].text;
+
+    var body = '🌟 New Influencer Marketing Request\n\n'
+      + 'Service: Influencer Marketing\n'
+      + 'Type: ' + typeText + '\n'
+      + 'Company Name: ' + company + '\n'
+      + 'Industry: ' + industryText + '\n'
+      + 'Name: ' + name + '\n'
+      + 'Mobile: ' + mobile + '\n'
+      + 'Email: ' + email + '\n'
+      + 'Budget: ' + budgetText;
+
+    try {
+      var response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '66f90d59-83e7-4136-8823-1bfeb38deb41',
+          subject: 'New Influencer Marketing Request – ' + name,
+          from_name: name,
+          email: email,
+          message: body
+        })
+      });
+      var result = await response.json();
+      if (result.success) {
+        btn.textContent = '✓ Proposal Sent!';
+        btn.style.background = '#1a5c1a';
+        setTimeout(function() { btn.textContent = 'Find My Creators →'; btn.style.background = ''; btn.disabled = false; }, 4000);
+      } else {
+        throw new Error(result.message || 'Submission failed');
+      }
+    } catch(e) {
+      btn.textContent = 'Find My Creators →';
+      btn.disabled = false;
+      alert('Submission failed. Please try again or email us directly at info@thesonicmedia.com');
+    }
   }
   </script>
 

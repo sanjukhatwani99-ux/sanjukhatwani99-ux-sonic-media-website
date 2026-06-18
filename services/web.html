@@ -2937,10 +2937,19 @@ window.setDevice = function(dev, btn) {
     if (screen) { screen.style.height = ''; } // let CSS clamp handle it
     if (labelText) labelText.textContent = '1440px — Desktop';
     document.getElementById('zoomIndicator').textContent = '1440px desktop';
+  } else if (dev === 'tablet') {
+    shell.classList.add('shell-desktop');
+    shell.style.width = '768px';
+    if (stand) { stand.style.display = 'block'; stand.className = 'device-stand'; }
+    var hb2 = document.getElementById('deviceHomeBar'); if (hb2) hb2.style.display = 'none';
+    if (screen) { screen.style.height = ''; }
+    if (labelText) labelText.textContent = '768px — iPad';
+    document.getElementById('zoomIndicator').textContent = '768px tablet';
   } else if (dev === 'mobile') {
     shell.classList.add('shell-mobile');
     shell.style.width = '280px';
     if (stand) { stand.style.display = 'none'; }
+    var hb = document.getElementById('deviceHomeBar'); if (hb) hb.style.display = 'flex';
     if (screen) { screen.style.height = '520px'; }
     if (labelText) labelText.textContent = '390px — iPhone 15';
     document.getElementById('zoomIndicator').textContent = '390px mobile';
@@ -3007,8 +3016,7 @@ window.generatePreview = function() {
     out.innerHTML = buildPreview(brand, tagline||'Premium quality. Exceptional results.', industry);
     out.classList.add('active');
     observeReveal();
-    document.getElementById('viewportWrap').scrollTop = 0;
-    var ds = document.getElementById('deviceScreen'); if(ds) ds.scrollTop = 0;
+    var ds = document.getElementById('deviceScreen'); if(ds) ds.scrollTop = 0; else { var vw = document.getElementById('viewportWrap'); if(vw) vw.scrollTop = 0; }
     var ctaEl = document.getElementById('wsvPreviewCta'); if(ctaEl) ctaEl.style.display='block';
   }, 1100);
 };
@@ -3575,7 +3583,7 @@ function buildPreview(brand, tagline, industry) {
 
       <!-- PAIR 4: Custom Website -->
       <div class="wsv-live-pair">
-        <div class="wsv-lcard-title-wrap"><span class="wsv-lcard-title-badge">02</span><span class="wsv-lcard-title-text">Custom Website</span></div>
+        <div class="wsv-lcard-title-wrap"><span class="wsv-lcard-title-badge">04</span><span class="wsv-lcard-title-text">Custom Website</span></div>
         <div class="wsv-lcard" data-index="1">
           <div class="wsv-lcard-glow"></div>
           <div class="wsv-lcard-inner">
@@ -4145,6 +4153,345 @@ function buildPreview(brand, tagline, industry) {
   </script>
 
 
+
+  <!-- ═══ PREVIEW YOUR WEBSITE — INTERACTIVE TOOL ═══ -->
+  <section style="background:var(--black,#0a0a0a);padding:0 0 0;position:relative;overflow:visible;">
+  <style>
+    /* ── PREVIEW GENERATOR WRAPPER (from Old_File) ── */
+    .wsv-ppc-divider {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,92,0,.15), transparent);
+    }
+    .wsv-ppc-gen {
+      padding: 80px 60px 100px;
+    }
+    .wsv-ppc-gen-header {
+      text-align: left;
+      margin-bottom: 52px;
+    }
+    .wsv-ppc-gen-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(44px, 5vw, 76px);
+      color: #fff;
+      line-height: .93;
+      margin-bottom: 14px;
+    }
+    .wsv-ppc-gen-title span { color: var(--orange, #ff5c00); }
+    .wsv-ppc-gen-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: rgba(255,255,255,.38);
+      max-width: 480px;
+      margin: 0;
+      line-height: 1.7;
+    }
+    @media (max-width: 900px) {
+      .wsv-ppc-gen { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+
+    <div class="wsv-ppc-divider"></div>
+
+    <!-- PREVIEW GENERATOR -->
+    <div class="wsv-ppc-gen" id="wsv-gen-section-anchor">
+      <div class="wsv-ppc-gen-header">
+        <div class="section-tag" style="justify-content:flex-start;color:var(--orange,#ff5c00);margin-bottom:20px;">Interactive Tool</div>
+        <h2 class="wsv-ppc-gen-title">PREVIEW YOUR <span>WEBSITE</span></h2>
+        <p class="wsv-ppc-gen-sub">Enter your brand details and get an instant, full-fidelity preview — live, scrollable, real-time.</p>
+      </div>
+      <div class="wsv-gen-v2-wrap">
+      <div class="gen-box" id="genBox">
+
+    <!-- LEFT PANEL -->
+    <div class="panel-left" style="position:relative;">
+      <div class="panel-topbar">
+        <div class="panel-topbar-logo">✦</div>
+        <span class="panel-topbar-text">EDIT MY WEBSITE</span>
+      </div>
+      <div class="panel-body" id="panelBody">
+
+        <!-- Brand Info -->
+        <div class="sec-label">Brand Info</div>
+        <div class="field">
+          <label for="inp-brand">Business Name</label>
+          <input type="text" id="inp-brand" class="inp" placeholder="e.g. Nexus Foods" maxlength="40" autocomplete="off" oninput="liveUpdate()">
+        </div>
+        <div class="field">
+          <label for="inp-tagline">Tagline</label>
+          <input type="text" id="inp-tagline" class="inp" placeholder="e.g. Healthy meals, daily" maxlength="60" autocomplete="off" oninput="liveUpdate()">
+        </div>
+
+        <!-- Industry -->
+        <div class="sec-label">Industry</div>
+        <div class="field">
+          <select id="inp-industry" class="inp inp-select" onchange="liveUpdate()">
+            <option value="">Select industry…</option>
+            <option value="food">Food &amp; Beverage</option>
+            <option value="fashion">Fashion &amp; Lifestyle</option>
+            <option value="health">Health &amp; Wellness</option>
+            <option value="finance">Finance</option>
+            <option value="real-estate">Real Estate</option>
+            <option value="ecommerce">E-Commerce</option>
+            <option value="hospitality">Hospitality &amp; Travel</option>
+            <option value="tech">Technology &amp; SaaS</option>
+            <option value="education">Education</option>
+          </select>
+        </div>
+
+        <!-- Accent Colour -->
+        <div class="sec-label">Accent Colour</div>
+        <div class="colour-grid" id="colourGrid">
+          <button class="colour-swatch active" style="background:#ff5c00;" data-c="#ff5c00" onclick="setColour(this)" title="Orange"></button>
+          <button class="colour-swatch" style="background:#7c3aed;" data-c="#7c3aed" onclick="setColour(this)" title="Purple"></button>
+          <button class="colour-swatch" style="background:#0ea5e9;" data-c="#0ea5e9" onclick="setColour(this)" title="Sky Blue"></button>
+          <button class="colour-swatch" style="background:#10b981;" data-c="#10b981" onclick="setColour(this)" title="Emerald"></button>
+          <button class="colour-swatch" style="background:#e11d48;" data-c="#e11d48" onclick="setColour(this)" title="Rose"></button>
+          <button class="colour-swatch" style="background:#f59e0b;" data-c="#f59e0b" onclick="setColour(this)" title="Amber"></button>
+          <button class="colour-swatch" style="background:#06b6d4;" data-c="#06b6d4" onclick="setColour(this)" title="Cyan"></button>
+          <button class="colour-swatch" style="background:#ec4899;" data-c="#ec4899" onclick="setColour(this)" title="Pink"></button>
+          <button class="colour-swatch" style="background:#1d4ed8;" data-c="#1d4ed8" onclick="setColour(this)" title="Blue"></button>
+          <button class="colour-swatch" style="background:#111111;" data-c="#111111" onclick="setColour(this)" title="Black"></button>
+        </div>
+
+        <!-- Style Theme -->
+        <div class="sec-label">Site Theme</div>
+        <div class="style-grid" id="styleGrid">
+          <button class="style-btn" data-s="dark" onclick="setStyle(this)">Dark Bold</button>
+          <button class="style-btn active" data-s="minimal" onclick="setStyle(this)">Minimal</button>
+          <button class="style-btn" data-s="vibrant" onclick="setStyle(this)">Vibrant</button>
+          <button class="style-btn" data-s="corporate" onclick="setStyle(this)">Corporate</button>
+        </div>
+
+        <!-- Typography -->
+        <div class="sec-label">Typography</div>
+        <div class="font-btns" id="fontBtns">
+          <button class="font-btn active" data-f="bebas" onclick="setFont(this)">Bebas Neue <span class="font-preview" style="font-family:'Bebas Neue',sans-serif;">Aa</span></button>
+          <button class="font-btn" data-f="playfair" onclick="setFont(this)">Playfair Display <span class="font-preview" style="font-family:Georgia,serif;">Aa</span></button>
+          <button class="font-btn" data-f="syne" onclick="setFont(this)">Syne Bold <span class="font-preview" style="font-family:'Syne',sans-serif;font-weight:800;">Aa</span></button>
+          <button class="font-btn" data-f="dm" onclick="setFont(this)">DM Sans Modern <span class="font-preview" style="font-family:'DM Sans',sans-serif;">Aa</span></button>
+        </div>
+
+        <!-- Hidden toggles for code compatibility -->
+        <input type="checkbox" id="tog-anim" checked style="display:none">
+        <input type="checkbox" id="tog-stats" checked style="display:none">
+        <input type="checkbox" id="tog-photos" checked style="display:none">
+        <input type="checkbox" id="tog-feature" checked style="display:none">
+        <input type="range" id="rng-radius" value="8" style="display:none">
+        <input type="range" id="rng-spacing" value="100" style="display:none">
+        <input type="range" id="rng-hero" value="340" style="display:none">
+        <span id="rng-radius-val" style="display:none"></span>
+        <span id="rng-spacing-val" style="display:none"></span>
+        <span id="rng-hero-val" style="display:none"></span>
+
+      </div><!-- /panel-body -->
+
+      <!-- Generate button fixed at bottom -->
+      <div class="gen-btn-wrap">
+        <button class="gen-btn" onclick="generatePreview()" id="genBtn">
+          ✦ GENERATE PREVIEW
+        </button>
+      </div>
+    </div><!-- /panel-left -->
+
+    <!-- RIGHT PANE -->
+    <div class="panel-right" id="panelRight">
+
+      <!-- ── CLOSED STATE: shown until user clicks ── -->
+      <div class="preview-start-screen" id="previewStartScreen">
+        <div class="preview-start-card">
+          <div class="preview-start-icon">🌐</div>
+          <div class="preview-start-title">Your Website Preview</div>
+          <p class="preview-start-sub">Fill in your details on the left, then click below to see your site come to life.</p>
+          <button class="preview-start-btn" onclick="openPreviewPanel()">
+            <span>Click Here to Start</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── OPEN STATE: hidden until user clicks ── -->
+      <div class="preview-open-panel" id="previewOpenPanel" style="display:none;flex-direction:column;flex:1;min-height:0;">
+
+      <!-- Browser chrome -->
+      <div class="browser-chrome">
+        <div class="chrome-dots"><span></span><span></span><span></span></div>
+        <div class="chrome-url">
+          <span class="chrome-url-dot"></span>
+          <span class="chrome-url-text" id="chromeUrl">yourwebsite.com — fill in details and click Generate</span>
+        </div>
+        <div class="chrome-device-btns">
+          <button class="chrome-device-btn active" onclick="setDevice('desktop',this)">🖥 Desktop</button>
+          <button class="chrome-device-btn" onclick="setDevice('tablet',this)">📱 Tablet</button>
+          <button class="chrome-device-btn" onclick="setDevice('mobile',this)">📱 Mobile</button>
+        </div>
+        <div class="chrome-live-badge" id="liveBadge">
+          <div class="chrome-live-dot"></div>LIVE
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="browser-toolbar">
+        <span class="toolbar-label">Tools</span>
+        <div class="toolbar-divider"></div>
+        <button class="toolbar-btn" onclick="scrollPreview('top')">
+          <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 10V2M2 6l4-4 4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          Top
+        </button>
+        <button class="toolbar-btn" onclick="scrollPreview('bottom')">
+          <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 2v8M10 6L6 10 2 6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          Bottom
+        </button>
+        <button class="toolbar-btn" onclick="scrollPreview('services')">Services</button>
+        <button class="toolbar-btn" onclick="scrollPreview('footer')">Footer</button>
+        <div class="toolbar-divider"></div>
+        <button class="toolbar-btn" onclick="refreshPreview()">
+          <svg width="12" height="12" viewBox="0 0 12 12"><path d="M10 6A4 4 0 0 1 2.3 8.5M2 6A4 4 0 0 1 9.7 3.5M10 2v2H8M4 10H2V8" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+          Refresh
+        </button>
+        <span class="zoom-indicator" id="zoomIndicator">1440px desktop</span>
+      </div>
+
+      <!-- Viewport -->
+      <div class="viewport-wrap" id="viewportWrap">
+        <!-- Device Shell -->
+        <div class="device-shell shell-desktop" id="deviceShell">
+          <div class="device-bezel">
+            <div class="device-screen-wrap">
+              <div class="device-screen-inner" id="deviceScreen" data-lenis-prevent>
+                <!-- Empty state -->
+                <div class="empty-state" id="emptyState">
+                  <div class="empty-icon">🌐</div>
+                  <div class="empty-title">YOUR SITE PREVIEW</div>
+                  <p class="empty-sub">Fill in your brand details and click Generate Preview to see a scrollable desktop preview.</p>
+                </div>
+                <!-- Spinner -->
+                <div class="spinner" id="spinner">
+                  <div class="spinner-ring"></div>
+                  <div class="spinner-text">BUILDING YOUR PREVIEW…</div>
+                </div>
+                <!-- Output -->
+                <div class="gen-output" id="genOutput"></div>
+              </div>
+            </div>
+            <div class="device-home-bar" style="display:none;" id="deviceHomeBar"></div>
+            <div class="device-stand" id="deviceStand"></div>
+          </div>
+        </div>
+        <!-- Label row -->
+        <div class="device-label-row">
+          <span class="device-label-dot"></span>
+          <span id="deviceLabelText">1440px — Desktop</span>
+          <span class="device-label-dot"></span>
+        </div>
+      </div>
+
+      </div><!-- /preview-open-panel -->
+    </div><!-- /panel-right -->
+
+    <style>
+    /* ── CLOSED STATE ── */
+    .preview-start-screen {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #111;
+      border-radius: 0 16px 16px 0;
+      padding: 40px 24px;
+    }
+    .preview-start-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 44px 40px 40px;
+      text-align: center;
+      max-width: 340px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35), 0 0 0 1px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .preview-start-icon {
+      font-size: 44px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .preview-start-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: .06em;
+      color: #111;
+      line-height: 1;
+    }
+    .preview-start-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      line-height: 1.65;
+      color: #888;
+      max-width: 260px;
+      margin: 0;
+    }
+    .preview-start-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 13px 28px;
+      background: #ff5c00;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px;
+      letter-spacing: .1em;
+      cursor: pointer;
+      transition: background .2s, transform .2s, box-shadow .2s;
+      width: 100%;
+      justify-content: center;
+    }
+    .preview-start-btn:hover {
+      background: #e05200;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(255,92,0,.35);
+    }
+    /* ── OPEN STATE ── */
+    .preview-open-panel {
+      display: none;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .preview-open-panel.active {
+      display: flex !important;
+    }
+    </style>
+
+    <script>
+    window.openPreviewPanel = function() {
+      var startScreen = document.getElementById('previewStartScreen');
+      var openPanel   = document.getElementById('previewOpenPanel');
+      if (startScreen) startScreen.style.display = 'none';
+      if (openPanel)   openPanel.classList.add('active');
+    };
+    </script>
+      </div><!-- /gen-box -->
+    </div><!-- /gen-v2-wrap -->
+    <!-- CTA below preview -->
+    <div id="wsvPreviewCta" style="display:none;margin-top:32px;padding:28px 32px;background:#111;border:1px solid rgba(255,92,0,.2);border-radius:16px;">
+      <div style="font-family:var(--font-heading,'Bebas Neue',sans-serif);font-size:20px;color:#fff;margin-bottom:8px;">Love what you see?</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px;line-height:1.6;">This is just a glimpse. Let's build the real thing — engineered for performance and conversion.</div>
+      <a href="#" onclick="navigate('contact');return false;" class="btn-p" style="font-size:13px;">Start Your Project →</a>
+    </div>
+    </div><!-- /ppc-gen -->
+
+  </section>
+
+  
 
   <!-- ═══ COMBINED: PROCESS + PREVIEW ═══ -->
   <!-- ═══ OUR PROCESS — INTERACTIVE TIMELINE ═══ -->
@@ -4827,29 +5174,63 @@ function buildPreview(brand, tagline, industry) {
   </style>
 
   <script>
-  function wsvSubmitProposal() {
-    var type    = document.getElementById('pfWebsiteType').value;
-    var name    = document.getElementById('pfName').value.trim();
-    var mobile  = document.getElementById('pfMobile').value.trim();
-    var email   = document.getElementById('pfEmail').value.trim();
-    var budget  = document.getElementById('pfBudget').value;
+  async function wsvSubmitProposal() {
+    var type     = document.getElementById('pfWebsiteType').value;
+    var company  = document.getElementById('pfCompany').value.trim();
+    var industry = document.getElementById('pfIndustry').value;
+    var name     = document.getElementById('pfName').value.trim();
+    var mobile   = document.getElementById('pfMobile').value.trim();
+    var email    = document.getElementById('pfEmail').value.trim();
+    var budget   = document.getElementById('pfBudget').value;
 
-    if (!type || !name || !mobile || !email || !budget) {
+    if (!type || !company || !industry || !name || !mobile || !email || !budget) {
       alert('Please fill in all fields before submitting.');
       return;
     }
 
-    // Encode for WhatsApp
-    var msg = '🚀 *New Website Proposal Request*\n\n'
-      + '*Service:* Website Development\n'
-      + '*Website Type:* ' + document.getElementById('pfWebsiteType').options[document.getElementById('pfWebsiteType').selectedIndex].text + '\n'
-      + '*Name:* ' + name + '\n'
-      + '*Mobile:* ' + mobile + '\n'
-      + '*Email:* ' + email + '\n'
-      + '*Budget:* ' + document.getElementById('pfBudget').options[document.getElementById('pfBudget').selectedIndex].text;
+    var btn = document.querySelector('#wsv-final-cta .wsv-pf-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
 
-    var waUrl = 'https://wa.me/918733087249?text=' + encodeURIComponent(msg);
-    window.open(waUrl, '_blank');
+    var typeText     = document.getElementById('pfWebsiteType').options[document.getElementById('pfWebsiteType').selectedIndex].text;
+    var industryText = document.getElementById('pfIndustry').options[document.getElementById('pfIndustry').selectedIndex].text;
+    var budgetText   = document.getElementById('pfBudget').options[document.getElementById('pfBudget').selectedIndex].text;
+
+    var body = '🚀 New Website Proposal Request\n\n'
+      + 'Service: Website Development\n'
+      + 'Website Type: ' + typeText + '\n'
+      + 'Company Name: ' + company + '\n'
+      + 'Industry: ' + industryText + '\n'
+      + 'Name: ' + name + '\n'
+      + 'Mobile: ' + mobile + '\n'
+      + 'Email: ' + email + '\n'
+      + 'Budget: ' + budgetText;
+
+    try {
+      var response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '66f90d59-83e7-4136-8823-1bfeb38deb41',
+          subject: 'New Website Proposal Request – ' + company,
+          from_name: name,
+          email: email,
+          message: body
+        })
+      });
+      var result = await response.json();
+      if (result.success) {
+        btn.textContent = '✓ Proposal Sent!';
+        btn.style.background = '#1a5c1a';
+        setTimeout(function() { btn.textContent = 'Get My Proposal →'; btn.style.background = ''; btn.disabled = false; }, 4000);
+      } else {
+        throw new Error(result.message || 'Submission failed');
+      }
+    } catch(e) {
+      btn.textContent = 'Get My Proposal →';
+      btn.disabled = false;
+      alert('Submission failed. Please try again or email us directly at info@thesonicmedia.com');
+    }
   }
   </script>
 

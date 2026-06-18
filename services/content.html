@@ -599,7 +599,7 @@
           Cinematic video, photography, reels, and written content crafted to stop the scroll — produced in-house with studio-quality output.
         </p>
         <div class="hero-btns" id="nhBtns">
-          <a href="#" onclick="navigate('contact');return false;" class="btn-primary">
+          <a href="#wsv-final-cta" onclick="document.getElementById('wsv-final-cta').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary">
             Book a Production Session
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
               <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1462,6 +1462,29 @@
 
             </select>
           </div>
+          <!-- Company Information -->
+          <div class="wsv-pf-row">
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfContentCompany">Company Name *</label>
+              <input class="wsv-input wsv-pf-input" type="text" id="pfContentCompany" name="company_name" placeholder="Enter Company Name">
+            </div>
+            <div class="wsv-pf-field">
+              <label class="wsv-pf-label" for="pfContentIndustry">Industry *</label>
+              <select class="wsv-input wsv-select wsv-pf-input" id="pfContentIndustry" name="industry">
+                <option value="" disabled selected>Select Industry ▼</option>
+                <option value="food">Food &amp; Beverage</option>
+                <option value="fashion">Fashion &amp; Lifestyle</option>
+                <option value="health">Health &amp; Wellness</option>
+                <option value="finance">Finance</option>
+                <option value="real-estate">Real Estate</option>
+                <option value="ecommerce">E-Commerce / Retail</option>
+                <option value="hospitality">Hospitality &amp; Travel</option>
+                <option value="tech">Technology &amp; SaaS</option>
+                <option value="education">Education</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
           <div class="wsv-pf-row">
             <div class="wsv-pf-field">
               <label class="wsv-pf-label" for="pfContentName">Your Name</label>
@@ -1644,29 +1667,64 @@
     tick();
   })();
 
-  function wsvSubmitProposalContent() {
+  async function wsvSubmitProposalContent() {
     
-    var type    = document.getElementById('pfContentType').value;
-    var name    = document.getElementById('pfContentName').value.trim();
-    var mobile  = document.getElementById('pfContentMobile').value.trim();
-    var email   = document.getElementById('pfContentEmail').value.trim();
-    var budget  = document.getElementById('pfContentBudget').value;
+    var type     = document.getElementById('pfContentType').value;
+    var company  = document.getElementById('pfContentCompany').value.trim();
+    var industry = document.getElementById('pfContentIndustry').value;
+    var name     = document.getElementById('pfContentName').value.trim();
+    var mobile   = document.getElementById('pfContentMobile').value.trim();
+    var email    = document.getElementById('pfContentEmail').value.trim();
+    var budget   = document.getElementById('pfContentBudget').value;
 
-    if (!type || !name || !mobile || !email || !budget) {
+    if (!type || !company || !industry || !name || !mobile || !email || !budget) {
       alert('Please fill in all fields before submitting.');
       return;
     }
 
-    var msg = '🎬 *New Content Production Request*\n\n'
-      + '*Service:* Content Production\n'
-      + '*Type:* ' + document.getElementById('pfContentType').options[document.getElementById('pfContentType').selectedIndex].text + '\n'
-      + '*Name:* ' + name + '\n'
-      + '*Mobile:* ' + mobile + '\n'
-      + '*Email:* ' + email + '\n'
-      + '*Budget:* ' + document.getElementById('pfContentBudget').options[document.getElementById('pfContentBudget').selectedIndex].text;
+    var btn = document.querySelector('#wsv-final-cta .wsv-pf-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
 
-    var waUrl = 'https://wa.me/918733087249?text=' + encodeURIComponent(msg);
-    window.open(waUrl, '_blank');
+    var typeText     = document.getElementById('pfContentType').options[document.getElementById('pfContentType').selectedIndex].text;
+    var industryText = document.getElementById('pfContentIndustry').options[document.getElementById('pfContentIndustry').selectedIndex].text;
+    var budgetText   = document.getElementById('pfContentBudget').options[document.getElementById('pfContentBudget').selectedIndex].text;
+
+    var body = '🎬 New Content Production Request\n\n'
+      + 'Service: Content Production\n'
+      + 'Type: ' + typeText + '\n'
+      + 'Company Name: ' + company + '\n'
+      + 'Industry: ' + industryText + '\n'
+      + 'Name: ' + name + '\n'
+      + 'Mobile: ' + mobile + '\n'
+      + 'Email: ' + email + '\n'
+      + 'Budget: ' + budgetText;
+
+    try {
+      var response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '66f90d59-83e7-4136-8823-1bfeb38deb41',
+          subject: 'New Content Production Request – ' + name,
+          from_name: name,
+          email: email,
+          message: body
+        })
+      });
+      var result = await response.json();
+      if (result.success) {
+        btn.textContent = '✓ Proposal Sent!';
+        btn.style.background = '#1a5c1a';
+        setTimeout(function() { btn.textContent = 'Get My Proposal →'; btn.style.background = ''; btn.disabled = false; }, 4000);
+      } else {
+        throw new Error(result.message || 'Submission failed');
+      }
+    } catch(e) {
+      btn.textContent = 'Get My Proposal →';
+      btn.disabled = false;
+      alert('Submission failed. Please try again or email us directly at info@thesonicmedia.com');
+    }
   }
   </script>
 
