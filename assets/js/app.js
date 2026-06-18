@@ -259,41 +259,70 @@ const cursor = document.getElementById('cursor');
 const cursorFollower = document.getElementById('cursor-follower');
 const mouseGlow = document.getElementById('mouse-glow');
 let mx = 0, my = 0, fx = 0, fy = 0;
+let cursorRAF = null;
 
+// Throttle mousemove for better performance
+let lastUpdate = 0;
 document.addEventListener('mousemove', e => {
+  const now = performance.now();
+  if (now - lastUpdate < 10) return; // Max 100fps
+  lastUpdate = now;
+  
   mx = e.clientX; my = e.clientY;
   cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
   if (mouseGlow) { mouseGlow.style.left = mx + 'px'; mouseGlow.style.top = my + 'px'; }
-});
+}, { passive: true });
+
 (function animCursor() {
-  fx += (mx - fx) * 0.12; fy += (my - fy) * 0.12;
+  fx += (mx - fx) * 0.15; fy += (my - fy) * 0.15;
   cursorFollower.style.left = fx + 'px'; cursorFollower.style.top = fy + 'px';
-  requestAnimationFrame(animCursor);
+  cursorRAF = requestAnimationFrame(animCursor);
 })();
+
 document.addEventListener('mouseover', e => {
   if (e.target.closest('a,button,.svc-card,.cs-item,.tcard,.jcard,.fv-card,.studio-card,.team-card,.val-card,.equip-card,.price-card'))
     document.body.classList.add('cursor-hover');
   else document.body.classList.remove('cursor-hover');
-});
+}, { passive: true });
 
 /* ─ Cursor Trail ─ */
 (function() {
   const canvas = document.getElementById('cursor-trail');
   if (!canvas) return;
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d', { alpha: true });
   canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-  window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+  
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      canvas.width = window.innerWidth; 
+      canvas.height = window.innerHeight;
+    }, 200);
+  }, { passive: true });
+  
   const trail = [];
-  document.addEventListener('mousemove', e => trail.push({ x: e.clientX, y: e.clientY, alpha: 1 }));
+  const maxTrailLength = 15; // Limit trail points
+  
+  let lastTrailUpdate = 0;
+  document.addEventListener('mousemove', e => {
+    const now = performance.now();
+    if (now - lastTrailUpdate < 40) return; // Throttle trail updates
+    lastTrailUpdate = now;
+    
+    trail.push({ x: e.clientX, y: e.clientY, alpha: 1 });
+    if (trail.length > maxTrailLength) trail.shift();
+  }, { passive: true });
+  
   (function drawTrail() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = trail.length - 1; i >= 0; i--) {
       const p = trail[i];
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,92,0,${p.alpha * 0.25})`;
+      ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,92,0,${p.alpha * 0.2})`;
       ctx.fill();
-      p.alpha -= 0.04;
+      p.alpha -= 0.06;
       if (p.alpha <= 0) trail.splice(i, 1);
     }
     requestAnimationFrame(drawTrail);
@@ -302,11 +331,19 @@ document.addEventListener('mouseover', e => {
 
 /* ─ Scroll Progress ─ */
 const sp=document.getElementById('sp');
-window.addEventListener('scroll',()=>{
-  const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100;
-  sp.style.width=pct+'%';
-  document.getElementById('navbar').classList.toggle('stuck',window.scrollY>60);
-});
+let scrollTicking = false;
+
+window.addEventListener('scroll', () => {
+  if (!scrollTicking) {
+    requestAnimationFrame(() => {
+      const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+      sp.style.width = pct + '%';
+      document.getElementById('navbar').classList.toggle('stuck', window.scrollY > 60);
+      scrollTicking = false;
+    });
+    scrollTicking = true;
+  }
+}, { passive: true });
 
 /* ─ Mobile Nav ─ */
 const mobNav=document.getElementById('mobNav');
@@ -389,27 +426,41 @@ initReveal();
 
 /* ─ CTA Matrix Canvas ─ */
 function initCanvas() {
-  const canvas=document.getElementById('ctaCanvas');
-  if(!canvas)return;
-  const ctx=canvas.getContext('2d');
-  function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;}
-  resize();window.addEventListener('resize',resize);
-  const chars='SONICMEDIA01アイウエオ∆∇★✦'.split('');
-  const fs=13;let cols=Math.floor(canvas.width/fs);
-  const drops=Array(cols).fill(1);
-  if(canvas._interval)clearInterval(canvas._interval);
-  canvas._interval=setInterval(()=>{
-    ctx.fillStyle='rgba(20,10,0,0.08)';ctx.fillRect(0,0,canvas.width,canvas.height);
-    cols=Math.floor(canvas.width/fs);
-    while(drops.length<cols)drops.push(Math.random()*canvas.height);
-    ctx.font=fs+'px monospace';
-    for(let i=0;i<cols;i++){
-      ctx.fillStyle=`rgba(255,92,0,${Math.random()*.5+.2})`;
-      ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*fs,drops[i]*fs);
-      if(drops[i]*fs>canvas.height&&Math.random()>.97)drops[i]=0;
+  const canvas = document.getElementById('ctaCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d', { alpha: false });
+  
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(resize, 200);
+  }, { passive: true });
+  
+  const chars = 'SONICMEDIA01アイウエオ∆∇★✦'.split('');
+  const fs = 13;
+  let cols = Math.floor(canvas.width / fs);
+  const drops = Array(cols).fill(1);
+  
+  if (canvas._interval) clearInterval(canvas._interval);
+  canvas._interval = setInterval(() => {
+    ctx.fillStyle = 'rgba(20,10,0,0.08)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    cols = Math.floor(canvas.width / fs);
+    while (drops.length < cols) drops.push(Math.random() * canvas.height);
+    ctx.font = fs + 'px monospace';
+    for (let i = 0; i < cols; i++) {
+      ctx.fillStyle = `rgba(255,92,0,${Math.random() * 0.4 + 0.2})`;
+      ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * fs, drops[i] * fs);
+      if (drops[i] * fs > canvas.height && Math.random() > 0.97) drops[i] = 0;
       drops[i]++;
     }
-  },70);
+  }, 80);
 }
 initCanvas();
 
@@ -439,19 +490,30 @@ rStyle.textContent='@keyframes ripA{to{transform:scale(4);opacity:0;}}';
 document.head.appendChild(rStyle);
 
 /* ─ Parallax on Hero ─ */
-window.addEventListener('scroll',()=>{
-  const hero=document.querySelector('.page.active .hero-left');
-  if(hero&&window.scrollY<window.innerHeight){
-    // Only apply parallax translate to non-button elements
-    const fadeEls=hero.querySelectorAll('.hero-eyebrow,.hero-h1,.hero-sub,.hero-stats,.hero-scroll');
-    const opacity=Math.max(0,1-window.scrollY/(window.innerHeight*.8));
-    const ty=window.scrollY*.22;
-    fadeEls.forEach(el=>{el.style.opacity=opacity;el.style.transform=`translateY(${ty}px)`;});
-    // Buttons: keep fully visible, no transform
-    const btns=hero.querySelector('.hero-btns');
-    if(btns){btns.style.opacity='1';btns.style.transform='none';}
+let parallaxTicking = false;
+
+window.addEventListener('scroll', () => {
+  if (!parallaxTicking) {
+    requestAnimationFrame(() => {
+      const hero = document.querySelector('.page.active .hero-left');
+      if (hero && window.scrollY < window.innerHeight) {
+        // Only apply parallax translate to non-button elements
+        const fadeEls = hero.querySelectorAll('.hero-eyebrow,.hero-h1,.hero-sub,.hero-stats,.hero-scroll');
+        const opacity = Math.max(0, 1 - window.scrollY / (window.innerHeight * 0.8));
+        const ty = window.scrollY * 0.18;
+        fadeEls.forEach(el => {
+          el.style.opacity = opacity;
+          el.style.transform = `translate3d(0, ${ty}px, 0)`;
+        });
+        // Buttons: keep fully visible, no transform
+        const btns = hero.querySelector('.hero-btns');
+        if (btns) { btns.style.opacity = '1'; btns.style.transform = 'none'; }
+      }
+      parallaxTicking = false;
+    });
+    parallaxTicking = true;
   }
-});
+}, { passive: true });
 
 /* ─ Portfolio Filter ─ */
 function filterPort(btn, cat) {
