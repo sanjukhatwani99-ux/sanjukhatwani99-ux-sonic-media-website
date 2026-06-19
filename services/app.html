@@ -3471,16 +3471,12 @@ function buildPreview(brand, tagline, industry) {
                 </div>
               </div>
             </div>
-            <div class="wsv-phone-screen">
-              <div class="wsv-phone-shimmer"></div>
-              <iframe
-                src="https://www.lcpladvisory.com"
-                title="Starter App Preview"
-                loading="lazy"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                scrolling="yes"
-                class="wsv-phone-iframe"
-              ></iframe>
+            <div class="wsv-phone-screen" data-site-url="https://www.lcpladvisory.com" data-site-title="Starter App Preview">
+              <img class="wsv-phone-thumb" src="https://image.thum.io/get/width/780/crop/1600/noanimate/https://www.lcpladvisory.com" alt="Starter App mobile preview" loading="lazy" />
+              <button class="wsv-phone-tap" type="button" aria-label="Open live preview of Starter App">
+                <span class="wsv-phone-tap-icon">▶</span>
+                <span class="wsv-phone-tap-text">Tap to preview</span>
+              </button>
             </div>
             <!-- Home indicator -->
             <div class="wsv-phone-bar"></div>
@@ -3528,16 +3524,12 @@ function buildPreview(brand, tagline, industry) {
                 </div>
               </div>
             </div>
-            <div class="wsv-phone-screen">
-              <div class="wsv-phone-shimmer"></div>
-              <iframe
-                src="https://www.thesonicmedia.com"
-                title="Premium App Preview"
-                loading="lazy"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                scrolling="yes"
-                class="wsv-phone-iframe"
-              ></iframe>
+            <div class="wsv-phone-screen" data-site-url="https://www.thesonicmedia.com" data-site-title="Premium App Preview">
+              <img class="wsv-phone-thumb" src="https://image.thum.io/get/width/780/crop/1600/noanimate/https://www.thesonicmedia.com" alt="Premium Experience mobile preview" loading="lazy" />
+              <button class="wsv-phone-tap" type="button" aria-label="Open live preview of Premium Experience">
+                <span class="wsv-phone-tap-icon">▶</span>
+                <span class="wsv-phone-tap-text">Tap to preview</span>
+              </button>
             </div>
             <div class="wsv-phone-bar"></div>
           </div>
@@ -3583,16 +3575,12 @@ function buildPreview(brand, tagline, industry) {
                 </div>
               </div>
             </div>
-            <div class="wsv-phone-screen">
-              <div class="wsv-phone-shimmer"></div>
-              <iframe
-                src="https://nuvella-noir.myshopify.com/"
-                title="E-Commerce App Preview"
-                loading="lazy"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                scrolling="yes"
-                class="wsv-phone-iframe"
-              ></iframe>
+            <div class="wsv-phone-screen" data-site-url="https://nuvella-noir.myshopify.com/" data-site-title="E-Commerce App Preview">
+              <img class="wsv-phone-thumb" src="https://image.thum.io/get/width/780/crop/1600/noanimate/https://nuvella-noir.myshopify.com/" alt="E-Commerce App mobile preview" loading="lazy" />
+              <button class="wsv-phone-tap" type="button" aria-label="Open live preview of E-Commerce App">
+                <span class="wsv-phone-tap-icon">▶</span>
+                <span class="wsv-phone-tap-text">Tap to preview</span>
+              </button>
             </div>
             <div class="wsv-phone-bar"></div>
           </div>
@@ -3638,16 +3626,12 @@ function buildPreview(brand, tagline, industry) {
                 </div>
               </div>
             </div>
-            <div class="wsv-phone-screen">
-              <div class="wsv-phone-shimmer"></div>
-              <iframe
-                src="https://www.thesonicmedia.com"
-                title="Premium App Preview"
-                loading="lazy"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                scrolling="yes"
-                class="wsv-phone-iframe"
-              ></iframe>
+            <div class="wsv-phone-screen" data-site-url="https://www.thesonicmedia.com" data-site-title="Custom Platform App Preview">
+              <img class="wsv-phone-thumb" src="https://image.thum.io/get/width/780/crop/1600/noanimate/https://www.thesonicmedia.com" alt="Custom Platform App mobile preview" loading="lazy" />
+              <button class="wsv-phone-tap" type="button" aria-label="Open live preview of Custom Platform App">
+                <span class="wsv-phone-tap-icon">▶</span>
+                <span class="wsv-phone-tap-text">Tap to preview</span>
+              </button>
             </div>
             <div class="wsv-phone-bar"></div>
           </div>
@@ -3881,20 +3865,80 @@ function buildPreview(brand, tagline, industry) {
     background: #0a0a0a;
   }
 
-  /* Shimmer skeleton */
-  .wsv-phone-shimmer {
+  /* Mobile thumbnail screenshot (default state) */
+  .wsv-phone-thumb {
     position: absolute;
     inset: 0;
-    z-index: 2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
     background: linear-gradient(90deg, #111 25%, #1e1e1e 50%, #111 75%);
     background-size: 200% 100%;
     animation: wsv-shimmer 1.8s ease-in-out infinite;
-    transition: opacity .6s ease;
-    border-radius: 44px;
-    pointer-events: none;
   }
-  .wsv-phone-wrap.wsv-phone--loaded .wsv-phone-shimmer {
-    opacity: 0;
+  .wsv-phone-thumb[src]:not([src=""]) {
+    animation: none;
+  }
+
+  /* Tap-to-preview overlay */
+  .wsv-phone-tap {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    background: linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,.45) 100%);
+    color: #fff;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .25s ease;
+  }
+  .wsv-phone-tap:hover,
+  .wsv-phone-tap:focus-visible {
+    background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.55) 100%);
+  }
+  .wsv-phone-tap-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.16);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,.35);
+    font-size: 16px;
+    line-height: 1;
+    padding-left: 3px; /* optical centering of ▶ glyph */
+    transition: transform .25s ease, background .25s ease;
+  }
+  .wsv-phone-tap:hover .wsv-phone-tap-icon,
+  .wsv-phone-tap:focus-visible .wsv-phone-tap-icon {
+    transform: scale(1.08);
+    background: var(--orange, #ff5c00);
+    border-color: var(--orange, #ff5c00);
+  }
+  .wsv-phone-tap-text {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0,0,0,.6);
+  }
+  /* Hide overlay + thumb once the live site has been loaded in */
+  .wsv-phone-wrap.wsv-phone--loaded .wsv-phone-tap,
+  .wsv-phone-wrap.wsv-phone--loaded .wsv-phone-thumb {
+    display: none;
   }
   @keyframes wsv-shimmer {
     0%   { background-position: 200% 0; }
@@ -4052,28 +4096,47 @@ function buildPreview(brand, tagline, industry) {
   <!-- ─── PHONE MOCKUP SCRIPT ─── -->
   <script>
   (function() {
-    /* Scale each iframe to fit inside its phone shell */
-    function scalePhones() {
-      document.querySelectorAll('.wsv-phone-shell').forEach(function(shell) {
-        var iframe = shell.querySelector('.wsv-phone-iframe');
-        if (!iframe) return;
-        var shellW = shell.offsetWidth;
-        var scale  = shellW / 393; /* 393 = iPhone 15 Pro logical viewport width */
-        iframe.style.transform = 'scale(' + scale + ')';
-      });
+    /* Scale a given iframe to fit inside its phone shell */
+    function scaleIframe(shell, iframe) {
+      if (!shell || !iframe) return;
+      var shellW = shell.offsetWidth;
+      var scale  = shellW / 393; /* 393 = iPhone 15 Pro logical viewport width */
+      iframe.style.transform = 'scale(' + scale + ')';
     }
 
-    /* Shimmer off once iframe loads */
-    document.querySelectorAll('.wsv-phone-wrap').forEach(function(wrap) {
-      var iframe = wrap.querySelector('.wsv-phone-iframe');
-      if (!iframe) return;
-      var done = false;
-      function markLoaded() {
-        if (done) return; done = true;
-        wrap.classList.add('wsv-phone--loaded');
-      }
-      iframe.addEventListener('load', markLoaded);
-      setTimeout(markLoaded, 4000); /* fallback for cross-origin */
+    /* Build + insert the live iframe for a phone card, only when tapped */
+    function loadLivePreview(wrap) {
+      if (wrap.classList.contains('wsv-phone--loaded')) return; /* already loaded */
+      var screen = wrap.querySelector('.wsv-phone-screen');
+      var shell  = wrap.querySelector('.wsv-phone-shell');
+      if (!screen || !shell) return;
+
+      var url   = screen.getAttribute('data-site-url');
+      var title = screen.getAttribute('data-site-title') || 'Live preview';
+      if (!url) return;
+
+      var iframe = document.createElement('iframe');
+      iframe.src = url;
+      iframe.title = title;
+      iframe.loading = 'eager';
+      iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups');
+      iframe.scrolling = 'yes';
+      iframe.className = 'wsv-phone-iframe';
+      screen.appendChild(iframe);
+
+      wrap.classList.add('wsv-phone--loaded');
+      scaleIframe(shell, iframe);
+
+      var onResize = function() { scaleIframe(shell, iframe); };
+      window.addEventListener('resize', onResize);
+    }
+
+    /* Wire up tap buttons */
+    document.querySelectorAll('.wsv-phone-tap').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var wrap = btn.closest('.wsv-phone-wrap');
+        if (wrap) loadLivePreview(wrap);
+      });
     });
 
     /* Scroll reveal */
@@ -4087,9 +4150,6 @@ function buildPreview(brand, tagline, industry) {
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.wsv-phone-wrap').forEach(function(w) { observer.observe(w); });
-
-    scalePhones();
-    window.addEventListener('resize', scalePhones);
   })();
   </script>
 
