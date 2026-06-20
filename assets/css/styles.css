@@ -1908,7 +1908,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.05);paddin
   position: sticky;
   top: 0;
   width: 100%;
-  height: 100vh;
+  height: 100vh;   /* fallback for browsers without dvh support */
+  height: 100dvh;  /* true visible viewport — adapts to mobile browser chrome show/hide */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2032,7 +2033,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.05);paddin
   /* Mobile: show the about page video section with optimised height */
   #abTsmScrollSection { display: block !important; }
   #abTsmScrollSection .tsm-scroll-section { height: 220vh; }
-  #abTsmScrollSection .tsm-video-wrapper { height: 100svh; }
 }
 
 /* ═══════════════════════════════════════════════════
@@ -2421,7 +2421,6 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
   /* Scroll reveal TSM — show on mobile with optimised sizing */
   #tsmScrollSection { display: block !important; }
   #tsmScrollSection .tsm-scroll-section { height: 220vh; }
-  #tsmScrollSection .tsm-video-wrapper { height: 100svh; }
   #tsm-vc, #ab-tsm-vc { width: 72vw; height: 72vw; }
 
   /* Home coverflow */
@@ -3435,6 +3434,11 @@ footer { position: relative; overflow: visible; padding-top: 280px; }
     background: transparent !important;
     border: 1px solid rgba(245,240,235,.4) !important;
     backdrop-filter: none !important;
+  }
+  .hero-btns .btn-s {
+    background: var(--orange) !important;
+    border: none !important;
+    color: #fff !important;
   }
 
   /* Hide stats + scroll-marquee chrome to keep the editorial layout uncluttered */
