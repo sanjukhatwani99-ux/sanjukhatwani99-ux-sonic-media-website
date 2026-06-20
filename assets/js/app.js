@@ -158,6 +158,9 @@ function reinitHomeAnimations() {
     // Reset elements to initial state before re-animating
     const _isMob = window.innerWidth <= 768;
     const _tsmInitSize = _isMob ? '72vw' : '320px';
+
+    setResponsiveVideoSrc(vid, _isMob);
+
     gsap.set(vc,        { width: _tsmInitSize, height: _tsmInitSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
     gsap.set(vid,       { scale: 1 });
     gsap.set(darkOv,    { backgroundColor: 'rgba(0,0,0,0)' });
@@ -177,7 +180,7 @@ function reinitHomeAnimations() {
         onEnter: () => vid.play()
       }
     })
-    .to(vc,        { width: '100vw', height: _isMob ? '56vw' : '88vh', borderRadius: '0px', borderColor: 'transparent', ease: 'expo.out', duration: 0.5 }, 0)
+    .to(vc,        { width: '100vw', height: _isMob ? '92svh' : '88vh', borderRadius: '0px', borderColor: 'transparent', ease: 'expo.out', duration: 0.5 }, 0)
     .to(vid,       { scale: 1.08, ease: 'expo.out', duration: 0.5 }, 0)
     .to(darkOv,    { backgroundColor: 'rgba(0,0,0,0.45)', ease: 'power3.inOut', duration: 0.5 }, 0)
     .to(overlay,   { clipPath: 'inset(0% 0 0 0)', ease: 'expo.out', duration: 0.3 }, 0.4)
@@ -2382,6 +2385,33 @@ buildCoverflowInstance({
 /* ═══════════════════════════════════════════════════
    THOUGHT VESSEL — SCROLL REVEAL ANIMATION
 ═══════════════════════════════════════════════════ */
+
+// Swaps a <video>'s <source> to a device-specific URL (data-mobile-src /
+// data-desktop-src) if present, reloading and resuming playback as needed.
+function setResponsiveVideoSrc(vid, isMobile) {
+  if (!vid) return;
+  const source = vid.querySelector('source[data-mobile-src]');
+  if (!source) return;
+
+  const target = isMobile
+    ? source.dataset.mobileSrc
+    : (source.dataset.desktopSrc || source.getAttribute('src'));
+
+  if (!target || source.getAttribute('src') === target) return;
+
+  const wasPlaying = !vid.paused;
+  const t = vid.currentTime;
+  source.setAttribute('src', target);
+  vid.load();
+  if (wasPlaying) {
+    vid.addEventListener('loadedmetadata', function resume() {
+      vid.removeEventListener('loadedmetadata', resume);
+      try { vid.currentTime = t; } catch (e) {}
+      vid.play().catch(() => {});
+    });
+  }
+}
+
 (function initThoughtVessel() {
   function tryTVInit() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
@@ -2401,7 +2431,9 @@ buildCoverflowInstance({
     const isMobile = window.innerWidth <= 768;
     const initSize = isMobile ? '72vw' : '320px';
     const expandW  = '100vw';
-    const expandH  = isMobile ? '56vw' : '88vh';
+    const expandH  = isMobile ? '92svh' : '88vh';
+
+    setResponsiveVideoSrc(vid, isMobile);
 
     gsap.set(vc,        { width: initSize, height: initSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
     gsap.set(vid,       { scale: 1 });
@@ -2411,6 +2443,7 @@ buildCoverflowInstance({
     if (ovContent) gsap.set(ovContent, { filter: 'blur(10px)', transform: 'scale(1.1)' });
 
     vid.play().catch(() => {});
+
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -2501,6 +2534,9 @@ buildCoverflowInstance({
     // Set initial state — small square
     const _abIsMob = window.innerWidth <= 768;
     const _abInitSize = _abIsMob ? '72vw' : '320px';
+
+    setResponsiveVideoSrc(vid, _abIsMob);
+
     gsap.set(vc,        { width: _abInitSize, height: _abInitSize, borderRadius: '16px', borderColor: 'rgba(255,92,0,0.18)' });
     gsap.set(vid,       { scale: 1 });
     gsap.set(darkOv,    { backgroundColor: 'rgba(0,0,0,0)' });
@@ -2521,7 +2557,7 @@ buildCoverflowInstance({
     })
     .to(vc, {
       width: '100vw',
-      height: _abIsMob ? '56vw' : '88vh',
+      height: _abIsMob ? '92svh' : '88vh',
       borderRadius: '0px',
       borderColor: 'transparent',
       ease: 'expo.out',
@@ -2728,20 +2764,24 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
     var prevBtn = document.getElementById('mobSvcPrev');
     var nextBtn = document.getElementById('mobSvcNext');
     if (!track || !outer || !dotsEl) return;
-    var cards = SVC_CARDS_DATA;
-    var current = 0, startX = 0, isDragging = false, dragDelta = 0;
 
+    var cards = SVC_CARDS_DATA;
+    var n = cards.length;
+    if (!n) return;
+
+    /* Only the n real cards ever exist in the DOM — no clones. Each
+       card's screen position is the shortest signed distance (mod n)
+       between its own index and a single floating "virtualIndex". That
+       distance is inherently circular, so card 10 and card 1 are always
+       exactly one spacing apart in both directions — there is no seam,
+       no clone, and therefore nothing to silently jump or snap back to. */
     track.innerHTML = cards.map(function(c, i) {
-      return '<div class="mob-svc-card' + (i===0?' active':'') + '" data-idx="' + i + '">' +
+      return '<div class="mob-svc-card" data-idx="' + i + '">' +
         '<div class="mob-svc-card-inner-wrap">' +
           '<div class="mob-svc-card-img"><img src="' + (c.img || 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80') + '" alt="' + c.title + '" loading="lazy"></div>' +
           '<div class="mob-svc-card-grad"></div>' +
-          '<div class="mob-svc-card-num">' + String(i+1).padStart(2,'0') + '</div>' +
           '<div class="mob-svc-card-body">' +
-            '<div class="mob-svc-card-icon">' + (c.icon || '\u{1F680}') + '</div>' +
             '<div class="mob-svc-card-title">' + c.title + '</div>' +
-            '<div class="mob-svc-card-desc">' + (c.desc || '') + '</div>' +
-            '<div class="mob-svc-card-tag">' + (c.tag || c.title) + '</div>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -2751,43 +2791,125 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
       return '<div class="mob-svc-dot' + (i===0?' active':'') + '" data-idx="' + i + '"></div>';
     }).join('');
 
-    function getCardWidth() {
-      /* Each card is exactly 100vw wide — one card per screen */
-      return window.innerWidth;
+    var cardEls = Array.prototype.slice.call(track.querySelectorAll('.mob-svc-card'));
+    var dotEls  = Array.prototype.slice.call(dotsEl.querySelectorAll('.mob-svc-dot'));
+
+    var virtualIndex = 0;     /* continuous "position" — never bounded */
+    var cardSpacing  = 0;     /* px between card centers */
+    var dragging = false, axisLock = null, startX = 0, startY = 0, startVirtual = 0;
+    var rafScheduled = false;
+
+    function measure() {
+      var first = cardEls[0];
+      cardSpacing = first.offsetWidth;       /* unaffected by the scale() transform */
+      outer.style.height = first.offsetHeight + 'px';
     }
 
-    function goTo(idx, animated) {
-      if (idx < 0 || idx >= cards.length) return;
-      current = idx;
-      var cw = getCardWidth();
-      track.style.transition = animated === false ? 'none' : 'transform 0.42s cubic-bezier(0.22,1,0.36,1)';
-      track.style.transform = 'translateX(' + -(current * cw) + 'px)';
-      track.querySelectorAll('.mob-svc-card').forEach(function(el,i){ el.classList.toggle('active',i===current); });
-      dotsEl.querySelectorAll('.mob-svc-dot').forEach(function(el,i){ el.classList.toggle('active',i===current); });
-      prevBtn.classList.toggle('disabled', current===0);
-      nextBtn.classList.toggle('disabled', current===cards.length-1);
+    function shortestDelta(i, idxFloat) {
+      var d = i - idxFloat;
+      d = ((d % n) + n) % n;
+      if (d > n / 2) d -= n;
+      return d;
     }
 
-    prevBtn.addEventListener('click', function(){ goTo(current-1, true); });
-    nextBtn.addEventListener('click', function(){ goTo(current+1, true); });
+    function render() {
+      rafScheduled = false;
+      cardEls.forEach(function(el, i) {
+        var d = shortestDelta(i, virtualIndex);
+        var absD = Math.abs(d);
+        var scale = Math.max(0.78, 1.05 - absD * 0.20);
+        var opacity = Math.max(0.3, 1 - absD * 0.55);
+        el.style.transform = 'translate(-50%, -50%) translateX(' + (d * cardSpacing).toFixed(2) + 'px) scale(' + scale.toFixed(3) + ')';
+        el.style.opacity = opacity.toFixed(3);
+        el.style.zIndex = String(100 - Math.round(absD * 10));
+        el.classList.toggle('active', absD < 0.001);
+      });
+    }
+
+    function scheduleRender() {
+      if (!rafScheduled) { rafScheduled = true; requestAnimationFrame(render); }
+    }
+
+    function setActiveDot() {
+      var real = ((Math.round(virtualIndex) % n) + n) % n;
+      dotEls.forEach(function(el, i){ el.classList.toggle('active', i === real); });
+    }
+
+    function setTransition(on) {
+      cardEls.forEach(function(el) {
+        el.style.transition = on ? 'transform 0.45s cubic-bezier(0.22,1,0.36,1), opacity 0.45s' : 'none';
+      });
+    }
+
+    function animateTo(target) {
+      setTransition(true);
+      virtualIndex = target;
+      scheduleRender();
+      setActiveDot();
+      setTimeout(function() {
+        /* Folding the index by a multiple of n once it's settled is
+           mathematically invisible (shortestDelta is unaffected by it)
+           — it just keeps the number from growing forever. */
+        virtualIndex = ((virtualIndex % n) + n) % n;
+        setTransition(false);
+      }, 460);
+    }
+
+    function goTo(realIdx) {
+      var current = Math.round(virtualIndex);
+      var currentReal = ((current % n) + n) % n;
+      var diff = ((realIdx - currentReal + n / 2) % n + n) % n - n / 2;
+      animateTo(current + diff);
+    }
+
+    function onPointerDown(e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      dragging = true;
+      axisLock = null;
+      startX = e.clientX; startY = e.clientY;
+      startVirtual = virtualIndex;
+      setTransition(false);
+      try { outer.setPointerCapture(e.pointerId); } catch (err) {}
+    }
+    function onPointerMove(e) {
+      if (!dragging) return;
+      var dx = e.clientX - startX;
+      var dy = e.clientY - startY;
+      if (axisLock === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+        axisLock = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      }
+      if (axisLock === 'y') return; /* let the page scroll vertically as normal */
+      if (axisLock === 'x') e.preventDefault();
+      virtualIndex = startVirtual - dx / cardSpacing;
+      scheduleRender();
+      setActiveDot();
+    }
+    function onPointerUp() {
+      if (!dragging) return;
+      dragging = false;
+      animateTo(axisLock === 'x' ? Math.round(virtualIndex) : Math.round(startVirtual));
+      axisLock = null;
+    }
+
+    outer.style.touchAction = 'pan-y';
+    outer.addEventListener('pointerdown', onPointerDown);
+    outer.addEventListener('pointermove', onPointerMove, { passive: false });
+    outer.addEventListener('pointerup', onPointerUp);
+    outer.addEventListener('pointercancel', onPointerUp);
+
     dotsEl.addEventListener('click', function(e){
       var dot = e.target.closest('.mob-svc-dot');
-      if (dot) goTo(parseInt(dot.dataset.idx), true);
+      if (dot) goTo(parseInt(dot.dataset.idx, 10));
     });
-    outer.addEventListener('touchstart', function(e){ startX=e.touches[0].clientX; isDragging=true; dragDelta=0; },{passive:true});
-    outer.addEventListener('touchmove', function(e){
-      if (!isDragging) return;
-      dragDelta = e.touches[0].clientX - startX;
-      track.style.transition = 'none';
-      track.style.transform = 'translateX(' + (-(current*getCardWidth()) + dragDelta*0.6) + 'px)';
-    },{passive:true});
-    outer.addEventListener('touchend', function(){
-      isDragging = false;
-      if (dragDelta < -50 && current < cards.length-1) goTo(current+1, true);
-      else if (dragDelta > 50 && current > 0)          goTo(current-1, true);
-      else                                              goTo(current, true);
-    });
-    goTo(0, false);
+    if (prevBtn) prevBtn.addEventListener('click', function(){ animateTo(Math.round(virtualIndex) - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function(){ animateTo(Math.round(virtualIndex) + 1); });
+
+    window.addEventListener('resize', function(){ measure(); scheduleRender(); }, { passive: true });
+
+    requestAnimationFrame(function() { measure(); render(); });
+    /* Outer may still be display:none (ancestor toggled by media-query JS)
+       on first build — re-measure once layout has settled. */
+    setTimeout(function(){ measure(); render(); }, 300);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', buildCarousel);
   else buildCarousel();
@@ -2800,30 +2922,26 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
 ═══════════════════════════════════════════════════ */
 (function initPageMobSvcCarousel() {
   var inited = false;
+  var remeasure = null;
 
   function buildCarousel() {
     if (typeof SVC_CARDS_DATA === 'undefined') { setTimeout(buildCarousel, 150); return; }
     var track   = document.getElementById('pageMobSvcTrack');
     var outer   = document.getElementById('pageMobSvcTrackOuter');
     var dotsEl  = document.getElementById('pageMobSvcDots');
-    var prevBtn = document.getElementById('pageMobSvcPrev');
-    var nextBtn = document.getElementById('pageMobSvcNext');
     if (!track || !outer || !dotsEl) return;
 
     var cards = SVC_CARDS_DATA;
-    var current = 0, startX = 0, isDragging = false, dragDelta = 0;
+    var current = 0;
+    var pointerMoved = false, downX = 0;
 
     track.innerHTML = cards.map(function(c, i) {
       return '<div class="mob-svc-card' + (i===0?' active':'') + '" data-idx="' + i + '" style="cursor:pointer;">' +
         '<div class="mob-svc-card-inner-wrap">' +
           '<div class="mob-svc-card-img"><img src="' + (c.img || 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80') + '" alt="' + c.title + '" loading="lazy"></div>' +
           '<div class="mob-svc-card-grad"></div>' +
-          '<div class="mob-svc-card-num">' + String(i+1).padStart(2,'0') + '</div>' +
           '<div class="mob-svc-card-body">' +
-            '<div class="mob-svc-card-icon">' + (c.icon || (c.cat ? c.cat.split('·')[0].trim() : '')) + '</div>' +
             '<div class="mob-svc-card-title">' + c.title + '</div>' +
-            '<div class="mob-svc-card-desc">' + (c.desc || c.cat || '') + '</div>' +
-            '<div class="mob-svc-card-tag">' + (c.tag || c.cat || c.title) + '</div>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -2833,56 +2951,73 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
       return '<div class="mob-svc-dot' + (i===0?' active':'') + '" data-idx="' + i + '"></div>';
     }).join('');
 
-    function getCardWidth() { return window.innerWidth; }
+    var cardEls = Array.prototype.slice.call(track.querySelectorAll('.mob-svc-card'));
+    var ticking = false;
 
-    function goTo(idx, animated) {
-      if (idx < 0 || idx >= cards.length) return;
-      current = idx;
-      var cw = getCardWidth();
-      track.style.transition = animated === false ? 'none' : 'transform 0.42s cubic-bezier(0.22,1,0.36,1)';
-      track.style.transform = 'translateX(' + -(current * cw) + 'px)';
-      track.querySelectorAll('.mob-svc-card').forEach(function(el,i){ el.classList.toggle('active',i===current); });
-      dotsEl.querySelectorAll('.mob-svc-dot').forEach(function(el,i){ el.classList.toggle('active',i===current); });
-      prevBtn.classList.toggle('disabled', current===0);
-      nextBtn.classList.toggle('disabled', current===cards.length-1);
+    function updateTransforms() {
+      ticking = false;
+      var outerRect = outer.getBoundingClientRect();
+      if (outerRect.width === 0) return; /* not laid out yet */
+      var centerX = outerRect.left + outerRect.width / 2;
+      var bestIdx = 0, bestDist = Infinity;
+
+      cardEls.forEach(function(el, i) {
+        var r = el.getBoundingClientRect();
+        var cardCenter = r.left + r.width / 2;
+        var dist = Math.abs(cardCenter - centerX);
+        var norm = Math.min(dist / (outerRect.width * 0.62), 1);
+        var scale = 1.05 - norm * 0.20;
+        var opacity = 1 - norm * 0.55;
+        el.style.transform = 'scale(' + scale.toFixed(3) + ')';
+        el.style.opacity = opacity.toFixed(3);
+        if (dist < bestDist) { bestDist = dist; bestIdx = i; }
+      });
+
+      if (bestIdx !== current) {
+        current = bestIdx;
+        cardEls.forEach(function(el, i){ el.classList.toggle('active', i===current); });
+        dotsEl.querySelectorAll('.mob-svc-dot').forEach(function(el,i){ el.classList.toggle('active', i===current); });
+      }
+    }
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(updateTransforms); }
     }
 
-    prevBtn.addEventListener('click', function(){ goTo(current-1, true); });
-    nextBtn.addEventListener('click', function(){ goTo(current+1, true); });
+    function goTo(idx) {
+      if (idx < 0 || idx >= cardEls.length) return;
+      cardEls[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
     dotsEl.addEventListener('click', function(e){
       var dot = e.target.closest('.mob-svc-dot');
-      if (dot) goTo(parseInt(dot.dataset.idx), true);
+      if (dot) goTo(parseInt(dot.dataset.idx));
     });
 
-    /* Tap on card navigates to its detail page */
+    /* Tap on the already-active card navigates to its detail page;
+       tapping a peeking neighbor just brings it to center. */
+    track.addEventListener('pointerdown', function(e){ downX = e.clientX; pointerMoved = false; });
+    track.addEventListener('pointermove', function(e){
+      if (Math.abs(e.clientX - downX) > 8) pointerMoved = true;
+    });
     track.addEventListener('click', function(e) {
-      if (Math.abs(dragDelta) > 10) return; /* was a swipe, not a tap */
+      if (pointerMoved) return; /* was a swipe, not a tap */
       var card = e.target.closest('.mob-svc-card');
       if (!card) return;
       var idx = parseInt(card.dataset.idx);
       if (idx === current && cards[idx] && cards[idx].page) {
         navigate(cards[idx].page);
       } else {
-        goTo(idx, true);
+        goTo(idx);
       }
     });
 
-    outer.addEventListener('touchstart', function(e){ startX=e.touches[0].clientX; isDragging=true; dragDelta=0; },{passive:true});
-    outer.addEventListener('touchmove', function(e){
-      if (!isDragging) return;
-      dragDelta = e.touches[0].clientX - startX;
-      track.style.transition = 'none';
-      track.style.transform = 'translateX(' + (-(current*getCardWidth()) + dragDelta*0.6) + 'px)';
-    },{passive:true});
-    outer.addEventListener('touchend', function(){
-      isDragging = false;
-      if (dragDelta < -50 && current < cards.length-1) goTo(current+1, true);
-      else if (dragDelta > 50 && current > 0)          goTo(current-1, true);
-      else                                              goTo(current, true);
-    });
-
-    goTo(0, false);
+    outer.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    updateTransforms();
+    setTimeout(updateTransforms, 50);
+    setTimeout(updateTransforms, 300);
     inited = true;
+    remeasure = updateTransforms;
   }
 
   /* Show carousel and hide coverflow when services page activates on mobile */
@@ -2893,6 +3028,7 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
     if (carousel) carousel.style.display = 'flex';
     if (coverflow) coverflow.style.display = 'none';
     if (!inited) buildCarousel();
+    else if (remeasure) setTimeout(remeasure, 50);
   }
 
   /* Hook into navigate */

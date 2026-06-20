@@ -6,7 +6,7 @@
 <title>The Sonic Media — Premium Digital Marketing Agency</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/styles.css">
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -188,17 +188,23 @@
   <section class="hero" id="hero">
     <div class="hero-noise"></div>
     <div class="hero-orb"></div>
+    <div class="hero-mobile-bg" aria-hidden="true">
+      <video src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1781960249/Vid_msgtsg.mp4" autoplay muted loop playsinline></video>
+      <div class="hero-mobile-overlay"></div>
+    </div>
     <div class="hero-left">
       <div class="hero-eyebrow">MARKETING AGENCY · AHMEDABAD</div>
-      <h1 class="hero-h1">
-        <span class="line">WE DON'T JUST</span>
-        <span class="line">MARKET.</span>
-        <span class="line"><span class="or">WE DOMINATE.</span></span>
-      </h1>
       <p class="hero-sub">Transform your brand into a cultural movement — through data-driven strategy, cinematic content & technology that actually converts.</p>
-      <div class="hero-btns">
-        <a href="#" onclick="navigate('services');return false;" class="btn-p">Explore Services →</a>
-        <a href="#" onclick="navigate('contact');return false;" class="btn-s">Start Your Journey</a>
+      <div class="hero-bottom-panel">
+        <h1 class="hero-h1">
+          <span class="line">WE DON'T JUST</span>
+          <span class="line">MARKET.</span>
+          <span class="line"><span class="or">WE DOMINATE.</span></span>
+        </h1>
+        <div class="hero-btns">
+          <a href="#" onclick="navigate('services');return false;" class="btn-p">Explore Services <span class="btn-arrow">→</span></a>
+          <a href="#" onclick="navigate('contact');return false;" class="btn-s">Start Your Journey</a>
+        </div>
       </div>
 
     </div>
@@ -262,7 +268,11 @@
     <div class="tsm-video-wrapper">
       <div id="tsm-vc">
         <video id="tsm-vid" loop muted playsinline>
-          <source src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1781796640/Indexvid_nuukhd.mp4" type="video/mp4" />
+          <source
+            src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1781796640/Indexvid_nuukhd.mp4"
+            data-desktop-src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1781796640/Indexvid_nuukhd.mp4"
+            data-mobile-src="https://res.cloudinary.com/dq2nrpky0/video/upload/q_auto/f_auto/v1779437141/44748-439982672_medium_ot7bbh.mp4"
+            type="video/mp4" />
         </video>
         <div id="tsm-dark-overlay"></div>
         <div class="tsm-vid-overlay" id="tsmVidOverlay">
@@ -297,21 +307,19 @@
 
 
   <!-- MOBILE SWIPE CAROUSEL — Services (shown only on mobile, hidden on desktop via CSS) -->
-  <div class="mob-svc-carousel-wrap" id="mobSvcCarousel" style="background:var(--black);padding-top:24px;">
-    <div style="padding:0 20px 20px;">
-      <div class="section-tag" style="color:var(--orange);margin-bottom:8px;">All 10 Services</div>
-      <h2 class="section-title" style="font-size:clamp(28px,8vw,48px);text-align:left;line-height:1;color:var(--white);">Swipe Through <span style="color:var(--orange);">What We Do</span></h2>
-      <p style="font-size:14px;color:rgba(245,240,235,.45);margin-top:8px;font-weight:300;">Every discipline. One agency.</p>
+  <div class="mob-svc-carousel-wrap" id="mobSvcCarousel" style="background:var(--black);padding-top:8px;">
+    <div style="padding:0 20px 16px;">
+      <div class="section-tag" style="color:var(--orange);margin-bottom:6px;">All 10 Services</div>
+      <h2 class="section-title" style="font-size:clamp(26px,7.5vw,44px);text-align:left;line-height:1;color:var(--white);">Swipe Through <span style="color:var(--orange);">What We Do</span></h2>
+      <p style="font-size:13px;color:rgba(245,240,235,.45);margin-top:6px;font-weight:300;">Every discipline. One agency.</p>
     </div>
     <div class="mob-svc-track-outer" id="mobSvcTrackOuter">
       <div class="mob-svc-track" id="mobSvcTrack"></div>
     </div>
     <div class="mob-svc-arrows">
-      <button class="mob-svc-arrow" id="mobSvcPrev" aria-label="Previous service">&#8592;</button>
       <div class="mob-svc-dots" id="mobSvcDots"></div>
-      <button class="mob-svc-arrow" id="mobSvcNext" aria-label="Next service">&#8594;</button>
     </div>
-    <div style="text-align:center;margin-top:28px;padding:0 20px 8px;">
+    <div style="text-align:center;margin-top:20px;padding:0 20px 4px;">
       <a href="#" onclick="navigate('services');return false;" class="btn-p" style="width:100%;justify-content:center;">Explore All Services &#8594;</a>
     </div>
   </div>
@@ -719,7 +727,16 @@
     transform: translateY(-2px);
   }
   @media (max-width: 600px) {
-    .cta-proposal-form { padding: 24px 18px; }
+    .cta-proposal-form-wrap { margin-top: 28px; }
+    .cta-proposal-form { padding: 20px 16px 18px; border-radius: 16px; }
+    .cta-pf-row { gap: 10px; }
+    .cta-pf-field { margin-bottom: 10px; gap: 4px; }
+    .cta-pf-label { font-size: 9px; }
+    .cta-pf-input, .cta-ms-trigger { padding: 10px 12px; font-size: 12.5px; border-radius: 8px; }
+    .cta-pf-btn { padding: 13px; font-size: 14px; margin-top: 2px; }
+    .cta-ms-item { padding: 8px 12px; font-size: 12.5px; }
+  }
+  @media (max-width: 380px) {
     .cta-pf-row { grid-template-columns: 1fr; }
   }
   </style>
