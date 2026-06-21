@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Branding & Creative Design — The Sonic Media</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Branding & Advertising Solutions — The Sonic Media</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -2096,7 +2096,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
         <a href="#" onclick="navigate('svc-inf');return false;"><span class="drop-icon">🤝</span>Influencer Marketing</a>
         <a href="#" onclick="navigate('svc-ecom');return false;"><span class="drop-icon">🛒</span>E-Commerce Marketing</a>
         <a href="#" onclick="navigate('svc-content');return false;"><span class="drop-icon">🎬</span>Content Production & Photo/Videography</a>
-        <a href="#" onclick="navigate('svc-brand');return false;"><span class="drop-icon">🎨</span>Branding & Creative Design</a>
+        <a href="#" onclick="navigate('svc-brand');return false;"><span class="drop-icon">🎨</span>Branding & Advertising Solutions</a>
         <a href="#" onclick="navigate('svc-ai');return false;"><span class="drop-icon">🤖</span>AI Doodling/Editing</a>
       </div>
     </li>
@@ -2176,7 +2176,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
           <span class="mob-svc-item-icon">🎬</span> Content Production
         </button>
         <button class="mob-svc-item" onclick="navigate('svc-brand');closeMob()">
-          <span class="mob-svc-item-icon">🎨</span> Branding & Creative Design
+          <span class="mob-svc-item-icon">🎨</span> Branding & Advertising Solutions
         </button>
         <button class="mob-svc-item" onclick="navigate('svc-ai');closeMob()">
           <span class="mob-svc-item-icon">🤖</span> AI Doodling / Editing
@@ -2267,6 +2267,26 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
   </style>
 
   <section id="wsv-hero-new" style="min-height:100vh;overflow:hidden;background:#000;">
+    <!-- MOBILE HERO (matches homepage mobile hero, same video) -->
+    <div class="svc-mobile-hero" aria-hidden="true">
+      <div class="svc-mobile-hero-bg">
+        <video src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1781960249/Vid_msgtsg.mp4" autoplay muted loop playsinline></video>
+        <div class="svc-mobile-hero-overlay"></div>
+      </div>
+      <div class="svc-mobile-hero-eyebrow">BRAND STRATEGY & CREATIVE STUDIO · AHMEDABAD</div>
+      <div class="svc-mobile-hero-panel">
+        <h1 class="svc-mobile-hero-h1">
+          <span class="line">BRANDING &</span>
+          <span class="line">ADVERTISING</span>
+          <span class="line"><span class="or">SOLUTIONS.</span></span>
+        </h1>
+        <div class="svc-mobile-hero-btns">
+          <a href="#" onclick="wsvScrollToAnchor('wsv-final-cta');return false;">Start Your Project</a>
+          <a href="#" onclick="navigate('studio');return false;">View Our Work</a>
+        </div>
+      </div>
+    </div>
+
     <!-- PERF-STYLE BACKGROUND LAYERS -->
     <div class="pm-hero-noise"></div>
     <div class="pm-hero-grid-bg"></div>
@@ -2926,20 +2946,62 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
   /* ── RESPONSIVE ── */
   @media (max-width: 1100px) {
     .svp-master-layout { grid-template-columns: 1fr 300px; }
+    /* Advertising & Brand Visibility: 8 boxes, 2 per row */
     .svp-grid { grid-template-columns: repeat(2, 1fr); }
-    .svp-cat-body-branding .svp-grid { grid-template-columns: repeat(3, 1fr); }
+    /* Branding & Advertising Solutions: 8 icons, 4 per row — shrink the icon cards so 4 fit cleanly */
+    .svp-cat-body-branding { padding: 14px; }
+    .svp-cat-body-branding .svp-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .svp-cat-body-branding .svp-card-icon-type { padding: 14px 8px 8px; }
+    .svp-cat-body-branding .svp-card-icon-wrap {
+      width: 64px; height: 64px; border-radius: 18px; margin-bottom: 10px;
+    }
+    .svp-cat-body-branding .svp-card-icon-wrap svg { width: 28px; height: 28px; }
+    .svp-cat-body-branding .svp-card-title { font-size: 10.5px; line-height: 1.25; }
+    .svp-cat-body-branding .svp-card-check {
+      width: 22px; height: 22px; top: 8px; right: 8px;
+    }
+    .svp-cat-body-branding .svp-card-check svg { width: 10px; height: 10px; }
   }
   @media (max-width: 860px) {
     .svp-master-layout { grid-template-columns: 1fr; }
     .svp-sticky-panel { position: static; }
     .svp-grid { grid-template-columns: repeat(2, 1fr); }
-    .svp-cat-body-branding .svp-grid { grid-template-columns: repeat(2, 1fr); }
+    .svp-cat-body-branding .svp-grid { grid-template-columns: repeat(4, 1fr); }
   }
   @media (max-width: 540px) {
     .svp-inner { padding: 0 20px; }
     .svp-header { margin-bottom: 48px; }
-    .svp-grid { grid-template-columns: 1fr; }
-    .svp-cat-body-branding .svp-grid { grid-template-columns: repeat(2, 1fr); }
+    .svp-cat-header { padding: 14px 16px; }
+    /* Advertising & Brand Visibility: keep 2 per row (was collapsing to 1 per row) */
+    .svp-grid { grid-template-columns: repeat(2, 1fr); }
+    /* Branding & Advertising Solutions: stay at 4 per row, sized down further for phones */
+    .svp-cat-body-branding { padding: 10px; }
+    .svp-cat-body-branding .svp-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .svp-cat-body-branding .svp-card-icon-type { padding: 10px 5px 6px; }
+    .svp-cat-body-branding .svp-card-icon-wrap {
+      width: 48px; height: 48px; border-radius: 14px; margin-bottom: 6px;
+    }
+    .svp-cat-body-branding .svp-card-icon-wrap svg { width: 22px; height: 22px; }
+    .svp-cat-body-branding .svp-card-title { font-size: 9px; line-height: 1.15; }
+    .svp-cat-body-branding .svp-card-check {
+      width: 18px; height: 18px; top: 5px; right: 5px;
+    }
+    .svp-cat-body-branding .svp-card-check svg { width: 8px; height: 8px; }
+  }
+  @media (max-width: 390px) {
+    .svp-cat-header { padding: 12px 14px; }
+    .svp-cat-body-branding { padding: 8px; }
+    .svp-cat-body-branding .svp-grid { gap: 5px; }
+    .svp-cat-body-branding .svp-card-icon-type { padding: 8px 4px 5px; }
+    .svp-cat-body-branding .svp-card-icon-wrap {
+      width: 38px; height: 38px; border-radius: 11px; margin-bottom: 5px;
+    }
+    .svp-cat-body-branding .svp-card-icon-wrap svg { width: 18px; height: 18px; }
+    .svp-cat-body-branding .svp-card-title { font-size: 8px; line-height: 1.1; }
+    .svp-cat-body-branding .svp-card-check {
+      width: 15px; height: 15px; top: 4px; right: 4px;
+    }
+    .svp-cat-body-branding .svp-card-check svg { width: 7px; height: 7px; }
   }
   </style>
 
@@ -2967,7 +3029,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
             <div class="svp-cat-icon">🎨</div>
             <div>
               <div class="svp-cat-label">Identity & Design</div>
-              <h3 class="svp-cat-title">Branding & Creative Design</h3>
+              <h3 class="svp-cat-title">Branding & Advertising Solutions</h3>
             </div>
           </div>
           <div class="svp-cat-body svp-cat-body-branding">
@@ -3598,11 +3660,41 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
     transition: width .6s ease;
   }
   @media (max-width: 900px) {
-    .app-ptl-inner { padding: 0 20px 72px; }
-    .app-ptl-track { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .app-process-tl-section { padding: 56px 0 0; }
+    .app-ptl-inner { padding: 0 16px 56px; }
+    .app-ptl-header { padding: 0 0 40px; }
+    .app-ptl-title { font-size: clamp(32px, 8vw, 52px); }
+    .app-ptl-sub { font-size: 13px; line-height: 1.65; }
+    .app-ptl-track {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .app-ptl-track::-webkit-scrollbar { display: none; }
     .app-ptl-track::before { display: none; }
-    .app-ptl-detail { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
-    .app-ptl-node { width: 56px; height: 56px; font-size: 20px; }
+    .app-ptl-step { padding: 8px 4px; min-width: 56px; }
+    .app-ptl-node {
+      width: 48px; height: 48px; font-size: 18px;
+      margin-bottom: 10px;
+      overflow: visible;
+    }
+    .app-ptl-step-num {
+      width: 18px; height: 18px; font-size: 8px;
+      top: -6px; right: -3px;
+    }
+    .app-ptl-step-label { font-size: 8px; letter-spacing: .03em; line-height: 1.3; }
+    .app-ptl-detail { grid-template-columns: 1fr; gap: 20px; padding: 20px 16px; margin-top: 28px; border-radius: 14px; }
+    .app-ptl-detail-title { font-size: 28px; }
+    .app-ptl-detail-desc { font-size: 13px; margin-bottom: 16px; }
+    .app-ptl-mock-card { padding: 12px 14px; gap: 10px; }
+    .app-ptl-mock-icon { width: 34px; height: 34px; font-size: 15px; }
+  }
+  @media (max-width: 480px) {
+    .app-ptl-track { grid-template-columns: repeat(5, minmax(52px, 1fr)); }
+    .app-ptl-step { min-width: 52px; }
   }
   </style>
 
@@ -3793,13 +3885,64 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
     width: 5px; height: 5px; border-radius: 50%;
     background: rgba(255,255,255,.7); flex-shrink: 0;
   }
-  @media (max-width: 1100px) {
-    .app-caps-deliv-grid { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 900px) {
+    .app-caps-deliv-section { padding: 60px 0; }
+    .app-caps-deliv-inner { padding: 0 16px; }
+    .app-caps-deliv-header { margin-bottom: 32px; }
+    .app-caps-deliv-eyebrow { font-size: 10px; padding: 5px 12px; margin-bottom: 14px; }
+    .app-caps-deliv-title { font-size: clamp(30px, 8vw, 48px); margin-bottom: 10px; }
+    .app-caps-deliv-subtitle { font-size: 13px; }
+    .app-caps-deliv-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .app-caps-deliv-card {
+      padding: 14px 12px;
+      border-radius: 12px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 10px;
+      row-gap: 4px;
+    }
+    .app-caps-deliv-card-icon {
+      font-size: 20px;
+      margin-bottom: 0;
+      grid-column: 1;
+      grid-row: 1;
+      align-self: center;
+    }
+    .app-caps-deliv-card-title {
+      font-size: 11px;
+      grid-column: 2;
+      grid-row: 1;
+      align-self: center;
+      margin-bottom: 0;
+    }
+    .app-caps-deliv-card-desc {
+      font-size: 11px;
+      line-height: 1.5;
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    .app-caps-deliv-card-check {
+      top: 10px; right: 10px;
+      width: 18px; height: 18px;
+      font-size: 9px;
+    }
+    .app-caps-deliv-strip {
+      padding: 22px 18px;
+      border-radius: 14px;
+      gap: 18px;
+    }
+    .app-caps-deliv-strip-heading { font-size: clamp(22px, 6vw, 32px); }
+    .app-caps-deliv-strip-right { gap: 8px; }
+    .app-caps-deliv-strip-pill { padding: 6px 12px; font-size: 10px; }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 380px) {
     .app-caps-deliv-grid { grid-template-columns: 1fr; }
-    .app-caps-deliv-inner { padding: 0 20px; }
-    .app-caps-deliv-strip { padding: 28px 24px; }
+    .app-caps-deliv-card { grid-template-columns: auto 1fr; }
   }
   </style>
 
@@ -3925,7 +4068,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
               </select>
             </div>
           </div>
-          <input type="hidden" name="service" value="Branding & Creative Design">
+          <input type="hidden" name="service" value="Branding & Advertising Solutions">
           <button class="wsv-pf-btn" type="button" onclick="wsvSubmitProposalBrand()">
             Get My Proposal →
           </button>
@@ -4082,9 +4225,31 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
     .wsv-final-tag { margin: 0 auto 18px; }
   }
   @media (max-width: 600px) {
-    .wsv-final-cta { padding: 60px 24px; }
-    .wsv-proposal-form { padding: 24px 18px; }
-    .wsv-pf-row { grid-template-columns: 1fr; }
+    .wsv-final-cta { padding: 40px 16px; }
+    .wsv-final-h { font-size: clamp(38px, 11vw, 58px); margin-bottom: 10px; }
+    .wsv-final-p { font-size: 12px; line-height: 1.6; }
+    .wsv-final-tag { font-size: 11px; padding: 5px 12px; margin-bottom: 14px; }
+    .wsv-proposal-form {
+      padding: 20px 16px 18px;
+      border-radius: 16px;
+    }
+    .wsv-pf-row { grid-template-columns: 1fr; gap: 0; }
+    .wsv-pf-field { margin-bottom: 10px; gap: 4px; }
+    .wsv-pf-label { font-size: 9px; letter-spacing: .12em; }
+    .wsv-pf-input {
+      padding: 11px 13px;
+      font-size: 14px;
+      border-radius: 9px;
+      min-height: 44px;
+      box-sizing: border-box;
+    }
+    .wsv-pf-btn {
+      margin-top: 4px;
+      padding: 14px;
+      font-size: 15px;
+      border-radius: 9px;
+      min-height: 48px;
+    }
   }
   </style>
 
@@ -4175,8 +4340,8 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
     var industryText = document.getElementById('pfBrandIndustry').options[document.getElementById('pfBrandIndustry').selectedIndex].text;
     var budgetText   = document.getElementById('pfBrandBudget').options[document.getElementById('pfBrandBudget').selectedIndex].text;
 
-    var body = '🎨 New Branding & Creative Design Request\n\n'
-      + 'Service: Branding & Creative Design\n'
+    var body = '🎨 New Branding & Advertising Solutions Request\n\n'
+      + 'Service: Branding & Advertising Solutions\n'
       + 'Type: ' + type + '\n'
       + 'Company Name: ' + company + '\n'
       + 'Industry: ' + industryText + '\n'
@@ -4191,7 +4356,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: '66f90d59-83e7-4136-8823-1bfeb38deb41',
-          subject: 'New Branding & Creative Design Request – ' + name,
+          subject: 'New Branding & Advertising Solutions Request – ' + name,
           from_name: name,
           email: email,
           message: body
@@ -4297,8 +4462,8 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
 
     <div class="footer-bottom-row">
       <div class="enquiry-form">
-        <input type="text" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID">
-        <button class="enquiry-btn" onclick="navigate('contact')" aria-label="Submit enquiry and go to contact page">Enquiry</button>
+        <input type="text" id="footer-enquiry-input" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID" autocomplete="off">
+        <button class="enquiry-btn" id="footer-enquiry-btn" onclick="tsmFooterEnquiry(event)" aria-label="Submit enquiry">Enquiry</button>
       </div>
       <div class="legal-links">
         <span class="legal-title">Legal Links</span>

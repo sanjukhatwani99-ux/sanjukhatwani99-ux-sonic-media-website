@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Social Media Management — The Sonic Media</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -530,9 +530,31 @@
   .smm-final-p { margin: 0 auto; }
 }
 @media (max-width: 600px) {
-  .smm-final-cta { padding: 60px 24px; }
-  .smm-proposal-form { padding: 24px 18px; }
-  .smm-pf-row { grid-template-columns: 1fr; }
+  .smm-final-cta { padding: 40px 16px; }
+  .smm-final-h { font-size: clamp(38px, 11vw, 58px); margin-bottom: 10px; }
+  .smm-final-p { font-size: 12px; line-height: 1.6; }
+  .smm-final-tag { font-size: 11px; padding: 5px 12px; margin-bottom: 14px; }
+  .smm-proposal-form {
+    padding: 20px 16px 18px;
+    border-radius: 16px;
+  }
+  .smm-pf-row { grid-template-columns: 1fr; gap: 0; }
+  .smm-pf-field { margin-bottom: 10px; gap: 4px; }
+  .smm-pf-label { font-size: 9px; letter-spacing: .12em; }
+  .smm-pf-input {
+    padding: 11px 13px;
+    font-size: 14px;
+    border-radius: 9px;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+  .smm-pf-btn {
+    margin-top: 4px;
+    padding: 14px;
+    font-size: 15px;
+    border-radius: 9px;
+    min-height: 48px;
+  }
 }
 </style>
   <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
@@ -569,7 +591,7 @@
         <a href="#" onclick="navigate('svc-inf');return false;"><span class="drop-icon">🤝</span>Influencer Marketing</a>
         <a href="#" onclick="navigate('svc-ecom');return false;"><span class="drop-icon">🛒</span>E-Commerce Marketing</a>
         <a href="#" onclick="navigate('svc-content');return false;"><span class="drop-icon">🎬</span>Content Production & Photo/Videography</a>
-        <a href="#" onclick="navigate('svc-brand');return false;"><span class="drop-icon">🎨</span>Branding & Creative Design</a>
+        <a href="#" onclick="navigate('svc-brand');return false;"><span class="drop-icon">🎨</span>Branding & Advertising Solutions</a>
         <a href="#" onclick="navigate('svc-ai');return false;"><span class="drop-icon">🤖</span>AI Doodling/Editing</a>
       </div>
     </li>
@@ -649,7 +671,7 @@
           <span class="mob-svc-item-icon">🎬</span> Content Production
         </button>
         <button class="mob-svc-item" onclick="navigate('svc-brand');closeMob()">
-          <span class="mob-svc-item-icon">🎨</span> Branding & Creative Design
+          <span class="mob-svc-item-icon">🎨</span> Branding & Advertising Solutions
         </button>
         <button class="mob-svc-item" onclick="navigate('svc-ai');closeMob()">
           <span class="mob-svc-item-icon">🤖</span> AI Doodling / Editing
@@ -707,6 +729,26 @@
 
   <!-- ═══ HERO ═══ -->
   <section id="wsv-hero-new" style="min-height:100vh;overflow:hidden;background:#080a0f;">
+    <!-- MOBILE HERO (matches homepage mobile hero, same video) -->
+    <div class="svc-mobile-hero" aria-hidden="true">
+      <div class="svc-mobile-hero-bg">
+        <video src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1781960249/Vid_msgtsg.mp4" autoplay muted loop playsinline></video>
+        <div class="svc-mobile-hero-overlay"></div>
+      </div>
+      <div class="svc-mobile-hero-eyebrow">SOCIAL MEDIA MANAGEMENT · AHMEDABAD</div>
+      <div class="svc-mobile-hero-panel">
+        <h1 class="svc-mobile-hero-h1">
+          <span class="line">WE GROW</span>
+          <span class="line">YOUR</span>
+          <span class="line"><span class="or">BRAND.</span></span>
+        </h1>
+        <div class="svc-mobile-hero-btns">
+          <a href="#smm-final-cta" onclick="document.getElementById('smm-final-cta').scrollIntoView({behavior:'smooth'});return false;">Start Growing Today</a>
+          <a href="#" onclick="navigate('studio');return false;">View Our Work</a>
+        </div>
+      </div>
+    </div>
+
     <div class="hero-inner-grid">
 
       <!-- LEFT: CONTENT -->
@@ -1848,14 +1890,16 @@
     background: rgba(255,92,0,.12); border: 1px solid rgba(255,92,0,.2);
     display: flex; align-items: center; justify-content: center; font-size: 18px;
   }
-  .smm-tl-mock-text {}
+  .smm-tl-mock-text { flex: 1; min-width: 0; }
   .smm-tl-mock-label {
     font-family: 'Syne', sans-serif; font-size: 9px; font-weight: 700;
     letter-spacing: .1em; text-transform: uppercase;
     color: rgba(255,255,255,.3); margin-bottom: 3px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .smm-tl-mock-val {
     font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(255,255,255,.7);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .smm-tl-mock-bar {
     height: 4px; border-radius: 2px; background: rgba(255,255,255,.06);
@@ -1867,11 +1911,30 @@
   }
 
   @media (max-width: 900px) {
-    .smm-tl-track { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .smm-tl-track {
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      overflow-x: auto;
+      overflow-y: visible;
+      -webkit-overflow-scrolling: touch;
+      padding-top: 16px;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .smm-tl-track::-webkit-scrollbar { display: none; }
     .smm-tl-track::before { display: none; }
-    .smm-tl-inner { padding: 0 20px; }
-    .smm-tl-detail { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
-    .smm-tl-node { width: 56px; height: 56px; font-size: 20px; }
+    .smm-tl-inner { padding: 0 16px 56px; overflow: visible; }
+    .smm-tl-node { width: 48px; height: 48px; font-size: 18px; overflow: visible; }
+    .smm-tl-step-num { width: 18px; height: 18px; font-size: 8px; top: -6px; right: -3px; }
+    .smm-tl-step-label { font-size: 8px; line-height: 1.3; }
+    /* Mobile detail card: short step info only — single column, no task list or metric cards */
+    .smm-tl-detail { grid-template-columns: 1fr; gap: 0; padding: 22px 20px; border-radius: 16px; margin-top: 28px; }
+    .smm-tl-detail-step-badge { font-size: 9px; padding: 4px 12px; margin-bottom: 10px; }
+    .smm-tl-detail-title { font-size: 22px; line-height: 1.15; margin-bottom: 8px; }
+    .smm-tl-detail-desc { font-size: 13px; line-height: 1.6; margin-bottom: 0; }
+  }
+  @media (max-width: 480px) {
+    .smm-tl-track { grid-template-columns: repeat(7, minmax(46px, 1fr)); }
   }
 
   /* ══════════════════════════════════════
@@ -1985,14 +2048,64 @@
     background: rgba(255,255,255,.7); flex-shrink: 0;
   }
 
-  @media (max-width: 1100px) {
-    .smm-deliv-grid { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 900px) {
+    .smm-deliverables-section { padding: 60px 0; }
+    .smm-deliv-inner { padding: 0 16px; }
+    .smm-deliv-header { margin-bottom: 32px; }
+    .smm-deliv-eyebrow { font-size: 10px; padding: 5px 12px; margin-bottom: 14px; }
+    .smm-deliv-title { font-size: clamp(30px, 8vw, 48px); margin-bottom: 10px; }
+    .smm-deliv-subtitle { font-size: 13px; }
+    .smm-deliv-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .smm-deliv-card {
+      padding: 14px 12px;
+      border-radius: 12px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 10px;
+      row-gap: 4px;
+    }
+    .smm-deliv-card-icon {
+      font-size: 20px;
+      margin-bottom: 0;
+      grid-column: 1;
+      grid-row: 1;
+      align-self: center;
+    }
+    .smm-deliv-card-title {
+      font-size: 11px;
+      grid-column: 2;
+      grid-row: 1;
+      align-self: center;
+      margin-bottom: 0;
+    }
+    .smm-deliv-card-desc {
+      font-size: 11px;
+      line-height: 1.5;
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    .smm-deliv-card-check {
+      top: 10px; right: 10px;
+      width: 18px; height: 18px;
+      font-size: 9px;
+    }
+    .smm-deliv-strip {
+      padding: 22px 18px;
+      border-radius: 14px;
+      gap: 18px;
+    }
+    .smm-deliv-strip-heading { font-size: clamp(22px, 6vw, 32px); }
+    .smm-deliv-strip-right { gap: 8px; }
+    .smm-deliv-strip-pill { padding: 6px 12px; font-size: 10px; }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 380px) {
     .smm-deliv-grid { grid-template-columns: 1fr; }
-    .smm-deliv-inner { padding: 0 20px; }
-    .smm-deliv-strip { padding: 28px 24px; }
-    .smm-tl-track { grid-template-columns: repeat(4, 1fr); }
+    .smm-deliv-card { grid-template-columns: auto 1fr; }
   }
   </style>
 
@@ -2609,10 +2722,25 @@
 
     function renderDetail(i) {
       var s = steps[i];
-      var tasksHtml = s.tasks.map(function(t) {
+      var isMobile = window.innerWidth <= 900;
+
+      if (isMobile) {
+        /* Mobile: keep it short — just the step info, no task list or metric cards */
+        detail.innerHTML =
+          '<div class="smm-tl-detail-left smm-tl-detail-mobile-simple">'
+          + '<div class="smm-tl-detail-step-badge">Step ' + (i + 1) + ' of 7</div>'
+          + '<div class="smm-tl-detail-title">' + s.label.toUpperCase() + '</div>'
+          + '<div class="smm-tl-detail-desc">' + s.desc + '</div>'
+          + '</div>';
+        return;
+      }
+
+      var visibleTasks = s.tasks;
+      var visibleMocks = s.mocks;
+      var tasksHtml = visibleTasks.map(function(t) {
         return '<div class="smm-tl-detail-task">' + t + '</div>';
       }).join('');
-      var mocksHtml = s.mocks.map(function(m) {
+      var mocksHtml = visibleMocks.map(function(m) {
         return '<div class="smm-tl-mock-card">'
           + '<div class="smm-tl-mock-icon">' + m.icon + '</div>'
           + '<div class="smm-tl-mock-text">'
@@ -2639,12 +2767,21 @@
       }, 50);
     }
 
+    var activeStepIdx = 0;
     track.querySelectorAll('.smm-tl-step').forEach(function(step) {
       step.addEventListener('click', function() {
         track.querySelectorAll('.smm-tl-step').forEach(function(s) { s.classList.remove('active'); });
         step.classList.add('active');
-        renderDetail(parseInt(step.getAttribute('data-step')));
+        activeStepIdx = parseInt(step.getAttribute('data-step'));
+        renderDetail(activeStepIdx);
       });
+    });
+
+    /* Re-render on resize so rotating/resizing crosses the mobile breakpoint cleanly */
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() { renderDetail(activeStepIdx); }, 200);
     });
 
     renderDetail(0);
@@ -3042,8 +3179,8 @@
 
     <div class="footer-bottom-row">
       <div class="enquiry-form">
-        <input type="text" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID">
-        <button class="enquiry-btn" onclick="navigate('contact')" aria-label="Submit enquiry and go to contact page">Enquiry</button>
+        <input type="text" id="footer-enquiry-input" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID" autocomplete="off">
+        <button class="enquiry-btn" id="footer-enquiry-btn" onclick="tsmFooterEnquiry(event)" aria-label="Submit enquiry">Enquiry</button>
       </div>
       <div class="legal-links">
         <span class="legal-title">Legal Links</span>

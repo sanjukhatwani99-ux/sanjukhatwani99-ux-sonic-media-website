@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>About Us — The Sonic Media</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,7 @@
         <a href="#" onclick="navigate('svc-inf');return false;"><span class="drop-icon">🤝</span>Influencer Marketing</a>
         <a href="#" onclick="navigate('svc-ecom');return false;"><span class="drop-icon">🛒</span>E-Commerce Marketing</a>
         <a href="#" onclick="navigate('svc-content');return false;"><span class="drop-icon">🎬</span>Content Production & Photo/Videography</a>
-        <a href="#" onclick="navigate('svc-brand');return false;"><span class="drop-icon">🎨</span>Branding & Creative Design</a>
+        <a href="#" onclick="navigate('svc-brand');return false;"><span class="drop-icon">🎨</span>Branding & Advertising Solutions</a>
         <a href="#" onclick="navigate('svc-ai');return false;"><span class="drop-icon">🤖</span>AI Doodling/Editing</a>
       </div>
     </li>
@@ -128,7 +128,7 @@
           <span class="mob-svc-item-icon">🎬</span> Content Production
         </button>
         <button class="mob-svc-item" onclick="navigate('svc-brand');closeMob()">
-          <span class="mob-svc-item-icon">🎨</span> Branding & Creative Design
+          <span class="mob-svc-item-icon">🎨</span> Branding & Advertising Solutions
         </button>
         <button class="mob-svc-item" onclick="navigate('svc-ai');closeMob()">
           <span class="mob-svc-item-icon">🤖</span> AI Doodling / Editing
@@ -216,30 +216,36 @@
   </div>
 
 
-  <section class="about-values">
-    <div style="text-align:center;margin-bottom:0;">
-      <div class="section-tag" style="justify-content:center;">What Drives Us</div>
-      <h2 class="section-title reveal" style="color:var(--white);text-align:center;">Our <span>Core Values</span></h2>
-    </div>
-    <div class="values-grid">
-      <div class="val-card reveal"><div class="val-icon">🔥</div><div class="val-title">Relentless Ambition</div><div class="val-desc">We don't do average. Every project gets 100% of our energy, creativity, and strategic thinking. Good enough is never enough.</div></div>
-      <div class="val-card reveal d1"><div class="val-icon">📊</div><div class="val-title">Data Over Gut</div><div class="val-desc">Every decision we make is backed by data. We track everything, optimise constantly, and let the numbers lead us to results.</div></div>
-      <div class="val-card reveal d2"><div class="val-icon">🤝</div><div class="val-title">Client Partnership</div><div class="val-desc">We don't take clients — we take partners. Your success is our success. We are invested in your brand as deeply as you are.</div></div>
-      <div class="val-card reveal"><div class="val-icon">🎨</div><div class="val-title">Creative Obsession</div><div class="val-desc">Creativity isn't a department — it's in our DNA. We obsess over every pixel, word, and frame to produce work that stands out.</div></div>
-      <div class="val-card reveal d1"><div class="val-icon">⚡</div><div class="val-title">Speed & Agility</div><div class="val-desc">The market doesn't wait. We move fast, iterate quickly, and stay ahead of every trend, algorithm change, and cultural shift.</div></div>
-      <div class="val-card reveal d2"><div class="val-icon">🌍</div><div class="val-title">Global Mindset</div><div class="val-desc">We think globally from day one. Our strategies are built to scale beyond borders — bringing world-class quality to every client.</div></div>
-    </div>
-  </section>
-
-  <section class="about-team">
-    <div style="text-align:center;margin-bottom:0;">
+  <section class="founders-cinematic" id="foundersCinematic">
+    <div class="fc-intro">
       <div class="section-tag" style="justify-content:center;color:var(--orange);">The People</div>
-      <h2 class="section-title reveal" style="color:var(--white);text-align:center;">Meet The <span>Team</span></h2>
+      <h2 class="section-title reveal" style="color:var(--white);text-align:center;">Meet the <span>Co-Founders</span></h2>
     </div>
-    <div class="team-grid">
-      <h2 class="section-title reveal" style="color:var(--white);text-align:center;"> <span></span></h2>
-      <div class="team-card reveal d1"><div class="team-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779812266/Founders_jrvgcs.jpg" alt="CMO"></div><div class="team-info"><div class="team-name">Sanju Khatwani</div><div class="team-role">Co-Founder</div><div class="team-bio"></div></div></div>
-      <div class="team-card reveal d2"><div class="team-img"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779812266/Founders_jrvgcs.jpg" alt="CTO"></div><div class="team-info"><div class="team-name">Mohit Kalwani</div><div class="team-role">Co-Founder</div><div class="team-bio"></div></div></div>
+
+    <div class="fc-panel" id="fcPanel1">
+      <div class="fc-glow fc-glow-1"></div>
+      <div class="fc-media fc-media-left">
+        <img src="https://res.cloudinary.com/dq2nrpky0/image/upload/q_auto/f_auto/v1782062749/WhatsApp_Image_2026-06-21_at_22.55.21_t45n2y.jpg" alt="Sanju Khatwani — Co-Founder">
+      </div>
+      <div class="fc-copy fc-copy-right">
+        <div class="fc-index">01</div>
+        <div class="fc-role">Co-Founder</div>
+        <h3 class="fc-name">Sanju<br>Khatwani</h3>
+        <p class="fc-bio">Leads strategy and growth at Sonic Media, turning ambitious ideas into category-defining brands. Obsessed with data, scale, and results that compound.</p>
+      </div>
+    </div>
+
+    <div class="fc-panel" id="fcPanel2">
+      <div class="fc-glow fc-glow-2"></div>
+      <div class="fc-media fc-media-right">
+        <img src="https://res.cloudinary.com/dq2nrpky0/image/upload/q_auto/f_auto/v1782061816/WhatsApp_Image_2026-06-21_at_22.39.43_q0p3xf.jpg" alt="Mohit Kalwani — Co-Founder">
+      </div>
+      <div class="fc-copy fc-copy-left">
+        <div class="fc-index">02</div>
+        <div class="fc-role">Co-Founder</div>
+        <h3 class="fc-name">Mohit<br>Kalwani</h3>
+        <p class="fc-bio">Shapes the creative vision behind every campaign, blending bold design with sharp storytelling. Believes great work should stop the scroll.</p>
+      </div>
     </div>
   </section>
 
@@ -327,8 +333,8 @@
 
     <div class="footer-bottom-row">
       <div class="enquiry-form">
-        <input type="text" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID">
-        <button class="enquiry-btn" onclick="navigate('contact')" aria-label="Submit enquiry and go to contact page">Enquiry</button>
+        <input type="text" id="footer-enquiry-input" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID" autocomplete="off">
+        <button class="enquiry-btn" id="footer-enquiry-btn" onclick="tsmFooterEnquiry(event)" aria-label="Submit enquiry">Enquiry</button>
       </div>
       <div class="legal-links">
         <span class="legal-title">Legal Links</span>

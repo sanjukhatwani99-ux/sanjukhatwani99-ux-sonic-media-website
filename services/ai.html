@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>AI Doodling & Editing — The Sonic Media</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -400,7 +400,7 @@
         <a href="#" onclick="navigate('svc-inf');return false;"><span class="drop-icon">🤝</span>Influencer Marketing</a>
         <a href="#" onclick="navigate('svc-ecom');return false;"><span class="drop-icon">🛒</span>E-Commerce Marketing</a>
         <a href="#" onclick="navigate('svc-content');return false;"><span class="drop-icon">🎬</span>Content Production & Photo/Videography</a>
-        <a href="#" onclick="navigate('svc-brand');return false;"><span class="drop-icon">🎨</span>Branding & Creative Design</a>
+        <a href="#" onclick="navigate('svc-brand');return false;"><span class="drop-icon">🎨</span>Branding & Advertising Solutions</a>
         <a href="#" onclick="navigate('svc-ai');return false;"><span class="drop-icon">🤖</span>AI Doodling/Editing</a>
       </div>
     </li>
@@ -480,7 +480,7 @@
           <span class="mob-svc-item-icon">🎬</span> Content Production
         </button>
         <button class="mob-svc-item" onclick="navigate('svc-brand');closeMob()">
-          <span class="mob-svc-item-icon">🎨</span> Branding & Creative Design
+          <span class="mob-svc-item-icon">🎨</span> Branding & Advertising Solutions
         </button>
         <button class="mob-svc-item" onclick="navigate('svc-ai');closeMob()">
           <span class="mob-svc-item-icon">🤖</span> AI Doodling / Editing
@@ -537,6 +537,26 @@
 <div id="page-svc-ai" class="page active">
   <!-- ═══ HERO ═══ -->
   <section id="wsv-hero-new" style="min-height:100vh;overflow:hidden;background:#080a0f;position:relative;">
+
+    <!-- MOBILE HERO (matches homepage mobile hero, same video) -->
+    <div class="svc-mobile-hero" aria-hidden="true">
+      <div class="svc-mobile-hero-bg">
+        <video src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1781960249/Vid_msgtsg.mp4" autoplay muted loop playsinline></video>
+        <div class="svc-mobile-hero-overlay"></div>
+      </div>
+      <div class="svc-mobile-hero-eyebrow">AI DOODLING &amp; EDITING · AHMEDABAD</div>
+      <div class="svc-mobile-hero-panel">
+        <h1 class="svc-mobile-hero-h1">
+          <span class="line">WE CREATE</span>
+          <span class="line">WITH</span>
+          <span class="line"><span class="or">AI.</span></span>
+        </h1>
+        <div class="svc-mobile-hero-btns">
+          <a href="#" onclick="document.getElementById('wsv-final-cta').scrollIntoView({behavior:'smooth'});return false;">Go AI-First</a>
+          <a href="#" onclick="document.getElementById('ai-video-wall').scrollIntoView({behavior:'smooth'});return false;">View AI Work</a>
+        </div>
+      </div>
+    </div>
 
     <!-- VIDEO BACKGROUND -->
     <video
@@ -904,20 +924,39 @@
     border: 1px solid rgba(255,92,0,.35); padding: 3px 9px; border-radius: 100px;
   }
 
-  /* Play button */
+  /* Play button — always visible, centered */
   .ai-vw-play {
-    position: absolute; top: 14px; right: 14px;
-    width: 36px; height: 36px; border-radius: 50%;
-    background: rgba(255,255,255,.12);
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    width: 52px; height: 52px; border-radius: 50%;
+    background: rgba(0,0,0,.38);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,.18);
+    border: 1.5px solid rgba(255,255,255,.55);
     display: flex; align-items: center; justify-content: center;
-    opacity: 0; transition: opacity .3s, transform .3s;
-    transform: scale(.8);
+    opacity: 1; transition: opacity .3s, transform .3s, background .25s, border-color .25s;
+    pointer-events: none;
   }
-  .ai-vw-play svg { width: 13px; height: 13px; fill: #fff; margin-left: 2px; }
+  .ai-vw-play svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; transition: opacity .2s; }
   .ai-vw-cell:hover .ai-vw-play {
-    opacity: 1; transform: scale(1);
+    transform: translate(-50%, -50%) scale(1.08);
+    background: rgba(255,92,0,.55);
+    border-color: rgba(255,92,0,.8);
+  }
+  /* While playing: fade the play button down to a small corner pause control */
+  .ai-vw-cell.is-playing .ai-vw-play {
+    top: 14px; left: auto; right: 14px;
+    width: 36px; height: 36px;
+    transform: translate(0, 0) scale(1);
+    background: rgba(255,255,255,.12);
+    border-color: rgba(255,255,255,.18);
+    opacity: 0;
+  }
+  .ai-vw-cell.is-playing:hover .ai-vw-play,
+  .ai-vw-cell.is-playing .ai-vw-play:focus {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+    background: rgba(255,92,0,.55);
+    border-color: rgba(255,92,0,.8);
   }
 
   /* Subtle always-on dimming at bottom of card */
@@ -936,16 +975,51 @@
     .ai-vw-rows { padding: 0 20px; gap: 10px; }
     .ai-vw-row  { height: 175px; gap: 10px; }
     .ai-vw-cell { border-radius: 12px; }
+    .ai-vw-play { width: 42px; height: 42px; }
+    .ai-vw-play svg { width: 15px; height: 15px; }
   }
   @media (max-width: 600px) {
-    .ai-vw-row {
-      overflow-x: auto; flex-wrap: nowrap;
-      height: 150px; gap: 8px;
-      scrollbar-width: none;
+    /* Masonry-style grid: shows the first 8 videos in mixed aspect-ratio tiles.
+       Remaining videos stay in the markup (for tablet/desktop) but are hidden here. */
+    .ai-vw-rows {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 76px;
+      grid-auto-flow: dense;
+      gap: 8px;
+      padding: 0 16px;
     }
-    .ai-vw-row::-webkit-scrollbar { display: none; }
-    .ai-vw-cell { min-width: 190px; border-radius: 10px; }
-    .ai-vw-rows { padding: 0 16px; gap: 8px; }
+    .ai-vw-row { display: contents; }
+    .ai-vw-cell {
+      width: 100%; height: 100%;
+      min-width: 0; flex-shrink: initial;
+      border-radius: 10px;
+    }
+    .ai-vw-cell video { border-radius: 10px; }
+    .ai-vw-cell-overlay { border-radius: 10px; padding: 10px 12px; }
+    .ai-vw-cell::before { border-radius: 0 0 10px 10px; height: 40px; }
+
+    /* Hide everything beyond the first 8 videos (row3 fully, row2 tail) */
+    .ai-vw-row:nth-of-type(n+3),
+    .ai-vw-row:nth-of-type(2) .ai-vw-cell:nth-child(n+4) {
+      display: none;
+    }
+
+    /* First 8 visible cells: mixed spans for a masonry feel */
+    .ai-vw-row:nth-of-type(1) .ai-vw-cell:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .ai-vw-row:nth-of-type(1) .ai-vw-cell:nth-child(2) { grid-column: span 1; grid-row: span 3; }
+    .ai-vw-row:nth-of-type(1) .ai-vw-cell:nth-child(3) { grid-column: span 1; grid-row: span 1; }
+    .ai-vw-row:nth-of-type(1) .ai-vw-cell:nth-child(4) { grid-column: span 1; grid-row: span 2; }
+    .ai-vw-row:nth-of-type(1) .ai-vw-cell:nth-child(5) { grid-column: span 2; grid-row: span 1; }
+    .ai-vw-row:nth-of-type(2) .ai-vw-cell:nth-child(1) { grid-column: span 1; grid-row: span 2; }
+    .ai-vw-row:nth-of-type(2) .ai-vw-cell:nth-child(2) { grid-column: span 1; grid-row: span 1; }
+    .ai-vw-row:nth-of-type(2) .ai-vw-cell:nth-child(3) { grid-column: span 1; grid-row: span 2; }
+  }
+
+  /* Extra-narrow phones: tighten row unit & spacing, keep same 8-video grid */
+  @media (max-width: 380px) {
+    .ai-vw-rows { grid-auto-rows: 64px; gap: 6px; padding: 0 12px; }
+    .ai-vw-cell { border-radius: 8px; }
   }
   </style>
 
@@ -955,28 +1029,28 @@
 
     <!-- ROW 1 — (16:9 | 9:16 | 4:3 | 1:1 | 21:9) -->
     <div class="ai-vw-row">
-      <div class="ai-vw-cell" style="flex:2.667;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="16/9" style="flex:2.667;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">Runway Gen-3</div><div class="ai-vw-cell-label">Generative Brand Film</div></div></div>
       </div>
-      <div class="ai-vw-cell" style="flex:0.5625;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="9/16" style="flex:0.5625;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">Reel</div><div class="ai-vw-cell-label">AI Reel</div></div></div>
       </div>
-      <div class="ai-vw-cell" style="flex:1.333;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="4/3" style="flex:1.333;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">Midjourney</div><div class="ai-vw-cell-label">AI Product Visual</div></div></div>
       </div>
-      <div class="ai-vw-cell" style="flex:1;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="1/1" style="flex:1;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">Square</div><div class="ai-vw-cell-label">Social Post</div></div></div>
       </div>
-      <div class="ai-vw-cell" style="flex:2.333;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="21/9" style="flex:2.333;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">Cinematic 21:9</div><div class="ai-vw-cell-label">AI Brand Campaign</div></div></div>
       </div>
@@ -984,33 +1058,33 @@
 
     <!-- ROW 2 — (1:1 | 4:3 | 16:9 | 9:16 | 4:3 | 1:1) -->
     <div class="ai-vw-row">
-      <div class="ai-vw-cell" style="flex:1;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="1/1" style="flex:1;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">DALL·E</div><div class="ai-vw-cell-label">AI Art Direction</div></div></div>
       </div>
-      <div class="ai-vw-cell" style="flex:1.333;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="4/3" style="flex:1.333;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">Adobe Firefly</div><div class="ai-vw-cell-label">Generative Fill</div></div></div>
       </div>
-      <div class="ai-vw-cell" style="flex:2.667;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="16/9" style="flex:2.667;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">Runway</div><div class="ai-vw-cell-label">AI Video Edit</div></div></div>
       </div>
-      <div class="ai-vw-cell" style="flex:0.5625;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="9/16" style="flex:0.5625;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">TikTok</div><div class="ai-vw-cell-label">Short-Form Reel</div></div></div>
       </div>
-      <div class="ai-vw-cell" style="flex:1.333;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="4/3" style="flex:1.333;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">Kling AI</div><div class="ai-vw-cell-label">Motion Graphics</div></div></div>
       </div>
-      <div class="ai-vw-cell" style="flex:1;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="1/1" style="flex:1;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">Stable Diffusion</div><div class="ai-vw-cell-label">Brand Identity</div></div></div>
       </div>
@@ -1018,28 +1092,28 @@
 
     <!-- ROW 3 — (21:9 | 9:16 | 1:1 | 4:3 | 16:9) -->
     <div class="ai-vw-row">
-      <div class="ai-vw-cell" style="flex:2.333;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="21/9" style="flex:2.333;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">Sora</div><div class="ai-vw-cell-label">AI Cinematic Scene</div></div></div>
       </div>
-      <div class="ai-vw-cell" style="flex:0.5625;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="9/16" style="flex:0.5625;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">Stories</div><div class="ai-vw-cell-label">Story Content</div></div></div>
       </div>
-      <div class="ai-vw-cell" style="flex:1;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="1/1" style="flex:1;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">CapCut AI</div><div class="ai-vw-cell-label">Auto-Edited Reel</div></div></div>
       </div>
-      <div class="ai-vw-cell" style="flex:1.333;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="4/3" style="flex:1.333;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">ElevenLabs</div><div class="ai-vw-cell-label">AI Voiceover Video</div></div></div>
       </div>
-      <div class="ai-vw-cell" style="flex:2.667;">
-        <video autoplay muted loop playsinline><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+      <div class="ai-vw-cell" data-ratio="16/9" style="flex:2.667;">
+        <video muted loop playsinline preload="metadata"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
         <div class="ai-vw-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="ai-vw-cell-overlay"><div><div class="ai-vw-cell-tag">Descript</div><div class="ai-vw-cell-label">AI Ad Creative</div></div></div>
       </div>
@@ -1048,6 +1122,156 @@
   </div><!-- /ai-vw-rows -->
   </section>
   <!-- ═══ END VIDEO WALL ═══ -->
+
+  <style>
+  /* ── Lightbox — fullscreen viewer, scales to the video's true aspect ratio ── */
+  .ai-vw-lightbox {
+    position: fixed; inset: 0; z-index: 9999;
+    display: none; align-items: center; justify-content: center;
+    width: 100vw; height: 100vh; height: 100dvh;
+  }
+  .ai-vw-lightbox.is-active { display: flex; }
+  .ai-vw-lightbox-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(4,5,8,.95);
+    backdrop-filter: blur(10px);
+  }
+  /* Frame fills the screen; video inside is letterboxed by object-fit:contain
+     so it always shows the FULL frame, scaled to fit, no crop/distortion. */
+  .ai-vw-lightbox-frame {
+    position: relative;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    padding: clamp(10px, 3vw, 40px);
+    box-sizing: border-box;
+  }
+  .ai-vw-lightbox-video {
+    display: block;
+    /* Intrinsic sizing: the browser uses the video's real width/height
+       (whatever ratio it is) and scales it down to fit inside the frame,
+       capped by max-width/max-height. Only one axis ever ends up
+       constraining, the other is derived automatically — so the box
+       itself (not just the pixels) always matches the true aspect
+       ratio. No cropping, no stretching, and it always fills as much
+       of the screen as the ratio allows. */
+    width: auto; height: auto;
+    max-width: 100%; max-height: 100%;
+    border-radius: 12px;
+    background: #000;
+    box-shadow: 0 24px 90px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.06);
+    object-fit: contain;
+    animation: ai-vw-lightbox-in .28s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes ai-vw-lightbox-in {
+    from { opacity: 0; transform: scale(.96); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .ai-vw-lightbox-close {
+    position: fixed; top: 18px; right: 20px; z-index: 2;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,.08);
+    border: 1.5px solid rgba(255,255,255,.18);
+    color: #fff; font-size: 20px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background .2s, border-color .2s, transform .2s;
+  }
+  .ai-vw-lightbox-close:hover {
+    background: rgba(255,92,0,.55); border-color: rgba(255,92,0,.8);
+    transform: rotate(90deg);
+  }
+  .ai-vw-lightbox-caption {
+    position: fixed; left: 20px; bottom: 16px; z-index: 2;
+    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: rgba(255,255,255,.55);
+    pointer-events: none;
+  }
+  .ai-vw-lightbox-caption span { color: #ff5c00; }
+  @media (max-width: 600px) {
+    .ai-vw-lightbox-close { top: 12px; right: 12px; width: 34px; height: 34px; font-size: 17px; }
+    .ai-vw-lightbox-caption { left: 14px; bottom: 12px; font-size: 9.5px; }
+  }
+  </style>
+
+  <div class="ai-vw-lightbox" id="aiVwLightbox" aria-hidden="true">
+    <div class="ai-vw-lightbox-backdrop" data-ai-vw-close></div>
+    <button type="button" class="ai-vw-lightbox-close" data-ai-vw-close aria-label="Close video">&times;</button>
+    <div class="ai-vw-lightbox-frame" data-ai-vw-close>
+      <video class="ai-vw-lightbox-video" playsinline controls></video>
+    </div>
+    <div class="ai-vw-lightbox-caption"><span id="aiVwLbTag"></span> &nbsp;&middot;&nbsp; <span id="aiVwLbLabel"></span></div>
+  </div>
+
+  <script>
+  /* Video Wall — cells act as static thumbnails only (no inline playback).
+     Clicking any cell opens a fullscreen lightbox. The video element uses
+     object-fit:contain inside a full-viewport frame, so whatever the clip's
+     real aspect ratio is (16:9, 9:16, 1:1, 21:9, etc.) it scales to the
+     largest size that fits the screen with no cropping or stretching. */
+  (function() {
+    function initVideoWall() {
+      var cells = document.querySelectorAll('.ai-vw-cell');
+      if (!cells.length) return;
+
+      var lightbox = document.getElementById('aiVwLightbox');
+      var lbVideo  = lightbox.querySelector('.ai-vw-lightbox-video');
+      var lbTag    = document.getElementById('aiVwLbTag');
+      var lbLabel  = document.getElementById('aiVwLbLabel');
+      var lastFocused = null;
+
+      cells.forEach(function(cell) {
+        var video = cell.querySelector('video');
+        if (!video) return;
+        video.removeAttribute('autoplay');
+        video.pause();
+
+        cell.addEventListener('click', function() {
+          var source = video.querySelector('source');
+          var tag    = cell.querySelector('.ai-vw-cell-tag');
+          var label  = cell.querySelector('.ai-vw-cell-label');
+
+          lastFocused = document.activeElement;
+          lbVideo.pause();
+          lbVideo.src = source ? source.getAttribute('src') : video.currentSrc;
+          lbTag.textContent = tag ? tag.textContent : '';
+          lbLabel.textContent = label ? label.textContent : '';
+
+          lightbox.classList.add('is-active');
+          lightbox.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+
+          lbVideo.currentTime = 0;
+          var playPromise = lbVideo.play();
+          if (playPromise && playPromise.catch) playPromise.catch(function(){});
+        });
+      });
+
+      function closeLightbox() {
+        lightbox.classList.remove('is-active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        lbVideo.pause();
+        lbVideo.removeAttribute('src');
+        lbVideo.load();
+        if (lastFocused && lastFocused.focus) lastFocused.focus();
+      }
+
+      lightbox.querySelectorAll('[data-ai-vw-close]').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+          if (e.target === el) closeLightbox();
+        });
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('is-active')) closeLightbox();
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initVideoWall);
+    } else {
+      initVideoWall();
+    }
+  })();
+  </script>
 
 
 
@@ -1233,11 +1457,41 @@
     transition: width .6s ease;
   }
   @media (max-width: 900px) {
-    .app-ptl-inner { padding: 0 20px 72px; }
-    .app-ptl-track { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .app-process-tl-section { padding: 56px 0 0; }
+    .app-ptl-inner { padding: 0 16px 56px; }
+    .app-ptl-header { padding: 0 0 40px; }
+    .app-ptl-title { font-size: clamp(32px, 8vw, 52px); }
+    .app-ptl-sub { font-size: 13px; line-height: 1.65; }
+    .app-ptl-track {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .app-ptl-track::-webkit-scrollbar { display: none; }
     .app-ptl-track::before { display: none; }
-    .app-ptl-detail { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
-    .app-ptl-node { width: 56px; height: 56px; font-size: 20px; }
+    .app-ptl-step { padding: 8px 4px; min-width: 56px; }
+    .app-ptl-node {
+      width: 48px; height: 48px; font-size: 18px;
+      margin-bottom: 10px;
+      overflow: visible;
+    }
+    .app-ptl-step-num {
+      width: 18px; height: 18px; font-size: 8px;
+      top: -6px; right: -3px;
+    }
+    .app-ptl-step-label { font-size: 8px; letter-spacing: .03em; line-height: 1.3; }
+    .app-ptl-detail { grid-template-columns: 1fr; gap: 20px; padding: 20px 16px; margin-top: 28px; border-radius: 14px; }
+    .app-ptl-detail-title { font-size: 28px; }
+    .app-ptl-detail-desc { font-size: 13px; margin-bottom: 16px; }
+    .app-ptl-mock-card { padding: 12px 14px; gap: 10px; }
+    .app-ptl-mock-icon { width: 34px; height: 34px; font-size: 15px; }
+  }
+  @media (max-width: 480px) {
+    .app-ptl-track { grid-template-columns: repeat(5, minmax(52px, 1fr)); }
+    .app-ptl-step { min-width: 52px; }
   }
   </style>
 
@@ -1428,13 +1682,64 @@
     width: 5px; height: 5px; border-radius: 50%;
     background: rgba(255,255,255,.7); flex-shrink: 0;
   }
-  @media (max-width: 1100px) {
-    .app-caps-deliv-grid { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 900px) {
+    .app-caps-deliv-section { padding: 60px 0; }
+    .app-caps-deliv-inner { padding: 0 16px; }
+    .app-caps-deliv-header { margin-bottom: 32px; }
+    .app-caps-deliv-eyebrow { font-size: 10px; padding: 5px 12px; margin-bottom: 14px; }
+    .app-caps-deliv-title { font-size: clamp(30px, 8vw, 48px); margin-bottom: 10px; }
+    .app-caps-deliv-subtitle { font-size: 13px; }
+    .app-caps-deliv-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .app-caps-deliv-card {
+      padding: 14px 12px;
+      border-radius: 12px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 10px;
+      row-gap: 4px;
+    }
+    .app-caps-deliv-card-icon {
+      font-size: 20px;
+      margin-bottom: 0;
+      grid-column: 1;
+      grid-row: 1;
+      align-self: center;
+    }
+    .app-caps-deliv-card-title {
+      font-size: 11px;
+      grid-column: 2;
+      grid-row: 1;
+      align-self: center;
+      margin-bottom: 0;
+    }
+    .app-caps-deliv-card-desc {
+      font-size: 11px;
+      line-height: 1.5;
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    .app-caps-deliv-card-check {
+      top: 10px; right: 10px;
+      width: 18px; height: 18px;
+      font-size: 9px;
+    }
+    .app-caps-deliv-strip {
+      padding: 22px 18px;
+      border-radius: 14px;
+      gap: 18px;
+    }
+    .app-caps-deliv-strip-heading { font-size: clamp(22px, 6vw, 32px); }
+    .app-caps-deliv-strip-right { gap: 8px; }
+    .app-caps-deliv-strip-pill { padding: 6px 12px; font-size: 10px; }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 380px) {
     .app-caps-deliv-grid { grid-template-columns: 1fr; }
-    .app-caps-deliv-inner { padding: 0 20px; }
-    .app-caps-deliv-strip { padding: 28px 24px; }
+    .app-caps-deliv-card { grid-template-columns: auto 1fr; }
   }
   </style>
 
@@ -1662,9 +1967,31 @@
     .wsv-final-tag { margin: 0 auto 18px; }
   }
   @media (max-width: 600px) {
-    .wsv-final-cta { padding: 60px 24px; }
-    .wsv-proposal-form { padding: 24px 18px; }
-    .wsv-pf-row { grid-template-columns: 1fr; }
+    .wsv-final-cta { padding: 40px 16px; }
+    .wsv-final-h { font-size: clamp(38px, 11vw, 58px); margin-bottom: 10px; }
+    .wsv-final-p { font-size: 12px; line-height: 1.6; }
+    .wsv-final-tag { font-size: 11px; padding: 5px 12px; margin-bottom: 14px; }
+    .wsv-proposal-form {
+      padding: 20px 16px 18px;
+      border-radius: 16px;
+    }
+    .wsv-pf-row { grid-template-columns: 1fr; gap: 0; }
+    .wsv-pf-field { margin-bottom: 10px; gap: 4px; }
+    .wsv-pf-label { font-size: 9px; letter-spacing: .12em; }
+    .wsv-pf-input {
+      padding: 11px 13px;
+      font-size: 14px;
+      border-radius: 9px;
+      min-height: 44px;
+      box-sizing: border-box;
+    }
+    .wsv-pf-btn {
+      margin-top: 4px;
+      padding: 14px;
+      font-size: 15px;
+      border-radius: 9px;
+      min-height: 48px;
+    }
   }
   </style>
 
@@ -1841,8 +2168,8 @@
 
     <div class="footer-bottom-row">
       <div class="enquiry-form">
-        <input type="text" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID">
-        <button class="enquiry-btn" onclick="navigate('contact')" aria-label="Submit enquiry and go to contact page">Enquiry</button>
+        <input type="text" id="footer-enquiry-input" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID" autocomplete="off">
+        <button class="enquiry-btn" id="footer-enquiry-btn" onclick="tsmFooterEnquiry(event)" aria-label="Submit enquiry">Enquiry</button>
       </div>
       <div class="legal-links">
         <span class="legal-title">Legal Links</span>

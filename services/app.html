@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Mobile App Development — The Sonic Media</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -701,7 +701,7 @@
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: minmax(0, 380px) 1fr;
   gap: 48px;
   align-items: start;
 }
@@ -1166,8 +1166,8 @@
 }
 .wsv-orbit-wrap {
   position: relative;
-  width: 580px;
-  height: 580px;
+  width: min(580px, 92vw);
+  height: min(580px, 92vw);
   margin: 0 auto;
 }
 .wsv-orbit-canvas {
@@ -1288,7 +1288,7 @@
   max-width: 1380px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 420px 1fr;
+  grid-template-columns: minmax(0, 420px) 1fr;
   gap: 56px;
   align-items: center;
 }
@@ -1341,6 +1341,8 @@
   .wsv-gen-ui { grid-template-columns: 1fr; }
   .wsv-test-grid { grid-template-columns: 1fr; }
   .wsv-hero-stats { gap: 24px; }
+  .wsv-final-inner { grid-template-columns: 1fr; }
+  .wsv-tech-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 @media (max-width: 768px) {
   .wsv-hero-inner,
@@ -1353,6 +1355,35 @@
   .wsv-caps-grid { grid-template-columns: 1fr; }
   .wsv-hscroll-track { padding: 0 24px; }
   .wsv-step-card { width: 320px; }
+  .wsv-orbit-wrap { width: min(480px, 90vw); height: min(480px, 90vw); }
+  .wsv-orbit-section { padding: 80px 24px; }
+  .wsv-process-header { padding-left: 24px; padding-right: 24px; }
+  .wsv-step-left { padding: 60px 24px; }
+  .wsv-final-inner { padding: 0; }
+  .wsv-final-btns { flex-direction: column; }
+  .wsv-tech-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 480px) {
+  .wsv-hero-inner { padding: 120px 20px 60px; }
+  .wsv-caps-section,
+  .wsv-gen-section,
+  .wsv-testimonials,
+  .wsv-tech-section,
+  .wsv-final-cta,
+  .wsv-process-outer { padding-left: 16px; padding-right: 16px; }
+  .wsv-orbit-wrap { width: min(340px, 92vw); height: min(340px, 92vw); }
+  .wsv-orbit-brand-ring { width: 100px; height: 100px; }
+  .wsv-orbit-logo-img { width: 24px; height: 24px; }
+  .wsv-orbit-brand-name { font-size: 10px; }
+  .wsv-orbit-input-row { flex-direction: column; }
+  .wsv-caps-grid { grid-template-columns: 1fr; }
+  .wsv-tech-grid { grid-template-columns: 1fr !important; }
+  .wsv-hero-stats { flex-wrap: wrap; gap: 16px; }
+  .wsv-hero-btns { flex-direction: column; }
+  .wsv-gen-panel { padding: 24px 20px; }
+  .wsv-process-header { padding-left: 16px; padding-right: 16px; padding-bottom: 40px; }
+  .wsv-step-left { padding: 40px 16px; }
+  .wsv-step-right { min-height: 220px; }
 }
 
 /* ══ PREVIEW GENERATOR V2 STYLES ══ */
@@ -2035,6 +2066,12 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
   transform-origin: top left;
   pointer-events: none;
 }
+@media (max-width: 480px) {
+  #wsv-hero-new .site-iframe-wrap iframe {
+    width: 320px;
+    height: 693px;
+  }
+}
 #wsv-hero-new .rod-canvas {
   position: absolute;
   inset: 0;
@@ -2135,7 +2172,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
         <a href="#" onclick="navigate('svc-inf');return false;"><span class="drop-icon">🤝</span>Influencer Marketing</a>
         <a href="#" onclick="navigate('svc-ecom');return false;"><span class="drop-icon">🛒</span>E-Commerce Marketing</a>
         <a href="#" onclick="navigate('svc-content');return false;"><span class="drop-icon">🎬</span>Content Production & Photo/Videography</a>
-        <a href="#" onclick="navigate('svc-brand');return false;"><span class="drop-icon">🎨</span>Branding & Creative Design</a>
+        <a href="#" onclick="navigate('svc-brand');return false;"><span class="drop-icon">🎨</span>Branding & Advertising Solutions</a>
         <a href="#" onclick="navigate('svc-ai');return false;"><span class="drop-icon">🤖</span>AI Doodling/Editing</a>
       </div>
     </li>
@@ -2215,7 +2252,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
           <span class="mob-svc-item-icon">🎬</span> Content Production
         </button>
         <button class="mob-svc-item" onclick="navigate('svc-brand');closeMob()">
-          <span class="mob-svc-item-icon">🎨</span> Branding & Creative Design
+          <span class="mob-svc-item-icon">🎨</span> Branding & Advertising Solutions
         </button>
         <button class="mob-svc-item" onclick="navigate('svc-ai');closeMob()">
           <span class="mob-svc-item-icon">🤖</span> AI Doodling / Editing
@@ -2307,6 +2344,26 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
   </style>
 
   <section id="wsv-hero-new" style="min-height:100vh;overflow:hidden;background:#000;">
+    <!-- MOBILE HERO (matches homepage mobile hero, same video) -->
+    <div class="svc-mobile-hero" aria-hidden="true">
+      <div class="svc-mobile-hero-bg">
+        <video src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1781960249/Vid_msgtsg.mp4" autoplay muted loop playsinline></video>
+        <div class="svc-mobile-hero-overlay"></div>
+      </div>
+      <div class="svc-mobile-hero-eyebrow">PREMIUM iOS &amp; ANDROID STUDIO · AHMEDABAD</div>
+      <div class="svc-mobile-hero-panel">
+        <h1 class="svc-mobile-hero-h1">
+          <span class="line">WE BUILD</span>
+          <span class="line">MOBILE</span>
+          <span class="line">APPS THAT <span class="or">RETAIN.</span></span>
+        </h1>
+        <div class="svc-mobile-hero-btns">
+          <a href="#" onclick="wsvScrollToAnchor('wsv-final-cta');return false;">Start Your Project</a>
+          <a href="#" onclick="wsvScrollToAnchor('wsv-live');return false;">View Our Work</a>
+        </div>
+      </div>
+    </div>
+
     <!-- PERF-STYLE BACKGROUND LAYERS -->
     <div class="pm-hero-noise"></div>
     <div class="pm-hero-grid-bg"></div>
@@ -3472,7 +3529,7 @@ function buildPreview(brand, tagline, industry) {
               </div>
             </div>
             <div class="wsv-phone-screen" data-site-url="https://www.lcpladvisory.com" data-site-title="Starter App Preview">
-              <img class="wsv-phone-thumb" src="https://image.thum.io/get/width/780/crop/1600/noanimate/https://www.lcpladvisory.com" alt="Starter App mobile preview" loading="lazy" />
+              <img class="wsv-phone-thumb" src="https://image.thum.io/get/width/620/crop/1340/noanimate/https://www.lcpladvisory.com" alt="Starter App mobile preview" loading="lazy" />
               <button class="wsv-phone-tap" type="button" aria-label="Open live preview of Starter App">
                 <span class="wsv-phone-tap-icon">▶</span>
                 <span class="wsv-phone-tap-text">Tap to preview</span>
@@ -3525,7 +3582,7 @@ function buildPreview(brand, tagline, industry) {
               </div>
             </div>
             <div class="wsv-phone-screen" data-site-url="https://www.thesonicmedia.com" data-site-title="Premium App Preview">
-              <img class="wsv-phone-thumb" src="https://image.thum.io/get/width/780/crop/1600/noanimate/https://www.thesonicmedia.com" alt="Premium Experience mobile preview" loading="lazy" />
+              <img class="wsv-phone-thumb" src="https://image.thum.io/get/width/620/crop/1340/noanimate/https://www.thesonicmedia.com" alt="Premium Experience mobile preview" loading="lazy" />
               <button class="wsv-phone-tap" type="button" aria-label="Open live preview of Premium Experience">
                 <span class="wsv-phone-tap-icon">▶</span>
                 <span class="wsv-phone-tap-text">Tap to preview</span>
@@ -3576,7 +3633,7 @@ function buildPreview(brand, tagline, industry) {
               </div>
             </div>
             <div class="wsv-phone-screen" data-site-url="https://nuvella-noir.myshopify.com/" data-site-title="E-Commerce App Preview">
-              <img class="wsv-phone-thumb" src="https://image.thum.io/get/width/780/crop/1600/noanimate/https://nuvella-noir.myshopify.com/" alt="E-Commerce App mobile preview" loading="lazy" />
+              <img class="wsv-phone-thumb" src="https://image.thum.io/get/width/620/crop/1340/noanimate/https://nuvella-noir.myshopify.com/" alt="E-Commerce App mobile preview" loading="lazy" />
               <button class="wsv-phone-tap" type="button" aria-label="Open live preview of E-Commerce App">
                 <span class="wsv-phone-tap-icon">▶</span>
                 <span class="wsv-phone-tap-text">Tap to preview</span>
@@ -3627,7 +3684,7 @@ function buildPreview(brand, tagline, industry) {
               </div>
             </div>
             <div class="wsv-phone-screen" data-site-url="https://www.thesonicmedia.com" data-site-title="Custom Platform App Preview">
-              <img class="wsv-phone-thumb" src="https://image.thum.io/get/width/780/crop/1600/noanimate/https://www.thesonicmedia.com" alt="Custom Platform App mobile preview" loading="lazy" />
+              <img class="wsv-phone-thumb" src="https://image.thum.io/get/width/620/crop/1340/noanimate/https://www.thesonicmedia.com" alt="Custom Platform App mobile preview" loading="lazy" />
               <button class="wsv-phone-tap" type="button" aria-label="Open live preview of Custom Platform App">
                 <span class="wsv-phone-tap-icon">▶</span>
                 <span class="wsv-phone-tap-text">Tap to preview</span>
@@ -3692,7 +3749,7 @@ function buildPreview(brand, tagline, industry) {
   /* ── 4-PHONE HORIZONTAL ROW ── */
   .wsv-phones-row {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 28px;
     max-width: 1440px;
     margin: 0 auto;
@@ -3706,6 +3763,7 @@ function buildPreview(brand, tagline, industry) {
     flex-direction: column;
     align-items: center;
     gap: 22px;
+    min-width: 0;
     opacity: 0;
     transform: translateY(50px);
     transition: opacity .9s cubic-bezier(.16,1,.3,1) var(--pd,0s),
@@ -3723,6 +3781,7 @@ function buildPreview(brand, tagline, industry) {
     gap: 10px;
     width: 100%;
     max-width: 300px;
+    min-width: 0;
   }
   .wsv-phone-badge {
     font-family: 'Bebas Neue', sans-serif;
@@ -3744,6 +3803,8 @@ function buildPreview(brand, tagline, industry) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-width: 0;
+    flex-shrink: 1;
   }
   .wsv-phone-label-wrap::after {
     content: '';
@@ -4083,13 +4144,20 @@ function buildPreview(brand, tagline, industry) {
     .wsv-phone-device { max-width: 260px; }
   }
   @media (max-width: 1100px) {
-    .wsv-phones-row { grid-template-columns: repeat(2, 1fr); gap: 48px 32px; }
+    .wsv-phones-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 32px; }
     .wsv-phone-device { max-width: 300px; }
   }
   @media (max-width: 700px) {
-    .wsv-phones-row { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; padding: 0 16px 32px; }
+    .wsv-live-section { overflow-x: hidden; }
+    .wsv-phones-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; padding: 0 16px 32px; max-width: 100%; }
     .wsv-live-header { padding: 0 20px; }
     .wsv-phone-device { max-width: 200px; }
+  }
+  @media (max-width: 420px) {
+    .wsv-phones-row { grid-template-columns: minmax(0, 1fr); gap: 36px; padding: 0 16px 32px; }
+    .wsv-phone-device { max-width: 240px; margin: 0 auto; }
+    .wsv-phone-label-wrap { max-width: 240px; margin: 0 auto; }
+    .wsv-live-header { padding: 0 16px; }
   }
   </style>
 
@@ -4384,11 +4452,41 @@ function buildPreview(brand, tagline, industry) {
   }
 
   @media (max-width: 900px) {
-    .app-ptl-inner { padding: 0 20px 72px; }
-    .app-ptl-track { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .app-process-tl-section { padding: 56px 0 0; }
+    .app-ptl-inner { padding: 0 16px 56px; }
+    .app-ptl-header { padding: 0 16px 40px; }
+    .app-ptl-title { font-size: clamp(32px, 8vw, 52px); }
+    .app-ptl-sub { font-size: 13px; line-height: 1.65; }
+    .app-ptl-track {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .app-ptl-track::-webkit-scrollbar { display: none; }
     .app-ptl-track::before { display: none; }
-    .app-ptl-detail { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
-    .app-ptl-node { width: 56px; height: 56px; font-size: 20px; }
+    .app-ptl-step { padding: 8px 4px; min-width: 56px; }
+    .app-ptl-node {
+      width: 48px; height: 48px; font-size: 18px;
+      margin-bottom: 10px;
+      overflow: visible;
+    }
+    .app-ptl-step-num {
+      width: 18px; height: 18px; font-size: 8px;
+      top: -6px; right: -3px;
+    }
+    .app-ptl-step-label { font-size: 8px; letter-spacing: .03em; line-height: 1.3; }
+    .app-ptl-detail { grid-template-columns: 1fr; gap: 20px; padding: 20px 16px; margin-top: 28px; border-radius: 14px; }
+    .app-ptl-detail-title { font-size: 28px; }
+    .app-ptl-detail-desc { font-size: 13px; margin-bottom: 16px; }
+    .app-ptl-mock-card { padding: 12px 14px; gap: 10px; }
+    .app-ptl-mock-icon { width: 34px; height: 34px; font-size: 15px; }
+  }
+  @media (max-width: 480px) {
+    .app-ptl-track { grid-template-columns: repeat(5, minmax(52px, 1fr)); }
+    .app-ptl-step { min-width: 52px; }
   }
   </style>
 
@@ -4642,13 +4740,64 @@ function buildPreview(brand, tagline, industry) {
     background: rgba(255,255,255,.7); flex-shrink: 0;
   }
 
-  @media (max-width: 1100px) {
-    .app-caps-deliv-grid { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 900px) {
+    .app-caps-deliv-section { padding: 60px 0; }
+    .app-caps-deliv-inner { padding: 0 16px; }
+    .app-caps-deliv-header { margin-bottom: 32px; }
+    .app-caps-deliv-eyebrow { font-size: 10px; padding: 5px 12px; margin-bottom: 14px; }
+    .app-caps-deliv-title { font-size: clamp(30px, 8vw, 48px); margin-bottom: 10px; }
+    .app-caps-deliv-subtitle { font-size: 13px; }
+    .app-caps-deliv-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .app-caps-deliv-card {
+      padding: 14px 12px;
+      border-radius: 12px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 10px;
+      row-gap: 4px;
+    }
+    .app-caps-deliv-card-icon {
+      font-size: 20px;
+      margin-bottom: 0;
+      grid-column: 1;
+      grid-row: 1;
+      align-self: center;
+    }
+    .app-caps-deliv-card-title {
+      font-size: 11px;
+      grid-column: 2;
+      grid-row: 1;
+      align-self: center;
+      margin-bottom: 0;
+    }
+    .app-caps-deliv-card-desc {
+      font-size: 11px;
+      line-height: 1.5;
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    .app-caps-deliv-card-check {
+      top: 10px; right: 10px;
+      width: 18px; height: 18px;
+      font-size: 9px;
+    }
+    .app-caps-deliv-strip {
+      padding: 22px 18px;
+      border-radius: 14px;
+      gap: 18px;
+    }
+    .app-caps-deliv-strip-heading { font-size: clamp(22px, 6vw, 32px); }
+    .app-caps-deliv-strip-right { gap: 8px; }
+    .app-caps-deliv-strip-pill { padding: 6px 12px; font-size: 10px; }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 380px) {
     .app-caps-deliv-grid { grid-template-columns: 1fr; }
-    .app-caps-deliv-inner { padding: 0 20px; }
-    .app-caps-deliv-strip { padding: 28px 24px; }
+    .app-caps-deliv-card { grid-template-columns: auto 1fr; }
   }
   </style>
 
@@ -4858,9 +5007,31 @@ function buildPreview(brand, tagline, industry) {
     .wsv-final-p { margin: 0 auto; }
   }
   @media (max-width: 600px) {
-    .wsv-final-cta { padding: 60px 24px; }
-    .wsv-proposal-form { padding: 24px 18px; }
-    .wsv-pf-row { grid-template-columns: 1fr; }
+    .wsv-final-cta { padding: 40px 16px; }
+    .wsv-final-h { font-size: clamp(38px, 11vw, 58px); margin-bottom: 10px; }
+    .wsv-final-p { font-size: 12px; line-height: 1.6; }
+    .wsv-final-tag { font-size: 11px; padding: 5px 12px; margin-bottom: 14px; }
+    .wsv-proposal-form {
+      padding: 20px 16px 18px;
+      border-radius: 16px;
+    }
+    .wsv-pf-row { grid-template-columns: 1fr; gap: 0; }
+    .wsv-pf-field { margin-bottom: 10px; gap: 4px; }
+    .wsv-pf-label { font-size: 9px; letter-spacing: .12em; }
+    .wsv-pf-input {
+      padding: 11px 13px;
+      font-size: 14px;
+      border-radius: 9px;
+      min-height: 44px;
+      box-sizing: border-box;
+    }
+    .wsv-pf-btn {
+      margin-top: 4px;
+      padding: 14px;
+      font-size: 15px;
+      border-radius: 9px;
+      min-height: 48px;
+    }
   }
   </style>
 
@@ -5914,8 +6085,8 @@ function wsvScrollToAnchor(id) {
 
     <div class="footer-bottom-row">
       <div class="enquiry-form">
-        <input type="text" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID">
-        <button class="enquiry-btn" onclick="navigate('contact')" aria-label="Submit enquiry and go to contact page">Enquiry</button>
+        <input type="text" id="footer-enquiry-input" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID" autocomplete="off">
+        <button class="enquiry-btn" id="footer-enquiry-btn" onclick="tsmFooterEnquiry(event)" aria-label="Submit enquiry">Enquiry</button>
       </div>
       <div class="legal-links">
         <span class="legal-title">Legal Links</span>

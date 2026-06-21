@@ -89,7 +89,7 @@ function navigate(page) {
     a.classList.toggle('active-link', a.dataset.page === page);
   });
   // Update title
-  const titles = {home:'The Sonic Media — Premium Digital Marketing Agency',about:'About Us — The Sonic Media',services:'Services — The Sonic Media',studio:'Portfolio — The Sonic Media',casestudies:'Case Studies — The Sonic Media',journal:'Journal — The Sonic Media',future:'Future Vision — The Sonic Media',faq:'FAQ — The Sonic Media',contact:'Contact — The Sonic Media','svc-web':'Website Development — The Sonic Media','svc-app':'Mobile App Development — The Sonic Media','svc-seo':'SEO — The Sonic Media','svc-smm':'Social Media Management — The Sonic Media','svc-perf':'Performance Marketing — The Sonic Media','svc-inf':'Influencer Marketing — The Sonic Media','svc-ecom':'E-Commerce Marketing — The Sonic Media','svc-content':'Content Production — The Sonic Media','svc-brand':'Branding & Creative Design — The Sonic Media','svc-ai':'AI Doodling/Editing — The Sonic Media'};
+  const titles = {home:'The Sonic Media — Premium Digital Marketing Agency',about:'About Us — The Sonic Media',services:'Services — The Sonic Media',studio:'Portfolio — The Sonic Media',casestudies:'Case Studies — The Sonic Media',journal:'Journal — The Sonic Media',future:'Future Vision — The Sonic Media',faq:'FAQ — The Sonic Media',contact:'Contact — The Sonic Media','svc-web':'Website Development — The Sonic Media','svc-app':'Mobile App Development — The Sonic Media','svc-seo':'SEO — The Sonic Media','svc-smm':'Social Media Management — The Sonic Media','svc-perf':'Performance Marketing — The Sonic Media','svc-inf':'Influencer Marketing — The Sonic Media','svc-ecom':'E-Commerce Marketing — The Sonic Media','svc-content':'Content Production — The Sonic Media','svc-brand':'Branding & Advertising Solutions — The Sonic Media','svc-ai':'AI Doodling/Editing — The Sonic Media'};
   document.title = titles[page] || titles.home;
   // Re-init observers for new page
   setTimeout(initReveal, 50);
@@ -391,10 +391,6 @@ window._addNavHook(function(page){
     btn.classList.toggle('active-mob', btn.dataset.mobPage===page);
   });
 });
-// Also patch post-script navigate calls
-document.querySelectorAll('[data-mob-page]').forEach(btn=>{
-  btn.classList.toggle('active-mob', btn.dataset.mobPage==='home');
-});
 
 /* ─ Reveal Observer ─ */
 /* ── Activate the correct initial page on load ── */
@@ -414,7 +410,7 @@ document.querySelectorAll('[data-mob-page]').forEach(btn=>{
     a.classList.toggle('active-link', a.dataset.page === initPage);
   });
   document.querySelectorAll('[data-mob-page]').forEach(b => {
-    b.classList.toggle('active', b.dataset.mobPage === initPage);
+    b.classList.toggle('active-mob', b.dataset.mobPage === initPage);
   });
 })();
 
@@ -744,7 +740,7 @@ const workDetails = {
   nexahealth: {
     title: 'Spice Theory Kitchen',
     subtitle: 'Restaurant Menu & Packaging Design',
-    category: 'Branding & Creative Design',
+    category: 'Branding & Advertising Solutions',
     type: ' Branding Project',
     status: 'Completed',
     location: 'Ahmedabad, Gujarat',
@@ -754,7 +750,7 @@ const workDetails = {
     about: 'Spice Theory Kitchen is a modern food brand focused on premium Indian fusion meals and takeaway services.',
     challenge: 'The brand needed visually appealing menus and packaging that felt premium while maintaining readability and strong brand consistency.',
     solution: 'Designed a complete  branding system including menu layouts, takeaway packaging, and promotional print materials aligned with the restaurant\'s modern identity.',
-    tags: ['Branding & Creative Design', 'Packaging Design', 'Print Design', 'Typography', 'Food Industry'],
+    tags: ['Branding & Advertising Solutions', 'Packaging Design', 'Print Design', 'Typography', 'Food Industry'],
     deliverables: [
       'Menu card design',
       'Food packaging design',
@@ -802,7 +798,7 @@ const workDetails = {
   ahmdstartup: {
     title: 'Ahmedabad Startup Connect',
     subtitle: 'Event Branding & Promotional Design',
-    category: 'Event Branding & Creative Design',
+    category: 'Event Branding & Advertising Solutions',
     type: 'Event Branding Project',
     status: 'Completed',
     location: 'Ahmedabad, Gujarat',
@@ -1769,7 +1765,7 @@ const PAGE_DATA = {
       {
         id: 'nexahealth',
         num: '04',
-        cat: 'Branding & Creative Design',
+        cat: 'Branding & Advertising Solutions',
         name: 'Spice Theory Kitchen — Restaurant Menu & Packaging Design',
         tags: ['Menu Design', 'Packaging', 'Print Design'],
         img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80',
@@ -2180,9 +2176,10 @@ const SVC_CARDS_DATA = [
   { img: 'https://res.cloudinary.com/dq2nrpky0/image/upload/v1779741221/IM_pev5ba.jpg', cat: '06 · Influencer',     title: 'Influencer Marketing',         page: 'svc-inf'     },
   { img: 'https://res.cloudinary.com/dq2nrpky0/image/upload/v1779741212/EM_ptuofv.jpg', cat: '07 · E-Commerce',     title: 'E-Commerce Marketing',         page: 'svc-ecom'    },
   { img: 'https://res.cloudinary.com/dq2nrpky0/image/upload/v1779741212/PV_twlw1w.jpg', cat: '08 · Content',     title: 'Content Production',           page: 'svc-content' },
-  { img: 'https://res.cloudinary.com/dq2nrpky0/image/upload/v1779741210/BD_djg0wp.jpg', cat: '09 · Branding',       title: 'Branding & Creative Design',   page: 'svc-brand'   },
+  { img: 'https://res.cloudinary.com/dq2nrpky0/image/upload/v1779741210/BD_djg0wp.jpg', cat: '09 · Branding',       title: 'Branding & Advertising Solutions',   page: 'svc-brand'   },
   { img: 'https://res.cloudinary.com/dq2nrpky0/image/upload/v1779741213/AI_d2vdpn.jpg', cat: '10 · AI',          title: 'AI Doodling / Editing',        page: 'svc-ai'      },
 ];
+
 
 const FUTURE_CARDS_DATA = [
   { img: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80', cat: 'In Development', title: 'AI-Powered Marketing',        page: null },
@@ -2755,269 +2752,215 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
 /* ═══════════════════════════════════════════════════
    MOBILE SWIPE CAROUSEL — SERVICES
 ═══════════════════════════════════════════════════ */
-(function initMobSvcCarousel() {
-  function buildCarousel() {
-    if (typeof SVC_CARDS_DATA === 'undefined') { setTimeout(buildCarousel, 150); return; }
-    var track   = document.getElementById('mobSvcTrack');
-    var outer   = document.getElementById('mobSvcTrackOuter');
-    var dotsEl  = document.getElementById('mobSvcDots');
-    var prevBtn = document.getElementById('mobSvcPrev');
-    var nextBtn = document.getElementById('mobSvcNext');
-    if (!track || !outer || !dotsEl) return;
+/* ═══════════════════════════════════════════════════
+   MOBILE SWIPE CAROUSEL — SERVICES (shared factory)
+   Both the home page and the services page use this
+   exact same ring-carousel implementation — just
+   pointed at different element IDs — so behavior is
+   guaranteed identical, not merely similar.
+═══════════════════════════════════════════════════ */
+function buildMobSvcCarousel(ids) {
+  var track   = document.getElementById(ids.trackId);
+  var outer   = document.getElementById(ids.outerId);
+  var dotsEl  = document.getElementById(ids.dotsId);
+  var prevBtn = ids.prevId ? document.getElementById(ids.prevId) : null;
+  var nextBtn = ids.nextId ? document.getElementById(ids.nextId) : null;
+  if (!track || !outer || !dotsEl) return null;
 
-    var cards = SVC_CARDS_DATA;
-    var n = cards.length;
-    if (!n) return;
+  var cards = SVC_CARDS_DATA;
+  var n = cards.length;
+  if (!n) return null;
 
-    /* Only the n real cards ever exist in the DOM — no clones. Each
-       card's screen position is the shortest signed distance (mod n)
-       between its own index and a single floating "virtualIndex". That
-       distance is inherently circular, so card 10 and card 1 are always
-       exactly one spacing apart in both directions — there is no seam,
-       no clone, and therefore nothing to silently jump or snap back to. */
-    track.innerHTML = cards.map(function(c, i) {
-      return '<div class="mob-svc-card" data-idx="' + i + '">' +
-        '<div class="mob-svc-card-inner-wrap">' +
-          '<div class="mob-svc-card-img"><img src="' + (c.img || 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80') + '" alt="' + c.title + '" loading="lazy"></div>' +
-          '<div class="mob-svc-card-grad"></div>' +
-          '<div class="mob-svc-card-body">' +
-            '<div class="mob-svc-card-title">' + c.title + '</div>' +
-          '</div>' +
+  /* Only the n real cards ever exist in the DOM — no clones. Each
+     card's screen position is the shortest signed distance (mod n)
+     between its own index and a single floating "virtualIndex". That
+     distance is inherently circular, so card 10 and card 1 are always
+     exactly one spacing apart in both directions — there is no seam,
+     no clone, and therefore nothing to silently jump or snap back to. */
+  track.innerHTML = cards.map(function(c, i) {
+    return '<div class="mob-svc-card" data-idx="' + i + '">' +
+      '<div class="mob-svc-card-inner-wrap">' +
+        '<div class="mob-svc-card-img"><img src="' + (c.img || 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80') + '" alt="' + c.title + '" loading="lazy"></div>' +
+        '<div class="mob-svc-card-grad"></div>' +
+        '<div class="mob-svc-card-body">' +
+          '<div class="mob-svc-card-title">' + c.title + '</div>' +
         '</div>' +
-      '</div>';
-    }).join('');
+      '</div>' +
+    '</div>';
+  }).join('');
 
-    dotsEl.innerHTML = cards.map(function(_, i) {
-      return '<div class="mob-svc-dot' + (i===0?' active':'') + '" data-idx="' + i + '"></div>';
-    }).join('');
+  dotsEl.innerHTML = cards.map(function(_, i) {
+    return '<div class="mob-svc-dot' + (i===0?' active':'') + '" data-idx="' + i + '"></div>';
+  }).join('');
 
-    var cardEls = Array.prototype.slice.call(track.querySelectorAll('.mob-svc-card'));
-    var dotEls  = Array.prototype.slice.call(dotsEl.querySelectorAll('.mob-svc-dot'));
+  var cardEls = Array.prototype.slice.call(track.querySelectorAll('.mob-svc-card'));
+  var dotEls  = Array.prototype.slice.call(dotsEl.querySelectorAll('.mob-svc-dot'));
 
-    var virtualIndex = 0;     /* continuous "position" — never bounded */
-    var cardSpacing  = 0;     /* px between card centers */
-    var dragging = false, axisLock = null, startX = 0, startY = 0, startVirtual = 0;
-    var rafScheduled = false;
+  var virtualIndex = 0;     /* continuous "position" — never bounded */
+  var cardSpacing  = 0;     /* px between card centers */
+  var dragging = false, axisLock = null, startX = 0, startY = 0, startVirtual = 0;
+  var rafScheduled = false;
 
-    function measure() {
-      var first = cardEls[0];
-      cardSpacing = first.offsetWidth;       /* unaffected by the scale() transform */
-      outer.style.height = first.offsetHeight + 'px';
-    }
-
-    function shortestDelta(i, idxFloat) {
-      var d = i - idxFloat;
-      d = ((d % n) + n) % n;
-      if (d > n / 2) d -= n;
-      return d;
-    }
-
-    function render() {
-      rafScheduled = false;
-      cardEls.forEach(function(el, i) {
-        var d = shortestDelta(i, virtualIndex);
-        var absD = Math.abs(d);
-        var scale = Math.max(0.78, 1.05 - absD * 0.20);
-        var opacity = Math.max(0.3, 1 - absD * 0.55);
-        el.style.transform = 'translate(-50%, -50%) translateX(' + (d * cardSpacing).toFixed(2) + 'px) scale(' + scale.toFixed(3) + ')';
-        el.style.opacity = opacity.toFixed(3);
-        el.style.zIndex = String(100 - Math.round(absD * 10));
-        el.classList.toggle('active', absD < 0.001);
-      });
-    }
-
-    function scheduleRender() {
-      if (!rafScheduled) { rafScheduled = true; requestAnimationFrame(render); }
-    }
-
-    function setActiveDot() {
-      var real = ((Math.round(virtualIndex) % n) + n) % n;
-      dotEls.forEach(function(el, i){ el.classList.toggle('active', i === real); });
-    }
-
-    function setTransition(on) {
-      cardEls.forEach(function(el) {
-        el.style.transition = on ? 'transform 0.45s cubic-bezier(0.22,1,0.36,1), opacity 0.45s' : 'none';
-      });
-    }
-
-    function animateTo(target) {
-      setTransition(true);
-      virtualIndex = target;
-      scheduleRender();
-      setActiveDot();
-      setTimeout(function() {
-        /* Folding the index by a multiple of n once it's settled is
-           mathematically invisible (shortestDelta is unaffected by it)
-           — it just keeps the number from growing forever. */
-        virtualIndex = ((virtualIndex % n) + n) % n;
-        setTransition(false);
-      }, 460);
-    }
-
-    function goTo(realIdx) {
-      var current = Math.round(virtualIndex);
-      var currentReal = ((current % n) + n) % n;
-      var diff = ((realIdx - currentReal + n / 2) % n + n) % n - n / 2;
-      animateTo(current + diff);
-    }
-
-    function onPointerDown(e) {
-      if (e.pointerType === 'mouse' && e.button !== 0) return;
-      dragging = true;
-      axisLock = null;
-      startX = e.clientX; startY = e.clientY;
-      startVirtual = virtualIndex;
-      setTransition(false);
-      try { outer.setPointerCapture(e.pointerId); } catch (err) {}
-    }
-    function onPointerMove(e) {
-      if (!dragging) return;
-      var dx = e.clientX - startX;
-      var dy = e.clientY - startY;
-      if (axisLock === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
-        axisLock = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
-      }
-      if (axisLock === 'y') return; /* let the page scroll vertically as normal */
-      if (axisLock === 'x') e.preventDefault();
-      virtualIndex = startVirtual - dx / cardSpacing;
-      scheduleRender();
-      setActiveDot();
-    }
-    function onPointerUp() {
-      if (!dragging) return;
-      dragging = false;
-      animateTo(axisLock === 'x' ? Math.round(virtualIndex) : Math.round(startVirtual));
-      axisLock = null;
-    }
-
-    outer.style.touchAction = 'pan-y';
-    outer.addEventListener('pointerdown', onPointerDown);
-    outer.addEventListener('pointermove', onPointerMove, { passive: false });
-    outer.addEventListener('pointerup', onPointerUp);
-    outer.addEventListener('pointercancel', onPointerUp);
-
-    dotsEl.addEventListener('click', function(e){
-      var dot = e.target.closest('.mob-svc-dot');
-      if (dot) goTo(parseInt(dot.dataset.idx, 10));
-    });
-    if (prevBtn) prevBtn.addEventListener('click', function(){ animateTo(Math.round(virtualIndex) - 1); });
-    if (nextBtn) nextBtn.addEventListener('click', function(){ animateTo(Math.round(virtualIndex) + 1); });
-
-    window.addEventListener('resize', function(){ measure(); scheduleRender(); }, { passive: true });
-
-    requestAnimationFrame(function() { measure(); render(); });
-    /* Outer may still be display:none (ancestor toggled by media-query JS)
-       on first build — re-measure once layout has settled. */
-    setTimeout(function(){ measure(); render(); }, 300);
+  function measure() {
+    var first = cardEls[0];
+    cardSpacing = first.offsetWidth;       /* unaffected by the scale() transform */
+    outer.style.height = first.offsetHeight + 'px';
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', buildCarousel);
-  else buildCarousel();
+
+  function shortestDelta(i, idxFloat) {
+    var d = i - idxFloat;
+    d = ((d % n) + n) % n;
+    if (d > n / 2) d -= n;
+    return d;
+  }
+
+  function render() {
+    rafScheduled = false;
+    cardEls.forEach(function(el, i) {
+      var d = shortestDelta(i, virtualIndex);
+      var absD = Math.abs(d);
+      var scale = Math.max(0.78, 1.05 - absD * 0.20);
+      var opacity = Math.max(0.3, 1 - absD * 0.55);
+      el.style.transform = 'translate(-50%, -50%) translateX(' + (d * cardSpacing).toFixed(2) + 'px) scale(' + scale.toFixed(3) + ')';
+      el.style.opacity = opacity.toFixed(3);
+      el.style.zIndex = String(100 - Math.round(absD * 10));
+      el.classList.toggle('active', absD < 0.001);
+    });
+  }
+
+  function scheduleRender() {
+    if (!rafScheduled) { rafScheduled = true; requestAnimationFrame(render); }
+  }
+
+  function setActiveDot() {
+    var real = ((Math.round(virtualIndex) % n) + n) % n;
+    dotEls.forEach(function(el, i){ el.classList.toggle('active', i === real); });
+  }
+
+  function setTransition(on) {
+    cardEls.forEach(function(el) {
+      el.style.transition = on ? 'transform 0.45s cubic-bezier(0.22,1,0.36,1), opacity 0.45s' : 'none';
+    });
+  }
+
+  function animateTo(target) {
+    setTransition(true);
+    virtualIndex = target;
+    scheduleRender();
+    setActiveDot();
+    setTimeout(function() {
+      /* Folding the index by a multiple of n once it's settled is
+         mathematically invisible (shortestDelta is unaffected by it)
+         — it just keeps the number from growing forever. */
+      virtualIndex = ((virtualIndex % n) + n) % n;
+      setTransition(false);
+    }, 460);
+  }
+
+  function goTo(realIdx) {
+    var current = Math.round(virtualIndex);
+    var currentReal = ((current % n) + n) % n;
+    var diff = ((realIdx - currentReal + n / 2) % n + n) % n - n / 2;
+    animateTo(current + diff);
+  }
+
+  function onPointerDown(e) {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    dragging = true;
+    axisLock = null;
+    startX = e.clientX; startY = e.clientY;
+    startVirtual = virtualIndex;
+    setTransition(false);
+    try { outer.setPointerCapture(e.pointerId); } catch (err) {}
+  }
+  function onPointerMove(e) {
+    if (!dragging) return;
+    var dx = e.clientX - startX;
+    var dy = e.clientY - startY;
+    if (axisLock === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+      axisLock = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+    }
+    if (axisLock === 'y') return; /* let the page scroll vertically as normal */
+    if (axisLock === 'x') e.preventDefault();
+    virtualIndex = startVirtual - dx / cardSpacing;
+    scheduleRender();
+    setActiveDot();
+  }
+  function onPointerUp() {
+    if (!dragging) return;
+    dragging = false;
+    animateTo(axisLock === 'x' ? Math.round(virtualIndex) : Math.round(startVirtual));
+    axisLock = null;
+  }
+
+  /* Tapping the already-active card navigates to its detail page. */
+  track.addEventListener('click', function(e) {
+    if (dragging) return;
+    var card = e.target.closest('.mob-svc-card');
+    if (!card) return;
+    var idx = parseInt(card.dataset.idx, 10);
+    var real = ((Math.round(virtualIndex) % n) + n) % n;
+    if (idx === real && cards[idx] && cards[idx].page) {
+      navigate(cards[idx].page);
+    } else {
+      goTo(idx);
+    }
+  });
+
+  outer.style.touchAction = 'pan-y';
+  outer.addEventListener('pointerdown', onPointerDown);
+  outer.addEventListener('pointermove', onPointerMove, { passive: false });
+  outer.addEventListener('pointerup', onPointerUp);
+  outer.addEventListener('pointercancel', onPointerUp);
+
+  dotsEl.addEventListener('click', function(e){
+    var dot = e.target.closest('.mob-svc-dot');
+    if (dot) goTo(parseInt(dot.dataset.idx, 10));
+  });
+  if (prevBtn) prevBtn.addEventListener('click', function(){ animateTo(Math.round(virtualIndex) - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function(){ animateTo(Math.round(virtualIndex) + 1); });
+
+  window.addEventListener('resize', function(){ measure(); scheduleRender(); }, { passive: true });
+
+  requestAnimationFrame(function() { measure(); render(); });
+  /* Outer may still be display:none (ancestor toggled by media-query JS)
+     on first build — re-measure once layout has settled. */
+  setTimeout(function(){ measure(); render(); }, 300);
+
+  return { remeasure: function(){ measure(); scheduleRender(); } };
+}
+
+// ── Home page instance ──
+(function initMobSvcCarousel() {
+  function build() {
+    if (typeof SVC_CARDS_DATA === 'undefined') { setTimeout(build, 150); return; }
+    buildMobSvcCarousel({
+      trackId: 'mobSvcTrack', outerId: 'mobSvcTrackOuter', dotsId: 'mobSvcDots',
+      prevId: 'mobSvcPrev', nextId: 'mobSvcNext'
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
+  else build();
 })();
 
 /* ═══════════════════════════════════════════════════
    SERVICES PAGE — MOBILE SWIPE CAROUSEL
-   Mirrors the home-page carousel but uses separate
-   IDs so both can coexist in the DOM.
+   Exactly the same carousel as the home page (same
+   buildMobSvcCarousel factory), pointed at the
+   services-page-scoped IDs so both can coexist in the
+   DOM without colliding.
 ═══════════════════════════════════════════════════ */
 (function initPageMobSvcCarousel() {
-  var inited = false;
-  var remeasure = null;
+  var instance = null;
 
-  function buildCarousel() {
-    if (typeof SVC_CARDS_DATA === 'undefined') { setTimeout(buildCarousel, 150); return; }
-    var track   = document.getElementById('pageMobSvcTrack');
-    var outer   = document.getElementById('pageMobSvcTrackOuter');
-    var dotsEl  = document.getElementById('pageMobSvcDots');
-    if (!track || !outer || !dotsEl) return;
-
-    var cards = SVC_CARDS_DATA;
-    var current = 0;
-    var pointerMoved = false, downX = 0;
-
-    track.innerHTML = cards.map(function(c, i) {
-      return '<div class="mob-svc-card' + (i===0?' active':'') + '" data-idx="' + i + '" style="cursor:pointer;">' +
-        '<div class="mob-svc-card-inner-wrap">' +
-          '<div class="mob-svc-card-img"><img src="' + (c.img || 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80') + '" alt="' + c.title + '" loading="lazy"></div>' +
-          '<div class="mob-svc-card-grad"></div>' +
-          '<div class="mob-svc-card-body">' +
-            '<div class="mob-svc-card-title">' + c.title + '</div>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-    }).join('');
-
-    dotsEl.innerHTML = cards.map(function(_, i) {
-      return '<div class="mob-svc-dot' + (i===0?' active':'') + '" data-idx="' + i + '"></div>';
-    }).join('');
-
-    var cardEls = Array.prototype.slice.call(track.querySelectorAll('.mob-svc-card'));
-    var ticking = false;
-
-    function updateTransforms() {
-      ticking = false;
-      var outerRect = outer.getBoundingClientRect();
-      if (outerRect.width === 0) return; /* not laid out yet */
-      var centerX = outerRect.left + outerRect.width / 2;
-      var bestIdx = 0, bestDist = Infinity;
-
-      cardEls.forEach(function(el, i) {
-        var r = el.getBoundingClientRect();
-        var cardCenter = r.left + r.width / 2;
-        var dist = Math.abs(cardCenter - centerX);
-        var norm = Math.min(dist / (outerRect.width * 0.62), 1);
-        var scale = 1.05 - norm * 0.20;
-        var opacity = 1 - norm * 0.55;
-        el.style.transform = 'scale(' + scale.toFixed(3) + ')';
-        el.style.opacity = opacity.toFixed(3);
-        if (dist < bestDist) { bestDist = dist; bestIdx = i; }
-      });
-
-      if (bestIdx !== current) {
-        current = bestIdx;
-        cardEls.forEach(function(el, i){ el.classList.toggle('active', i===current); });
-        dotsEl.querySelectorAll('.mob-svc-dot').forEach(function(el,i){ el.classList.toggle('active', i===current); });
-      }
-    }
-    function onScroll() {
-      if (!ticking) { ticking = true; requestAnimationFrame(updateTransforms); }
-    }
-
-    function goTo(idx) {
-      if (idx < 0 || idx >= cardEls.length) return;
-      cardEls[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
-
-    dotsEl.addEventListener('click', function(e){
-      var dot = e.target.closest('.mob-svc-dot');
-      if (dot) goTo(parseInt(dot.dataset.idx));
+  function build() {
+    if (typeof SVC_CARDS_DATA === 'undefined') { setTimeout(build, 150); return; }
+    var track = document.getElementById('pageMobSvcTrack');
+    if (!track) return;
+    instance = buildMobSvcCarousel({
+      trackId: 'pageMobSvcTrack', outerId: 'pageMobSvcTrackOuter', dotsId: 'pageMobSvcDots',
+      prevId: 'pageMobSvcPrev', nextId: 'pageMobSvcNext'
     });
-
-    /* Tap on the already-active card navigates to its detail page;
-       tapping a peeking neighbor just brings it to center. */
-    track.addEventListener('pointerdown', function(e){ downX = e.clientX; pointerMoved = false; });
-    track.addEventListener('pointermove', function(e){
-      if (Math.abs(e.clientX - downX) > 8) pointerMoved = true;
-    });
-    track.addEventListener('click', function(e) {
-      if (pointerMoved) return; /* was a swipe, not a tap */
-      var card = e.target.closest('.mob-svc-card');
-      if (!card) return;
-      var idx = parseInt(card.dataset.idx);
-      if (idx === current && cards[idx] && cards[idx].page) {
-        navigate(cards[idx].page);
-      } else {
-        goTo(idx);
-      }
-    });
-
-    outer.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    updateTransforms();
-    setTimeout(updateTransforms, 50);
-    setTimeout(updateTransforms, 300);
-    inited = true;
-    remeasure = updateTransforms;
   }
 
   /* Show carousel and hide coverflow when services page activates on mobile */
@@ -3027,8 +2970,8 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
     var coverflow = document.getElementById('pageSvcScrollWrapper');
     if (carousel) carousel.style.display = 'flex';
     if (coverflow) coverflow.style.display = 'none';
-    if (!inited) buildCarousel();
-    else if (remeasure) setTimeout(remeasure, 50);
+    if (!instance) build();
+    else instance.remeasure();
   }
 
   /* Hook into navigate */
@@ -3047,7 +2990,7 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
     if (window.innerWidth <= 768) {
       if (carousel) carousel.style.display = 'flex';
       if (coverflow) coverflow.style.display = 'none';
-      if (!inited) buildCarousel();
+      if (!instance) build();
     } else {
       if (carousel) carousel.style.display = 'none';
       if (coverflow) coverflow.style.display = '';
@@ -3484,6 +3427,175 @@ function buildFutureVisionSplit({ sectionId, archSelector, rightSelector, imgSel
 })();
 
 /* ═══════════════════════════════════════════════════
+   FOOTER ENQUIRY — WEB3FORMS SUBMISSION
+   Validates mobile/email input, submits to Web3Forms,
+   gives inline feedback on the button.
+═══════════════════════════════════════════════════ */
+window.tsmFooterEnquiry = function(e) {
+  if (e) e.preventDefault();
+
+  var input = document.getElementById('footer-enquiry-input');
+  var btn   = document.getElementById('footer-enquiry-btn');
+  if (!input || !btn) return;
+
+  var val = (input.value || '').trim();
+  if (!val) {
+    input.focus();
+    input.style.borderColor = '#ff5c00';
+    setTimeout(function() { input.style.borderColor = ''; }, 1500);
+    return;
+  }
+
+  // Detect email vs phone
+  var isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+  var isPhone = /^[0-9+\-\s()]{7,15}$/.test(val);
+
+  if (!isEmail && !isPhone) {
+    input.style.borderColor = '#ff5c00';
+    input.placeholder = 'ENTER A VALID EMAIL OR MOBILE NUMBER';
+    setTimeout(function() {
+      input.style.borderColor = '';
+      input.placeholder = 'ENTER YOUR MOBILE NUMBER OR MAIL ID';
+    }, 2500);
+    return;
+  }
+
+  // Build submission payload
+  var subject  = isEmail
+    ? 'Footer Enquiry — ' + val
+    : 'Footer Enquiry — Mobile: ' + val;
+  var message  = isEmail
+    ? 'New footer enquiry.\n\nEmail: ' + val + '\n\nSource page: ' + window.location.href
+    : 'New footer enquiry.\n\nMobile: ' + val + '\n\nSource page: ' + window.location.href;
+  var fromName = 'Footer Enquiry';
+  var emailField = isEmail ? val : 'noreply@thesonicmedia.com';
+
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      access_key: '66f90d59-83e7-4136-8823-1bfeb38deb41',
+      subject:    subject,
+      from_name:  fromName,
+      email:      emailField,
+      message:    message
+    })
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(result) {
+    if (result.success) {
+      btn.textContent = '✓ Sent!';
+      btn.style.background = '#16a34a';
+      btn.style.color = '#fff';
+      input.value = '';
+      input.placeholder = 'ENTER YOUR MOBILE NUMBER OR MAIL ID';
+      setTimeout(function() {
+        btn.textContent = 'Enquiry';
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.disabled = false;
+      }, 4000);
+    } else {
+      throw new Error(result.message || 'Submission failed');
+    }
+  })
+  .catch(function() {
+    btn.textContent = 'Enquiry';
+    btn.disabled = false;
+    alert('Submission failed. Please email us at info@thesonicmedia.com');
+  });
+};
+
+// Also trigger on Enter key in the footer input (event delegation — works after footer injection)
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && e.target && e.target.id === 'footer-enquiry-input') {
+    window.tsmFooterEnquiry(e);
+  }
+});
+
+/* ═══════════════════════════════════════════════════
+   WEEKLY NEWSLETTER — WEB3FORMS SUBMISSION
+   Uses the same Web3Forms access key as the Footer
+   Enquiry form so every subscription is delivered the
+   same way enquiries are.
+═══════════════════════════════════════════════════ */
+window.tsmNewsletterSubmit = function(e) {
+  if (e) e.preventDefault();
+
+  var nameInput  = document.getElementById('nl-name-input');
+  var emailInput = document.getElementById('nl-email-input');
+  var btn        = document.getElementById('nl-submit-btn');
+  if (!nameInput || !emailInput || !btn) return;
+
+  var name  = (nameInput.value || '').trim();
+  var email = (emailInput.value || '').trim();
+
+  if (!name) {
+    nameInput.focus();
+    nameInput.style.borderColor = '#ff5c00';
+    setTimeout(function() { nameInput.style.borderColor = ''; }, 1500);
+    return;
+  }
+
+  var isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!isEmail) {
+    emailInput.focus();
+    emailInput.style.borderColor = '#ff5c00';
+    emailInput.placeholder = 'ENTER A VALID EMAIL ADDRESS';
+    setTimeout(function() {
+      emailInput.style.borderColor = '';
+      emailInput.placeholder = 'Your email address';
+    }, 2500);
+    return;
+  }
+
+  var subject = 'Weekly Newsletter Subscription — ' + name;
+  var message = 'New newsletter subscription.\n\nName: ' + name + '\nEmail: ' + email + '\n\nSource page: ' + window.location.href;
+  var originalText = btn.textContent;
+
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      access_key: '66f90d59-83e7-4136-8823-1bfeb38deb41',
+      subject:    subject,
+      from_name:  name,
+      email:      email,
+      message:    message
+    })
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(result) {
+    if (result.success) {
+      btn.textContent = '✓ Subscribed!';
+      btn.style.background = '#16a34a';
+      btn.style.color = '#fff';
+      nameInput.value = '';
+      emailInput.value = '';
+      setTimeout(function() {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.disabled = false;
+      }, 4000);
+    } else {
+      throw new Error(result.message || 'Submission failed');
+    }
+  })
+  .catch(function() {
+    btn.textContent = originalText;
+    btn.disabled = false;
+    alert('Subscription failed. Please email us at info@thesonicmedia.com');
+  });
+};
+
+/* ═══════════════════════════════════════════════════
    FUTURE VISION DETAIL MODAL
 ═══════════════════════════════════════════════════ */
 (function(){
@@ -3610,18 +3722,104 @@ body{font-family:'DM Sans',sans-serif;background:#080808;color:#F5F0EB;line-heig
    GSAP manages the element. Force a restart on 'ended'.
 ═══════════════════════════════════════════════════ */
 (function fixMobileVideoLoop() {
+  /**
+   * Attempts to play a video and handles Low Power Mode / autoplay restrictions
+   * gracefully by showing a poster-frame fallback with a tap-to-play overlay.
+   *
+   * Strategy:
+   *  1. Try autoplay as normal (works on most browsers/conditions).
+   *  2. If the play() promise rejects (Low Power Mode, aggressive autoplay
+   *     policy, etc.), show a lightweight tap-to-play UI anchored to the video.
+   *  3. On first user tap anywhere on the page, attempt playback again — this
+   *     satisfies the "user gesture" requirement that Low Power Mode enforces.
+   *  4. Keep the loop/ended fallback for browsers that ignore the `loop` attr.
+   */
   function ensureLoop(videoEl) {
     if (!videoEl) return;
+
+    // Force-restart when the 'loop' attribute is silently ignored
     videoEl.addEventListener('ended', function() {
       videoEl.currentTime = 0;
       videoEl.play().catch(function(){});
     });
-    // Resume play after tab becomes visible again
+
+    // Resume after tab becomes visible again
     document.addEventListener('visibilitychange', function() {
       if (document.visibilityState === 'visible' && videoEl.paused) {
         videoEl.play().catch(function(){});
       }
     });
+
+    // --- Low Power Mode graceful fallback ---
+    var playPromise = videoEl.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(function(err) {
+        // Only handle NotAllowedError (autoplay blocked) — rethrow others
+        if (err && err.name !== 'NotAllowedError') return;
+
+        // Ensure the video has a poster so something meaningful is shown
+        if (!videoEl.hasAttribute('poster') && videoEl.dataset.poster) {
+          videoEl.setAttribute('poster', videoEl.dataset.poster);
+        }
+
+        // Inject a subtle tap-to-play overlay if one doesn't already exist
+        var wrapper = videoEl.parentElement;
+        if (wrapper && !wrapper.querySelector('.tsm-tap-to-play')) {
+          var overlay = document.createElement('button');
+          overlay.className = 'tsm-tap-to-play';
+          overlay.setAttribute('aria-label', 'Tap to play video');
+          overlay.innerHTML =
+            '<span class="tsm-ttp-circle">' +
+              '<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                '<circle cx="14" cy="14" r="14" fill="rgba(255,92,0,0.85)"/>' +
+                '<polygon points="11,8 22,14 11,20" fill="#fff"/>' +
+              '</svg>' +
+            '</span>';
+
+          // Position relative to wrapper
+          var wPos = getComputedStyle(wrapper).position;
+          if (wPos === 'static') { wrapper.style.position = 'relative'; }
+
+          Object.assign(overlay.style, {
+            position: 'absolute',
+            inset: '0',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(0,0,0,0.25)',
+            border: 'none',
+            cursor: 'pointer',
+            zIndex: '10',
+            backdropFilter: 'blur(2px)',
+            WebkitBackdropFilter: 'blur(2px)',
+            transition: 'opacity 0.3s'
+          });
+
+          function dismissOverlay() {
+            videoEl.play().then(function() {
+              overlay.style.opacity = '0';
+              setTimeout(function() {
+                if (overlay.parentNode) { overlay.parentNode.removeChild(overlay); }
+              }, 300);
+            }).catch(function(){});
+          }
+
+          overlay.addEventListener('click', dismissOverlay);
+
+          // Also attempt resume on any user gesture on the page (first touch/click)
+          function onFirstGesture() {
+            document.removeEventListener('touchstart', onFirstGesture, { once: true });
+            document.removeEventListener('click',      onFirstGesture, { once: true });
+            if (videoEl.paused) { dismissOverlay(); }
+          }
+          document.addEventListener('touchstart', onFirstGesture, { once: true, passive: true });
+          document.addEventListener('click',      onFirstGesture, { once: true });
+
+          wrapper.appendChild(overlay);
+        }
+      });
+    }
+    // --- end Low Power Mode fallback ---
   }
 
   function initVideoLoops() {
@@ -3631,11 +3829,123 @@ body{font-family:'DM Sans',sans-serif;background:#080808;color:#F5F0EB;line-heig
     ensureLoop(document.getElementById('ab-tsm-vid'));
     // Also cover the home thought-vessel video
     ensureLoop(document.getElementById('tsm-vid'));
+    // Hero mobile background videos (inline autoplay, no id — select by class)
+    var heroBgVideos = document.querySelectorAll('.hero-mobile-bg video');
+    heroBgVideos.forEach(function(v) { ensureLoop(v); });
   }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initVideoLoops);
   } else {
     initVideoLoops();
+  }
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   MEET THE CO-FOUNDERS — Cinematic GSAP ScrollTrigger sequence
+   Two full-screen (100vh) panels. Each photo slides in from off-
+   screen (left panel's image from the left, right panel's image
+   from the right), while copy fades + rises into place. A slow
+   parallax drift continues on the photo for the remainder of the
+   panel's scroll life. Respects prefers-reduced-motion.
+═══════════════════════════════════════════════════════════════ */
+(function initFoundersCinematic() {
+  function boot() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      setTimeout(boot, 80);
+      return;
+    }
+    var section = document.getElementById('foundersCinematic');
+    if (!section) return; // not on this page
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Kill any stale instances from a prior init (e.g. hot nav / resize rebuild)
+    ScrollTrigger.getAll().forEach(function (st) {
+      if (st.vars && st.vars.id && st.vars.id.indexOf('fc-') === 0) st.kill();
+    });
+
+    var panels = section.querySelectorAll('.fc-panel');
+
+    panels.forEach(function (panel, i) {
+      var media = panel.querySelector('.fc-media');
+      var copy  = panel.querySelector('.fc-copy');
+      var index = panel.querySelector('.fc-index');
+      var role  = panel.querySelector('.fc-role');
+      var name  = panel.querySelector('.fc-name');
+      var bio   = panel.querySelector('.fc-bio');
+      var glow  = panel.querySelector('.fc-glow');
+      var fromLeft = media.classList.contains('fc-media-left');
+
+      if (reduceMotion) {
+        gsap.set([media, copy], { clearProps: 'all' });
+        return;
+      }
+
+      // ── Entrance timeline: plays once as the panel arrives ──
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          id: 'fc-enter-' + i,
+          trigger: panel,
+          start: 'top 75%',
+          end: 'top 20%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      tl.fromTo(media,
+        { xPercent: fromLeft ? -120 : 120, opacity: 0, scale: 1.04 },
+        { xPercent: 0, opacity: 1, scale: 1, duration: 1.3, ease: 'power4.out' },
+        0
+      );
+
+      if (glow) {
+        tl.fromTo(glow, { opacity: 0 }, { opacity: 1, duration: 1.6, ease: 'power2.out' }, 0.1);
+      }
+
+      [index, role, name, bio].forEach(function (el, idx) {
+        if (!el) return;
+        tl.fromTo(el,
+          { y: 46, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' },
+          0.18 + idx * 0.1
+        );
+      });
+
+      // ── Slow continuous parallax while the panel is in view ──
+      gsap.to(media, {
+        yPercent: -6,
+        ease: 'none',
+        scrollTrigger: {
+          id: 'fc-parallax-' + i,
+          trigger: panel,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+
+      gsap.to(copy, {
+        yPercent: 4,
+        ease: 'none',
+        scrollTrigger: {
+          id: 'fc-parallax-copy-' + i,
+          trigger: panel,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    });
+
+    ScrollTrigger.refresh();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(boot, 150); });
+  } else {
+    setTimeout(boot, 150);
   }
 })();

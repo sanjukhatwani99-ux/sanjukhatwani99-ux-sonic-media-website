@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Website Development — The Sonic Media</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -700,7 +700,7 @@
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: minmax(0, 380px) 1fr;
   gap: 48px;
   align-items: start;
 }
@@ -1165,8 +1165,8 @@
 }
 .wsv-orbit-wrap {
   position: relative;
-  width: 580px;
-  height: 580px;
+  width: min(580px, 92vw);
+  height: min(580px, 92vw);
   margin: 0 auto;
 }
 .wsv-orbit-canvas {
@@ -1287,7 +1287,7 @@
   max-width: 1380px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 420px 1fr;
+  grid-template-columns: minmax(0, 420px) 1fr;
   gap: 56px;
   align-items: center;
 }
@@ -1340,6 +1340,8 @@
   .wsv-gen-ui { grid-template-columns: 1fr; }
   .wsv-test-grid { grid-template-columns: 1fr; }
   .wsv-hero-stats { gap: 24px; }
+  .wsv-final-inner { grid-template-columns: 1fr; }
+  .wsv-tech-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 @media (max-width: 768px) {
   .wsv-hero-inner,
@@ -1352,9 +1354,41 @@
   .wsv-caps-grid { grid-template-columns: 1fr; }
   .wsv-hscroll-track { padding: 0 24px; }
   .wsv-step-card { width: 320px; }
+  .wsv-orbit-wrap { width: min(480px, 90vw); height: min(480px, 90vw); }
+  .wsv-orbit-section { padding: 80px 24px; }
+  .wsv-process-header { padding-left: 24px; padding-right: 24px; }
+  .wsv-step-left { padding: 60px 24px; }
+  .wsv-final-inner { padding: 0; }
+  .wsv-final-btns { flex-direction: column; }
+  .wsv-tech-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 480px) {
+  .wsv-hero-inner { padding: 120px 20px 60px; }
+  .wsv-caps-section,
+  .wsv-gen-section,
+  .wsv-testimonials,
+  .wsv-tech-section,
+  .wsv-final-cta,
+  .wsv-process-outer { padding-left: 16px; padding-right: 16px; }
+  .wsv-orbit-wrap { width: min(340px, 92vw); height: min(340px, 92vw); }
+  .wsv-orbit-brand-ring { width: 100px; height: 100px; }
+  .wsv-orbit-logo-img { width: 24px; height: 24px; }
+  .wsv-orbit-brand-name { font-size: 10px; }
+  .wsv-orbit-input-row { flex-direction: column; }
+  .wsv-caps-grid { grid-template-columns: 1fr; }
+  .wsv-tech-grid { grid-template-columns: 1fr !important; }
+  .wsv-hero-stats { flex-wrap: wrap; gap: 16px; }
+  .wsv-hero-btns { flex-direction: column; }
+  .wsv-gen-panel { padding: 24px 20px; }
+  .wsv-process-header { padding-left: 16px; padding-right: 16px; padding-bottom: 40px; }
+  .wsv-step-left { padding: 40px 16px; }
+  .wsv-step-right { min-height: 220px; }
 }
 
-/* ══ PREVIEW GENERATOR V2 STYLES ══ */
+@media (max-width: 768px) {
+  #wsv-gen-section-anchor { display: none !important; }
+}
+
 .wsv-gen-v2-wrap{
   width:100%;
 }
@@ -2158,7 +2192,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
         <a href="#" onclick="navigate('svc-inf');return false;"><span class="drop-icon">🤝</span>Influencer Marketing</a>
         <a href="#" onclick="navigate('svc-ecom');return false;"><span class="drop-icon">🛒</span>E-Commerce Marketing</a>
         <a href="#" onclick="navigate('svc-content');return false;"><span class="drop-icon">🎬</span>Content Production & Photo/Videography</a>
-        <a href="#" onclick="navigate('svc-brand');return false;"><span class="drop-icon">🎨</span>Branding & Creative Design</a>
+        <a href="#" onclick="navigate('svc-brand');return false;"><span class="drop-icon">🎨</span>Branding & Advertising Solutions</a>
         <a href="#" onclick="navigate('svc-ai');return false;"><span class="drop-icon">🤖</span>AI Doodling/Editing</a>
       </div>
     </li>
@@ -2238,7 +2272,7 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
           <span class="mob-svc-item-icon">🎬</span> Content Production
         </button>
         <button class="mob-svc-item" onclick="navigate('svc-brand');closeMob()">
-          <span class="mob-svc-item-icon">🎨</span> Branding & Creative Design
+          <span class="mob-svc-item-icon">🎨</span> Branding & Advertising Solutions
         </button>
         <button class="mob-svc-item" onclick="navigate('svc-ai');closeMob()">
           <span class="mob-svc-item-icon">🤖</span> AI Doodling / Editing
@@ -2330,6 +2364,26 @@ input:checked + .toggle-slider:before{transform:translateX(16px);}
   </style>
 
   <section id="wsv-hero-new" style="min-height:100vh;overflow:hidden;background:#000;">
+    <!-- MOBILE HERO (matches homepage mobile hero, same video) -->
+    <div class="svc-mobile-hero" aria-hidden="true">
+      <div class="svc-mobile-hero-bg">
+        <video src="https://res.cloudinary.com/dq2nrpky0/video/upload/v1781960249/Vid_msgtsg.mp4" autoplay muted loop playsinline></video>
+        <div class="svc-mobile-hero-overlay"></div>
+      </div>
+      <div class="svc-mobile-hero-eyebrow">PREMIUM WEB DESIGN STUDIO · AHMEDABAD</div>
+      <div class="svc-mobile-hero-panel">
+        <h1 class="svc-mobile-hero-h1">
+          <span class="line">WE BUILD</span>
+          <span class="line">WEBSITES</span>
+          <span class="line">THAT <span class="or">CONVERT.</span></span>
+        </h1>
+        <div class="svc-mobile-hero-btns">
+          <a href="#" onclick="wsvScrollToAnchor('wsv-final-cta');return false;">Start Your Project</a>
+          <a href="#" onclick="wsvScrollToAnchor('wsv-gen-section-anchor');return false;">Preview Your Website</a>
+        </div>
+      </div>
+    </div>
+
     <!-- PERF-STYLE BACKGROUND LAYERS -->
     <div class="pm-hero-noise"></div>
     <div class="pm-hero-grid-bg"></div>
@@ -3478,11 +3532,12 @@ function buildPreview(brand, tagline, industry) {
             <div class="wsv-lcard-viewport">
               <a href="https://www.lcpladvisory.com" target="_blank" rel="noopener noreferrer" class="wsv-lcard-thumb-link" aria-label="Visit LCPL Advisory website">
                 <img
-                  src="https://api.microlink.io/?url=https%3A%2F%2Fwww.lcpladvisory.com&screenshot=true&meta=false&embed=screenshot.url"
+                  src="https://api.microlink.io/?url=https%3A%2F%2Fwww.lcpladvisory.com&screenshot=true&meta=false&embed=screenshot.url&viewport.width=800&viewport.height=450&type=jpeg&quality=45&waitUntil=domcontentloaded"
                   alt="LCPL Advisory homepage preview"
                   class="wsv-lcard-thumb"
+                  width="800" height="450" decoding="async" fetchpriority="low"
                   loading="lazy"
-                  onerror="this.src='https://image.thum.io/get/width/1440/crop/900/https://www.lcpladvisory.com'"
+                  onerror="this.src='https://image.thum.io/get/width/960/crop/540/https://www.lcpladvisory.com'"
                 />
                 <div class="wsv-lcard-thumb-overlay">
                   <span class="wsv-lcard-visit-btn">Visit Site <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -3524,11 +3579,12 @@ function buildPreview(brand, tagline, industry) {
             <div class="wsv-lcard-viewport">
               <a href="https://www.thesonicmedia.com" target="_blank" rel="noopener noreferrer" class="wsv-lcard-thumb-link" aria-label="Visit The Sonic Media website">
                 <img
-                  src="https://api.microlink.io/?url=https%3A%2F%2Fwww.thesonicmedia.com&screenshot=true&meta=false&embed=screenshot.url"
+                  src="https://api.microlink.io/?url=https%3A%2F%2Fwww.thesonicmedia.com&screenshot=true&meta=false&embed=screenshot.url&viewport.width=800&viewport.height=450&type=jpeg&quality=45&waitUntil=domcontentloaded"
                   alt="The Sonic Media homepage preview"
                   class="wsv-lcard-thumb"
+                  width="800" height="450" decoding="async" fetchpriority="low"
                   loading="lazy"
-                  onerror="this.src='https://image.thum.io/get/width/1440/crop/900/https://www.thesonicmedia.com'"
+                  onerror="this.src='https://image.thum.io/get/width/960/crop/540/https://www.thesonicmedia.com'"
                 />
                 <div class="wsv-lcard-thumb-overlay">
                   <span class="wsv-lcard-visit-btn">Visit Site <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -3574,11 +3630,12 @@ function buildPreview(brand, tagline, industry) {
             <div class="wsv-lcard-viewport">
               <a href="https://nuvellanoir.com/" target="_blank" rel="noopener noreferrer" class="wsv-lcard-thumb-link" aria-label="Visit Nuvella Noir website">
                 <img
-                  src="https://api.microlink.io/?url=https%3A%2F%2Fnuvellanoir.com&screenshot=true&meta=false&embed=screenshot.url"
+                  src="https://api.microlink.io/?url=https%3A%2F%2Fnuvellanoir.com&screenshot=true&meta=false&embed=screenshot.url&viewport.width=800&viewport.height=450&type=jpeg&quality=45&waitUntil=domcontentloaded"
                   alt="Nuvella Noir homepage preview"
                   class="wsv-lcard-thumb"
+                  width="800" height="450" decoding="async" fetchpriority="low"
                   loading="lazy"
-                  onerror="this.src='https://image.thum.io/get/width/1440/crop/900/https://nuvellanoir.com'"
+                  onerror="this.src='https://image.thum.io/get/width/960/crop/540/https://nuvellanoir.com'"
                 />
                 <div class="wsv-lcard-thumb-overlay">
                   <span class="wsv-lcard-visit-btn">Visit Site <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -3620,11 +3677,12 @@ function buildPreview(brand, tagline, industry) {
             <div class="wsv-lcard-viewport">
               <a href="https://www.thesonicmedia.com" target="_blank" rel="noopener noreferrer" class="wsv-lcard-thumb-link" aria-label="Visit The Sonic Media website">
                 <img
-                  src="https://api.microlink.io/?url=https%3A%2F%2Fwww.thesonicmedia.com&screenshot=true&meta=false&embed=screenshot.url"
+                  src="https://api.microlink.io/?url=https%3A%2F%2Fwww.thesonicmedia.com&screenshot=true&meta=false&embed=screenshot.url&viewport.width=800&viewport.height=450&type=jpeg&quality=45&waitUntil=domcontentloaded"
                   alt="The Sonic Media homepage preview"
                   class="wsv-lcard-thumb"
+                  width="800" height="450" decoding="async" fetchpriority="low"
                   loading="lazy"
-                  onerror="this.src='https://image.thum.io/get/width/1440/crop/900/https://www.thesonicmedia.com'"
+                  onerror="this.src='https://image.thum.io/get/width/960/crop/540/https://www.thesonicmedia.com'"
                 />
                 <div class="wsv-lcard-thumb-overlay">
                   <span class="wsv-lcard-visit-btn">Visit Site <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -3703,7 +3761,7 @@ function buildPreview(brand, tagline, industry) {
   /* Each row holds 2 cards side by side */
   .wsv-live-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 32px;
     align-items: start;
     padding: 20px 0;
@@ -3718,11 +3776,13 @@ function buildPreview(brand, tagline, industry) {
     display: flex;
     flex-direction: column;
     gap: 0;
+    min-width: 0;
   }
 
   /* ── SINGLE CARD ── */
   .wsv-lcard {
     position: relative;
+    min-width: 0;
     opacity: 0;
     transform: translateY(32px);
     transition: opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1);
@@ -3783,6 +3843,7 @@ function buildPreview(brand, tagline, industry) {
 
   .wsv-lcard-url {
     flex: 1;
+    min-width: 0;
     background: #ffffff;
     border: 1px solid #d0d0d0;
     border-radius: 7px;
@@ -3810,7 +3871,10 @@ function buildPreview(brand, tagline, industry) {
     font-size: 13px;
     letter-spacing: .08em;
     color: #999;
-    flex-shrink: 0;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
   }
 
@@ -4123,10 +4187,20 @@ function buildPreview(brand, tagline, industry) {
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    .wsv-live-section { padding: 80px 0 70px; }
-    .wsv-live-grid { padding: 0 18px; }
-    .wsv-live-row { grid-template-columns: 1fr; gap: 28px; min-height: auto; padding: 40px 0; }
+    .wsv-live-section { padding: 80px 0 70px; overflow-x: hidden; }
+    .wsv-live-header { padding: 0 20px; }
+    .wsv-live-grid { padding: 0 18px; max-width: 100%; }
+    .wsv-live-row { grid-template-columns: minmax(0, 1fr); gap: 28px; min-height: auto; padding: 40px 0; }
     .wsv-live-title { font-size: clamp(38px, 10vw, 60px); }
+  }
+  @media (max-width: 480px) {
+    .wsv-live-header { padding: 0 16px; }
+    .wsv-live-grid { padding: 0 14px; }
+    .wsv-lcard-bar { padding: 9px 10px 9px 12px; gap: 8px; }
+    .wsv-lcard-meta { display: none; }
+    .wsv-lcard-url { font-size: 10px; padding: 5px 9px; }
+    .wsv-lcard-maximize { width: 26px; height: 26px; }
+    .wsv-lcard-title-text { font-size: 15px; }
   }
   </style>
 
@@ -4760,14 +4834,41 @@ function buildPreview(brand, tagline, industry) {
   }
 
   @media (max-width: 900px) {
-    .wsv-ptl-inner { padding: 0 20px 72px; }
-    .wsv-ptl-track { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .app-process-tl-section { padding: 56px 0 0; }
+    .wsv-ptl-inner { padding: 0 16px 56px; }
+    .wsv-ptl-header { padding: 0 16px 40px; }
+    .wsv-ptl-title { font-size: clamp(32px, 8vw, 52px); }
+    .wsv-ptl-sub { font-size: 13px; line-height: 1.65; }
+    .wsv-ptl-track {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .wsv-ptl-track::-webkit-scrollbar { display: none; }
     .wsv-ptl-track::before { display: none; }
-    .wsv-ptl-detail { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
-    .wsv-ptl-node { width: 56px; height: 56px; font-size: 20px; }
+    .wsv-ptl-step { padding: 8px 4px; min-width: 56px; }
+    .wsv-ptl-node {
+      width: 48px; height: 48px; font-size: 18px;
+      margin-bottom: 10px;
+      overflow: visible;
+    }
+    .wsv-ptl-step-num {
+      width: 18px; height: 18px; font-size: 8px;
+      top: -6px; right: -3px;
+    }
+    .wsv-ptl-step-label { font-size: 8px; letter-spacing: .03em; line-height: 1.3; }
+    .wsv-ptl-detail { grid-template-columns: 1fr; gap: 20px; padding: 20px 16px; margin-top: 28px; border-radius: 14px; }
+    .wsv-ptl-detail-title { font-size: 28px; }
+    .wsv-ptl-detail-desc { font-size: 13px; margin-bottom: 16px; }
+    .wsv-ptl-mock-card { padding: 12px 14px; gap: 10px; }
+    .wsv-ptl-mock-icon { width: 34px; height: 34px; font-size: 15px; }
   }
-  @media (max-width: 500px) {
-    .wsv-ptl-track { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 480px) {
+    .wsv-ptl-track { grid-template-columns: repeat(5, minmax(52px, 1fr)); }
+    .wsv-ptl-step { min-width: 52px; }
   }
   </style>
 
@@ -5020,14 +5121,63 @@ function buildPreview(brand, tagline, industry) {
     width: 5px; height: 5px; border-radius: 50%;
     background: rgba(255,255,255,.7); flex-shrink: 0;
   }
-
-  @media (max-width: 1100px) {
-    .wsv-caps-deliv-grid { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 900px) {
+    .wsv-caps-deliv-section { padding: 60px 0; }
+    .wsv-caps-deliv-inner { padding: 0 16px; }
+    .wsv-caps-deliv-header { margin-bottom: 32px; }
+    .wsv-caps-deliv-eyebrow { font-size: 10px; padding: 5px 12px; margin-bottom: 14px; }
+    .wsv-caps-deliv-title { font-size: clamp(30px, 8vw, 48px); margin-bottom: 10px; }
+    .wsv-caps-deliv-subtitle { font-size: 13px; }
+    .wsv-caps-deliv-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .wsv-caps-deliv-card {
+      padding: 14px 12px;
+      border-radius: 12px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 10px;
+      row-gap: 4px;
+    }
+    .wsv-caps-deliv-card-icon {
+      font-size: 20px;
+      margin-bottom: 0;
+      grid-column: 1;
+      grid-row: 1;
+      align-self: center;
+    }
+    .wsv-caps-deliv-card-title {
+      font-size: 11px;
+      grid-column: 2;
+      grid-row: 1;
+      align-self: center;
+      margin-bottom: 0;
+    }
+    .wsv-caps-deliv-card-desc {
+      font-size: 11px;
+      line-height: 1.5;
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    .wsv-caps-deliv-card-check {
+      top: 10px; right: 10px;
+      width: 18px; height: 18px;
+      font-size: 9px;
+    }
+    .wsv-caps-deliv-strip {
+      padding: 22px 18px;
+      border-radius: 14px;
+      gap: 18px;
+    }
+    .wsv-caps-deliv-strip-heading { font-size: clamp(22px, 6vw, 32px); }
+    .wsv-caps-deliv-strip-right { gap: 8px; }
+    .wsv-caps-deliv-strip-pill { padding: 6px 12px; font-size: 10px; }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 380px) {
     .wsv-caps-deliv-grid { grid-template-columns: 1fr; }
-    .wsv-caps-deliv-inner { padding: 0 20px; }
-    .wsv-caps-deliv-strip { padding: 28px 24px; }
   }
   </style>
 
@@ -5237,9 +5387,31 @@ function buildPreview(brand, tagline, industry) {
     .wsv-final-p { margin: 0 auto; }
   }
   @media (max-width: 600px) {
-    .wsv-final-cta { padding: 60px 24px; }
-    .wsv-proposal-form { padding: 24px 18px; }
-    .wsv-pf-row { grid-template-columns: 1fr; }
+    .wsv-final-cta { padding: 40px 16px; }
+    .wsv-final-h { font-size: clamp(38px, 11vw, 58px); margin-bottom: 10px; }
+    .wsv-final-p { font-size: 12px; line-height: 1.6; }
+    .wsv-final-tag { font-size: 11px; padding: 5px 12px; margin-bottom: 14px; }
+    .wsv-proposal-form {
+      padding: 20px 16px 18px;
+      border-radius: 16px;
+    }
+    .wsv-pf-row { grid-template-columns: 1fr; gap: 0; }
+    .wsv-pf-field { margin-bottom: 10px; gap: 4px; }
+    .wsv-pf-label { font-size: 9px; letter-spacing: .12em; }
+    .wsv-pf-input {
+      padding: 11px 13px;
+      font-size: 14px;
+      border-radius: 9px;
+      min-height: 44px;
+      box-sizing: border-box;
+    }
+    .wsv-pf-btn {
+      margin-top: 4px;
+      padding: 14px;
+      font-size: 15px;
+      border-radius: 9px;
+      min-height: 48px;
+    }
   }
   </style>
 
@@ -6247,8 +6419,8 @@ function wsvScrollToAnchor(id) {
 
     <div class="footer-bottom-row">
       <div class="enquiry-form">
-        <input type="text" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID">
-        <button class="enquiry-btn" onclick="navigate('contact')" aria-label="Submit enquiry and go to contact page">Enquiry</button>
+        <input type="text" id="footer-enquiry-input" placeholder="ENTER YOUR MOBILE NUMBER OR MAIL ID" autocomplete="off">
+        <button class="enquiry-btn" id="footer-enquiry-btn" onclick="tsmFooterEnquiry(event)" aria-label="Submit enquiry">Enquiry</button>
       </div>
       <div class="legal-links">
         <span class="legal-title">Legal Links</span>
