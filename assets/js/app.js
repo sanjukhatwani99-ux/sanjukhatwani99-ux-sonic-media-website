@@ -14,7 +14,7 @@ const PAGES = ['home','about','services','studio','casestudies','journal','futur
    (falls back to SPA toggle if the target page div exists in the same file).
 */
 const PAGE_FILE_MAP = {
-  'home':        '../',
+  'home':        '/',
   'about':       '../about',
   'services':    '../services',
   'studio':      '../studio',
