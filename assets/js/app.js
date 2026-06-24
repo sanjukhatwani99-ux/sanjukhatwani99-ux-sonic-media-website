@@ -895,7 +895,55 @@ function openWorkDetail(id) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${w.title} — The Sonic Media</title>
+<title>${w.title} — Portfolio — The Sonic Media</title>
+<meta name="description" content="${w.about || w.subtitle} — A portfolio project by The Sonic Media, a premium digital marketing agency in India.">
+<link rel="icon" type="image/jpeg" href="${w.images[0].url.split('?')[0]}?w=32&h=32&fit=crop">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Sonic Media">
+<meta property="og:title" content="${w.title} — The Sonic Media Portfolio">
+<meta property="og:description" content="${w.about || w.subtitle}">
+<meta property="og:image" content="${w.images[0].url.replace(/w=\d+/,'w=1200')}&h=630&fit=crop">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${w.title}">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@thesonicmedia">
+<meta name="twitter:title" content="${w.title} — The Sonic Media Portfolio">
+<meta name="twitter:description" content="${w.about || w.subtitle}">
+<meta name="twitter:image" content="${w.images[0].url.replace(/w=\d+/,'w=1200')}&h=630&fit=crop">
+<meta name="robots" content="index, follow">
+<meta name="author" content="The Sonic Media">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CreativeWork",
+      "@id": "https://thesonicmedia.com/studio#${id}",
+      "name": "${w.title.replace(/"/g,'\\"')}",
+      "description": "${(w.about || w.subtitle).replace(/"/g,'\\"')}",
+      "image": "${w.images[0].url}",
+      "creator": {
+        "@type": "Organization",
+        "name": "The Sonic Media",
+        "url": "https://thesonicmedia.com"
+      },
+      "dateCreated": "${w.year || '2026'}",
+      "genre": "${w.category}",
+      "locationCreated": "${w.location || 'India'}"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://thesonicmedia.com/"},
+        {"@type":"ListItem","position":2,"name":"Portfolio","item":"https://thesonicmedia.com/studio"},
+        {"@type":"ListItem","position":3,"name":"${w.title.replace(/"/g,'\\"')}"}
+      ]
+    }
+  ]
+}
+<\/script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -1264,6 +1312,69 @@ function openCaseStudy(id) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${cs.title} — The Sonic Media</title>
+<meta name="description" content="${cs.subtitle}">
+<link rel="icon" type="image/jpeg" href="${cs.images[0].url.split('?')[0]}?w=32&h=32&fit=crop">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Sonic Media">
+<meta property="og:title" content="${cs.title}">
+<meta property="og:description" content="${cs.subtitle}">
+<meta property="og:image" content="${cs.images[0].url.replace(/w=\d+/,'w=1200')}&h=630&fit=crop">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${cs.title}">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@thesonicmedia">
+<meta name="twitter:title" content="${cs.title}">
+<meta name="twitter:description" content="${cs.subtitle}">
+<meta name="twitter:image" content="${cs.images[0].url.replace(/w=\d+/,'w=1200')}&h=630&fit=crop">
+<meta name="robots" content="index, follow">
+<meta name="author" content="The Sonic Media">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://thesonicmedia.com/casestudies#${id}",
+      "headline": "${cs.title.replace(/"/g,'\\"')}",
+      "description": "${cs.subtitle.replace(/"/g,'\\"')}",
+      "image": {
+        "@type": "ImageObject",
+        "url": "${cs.images[0].url}",
+        "width": 1200,
+        "height": 630
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "The Sonic Media",
+        "url": "https://thesonicmedia.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "The Sonic Media",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://res.cloudinary.com/dq2nrpky0/image/upload/v1779787887/favicon_oalxfi.png"
+        }
+      },
+      "datePublished": "${cs.date}",
+      "dateModified": "${cs.date}",
+      "mainEntityOfPage": "https://thesonicmedia.com/casestudies",
+      "articleSection": "${cs.category}",
+      "keywords": "${cs.category}, case study, digital marketing India, The Sonic Media"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://thesonicmedia.com/"},
+        {"@type":"ListItem","position":2,"name":"Case Studies","item":"https://thesonicmedia.com/casestudies"},
+        {"@type":"ListItem","position":3,"name":"${cs.title.replace(/"/g,'\\"')}"}
+      ]
+    }
+  ]
+}
+<\/script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -1565,6 +1676,74 @@ function openBlogArticle(id) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${art.title} — The Sonic Media Journal</title>
 <meta name="description" content="${art.subtitle}">
+<link rel="icon" type="image/jpeg" href="${art.img}&w=32&h=32&fit=crop">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Sonic Media">
+<meta property="og:title" content="${art.title}">
+<meta property="og:description" content="${art.subtitle}">
+<meta property="og:image" content="${art.img.replace('w=1200','w=1200')}&h=630&fit=crop">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${art.title} — The Sonic Media Journal">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@thesonicmedia">
+<meta name="twitter:title" content="${art.title}">
+<meta name="twitter:description" content="${art.subtitle}">
+<meta name="twitter:image" content="${art.img.replace('w=1200','w=1200')}&h=630&fit=crop">
+<meta name="twitter:label1" content="Reading time">
+<meta name="twitter:data1" content="${art.readTime}">
+<meta name="twitter:label2" content="Category">
+<meta name="twitter:data2" content="${art.cat}">
+<meta name="robots" content="index, follow">
+<meta name="author" content="The Sonic Media">
+<meta name="article:published_time" content="${art.date}">
+<meta name="article:section" content="${art.cat}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://thesonicmedia.com/journal#${art.id || id}",
+      "headline": "${art.title.replace(/"/g,'\\"')}",
+      "description": "${art.subtitle.replace(/"/g,'\\"')}",
+      "image": {
+        "@type": "ImageObject",
+        "url": "${art.img}",
+        "width": 1200,
+        "height": 630
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "The Sonic Media",
+        "url": "https://thesonicmedia.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "The Sonic Media",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://res.cloudinary.com/dq2nrpky0/image/upload/v1779787887/favicon_oalxfi.png"
+        }
+      },
+      "datePublished": "${art.date}",
+      "dateModified": "${art.date}",
+      "mainEntityOfPage": "https://thesonicmedia.com/journal",
+      "articleSection": "${art.cat}",
+      "keywords": "${art.cat}, digital marketing India, The Sonic Media"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://thesonicmedia.com/"},
+        {"@type":"ListItem","position":2,"name":"Journal","item":"https://thesonicmedia.com/journal"},
+        {"@type":"ListItem","position":3,"name":"${art.title.replace(/"/g,'\\"')}"}
+      ]
+    }
+  ]
+}
+<\/script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -1992,10 +2171,21 @@ function renderPageData() {
   setEl('home-portfolio-title', `${pt.titleMain}<br>${pt.titleSub} <em id="home-portfolio-title-em">${pt.titleEm}</em>`);
   setEl('home-portfolio-tagline', pt.tagline);
 
+  const PORT_CAT_ICON = {
+    'Web Design & Development':'🌐',
+    'Creative Design':'🎨',
+    'Presentation Design':'📊',
+    'Branding & Advertising Solutions':'✨',
+    'Content Production & Creative Direction':'🎬',
+    'Event Branding & Promotional Design':'🎪',
+  };
   function buildWorkRow(w) {
     const tagsHTML = w.tags.map(t => `<span class="fw-row-tag">${t}</span>`).join('');
+    const portIcon = PORT_CAT_ICON[w.cat] || '🏆';
     return `<div class="fw-row" onclick="openWorkDetail('${w.id}')">
-      <div class="fw-row-num">${w.num}</div>
+      <div class="fw-row-num" style="position:relative;">${w.num}
+        <div style="position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:26px;height:26px;border-radius:6px;background:rgba(255,92,0,.12);border:1px solid rgba(255,92,0,.2);display:flex;align-items:center;justify-content:center;font-size:13px;" title="${w.cat}">${portIcon}</div>
+      </div>
       <div class="fw-row-info">
         <div>
           <div class="fw-row-cat">${w.cat}</div>
@@ -2023,9 +2213,13 @@ function renderPageData() {
   setEl('home-casestudies-tag', cs.tag);
   setEl('home-casestudies-title', `${cs.titleMain}<span id="home-casestudies-title-span">${cs.titleSpan}</span>`);
 
+  const CS_CAT_ICON = {'strategy':'💡','performance':'🚀','seo':'🔍','social':'📣','branding':'🎨','technology':'⚙️'};
   function buildJcard(item, readLabel) {
+    const catIcon = CS_CAT_ICON[item.cat] || '📊';
     return `<div class="jcard" onclick="openCaseStudy('${item.id}')" style="cursor:pointer;" data-cat="${item.cat}">
-      <div class="jcard-img"><img src="${item.img}" alt="" loading="lazy"></div>
+      <div class="jcard-img" style="position:relative;"><img src="${item.img}" alt="${item.title}" loading="lazy">` +
+      `<div style="position:absolute;top:10px;left:10px;width:32px;height:32px;border-radius:8px;background:rgba(8,8,8,.75);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:15px;" title="${item.catLabel}">${catIcon}</div>` +
+      `</div>
       <div class="jcard-body">
         <div class="jcard-meta"><div class="jcard-cat">${item.catLabel}</div><div class="jcard-date">${item.date}</div></div>
         <div class="jcard-title">${item.title}</div>
@@ -2045,11 +2239,16 @@ function renderPageData() {
 
   const svgDot = (fill) => `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none"><path fill="${fill}" d="M5 2c0 1.105-1.895 2-3 2a2 2 0 1 1 0-4c1.105 0 3 .895 3 2ZM11 3.5c0 1.105-.895 3-2 3s-2-1.895-2-3a2 2 0 1 1 4 0ZM6 9a2 2 0 1 1-4 0c0-1.105.895-3 2-3s2 1.895 2 3Z"/></svg>`;
 
+  const FV_ICONS = ['🤖','🥽','💗','🏙️','🎬','🧠','🧬','👤','🔮','🌐'];
   function buildFvPanel(p, index, linkTarget) {
+    const fvIcon = FV_ICONS[index] || '✨';
     return `
       <div class="fv-arch__info" id="fv-panel-${index}">
         <div class="fv-content">
-          <div class="section-tag" style="margin-bottom:12px;">${p.tag}</div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,92,0,.12);border:1px solid rgba(255,92,0,.25);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">${fvIcon}</div>
+            <div class="section-tag" style="margin-bottom:0;">${p.tag}</div>
+          </div>
           <h2 class="fv-header">${p.title}</h2>
           <p class="fv-desc">${p.desc}</p>
           <div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;">
@@ -2066,10 +2265,14 @@ function renderPageData() {
   }
 
   function buildFvPagePanel(p, index) {
+    const fvIcon = FV_ICONS[index] || '✨';
     return `
       <div class="fv-arch__info" id="fv-page-panel-${index}">
         <div class="fv-content">
-          <div class="section-tag" style="margin-bottom:12px;">${p.tag}</div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,92,0,.12);border:1px solid rgba(255,92,0,.25);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">${fvIcon}</div>
+            <div class="section-tag" style="margin-bottom:0;">${p.tag}</div>
+          </div>
           <h2 class="fv-header">${p.title}</h2>
           <p class="fv-desc">${p.desc}</p>
           <div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;">
@@ -2097,7 +2300,34 @@ function renderPageData() {
 
   /* ── JOURNAL ── */
   const jnl = D.journal;
-  const buildBlogItem = p => `<div class="blog-item"><div class="blog-num">${p.num}</div><div class="blog-info"><div class="bt">${p.title}</div><div class="bm"><span>${p.cat}</span>· ${p.time} · ${p.date}</div><div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('${p.id}');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:gap .25s;" onmouseover="this.style.gap='12px'" onmouseout="this.style.gap='6px'">Read Full Article →</a></div></div></div>`;
+  const BLOG_THUMB = {
+    'blog-google-ai-seo':      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=80&q=80',
+    'blog-meta-roas':          'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=80&q=80',
+    'blog-brand-trust':        'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=80&q=80',
+    'blog-reels-algorithm':    'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=80&q=80',
+    'blog-website-conversion': 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=80&q=80',
+    'blog-ai-content':         'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=80&q=80',
+    'blog-local-seo':          'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=80&q=80',
+    'blog-ecom-launch':        'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=80&q=80',
+    'blog-influencer-roi':     'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=80&q=80',
+    'blog-whatsapp-marketing': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=80&q=80',
+  };
+  const CAT_ICON = {'SEO':'🔍','Performance':'🚀','Branding':'🎨','Social Media':'📣','Web Dev':'🌐','Content':'🎬','E-Commerce':'🛒','Influencer':'🤝','Strategy':'💡'};
+  const buildBlogItem = p => {
+    const thumb = BLOG_THUMB[p.id] || '';
+    const icon  = CAT_ICON[p.cat] || '📝';
+    const thumbHtml = thumb
+      ? `<div style="flex-shrink:0;width:64px;height:64px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.08);position:relative;">` +
+        `<img src="${thumb}" alt="${p.title}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">` +
+        `<div style="position:absolute;bottom:4px;right:4px;width:20px;height:20px;border-radius:50%;background:rgba(8,8,8,.75);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;font-size:10px;">${icon}</div>` +
+        `</div>`
+      : `<div style="flex-shrink:0;width:64px;height:64px;border-radius:10px;background:rgba(255,92,0,.1);border:1px solid rgba(255,92,0,.2);display:flex;align-items:center;justify-content:center;font-size:26px;">${icon}</div>`;
+    return `<div class="blog-item" style="display:flex;gap:16px;align-items:flex-start;">` +
+      thumbHtml +
+      `<div class="blog-info" style="flex:1;min-width:0;"><div class="bt">${p.title}</div><div class="bm"><span>${p.cat}</span>· ${p.time} · ${p.date}</div>` +
+      `<div style="margin-top:8px;"><a href="#" onclick="openBlogArticle('${p.id}');return false;" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:gap .25s;" onmouseover="this.style.gap='12px'" onmouseout="this.style.gap='6px'">Read Full Article →</a></div>` +
+      `</div></div>`;
+  };
   const homePostsHTML = jnl.posts.slice(0, 5).map(buildBlogItem).join('');
   const allPostsHTML  = jnl.posts.map(buildBlogItem).join('');
 
@@ -3620,7 +3850,68 @@ window.tsmNewsletterSubmit = function(e) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${p.title} — The Sonic Media</title>
+<title>${p.title} — Future Vision — The Sonic Media</title>
+<meta name="description" content="${p.desc}">
+<link rel="icon" type="image/jpeg" href="${p.img.split('?')[0]}?w=32&h=32&fit=crop">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Sonic Media">
+<meta property="og:title" content="${p.title} — The Sonic Media Future Vision">
+<meta property="og:description" content="${p.desc}">
+<meta property="og:image" content="${p.img.replace(/w=\d+/,'w=1200')}&h=630&fit=crop">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${p.title}">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@thesonicmedia">
+<meta name="twitter:title" content="${p.title} — The Sonic Media Future Vision">
+<meta name="twitter:description" content="${p.desc}">
+<meta name="twitter:image" content="${p.img.replace(/w=\d+/,'w=1200')}&h=630&fit=crop">
+<meta name="robots" content="index, follow">
+<meta name="author" content="The Sonic Media">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://thesonicmedia.com/future#${index}",
+      "headline": "${p.title.replace(/"/g,'\\"')}",
+      "description": "${p.desc.replace(/"/g,'\\"')}",
+      "image": {
+        "@type": "ImageObject",
+        "url": "${p.img}",
+        "width": 1200,
+        "height": 630
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "The Sonic Media",
+        "url": "https://thesonicmedia.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "The Sonic Media",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://res.cloudinary.com/dq2nrpky0/image/upload/v1779787887/favicon_oalxfi.png"
+        }
+      },
+      "mainEntityOfPage": "https://thesonicmedia.com/future",
+      "articleSection": "Future Vision",
+      "keywords": "${p.tag}, future of marketing, AI marketing, The Sonic Media"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://thesonicmedia.com/"},
+        {"@type":"ListItem","position":2,"name":"Future Vision","item":"https://thesonicmedia.com/future"},
+        {"@type":"ListItem","position":3,"name":"${p.title.replace(/"/g,'\\"')}"}
+      ]
+    }
+  ]
+}
+<\/script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
