@@ -10,13 +10,8 @@
   .wrap { position: relative; width: 100%; max-width: 608px; margin: 0 auto; display: block; }
   .wrap img { width: 100%; display: block; user-select: none; pointer-events: none; }
   a.hs {
-    position: absolute;
-    display: block;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: 18px;
-    -webkit-tap-highlight-color: transparent;
-    outline: none;
+    position: absolute; display: block; cursor: pointer; text-decoration: none;
+    border-radius: 18px; -webkit-tap-highlight-color: transparent; outline: none;
     transition: transform 180ms ease, filter 180ms ease;
   }
   a.hs:hover  { transform: scale(1.04); filter: brightness(1.15) drop-shadow(0 0 8px rgba(255,255,255,0.15)); }
@@ -27,83 +22,364 @@
 <body>
 <div class="wrap">
   <img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1782335002/LINKTREE-02-01_t3qbtg.jpg" alt="thesonicmedia linktree" draggable="false">
-
-  <!-- ── TOP BAR ─────────────────────────────────── -->
-
-  <!-- Back button → Website -->
-  <a class="hs circle"
-     href="https://www.thesonicmedia.com" target="_blank" rel="noopener"
-     aria-label="Back / Website"
-     style="left:4.44%;top:1.57%;width:10%;height:4.29%;"></a>
-
-  <!-- Call icon 1 (LEFT phone) → Mohit Kalwani +91 91577 07249 -->
-  <a class="hs circle"
-     href="tel:+919157707249"
-     aria-label="Call Sanju Khatwani"
-     style="left:70.37%;top:1.14%;width:11.85%;height:4.86%;"></a>
-
-  <!-- Call icon 2 (RIGHT phone) → Sanju Khatwani +91 87330 87249 -->
-  <a class="hs circle"
-     href="tel:+918733087249"
-     aria-label="Call Mohit Kalwani"
-     style="left:83.7%;top:1.14%;width:11.85%;height:4.86%;"></a>
-
-  <!-- ── ROW 1 ─────────────────────────────────── -->
-
-  <!-- Dribbble tile → Website -->
-  <a class="hs"
-     href="https://www.thesonicmedia.com" target="_blank" rel="noopener"
-     aria-label="Website"
-     style="left:8.78%;top:28.51%;width:35.96%;height:13.89%;"></a>
-
-  <!-- Instagram tile -->
-  <a class="hs"
-     href="https://www.instagram.com/thesonicmedia/" target="_blank" rel="noopener"
-     aria-label="Instagram"
-     style="left:55.26%;top:28.51%;width:35.93%;height:13.89%;"></a>
-
-  <!-- ── ROW 2 ─────────────────────────────────── -->
-
-  <!-- WhatsApp – Mohit Kalwani -->
-  <a class="hs"
-     href="https://wa.me/918733087249" target="_blank" rel="noopener"
-     aria-label="WhatsApp Mohit Kalwani"
-     style="left:8.78%;top:46.55%;width:35.96%;height:13.89%;"></a>
-
-  <!-- WhatsApp – Sanju Khatwani -->
-  <a class="hs"
-     href="https://wa.me/919157707249" target="_blank" rel="noopener"
-     aria-label="WhatsApp Sanju Khatwani"
-     style="left:55.26%;top:46.55%;width:35.93%;height:13.89%;"></a>
-
-  <!-- ── ROW 3 ─────────────────────────────────── -->
-
-  <!-- Facebook -->
-  <a class="hs"
-     href="https://www.facebook.com/people/The-Sonic-Media/61588527764890/" target="_blank" rel="noopener"
-     aria-label="Facebook"
-     style="left:8.78%;top:64.54%;width:35.96%;height:13.89%;"></a>
-
-  <!-- LinkedIn -->
-  <a class="hs"
-     href="https://www.linkedin.com/company/the-sonic-media/" target="_blank" rel="noopener"
-     aria-label="LinkedIn"
-     style="left:55.26%;top:64.54%;width:35.93%;height:13.89%;"></a>
-
-  <!-- ── ROW 4 ─────────────────────────────────── -->
-
-  <!-- Threads -->
-  <a class="hs"
-     href="https://www.threads.com/@thesonicmedia/" target="_blank" rel="noopener"
-     aria-label="Threads"
-     style="left:8.78%;top:82.52%;width:35.96%;height:13.89%;"></a>
-
-  <!-- X / Twitter -->
-  <a class="hs"
-     href="https://x.com/thesonicmedia" target="_blank" rel="noopener"
-     aria-label="X (Twitter)"
-     style="left:55.26%;top:82.52%;width:35.93%;height:13.89%;"></a>
-
+  <a class="hs circle" href="https://www.thesonicmedia.com" target="_blank" rel="noopener" aria-label="Back / Website" style="left:4.44%;top:1.57%;width:10%;height:4.29%;"></a>
+  <a class="hs circle" href="tel:+919157707249" aria-label="Call Sanju Khatwani" style="left:70.37%;top:1.14%;width:11.85%;height:4.86%;"></a>
+  <a class="hs circle" href="tel:+918733087249" aria-label="Call Mohit Kalwani" style="left:83.7%;top:1.14%;width:11.85%;height:4.86%;"></a>
+  <a class="hs" href="https://www.thesonicmedia.com" target="_blank" rel="noopener" aria-label="Website" style="left:8.78%;top:28.51%;width:35.96%;height:13.89%;"></a>
+  <a class="hs" href="https://www.instagram.com/thesonicmedia/" target="_blank" rel="noopener" aria-label="Instagram" style="left:55.26%;top:28.51%;width:35.93%;height:13.89%;"></a>
+  <a class="hs" href="https://wa.me/918733087249" target="_blank" rel="noopener" aria-label="WhatsApp Mohit Kalwani" style="left:8.78%;top:46.55%;width:35.96%;height:13.89%;"></a>
+  <a class="hs" href="https://wa.me/919157707249" target="_blank" rel="noopener" aria-label="WhatsApp Sanju Khatwani" style="left:55.26%;top:46.55%;width:35.93%;height:13.89%;"></a>
+  <a class="hs" href="https://www.facebook.com/people/The-Sonic-Media/61588527764890/" target="_blank" rel="noopener" aria-label="Facebook" style="left:8.78%;top:64.54%;width:35.96%;height:13.89%;"></a>
+  <a class="hs" href="https://www.linkedin.com/company/the-sonic-media/" target="_blank" rel="noopener" aria-label="LinkedIn" style="left:55.26%;top:64.54%;width:35.93%;height:13.89%;"></a>
+  <a class="hs" href="https://www.threads.com/@thesonicmedia/" target="_blank" rel="noopener" aria-label="Threads" style="left:8.78%;top:82.52%;width:35.96%;height:13.89%;"></a>
+  <a class="hs" href="https://x.com/thesonicmedia" target="_blank" rel="noopener" aria-label="X (Twitter)" style="left:55.26%;top:82.52%;width:35.93%;height:13.89%;"></a>
 </div>
+
+<!-- ASSISTIVE TOUCH -->
+<div id="assistive-touch" title="Quick Enquiry" aria-label="Open Enquiry Form">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+</div>
+
+<!-- ENQUIRY MODAL -->
+<div id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="modal-box">
+    <div id="modal-header">
+      <span id="modal-title">Quick Enquiry</span>
+      <button id="modal-close" aria-label="Close">&times;</button>
+    </div>
+
+    <div id="enquiry-form">
+
+      <!-- Mobile / Email toggled field -->
+      <div class="field-label">
+        <div id="contact-tabs">
+          <button class="ctab active" data-type="mobile">Mobile Number</button>
+          <button class="ctab" data-type="email">Mail ID</button>
+        </div>
+        <input type="tel"   id="input-mobile" placeholder="+91 00000 00000" maxlength="15" inputmode="tel">
+        <input type="email" id="input-email"  placeholder="you@example.com" inputmode="email" style="display:none;">
+      </div>
+
+      <!-- Enquiry About — custom dropdown -->
+      <div class="field-label">Enquiry About
+        <div id="dropdown-wrap">
+          <div id="dropdown-trigger">
+            <span id="dropdown-label">Select services…</span>
+            <svg id="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div id="dropdown-panel">
+            <div id="dd-actions">
+              <button id="select-all-btn" type="button">Select All</button>
+              <button id="deselect-all-btn" type="button">Deselect All</button>
+            </div>
+            <div class="dd-item" data-val="Website Development"><span>Website Development</span><div class="chk"></div></div>
+            <div class="dd-item" data-val="Mobile App Development"><span>Mobile App Development</span><div class="chk"></div></div>
+            <div class="dd-item" data-val="Search Engine Optimization"><span>Search Engine Optimization</span><div class="chk"></div></div>
+            <div class="dd-item" data-val="Social Media Management"><span>Social Media Management</span><div class="chk"></div></div>
+            <div class="dd-item" data-val="Performance Marketing"><span>Performance Marketing</span><div class="chk"></div></div>
+            <div class="dd-item" data-val="Influencer Marketing"><span>Influencer Marketing</span><div class="chk"></div></div>
+            <div class="dd-item" data-val="E-Commerce Marketing"><span>E-Commerce Marketing</span><div class="chk"></div></div>
+            <div class="dd-item" data-val="Content Production & Photo/Video"><span>Content Production &amp; Photo/Video</span><div class="chk"></div></div>
+            <div class="dd-item" data-val="Branding & Advertising Solutions"><span>Branding &amp; Advertising Solutions</span><div class="chk"></div></div>
+            <div class="dd-item" data-val="AI Doodling / Editing"><span>AI Doodling / Editing</span><div class="chk"></div></div>
+          </div>
+        </div>
+        <div id="selected-tags"></div>
+      </div>
+
+      <!-- Message -->
+      <div class="field-label">Message
+        <textarea id="enquiry-msg" placeholder="Tell us a little more about your requirements…" rows="3"></textarea>
+      </div>
+
+      <button id="submit-btn">Send Enquiry</button>
+    </div>
+
+    <!-- Success -->
+    <div id="success-msg" hidden>
+      <div id="success-icon">&#10003;</div>
+      <p>Thank you! We'll get back to you shortly.</p>
+      <button id="close-success">Done</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Assistive Touch */
+  #assistive-touch {
+    position: fixed; bottom: 32px; right: 20px;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b35, #f7c948);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 9999;
+    box-shadow: 0 4px 18px rgba(255,107,53,0.55);
+    animation: pulse-ring 2.2s ease-out infinite;
+    transition: transform 180ms ease; user-select: none;
+  }
+  #assistive-touch:hover  { transform: scale(1.1); }
+  #assistive-touch:active { transform: scale(0.94); }
+  @keyframes pulse-ring {
+    0%   { box-shadow: 0 4px 18px rgba(255,107,53,0.55), 0 0 0 0 rgba(255,107,53,0.4); }
+    60%  { box-shadow: 0 4px 18px rgba(255,107,53,0.55), 0 0 0 14px rgba(255,107,53,0); }
+    100% { box-shadow: 0 4px 18px rgba(255,107,53,0.55), 0 0 0 0 rgba(255,107,53,0); }
+  }
+
+  /* Overlay */
+  #modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6); z-index: 10000;
+    align-items: flex-end; justify-content: center; padding: 0 0 88px;
+  }
+  #modal-overlay.open { display: flex; animation: fade-in 180ms ease; }
+  @keyframes fade-in { from { opacity:0; } to { opacity:1; } }
+
+  /* Modal box */
+  #modal-box {
+    background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px; width: min(390px, calc(100vw - 20px));
+    max-height: 86vh; overflow-y: auto;
+    animation: slide-up 220ms cubic-bezier(.22,1,.36,1);
+    scrollbar-width: none;
+  }
+  #modal-box::-webkit-scrollbar { display: none; }
+  @keyframes slide-up { from { transform: translateY(30px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+
+  #modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 18px 14px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: sticky; top: 0; background: #1a1a1a; z-index: 2;
+  }
+  #modal-title { font-family: sans-serif; font-size: 15px; font-weight: 600; color: #fff; }
+  #modal-close { background: none; border: none; color: rgba(255,255,255,0.45); font-size: 24px; line-height: 1; cursor: pointer; transition: color 120ms; }
+  #modal-close:hover { color: #fff; }
+
+  /* Form */
+  #enquiry-form { padding: 18px 18px 22px; display: flex; flex-direction: column; gap: 18px; }
+  .field-label { display: flex; flex-direction: column; gap: 8px; font-family: sans-serif; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.7px; }
+
+  /* Contact tabs */
+  #contact-tabs { display: flex; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 3px; gap: 3px; }
+  .ctab {
+    flex: 1; padding: 8px 10px; border: none; border-radius: 8px;
+    background: none; color: rgba(255,255,255,0.45);
+    font-family: sans-serif; font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all 150ms; text-transform: none; letter-spacing: 0;
+  }
+  .ctab.active { background: linear-gradient(135deg, #ff6b35, #f7c948); color: #fff; font-weight: 600; }
+
+  /* Inputs */
+  #enquiry-form input, #enquiry-form textarea {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px; color: #fff; font-family: sans-serif; font-size: 14px;
+    padding: 11px 13px; outline: none; transition: border-color 150ms; width: 100%;
+  }
+  #enquiry-form input::placeholder, #enquiry-form textarea::placeholder { color: rgba(255,255,255,0.22); }
+  #enquiry-form input:focus, #enquiry-form textarea:focus { border-color: #ff6b35; }
+  #enquiry-form textarea { resize: none; font-family: sans-serif; }
+
+  /* Custom dropdown */
+  #dropdown-wrap { position: relative; }
+  #dropdown-trigger {
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px; padding: 11px 13px; cursor: pointer;
+    transition: border-color 150ms; user-select: none;
+  }
+  #dropdown-trigger:hover, #dropdown-wrap.open #dropdown-trigger { border-color: #ff6b35; }
+  #dropdown-label { font-family: sans-serif; font-size: 14px; color: rgba(255,255,255,0.35); text-transform: none; letter-spacing: 0; font-weight: 400; }
+  #dropdown-label.has-val { color: #fff; }
+  #dropdown-arrow { stroke: rgba(255,255,255,0.4); transition: transform 200ms; flex-shrink: 0; }
+  #dropdown-wrap.open #dropdown-arrow { transform: rotate(180deg); }
+
+  #dropdown-panel {
+    display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+    background: #242424; border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px; overflow: hidden; z-index: 50;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    max-height: 260px; overflow-y: auto; scrollbar-width: none;
+  }
+  #dropdown-panel::-webkit-scrollbar { display: none; }
+  #dropdown-wrap.open #dropdown-panel { display: block; animation: dd-in 150ms ease; }
+  @keyframes dd-in { from { opacity:0; transform: translateY(-6px); } to { opacity:1; transform: translateY(0); } }
+
+  #dd-actions {
+    display: flex; gap: 1px; background: rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  #select-all-btn, #deselect-all-btn {
+    flex: 1; padding: 9px; background: none; border: none;
+    font-family: sans-serif; font-size: 12px; font-weight: 600;
+    cursor: pointer; transition: background 150ms; text-transform: none; letter-spacing: 0;
+  }
+  #select-all-btn { color: #ff8c5a; border-right: 1px solid rgba(255,255,255,0.08); }
+  #select-all-btn:hover { background: rgba(255,107,53,0.12); }
+  #deselect-all-btn { color: rgba(255,255,255,0.4); }
+  #deselect-all-btn:hover { background: rgba(255,255,255,0.06); }
+
+  .dd-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 14px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 120ms; gap: 10px;
+  }
+  .dd-item:last-child { border-bottom: none; }
+  .dd-item:hover { background: rgba(255,255,255,0.04); }
+  .dd-item.selected { background: rgba(255,107,53,0.1); }
+  .dd-item span { font-family: sans-serif; font-size: 13px; color: rgba(255,255,255,0.7); text-transform: none; letter-spacing: 0; font-weight: 400; flex: 1; }
+  .dd-item.selected span { color: #fff; }
+  .chk {
+    width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.2);
+    flex-shrink: 0; transition: all 150ms; display: flex; align-items: center; justify-content: center;
+  }
+  .dd-item.selected .chk { background: linear-gradient(135deg, #ff6b35, #f7c948); border-color: transparent; }
+  .dd-item.selected .chk::after { content: '✓'; font-size: 11px; color: #fff; font-weight: 700; }
+
+  /* Selected tags */
+  #selected-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stag {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(255,107,53,0.15); border: 1px solid rgba(255,107,53,0.3);
+    border-radius: 20px; padding: 4px 10px 4px 12px;
+    font-family: sans-serif; font-size: 12px; color: #ff8c5a; font-weight: 500;
+  }
+  .stag-x { cursor: pointer; font-size: 14px; color: rgba(255,107,53,0.6); line-height: 1; }
+  .stag-x:hover { color: #ff6b35; }
+
+  /* Submit */
+  #submit-btn {
+    width: 100%; padding: 13px; border: none; border-radius: 12px;
+    background: linear-gradient(135deg, #ff6b35, #f7c948);
+    color: #fff; font-family: sans-serif; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: opacity 150ms, transform 100ms;
+  }
+  #submit-btn:hover  { opacity: 0.9; }
+  #submit-btn:active { transform: scale(0.97); }
+
+  /* Success */
+  #success-msg { padding: 36px 18px 32px; text-align: center; }
+  #success-icon { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #ff6b35, #f7c948); color: #fff; font-size: 28px; line-height: 56px; margin: 0 auto 16px; }
+  #success-msg p { font-family: sans-serif; color: rgba(255,255,255,0.75); font-size: 14px; margin-bottom: 22px; }
+  #close-success { padding: 11px 36px; border: none; border-radius: 10px; background: linear-gradient(135deg, #ff6b35, #f7c948); color: #fff; font-family: sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; }
+</style>
+
+<script>
+  const overlay   = document.getElementById('modal-overlay');
+  const form      = document.getElementById('enquiry-form');
+  const successEl = document.getElementById('success-msg');
+  const ddWrap    = document.getElementById('dropdown-wrap');
+  const ddLabel   = document.getElementById('dropdown-label');
+  const tagsEl    = document.getElementById('selected-tags');
+
+  // Open / close modal
+  document.getElementById('assistive-touch').addEventListener('click', () => overlay.classList.add('open'));
+  document.getElementById('modal-close').addEventListener('click', () => { overlay.classList.remove('open'); ddWrap.classList.remove('open'); });
+  overlay.addEventListener('click', e => { if (e.target === overlay) { overlay.classList.remove('open'); ddWrap.classList.remove('open'); } });
+
+  // Contact tabs
+  document.querySelectorAll('.ctab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.ctab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (btn.dataset.type === 'mobile') {
+        document.getElementById('input-mobile').style.display = '';
+        document.getElementById('input-email').style.display = 'none';
+      } else {
+        document.getElementById('input-mobile').style.display = 'none';
+        document.getElementById('input-email').style.display = '';
+      }
+    });
+  });
+
+  // Dropdown open/close
+  document.getElementById('dropdown-trigger').addEventListener('click', e => {
+    e.stopPropagation();
+    ddWrap.classList.toggle('open');
+  });
+  document.addEventListener('click', e => {
+    if (!ddWrap.contains(e.target)) ddWrap.classList.remove('open');
+  });
+
+  function getSelected() {
+    return [...document.querySelectorAll('.dd-item.selected')].map(i => i.dataset.val);
+  }
+
+  function updateTags() {
+    const sel = getSelected();
+    ddLabel.textContent = sel.length ? sel.length + ' service' + (sel.length > 1 ? 's' : '') + ' selected' : 'Select services…';
+    ddLabel.classList.toggle('has-val', sel.length > 0);
+    tagsEl.innerHTML = '';
+    sel.forEach(val => {
+      const tag = document.createElement('div');
+      tag.className = 'stag';
+      tag.innerHTML = `<span>${val}</span><span class="stag-x" data-val="${val}">&times;</span>`;
+      tagsEl.appendChild(tag);
+    });
+    tagsEl.querySelectorAll('.stag-x').forEach(x => {
+      x.addEventListener('click', () => {
+        document.querySelector(`.dd-item[data-val="${x.dataset.val}"]`).classList.remove('selected');
+        updateTags();
+      });
+    });
+  }
+
+  // Item toggle
+  document.querySelectorAll('.dd-item').forEach(item => {
+    item.addEventListener('click', () => { item.classList.toggle('selected'); updateTags(); });
+  });
+
+  document.getElementById('select-all-btn').addEventListener('click', e => {
+    e.stopPropagation();
+    document.querySelectorAll('.dd-item').forEach(i => i.classList.add('selected'));
+    updateTags();
+  });
+  document.getElementById('deselect-all-btn').addEventListener('click', e => {
+    e.stopPropagation();
+    document.querySelectorAll('.dd-item').forEach(i => i.classList.remove('selected'));
+    updateTags();
+  });
+
+  // Submit
+  document.getElementById('submit-btn').addEventListener('click', () => {
+    const isMobile = document.querySelector('.ctab.active').dataset.type === 'mobile';
+    const contact  = isMobile ? document.getElementById('input-mobile').value.trim() : document.getElementById('input-email').value.trim();
+    const message  = document.getElementById('enquiry-msg').value.trim();
+    const selected = getSelected();
+
+    if (!contact) { alert('Please enter your ' + (isMobile ? 'mobile number.' : 'email ID.')); return; }
+
+    const label    = isMobile ? 'Mobile' : 'Email';
+    const services = selected.length ? '\n\nServices:\n' + selected.map((s, i) => `${i + 1}. ${s}`).join('\n') : '';
+    const msg = `New Enquiry from Linktree\n\n${label}: ${contact}${services}${message ? '\n\nMessage: ' + message : ''}`;
+    // Submit to Web3Forms
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: '66f90d59-83e7-4136-8823-1bfeb38deb41',
+        subject:    'New Enquiry from Linktree',
+        from_name:  'Linktree Enquiry',
+        [isMobile ? 'phone' : 'email']: contact,
+        message:    msg,
+      })
+    }).catch(() => {});
+
+    form.hidden = true;
+    successEl.hidden = false;
+  });
+
+  document.getElementById('close-success').addEventListener('click', () => {
+    overlay.classList.remove('open');
+    setTimeout(() => {
+      successEl.hidden = true;
+      form.hidden = false;
+      document.getElementById('input-mobile').value = '';
+      document.getElementById('input-email').value = '';
+      document.getElementById('enquiry-msg').value = '';
+      document.querySelectorAll('.dd-item').forEach(i => i.classList.remove('selected'));
+      updateTags();
+    }, 300);
+  });
+</script>
 </body>
 </html>
