@@ -126,7 +126,34 @@
     transition:background .35s var(--ease), transform .35s var(--ease);
   }
   .nav-cta:hover{background:var(--accent); transform:translateY(-1px);}
-  .nav-mobile-toggle{display:none;}
+  .nav-mobile-toggle{
+    display:none;
+    width:40px;height:40px;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:5px;
+    flex-shrink:0;
+    z-index:210;
+  }
+  .nav-mobile-toggle span{
+    width:22px;height:2px;
+    background:currentColor;
+    border-radius:2px;
+    transition:transform .35s var(--ease), opacity .35s var(--ease);
+  }
+  .nav-mobile-toggle.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-mobile-toggle.active span:nth-child(2){opacity:0;}
+  .nav-mobile-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .nav-overlay{
+    position:fixed;inset:0;
+    background:rgba(20,32,29,0.4);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .4s var(--ease);
+    z-index:190;
+  }
+  .nav-overlay.open{opacity:1;pointer-events:auto;}
 
   /* ---------- BUTTONS ---------- */
   .btn{
@@ -554,7 +581,7 @@
   .meet-name strong{color:var(--ink);font-weight:500;}
 
   /* ---------- VIDEO TESTIMONIALS CAROUSEL ---------- */
-  .testimonials{background:var(--bg-alt); padding:70px 0 !important;}
+  .testimonials{background:var(--bg-alt); padding:70px 0 !important; overflow:hidden;}
   .testimonials .section-head{margin-bottom:40px;}
   .vt-stage{
     position:relative;
@@ -563,6 +590,7 @@
     align-items:center;
     justify-content:center;
     perspective:1800px;
+    overflow:hidden;
   }
   .vt-card{
     position:absolute;
@@ -738,7 +766,13 @@
 
   #cal-inline{
     width:100%;
+    max-width:100%;
     height:clamp(600px, 78vh, 760px);
+    overflow:hidden;
+  }
+  #cal-inline iframe{
+    width:100% !important;
+    max-width:100% !important;
   }
 
   /* ---------- FLOATING ACTION BUTTONS ---------- */
@@ -794,7 +828,28 @@
   /* ---------- RESPONSIVE ---------- */
   @media (max-width:980px){
     .wrap{padding:0 24px;}
-    .nav-links{display:none;}
+    .nav-inner{padding:0 24px;}
+    .nav-mobile-toggle{display:flex;}
+    .nav-links{
+      position:fixed;
+      top:0;right:0;
+      height:100vh;
+      width:min(78vw,320px);
+      background:var(--bg);
+      color:var(--ink);
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:center;
+      gap:26px;
+      padding:40px;
+      transform:translateX(100%);
+      transition:transform .5s var(--ease);
+      box-shadow:-20px 0 60px -30px rgba(20,32,29,0.35);
+      z-index:200;
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-links a{color:var(--ink);font-size:1.15rem;}
+    .nav-links a::after{background:var(--ink);}
     .hero{padding-top:120px;}
     .hero-grid{grid-template-columns:1fr;gap:50px;}
     .hero-image{order:-1;aspect-ratio:16/11;}
@@ -804,6 +859,7 @@
     .why-feature-stat{text-align:left;}
     .meet-grid{grid-template-columns:1fr;gap:40px;}
     .book-grid{gap:32px;}
+    .book-meta{flex-direction:column;align-items:flex-start;gap:24px;}
     .transform-head{flex-direction:column;align-items:flex-start;}
     .section-pad{padding:90px 0;}
     .book-section{padding:50px 0;}
@@ -815,6 +871,7 @@
     .fab-stack{right:16px;bottom:16px;}
     .fab{width:50px;height:50px;}
     .fab-label{display:none;}
+    #cal-inline{height:clamp(520px,72vh,680px);}
   }
 </style>
 </head>
@@ -823,15 +880,20 @@
 <header id="siteHeader">
   <div class="nav-inner">
     <div class="logo">Dr. Caroline <em>Dental Studio</em></div>
-    <nav class="nav-links">
+    <nav class="nav-links" id="navLinks">
       <a href="#treatments">Treatments</a>
       <a href="#why">Why Us</a>
       <a href="#transformations">Smiles</a>
       <a href="#dentist">About</a>
     </nav>
     <a href="#book" class="nav-cta">Book Visit</a>
+    <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+<div class="nav-overlay" id="navOverlay"></div>
+
 
 <!-- ============ HERO ============ -->
 <section class="hero">
@@ -1126,6 +1188,34 @@
   const header = document.getElementById('siteHeader');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // mobile nav drawer
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  const navOverlay = document.getElementById('navOverlay');
+
+  function closeMobileNav(){
+    navToggle.classList.remove('active');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navLinks.classList.remove('open');
+    navOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function openMobileNav(){
+    navToggle.classList.add('active');
+    navToggle.setAttribute('aria-expanded', 'true');
+    navLinks.classList.add('open');
+    navOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.contains('open') ? closeMobileNav() : openMobileNav();
+  });
+  navOverlay.addEventListener('click', closeMobileNav);
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileNav));
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 980) closeMobileNav();
   });
 
   // scroll reveal — fades in on enter, fades out on exit, replays every time
