@@ -494,6 +494,7 @@
     box-shadow:var(--shadow-sm);
     cursor:ew-resize;
     user-select:none;
+    touch-action:pan-y;
   }
   .compare img{
     position:absolute;top:0;left:0;
@@ -767,12 +768,14 @@
   #cal-inline{
     width:100%;
     max-width:100%;
-    height:clamp(600px, 78vh, 760px);
-    overflow:hidden;
+    min-height:600px;
+    height:auto;
+    overflow-x:hidden;
   }
   #cal-inline iframe{
     width:100% !important;
     max-width:100% !important;
+    min-height:600px;
   }
 
   /* ---------- FLOATING ACTION BUTTONS ---------- */
@@ -871,7 +874,7 @@
     .fab-stack{right:16px;bottom:16px;}
     .fab{width:50px;height:50px;}
     .fab-label{display:none;}
-    #cal-inline{height:clamp(520px,72vh,680px);}
+    #cal-inline{min-height:640px;}
   }
 </style>
 </head>
@@ -1186,9 +1189,16 @@
 <script>
   // header scroll state
   const header = document.getElementById('siteHeader');
+  let headerScrolled = false;
   window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 40);
-  });
+    if (!headerScrolled && window.scrollY > 60) {
+      headerScrolled = true;
+      header.classList.add('scrolled');
+    } else if (headerScrolled && window.scrollY < 24) {
+      headerScrolled = false;
+      header.classList.remove('scrolled');
+    }
+  }, { passive: true });
 
   // mobile nav drawer
   const navToggle = document.getElementById('navToggle');
@@ -1252,8 +1262,7 @@
     el.addEventListener('pointerdown', (e) => { dragging = true; setPos(e.clientX); });
     window.addEventListener('pointermove', (e) => { if (dragging) setPos(e.clientX); });
     window.addEventListener('pointerup', () => dragging = false);
-    el.addEventListener('touchstart', (e) => setPos(e.touches[0].clientX), {passive:true});
-    el.addEventListener('touchmove', (e) => setPos(e.touches[0].clientX), {passive:true});
+    window.addEventListener('pointercancel', () => dragging = false);
 
     window.addEventListener('resize', () => {
       const r = el.getBoundingClientRect();
