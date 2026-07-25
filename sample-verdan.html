@@ -313,10 +313,20 @@
     background:radial-gradient(700px 400px at 90% 20%,rgba(200,161,93,.08),transparent 60%);
   }
   .ind-scroll{
-    overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+    overflow:hidden;width:100%;max-width:100%;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
     margin-top:20px;
+    touch-action:pan-y;
   }
-  .ind-track{display:flex;gap:16px;width:max-content;animation:scroll-x 32s linear infinite;}
+  .ind-track{
+    display:flex;gap:16px;width:max-content;
+    animation:scroll-x 32s linear infinite;
+    will-change:transform;
+    transform:translateZ(0);
+    -webkit-transform:translateZ(0);
+    backface-visibility:hidden;
+  }
   .ind-track:hover{animation-play-state:paused;}
   @keyframes scroll-x{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .ind-pill{
@@ -326,6 +336,12 @@
     color:var(--cream-100);font-weight:600;font-size:.95rem;
   }
   .ind-pill .n{color:var(--gold-500);font-family:'Fraunces',serif;font-size:.85rem;}
+
+  @media(max-width:600px){
+    .ind-track{gap:10px;animation-duration:22s;}
+    .ind-pill{padding:11px 18px;font-size:.82rem;gap:8px;}
+    .ind-pill .n{font-size:.74rem;}
+  }
 
   /* ---------- pricing ---------- */
   .pricing{background:var(--cream-100);}
@@ -344,8 +360,14 @@
   .tag-premium{background:rgba(200,161,93,.16);color:#9c7a34;}
 
   .bottle-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-  @media(max-width:900px){.bottle-row{grid-template-columns:1fr 1fr;}}
-  @media(max-width:600px){.bottle-row{grid-template-columns:1fr;}}
+  .bottle-row-premium{grid-template-columns:repeat(2,1fr);max-width:70%;margin:0 auto;}
+  @media(max-width:900px){
+    .bottle-row{grid-template-columns:1fr 1fr;}
+    .bottle-row-premium{max-width:100%;}
+  }
+  @media(max-width:600px){
+    .bottle-row,.bottle-row-premium{grid-template-columns:1fr;max-width:100%;}
+  }
 
   .bottle-card{
     background:var(--cream-050);border-radius:var(--radius-md);
@@ -728,7 +750,7 @@
           <p>Designed for luxury hospitality, premium events, executive gifting, and exclusive branding.</p>
         </div>
       </div>
-      <div class="bottle-row" style="grid-template-columns:repeat(2,1fr);max-width:70%;">
+      <div class="bottle-row bottle-row-premium">
         <div class="bottle-card">
           <div class="bottle-media"><img src="https://res.cloudinary.com/vwdrbdrg/image/upload/v1784973762/0_2_hw09ti.jpg" alt="250ml premium customized bottle"></div>
           <div class="bottle-body">
