@@ -327,7 +327,9 @@
     -webkit-transform:translateZ(0);
     backface-visibility:hidden;
   }
-  .ind-track:hover{animation-play-state:paused;}
+  @media (hover:hover) and (pointer:fine){
+    .ind-track:hover{animation-play-state:paused;}
+  }
   @keyframes scroll-x{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .ind-pill{
     display:flex;align-items:center;gap:12px;
