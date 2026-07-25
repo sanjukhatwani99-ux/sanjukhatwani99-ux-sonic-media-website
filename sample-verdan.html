@@ -88,7 +88,7 @@
   /* ---------- pill navbar ---------- */
   .navbar{
     position:fixed;top:18px;left:50%;transform:translateX(-50%);
-    z-index:1000;
+    z-index:1200;
     display:flex;align-items:center;gap:clamp(6px,2vw,28px);
     background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.04)),rgba(10,37,64,.38);
     backdrop-filter:blur(22px) saturate(180%);
@@ -99,13 +99,14 @@
     padding:8px 10px 8px 18px;
     box-shadow:0 12px 40px -12px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.25);
     transition:padding .4s var(--ease), background .4s var(--ease);
+    max-width:calc(100vw - 24px);
   }
   .navbar.scrolled{background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.02)),rgba(8,27,48,.62);padding:6px 8px 6px 16px;}
   .navbar .brand{
     font-family:'Fraunces',serif;font-weight:600;font-size:1rem;color:var(--cream-100);
-    display:flex;align-items:center;gap:8px;white-space:nowrap;
+    display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0;
   }
-  .navbar .brand img{height:26px;width:auto;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25));}
+  .navbar .brand img{height:26px;width:auto;display:block;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25));}
   .navlinks{display:flex;align-items:center;gap:2px;margin-left:8px;}
   .navlinks a{
     font-size:.82rem;font-weight:600;color:var(--cream-soft);
@@ -116,7 +117,7 @@
   .nav-cta{
     font-size:.8rem;font-weight:700;color:var(--navy-950);
     background:linear-gradient(135deg,var(--gold-400),var(--gold-500));
-    padding:10px 20px;border-radius:999px;white-space:nowrap;
+    padding:10px 20px;border-radius:999px;white-space:nowrap;flex-shrink:0;
     transition:transform .3s var(--ease), box-shadow .3s var(--ease);
   }
   .nav-cta:hover{transform:translateY(-1px) scale(1.02);box-shadow:0 8px 20px -6px rgba(200,161,93,.6);}
@@ -161,7 +162,7 @@
   .mobile-menu .btn{margin-top:24px;width:100%;}
   body.menu-open{overflow:hidden;}
 
-  @media (max-width:880px){
+  @media (max-width:1080px){
     .navlinks{display:none;}
     .nav-toggle{display:flex;}
     .navbar{gap:10px;}
@@ -364,8 +365,14 @@
     margin-top:auto;text-align:center;font-weight:700;font-size:.85rem;
     padding:12px;border-radius:999px;border:1.5px solid var(--navy-900);color:var(--navy-900);
     transition:background .35s var(--ease), color .35s var(--ease);
+    display:block;cursor:pointer;
   }
   .bottle-card:hover .bottle-select{background:var(--navy-900);color:var(--cream-100);}
+  .field-highlight{animation:field-pulse 1.4s var(--ease);}
+  @keyframes field-pulse{
+    0%{box-shadow:0 0 0 5px rgba(200,161,93,.55);border-color:var(--gold-500);}
+    100%{box-shadow:0 0 0 0 rgba(200,161,93,0);}
+  }
 
   .moq-note{
     text-align:center;margin-top:8px;color:var(--ink-soft);font-size:.85rem;
@@ -687,7 +694,7 @@
             <h4>200ml Bottle</h4>
             <p class="desc">Premium Customized Bottle</p>
             <div class="bottle-meta"><div>Price<strong>₹240 / box</strong></div><div>Per Box<strong>48 Bottles</strong></div></div>
-            <div class="bottle-select">Select Bottle</div>
+            <a href="#contact" class="bottle-select" data-bottle="200ml Bottle">Select Bottle</a>
           </div>
         </div>
         <div class="bottle-card">
@@ -696,7 +703,7 @@
             <h4>500ml Bottle</h4>
             <p class="desc">Premium Customized Bottle</p>
             <div class="bottle-meta"><div>Price<strong>₹168 / box</strong></div><div>Per Box<strong>24 Bottles</strong></div></div>
-            <div class="bottle-select">Select Bottle</div>
+            <a href="#contact" class="bottle-select" data-bottle="500ml Bottle">Select Bottle</a>
           </div>
         </div>
         <div class="bottle-card">
@@ -705,7 +712,7 @@
             <h4>1L Bottle</h4>
             <p class="desc">Premium Customized Bottle</p>
             <div class="bottle-meta"><div>Price<strong>₹132 / box</strong></div><div>Per Box<strong>12 Bottles</strong></div></div>
-            <div class="bottle-select">Select Bottle</div>
+            <a href="#contact" class="bottle-select" data-bottle="1L Bottle">Select Bottle</a>
           </div>
         </div>
       </div>
@@ -725,7 +732,7 @@
             <h4>250ml Bottle</h4>
             <p class="desc">Premium Customized Bottle</p>
             <div class="bottle-meta"><div>Price<strong>₹230 / box</strong></div><div>Per Box<strong>35 Bottles</strong></div></div>
-            <div class="bottle-select">Select Bottle</div>
+            <a href="#contact" class="bottle-select" data-bottle="250ml Bottle">Select Bottle</a>
           </div>
         </div>
         <div class="bottle-card">
@@ -734,7 +741,7 @@
             <h4>750ml Bottle</h4>
             <p class="desc">Premium Customized Bottle</p>
             <div class="bottle-meta"><div>Price<strong>₹225 / box</strong></div><div>Per Box<strong>15 Bottles</strong></div></div>
-            <div class="bottle-select">Select Bottle</div>
+            <a href="#contact" class="bottle-select" data-bottle="750ml Bottle">Select Bottle</a>
           </div>
         </div>
       </div>
@@ -815,11 +822,14 @@
         </div>
         <div class="form-row">
           <div class="field">
-            <label>Bottle Segment</label>
-            <select>
-              <option>Standard Collection</option>
-              <option>Premium Collection</option>
-              <option>Not sure yet</option>
+            <label>Preferred Bottle</label>
+            <select id="bottleSelect">
+              <option value="">Not sure yet</option>
+              <option value="200ml Bottle">200ml Bottle — Standard</option>
+              <option value="500ml Bottle">500ml Bottle — Standard</option>
+              <option value="1L Bottle">1L Bottle — Standard</option>
+              <option value="250ml Bottle">250ml Bottle — Premium</option>
+              <option value="750ml Bottle">750ml Bottle — Premium</option>
             </select>
           </div>
           <div class="field"><label>Quantity Required</label><input type="text" placeholder="e.g. 500 boxes"></div>
@@ -876,7 +886,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <div class="brand"><img src="https://res.cloudinary.com/vwdrbdrg/image/upload/v1784974244/logo_dj09m8.png" alt="Verdan Beverages logo" style="height:32px;width:auto;"></div>
+        <div class="brand"><img src="https://res.cloudinary.com/vwdrbdrg/image/upload/v1784974244/logo_dj09m8.png" alt="Verdan Beverages logo" style="height:32px;width:auto;object-fit:contain;"></div>
         <p>Premium customized bottled water for powerful brand experiences.</p>
       </div>
       <div class="foot-col">
@@ -991,7 +1001,27 @@
   });
   menuOverlay.addEventListener('click', closeMenu);
   mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-  window.addEventListener('resize', () => { if(window.innerWidth > 880) closeMenu(); });
+  window.addEventListener('resize', () => { if(window.innerWidth > 1080) closeMenu(); });
+
+  // Bottle selection -> auto-select in contact form + scroll to it
+  const bottleSelect = document.getElementById('bottleSelect');
+  document.querySelectorAll('.bottle-select[data-bottle]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const bottle = link.getAttribute('data-bottle');
+      if (bottleSelect && bottle) {
+        bottleSelect.value = bottle;
+        bottleSelect.classList.remove('field-highlight');
+        void bottleSelect.offsetWidth; // restart animation
+        bottleSelect.classList.add('field-highlight');
+      }
+      const target = document.getElementById('contact');
+      if (target) {
+        const top = target.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
 
   // Navbar scroll state
   const nav = document.getElementById('navbar');
