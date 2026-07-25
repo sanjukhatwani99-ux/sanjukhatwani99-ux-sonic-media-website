@@ -340,8 +340,29 @@
   }
   .ind-pill .n{color:var(--gold-500);font-family:'Fraunces',serif;font-size:.85rem;}
 
+  @media(max-width:768px){
+    .ind-scroll{display:none;}
+  }
+
+  /* ---------- mobile marquee: native scroll, JS auto-advance (no CSS animation) ---------- */
+  .ind-scroll-mobile{display:none;}
+  @media(max-width:768px){
+    .ind-scroll-mobile{
+      display:block;position:relative;margin-top:20px;
+      overflow-x:auto;overflow-y:hidden;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .ind-scroll-mobile::-webkit-scrollbar{display:none;height:0;}
+    .ind-scroll-mobile::before,.ind-scroll-mobile::after{
+      content:"";position:absolute;top:0;bottom:0;width:32px;z-index:2;pointer-events:none;
+    }
+    .ind-scroll-mobile::before{left:0;background:linear-gradient(90deg,var(--navy-950),transparent);}
+    .ind-scroll-mobile::after{right:0;background:linear-gradient(-90deg,var(--navy-950),transparent);}
+    .ind-track-mobile{display:flex;gap:10px;width:max-content;}
+  }
+
   @media(max-width:600px){
-    .ind-track{gap:10px;animation-duration:22s;}
     .ind-pill{padding:11px 18px;font-size:.82rem;gap:8px;}
     .ind-pill .n{font-size:.74rem;}
   }
@@ -697,6 +718,11 @@
       <!-- items injected twice via JS for seamless loop -->
     </div>
   </div>
+  <div class="ind-scroll-mobile reveal" id="indScrollMobile">
+    <div class="ind-track-mobile" id="indTrackMobile">
+      <!-- items injected via JS, auto-advanced with native scroll -->
+    </div>
+  </div>
 </section>
 
 <!-- ================= BOTTLE PRICING ================= -->
@@ -967,6 +993,38 @@
   const track = document.getElementById('ind-track');
   const buildPills = () => industries.map((name,i)=>`<div class="ind-pill"><span class="n">0${i+1}</span>${name}</div>`).join('');
   track.innerHTML = buildPills() + buildPills();
+
+  // Mobile marquee: native horizontal scroll auto-advanced via rAF (no CSS transform animation → no flicker)
+  const trackMobile = document.getElementById('indTrackMobile');
+  const scrollMobile = document.getElementById('indScrollMobile');
+  if (trackMobile && scrollMobile) {
+    trackMobile.innerHTML = buildPills() + buildPills();
+    let mobileAutoplay = true;
+    let resumeTimer = null;
+    const step = () => {
+      if (mobileAutoplay && document.body.contains(scrollMobile)) {
+        const half = trackMobile.scrollWidth / 2;
+        scrollMobile.scrollLeft += 0.7;
+        if (scrollMobile.scrollLeft >= half) {
+          scrollMobile.scrollLeft -= half;
+        }
+      }
+      requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+    const pause = () => {
+      mobileAutoplay = false;
+      if (resumeTimer) clearTimeout(resumeTimer);
+    };
+    const resumeLater = () => {
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => { mobileAutoplay = true; }, 2000);
+    };
+    scrollMobile.addEventListener('touchstart', pause, {passive:true});
+    scrollMobile.addEventListener('touchend', resumeLater, {passive:true});
+    scrollMobile.addEventListener('pointerdown', pause);
+    window.addEventListener('pointerup', resumeLater);
+  }
 
   // Hero liquid ripple — follows pointer, drifts gently when idle
   const hero = document.getElementById('top');
