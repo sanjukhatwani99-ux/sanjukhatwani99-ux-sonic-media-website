@@ -428,7 +428,7 @@
     .marquee-track img{margin-right:70px;}
   }
   .marquee-track img{
-    height:42px;width:auto;
+    height:42px;width:auto;flex-shrink:0;
     transition:transform .4s var(--ease);
   }
   .marquee-track img:hover{-webkit-transform:scale(1.08);transform:scale(1.08);}
@@ -901,7 +901,7 @@
       <div class="calc-controls reveal">
         <div class="field">
           <label>Loan Amount <b id="amountLabel">₹5,00,000</b></label>
-          <input type="range" id="amount" min="50000" max="5000000" step="10000" value="500000">
+          <input type="range" id="amount" min="50000" max="50000000" step="10000" value="500000">
         </div>
         <div class="field">
           <label>Interest Rate (p.a.) <b id="rateLabel">10.5%</b></label>
@@ -1317,42 +1317,59 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function startMarquee(track, reverse){
-    // Half the track's width, since the logo set is duplicated back-to-back —
-    // looping at exactly the halfway point makes the wrap invisible.
-    let halfWidth = track.scrollWidth / 2;
-    if(!halfWidth || reducedMotion) return;
+    // Measure on the next couple of frames instead of immediately: on mobile,
+    // the browser can still be settling layout right after the last image's
+    // onload fires (especially over slower connections), so scrollWidth read
+    // synchronously can come back 0 or too small, which made the strip look
+    // frozen or jump instead of autoswiping.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      // Half the track's width, since the logo set is duplicated back-to-back —
+      // looping at exactly the halfway point makes the wrap invisible.
+      let halfWidth = track.scrollWidth / 2;
+      if(!halfWidth){
+        // Still not measured (e.g. images not decoded yet on a slow mobile
+        // connection) — try again shortly rather than giving up.
+        setTimeout(() => startMarquee(track, reverse), 150);
+        return;
+      }
+      if(reducedMotion) return;
 
-    const speed = 40; // px per second
-    let pos = reverse ? -halfWidth : 0;
-    let last = null;
-    let paused = false;
-
-    track.style.transform = `translate3d(${pos}px,0,0)`;
-
-    function frame(now){
-      requestAnimationFrame(frame);
-      if(paused || last === null){ last = now; return; }
-      const dt = (now - last) / 1000;
-      last = now;
-      pos += (reverse ? speed : -speed) * dt;
-
-      if(!reverse && pos <= -halfWidth) pos += halfWidth;
-      if(reverse && pos >= 0) pos -= halfWidth;
+      const speed = 40; // px per second
+      let pos = reverse ? -halfWidth : 0;
+      let last = null;
+      let paused = false;
 
       track.style.transform = `translate3d(${pos}px,0,0)`;
-    }
-    requestAnimationFrame(frame);
 
-    // Recompute the loop point if the track's real size changes (e.g. images
-    // finish decoding, fonts shift layout, or the viewport is resized).
-    if('ResizeObserver' in window){
-      new ResizeObserver(() => {
+      function frame(now){
+        requestAnimationFrame(frame);
+        if(paused || last === null){ last = now; return; }
+        const dt = (now - last) / 1000;
+        last = now;
+        pos += (reverse ? speed : -speed) * dt;
+
+        if(!reverse && pos <= -halfWidth) pos += halfWidth;
+        if(reverse && pos >= 0) pos -= halfWidth;
+
+        track.style.transform = `translate3d(${pos}px,0,0)`;
+      }
+      requestAnimationFrame(frame);
+
+      // Recompute the loop point if the track's real size changes (e.g. images
+      // finish decoding, fonts shift layout, or the viewport is resized —
+      // including mobile orientation changes / the address bar showing/hiding).
+      function recompute(){
         const newHalf = track.scrollWidth / 2;
         if(newHalf) halfWidth = newHalf;
-      }).observe(track);
-    }
+      }
+      if('ResizeObserver' in window){
+        new ResizeObserver(recompute).observe(track);
+      }
+      window.addEventListener('resize', recompute);
+      window.addEventListener('orientationchange', recompute);
 
-    document.addEventListener('visibilitychange', () => { paused = document.hidden; if(!paused) last = null; });
+      document.addEventListener('visibilitychange', () => { paused = document.hidden; if(!paused) last = null; });
+    }));
   }
 
   fillTrack('track1', false);
