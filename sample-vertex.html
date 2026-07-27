@@ -432,8 +432,13 @@
   }
   .marquee-track.marquee-ready{-webkit-animation-play-state:running;animation-play-state:running;}
   .marquee-track.reverse{-webkit-animation-name:marquee-scroll-right;animation-name:marquee-scroll-right;}
-  /* Pause on hover so users can read a logo without the strip fighting them */
-  .marquee-row:hover .marquee-track{-webkit-animation-play-state:paused;animation-play-state:paused;}
+  /* Pause on hover so users can read a logo without the strip fighting them.
+     Scoped to real pointer devices only: on touchscreens a tap can trigger a
+     "stuck" :hover state that never clears until the user taps elsewhere,
+     which would otherwise freeze the marquee permanently on mobile. */
+  @media (hover:hover) and (pointer:fine){
+    .marquee-row:hover .marquee-track{-webkit-animation-play-state:paused;animation-play-state:paused;}
+  }
   @-webkit-keyframes marquee-scroll-left{from{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);}to{-webkit-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0);}}
   @keyframes marquee-scroll-left{from{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);}to{-webkit-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0);}}
   @-webkit-keyframes marquee-scroll-right{from{-webkit-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0);}to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);}}
@@ -1317,19 +1322,32 @@
     const track = document.getElementById(id);
     const doubled = [...logos, ...logos];
     let loaded = 0;
+    let started = false;
+
+    const begin = () => {
+      if(started) return;
+      started = true;
+      startMarquee(track);
+      watchMarqueeSize(track);
+    };
+
     doubled.forEach(src => {
       const img = document.createElement('img');
       img.alt = 'Partner bank logo';
       img.onload = img.onerror = () => {
         loaded++;
-        if(loaded === doubled.length){
-          startMarquee(track);
-          watchMarqueeSize(track);
-        }
+        if(loaded === doubled.length) begin();
       };
       img.src = src;
       track.appendChild(img);
     });
+
+    // Safety net for flaky mobile connections: a stalled request on a slow
+    // or data-saver connection can leave onload/onerror never firing for one
+    // image, which would otherwise block the marquee from ever starting.
+    // Whatever has actually loaded by this point is enough to measure a
+    // usable width and start the loop; slower images just fade in as they arrive.
+    setTimeout(begin, 3000);
   }
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
