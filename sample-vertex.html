@@ -274,7 +274,10 @@
     transition:transform .7s var(--ease);
     -webkit-transform-style:preserve-3d;transform-style:preserve-3d;
   }
-  .flip-card:hover .flip-inner, .flip-card.flipped .flip-inner{-webkit-transform:rotateY(180deg);transform:rotateY(180deg);}
+  .flip-card.flipped .flip-inner{-webkit-transform:rotateY(180deg);transform:rotateY(180deg);}
+  @media (hover:hover) and (pointer:fine){
+    .flip-card:hover .flip-inner{-webkit-transform:rotateY(180deg);transform:rotateY(180deg);}
+  }
   .flip-front,.flip-back{
     position:absolute;inset:0;
     -webkit-backface-visibility:hidden;backface-visibility:hidden;
@@ -295,7 +298,9 @@
   }
   .flip-visual svg{width:100%;height:auto;max-height:92px;}
   .flip-visual img{width:100%;height:100%;min-height:110px;object-fit:cover;display:block;transition:transform .5s var(--ease);}
-  .flip-card:hover .flip-visual img{-webkit-transform:scale(1.06);transform:scale(1.06);}
+  @media (hover:hover) and (pointer:fine){
+    .flip-card:hover .flip-visual img{-webkit-transform:scale(1.06);transform:scale(1.06);}
+  }
   .flip-front .icon{
     width:52px;height:52px;border-radius:50%;
     background:linear-gradient(135deg,var(--navy-mid),var(--navy-deep));
@@ -303,7 +308,9 @@
     color:var(--gold-bright);
     transition:transform .5s var(--ease);
   }
-  .flip-card:hover .flip-front .icon{-webkit-transform:rotate(-8deg) scale(1.08);transform:rotate(-8deg) scale(1.08);}
+  @media (hover:hover) and (pointer:fine){
+    .flip-card:hover .flip-front .icon{-webkit-transform:rotate(-8deg) scale(1.08);transform:rotate(-8deg) scale(1.08);}
+  }
   .flip-front h3{font-size:1.15rem;color:var(--navy-deep);margin-top:20px;}
   .flip-front .hint{font-size:.78rem;color:#8A93A6;font-family:var(--font-mono);}
   .flip-back{
@@ -415,16 +422,11 @@
   }
   .marquee-row::before{left:0;background:linear-gradient(90deg,var(--cream),transparent);}
   .marquee-row::after{right:0;background:linear-gradient(270deg,var(--cream),transparent);}
-  .marquee-track{display:flex;gap:70px;width:max-content;-webkit-animation:scroll-left 32s linear infinite;animation:scroll-left 32s linear infinite;will-change:transform;-webkit-backface-visibility:hidden;backface-visibility:hidden;}
-  .marquee-track.reverse{-webkit-animation:scroll-right 32s linear infinite;animation:scroll-right 32s linear infinite;}
+  .marquee-track{display:flex;gap:70px;width:max-content;will-change:transform;-webkit-backface-visibility:hidden;backface-visibility:hidden;}
   /* Fallback spacing for older browsers without flexbox gap support (e.g. Safari <14.1) */
   @supports not (gap: 1px){
     .marquee-track img{margin-right:70px;}
   }
-  @-webkit-keyframes scroll-left{from{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);}to{-webkit-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0);}}
-  @keyframes scroll-left{from{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);}to{-webkit-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0);}}
-  @-webkit-keyframes scroll-right{from{-webkit-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0);}to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);}}
-  @keyframes scroll-right{from{-webkit-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0);}to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);}}
   .marquee-track img{
     height:42px;width:auto;
     transition:transform .4s var(--ease);
@@ -1296,17 +1298,65 @@
     'https://res.cloudinary.com/vwdrbdrg/image/upload/v1784927431/1_lz6ihu.png',
     'https://res.cloudinary.com/vwdrbdrg/image/upload/v1784927431/2_ecsr4x.png'
   ];
-  function fillTrack(id){
+  function fillTrack(id, reverse){
     const track = document.getElementById(id);
     const doubled = [...logos, ...logos];
+    let loaded = 0;
     doubled.forEach(src => {
       const img = document.createElement('img');
-      img.src = src; img.alt = 'Partner bank logo'; img.loading='lazy';
+      img.alt = 'Partner bank logo';
+      img.onload = img.onerror = () => {
+        loaded++;
+        if(loaded === doubled.length) startMarquee(track, reverse);
+      };
+      img.src = src;
       track.appendChild(img);
     });
   }
-  fillTrack('track1');
-  fillTrack('track2');
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function startMarquee(track, reverse){
+    // Half the track's width, since the logo set is duplicated back-to-back —
+    // looping at exactly the halfway point makes the wrap invisible.
+    let halfWidth = track.scrollWidth / 2;
+    if(!halfWidth || reducedMotion) return;
+
+    const speed = 40; // px per second
+    let pos = reverse ? -halfWidth : 0;
+    let last = null;
+    let paused = false;
+
+    track.style.transform = `translate3d(${pos}px,0,0)`;
+
+    function frame(now){
+      requestAnimationFrame(frame);
+      if(paused || last === null){ last = now; return; }
+      const dt = (now - last) / 1000;
+      last = now;
+      pos += (reverse ? speed : -speed) * dt;
+
+      if(!reverse && pos <= -halfWidth) pos += halfWidth;
+      if(reverse && pos >= 0) pos -= halfWidth;
+
+      track.style.transform = `translate3d(${pos}px,0,0)`;
+    }
+    requestAnimationFrame(frame);
+
+    // Recompute the loop point if the track's real size changes (e.g. images
+    // finish decoding, fonts shift layout, or the viewport is resized).
+    if('ResizeObserver' in window){
+      new ResizeObserver(() => {
+        const newHalf = track.scrollWidth / 2;
+        if(newHalf) halfWidth = newHalf;
+      }).observe(track);
+    }
+
+    document.addEventListener('visibilitychange', () => { paused = document.hidden; if(!paused) last = null; });
+  }
+
+  fillTrack('track1', false);
+  fillTrack('track2', true);
 
   // ---------- EMI Calculator ----------
   const amount = document.getElementById('amount');
