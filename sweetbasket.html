@@ -322,6 +322,7 @@ footer{padding-bottom:96px}
 
 <a class="fab" id="fab" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.2-1.4A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800s.7-2 1-2.300c.2-.3.500-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 1.900c.1.200.1.400 0 .5l-.4.600c-.1.200-.3.300-.1.600.7 1.100 1.500 1.900 2.700 2.500.3.200.5.100.7-.1l.8-1c.2-.2.400-.2.600-.1l1.800.9c.2.100.4.200.4.300.1.200.1.800-.1 1.400z"/></svg></a>
 
+<div class="ov" id="wc" role="dialog" aria-modal="true" aria-labelledby="wct"><div class="pick"><button class="x" id="wcx" aria-label="Close">×</button><h2 id="wct">Which location?</h2><p>Choose the store you would like to message on WhatsApp.</p><a class="btn wa" id="wc1" target="_blank" rel="noopener">WhatsApp Adipur</a><a class="btn wa" id="wc2" target="_blank" rel="noopener">WhatsApp Ahmedabad</a></div></div>
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="modal">
 <button class="x" id="mx" aria-label="Close details">×</button>
 <div class="gal"><div class="track" id="trk"></div><button class="nv p" id="mp" aria-label="Previous image">‹</button><button class="nv n" id="mn" aria-label="Next image">›</button><div class="thumbs" id="mth"></div></div>
@@ -366,9 +367,12 @@ const PHA="919313881235",PHM="919157707249",wa=(t,ph)=>"https://wa.me/"+(ph||PH)
 const hi="Hello Sweet Basket, I would like to enquire about your hampers.";
 const bm="Hello Sweet Basket, I would like to enquire about bulk / corporate Diwali orders.";
 let store="919313881235";const SN={"919313881235":"Adipur, Kutch","919157707249":"Ahmedabad"};
-function setStore(ph){store=ph;document.querySelectorAll("[data-loc]").forEach(b=>{const on=b.dataset.loc===ph;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});$("heroWa").href=wa(hi,ph);$("fab").href=wa(hi,ph);$("bulkWa").href=wa(bm,ph)}
+function setStore(ph){store=ph;document.querySelectorAll("[data-loc]").forEach(b=>{const on=b.dataset.loc===ph;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});$("heroWa").href=wa(hi,ph);$("bulkWa").href=wa(bm,ph)}
 document.querySelectorAll("[data-loc]").forEach(b=>b.addEventListener("click",()=>{setStore(b.dataset.loc);toast("Location: "+SN[b.dataset.loc])}));
 setStore(store);
+$("fab").href="#";$("fab").addEventListener("click",e=>{e.preventDefault();$("wc1").href=wa(hi,PHA);$("wc2").href=wa(hi,PHM);$("wc").classList.add("on");$("wc1").focus()});
+$("wc1").addEventListener("click",()=>setStore(PHA));$("wc2").addEventListener("click",()=>setStore(PHM));
+$("wcx").onclick=()=>$("wc").classList.remove("on");$("wc").onclick=e=>{if(e.target===$("wc")||e.target.closest(".btn"))$("wc").classList.remove("on")};
 document.querySelectorAll("[data-wa]").forEach(a=>a.href=wa(hi,a.dataset.wa));
 
 function toast(m){const t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("on"),2200)}
@@ -391,7 +395,7 @@ $("items").addEventListener("input",e=>{if(e.target.dataset.n)cart.find(x=>x.id=
 $("mx").onclick=()=>$("ov").classList.remove("on");$("ov").onclick=e=>{if(e.target===$("ov"))$("ov").classList.remove("on")};
 $("mp").onclick=()=>step(-1);$("mn").onclick=()=>step(1);$("madd").onclick=()=>add(cur.id);
 $("openCart").onclick=()=>drawer(true);$("cx").onclick=()=>drawer(false);
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){$("ov").classList.remove("on");drawer(false)}if($("ov").classList.contains("on")){if(e.key==="ArrowRight")step(1);if(e.key==="ArrowLeft")step(-1)}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){$("ov").classList.remove("on");$("wc").classList.remove("on");drawer(false)}if($("ov").classList.contains("on")){if(e.key==="ArrowRight")step(1);if(e.key==="ArrowLeft")step(-1)}});
 $("send").onclick=()=>{if(!cart.length){toast("Add at least one product first");return}
 let m="Hello Sweet Basket ("+SN[store]+")! "+($("who").value?"I am "+$("who").value+". ":"")+"I would like to enquire about:\n\n";
 cart.forEach((x,i)=>{const p=P.find(y=>y.id===x.id);m+=(i+1)+". "+p.n+" | Qty: "+x.q+" | Price: "+p.p+(x.note?"\n   Customisation: "+x.note:"")+"\n"});
