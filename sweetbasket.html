@@ -377,7 +377,9 @@ $("wcx").onclick=()=>$("wc").classList.remove("on");$("wc").onclick=e=>{if(e.tar
 document.querySelectorAll("[data-wa]").forEach(a=>a.href=wa(hi,a.dataset.wa));
 
 function toast(m){const t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("on"),2200)}
-function add(id){const p=P.find(x=>x.id===id);const e=cart.find(x=>x.id===id);e?e.q++:cart.push({id,q:1,note:""});render();toast("Added in Inquiry Cart: "+p.n);const b=$("openCart");b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump")}
+function add(id){const p=P.find(x=>x.id===id),has=cart.some(x=>x.id===id);
+if(has){cart=cart.filter(x=>x.id!==id);render();toast("Removed from Inquiry Cart: "+p.n);return}
+cart.push({id,q:1,note:""});render();toast("Added in Inquiry Cart: "+p.n);const b=$("openCart");b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump")}
 function sync(){const has=id=>cart.some(x=>x.id===id),set=(b,on)=>{b.classList.toggle("added",on);b.textContent=on?"✓ Added in Inquiry Cart":"Add to inquiry"};
 document.querySelectorAll("[data-a]").forEach(b=>{const on=has(b.dataset.a);set(b,on);b.closest(".card").classList.toggle("in",on)});
 if(cur)set($("madd"),has(cur.id))}
