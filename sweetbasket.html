@@ -347,13 +347,19 @@ const P=[
 {id:"khas",c:"hamper",n:"Darbar Khas",p:"₹1,700–₹2,900",d:"A leather-finish gift box with a richer selection. A statement gift for someone special.",i:["1791391514/Leather_Box_1_c7j73z.heic","1791391514/Leather_Box_2_wzpmfb.heic"]},
 {id:"shahi",c:"hamper",n:"Shahi Dwar",p:"₹2,000–₹3,000",d:"A royal-themed hamper with an elephant-gate presentation and generous festive contents.",i:["1791391507/Shahi_Dwar_1_x2cau2.heic","1791391505/Shahi_Dwar_2_kvafs2.heic","1791391473/Royal_Elephant_2_qeowtm.heic","1791391473/Royal_Elephant_1_m4dyml.heic"]},
 {id:"trikon",c:"hamper",n:"Trikon",p:"₹1,300–₹2,500",d:"A triangular box and giant-samosa style packs that are playful, festive and easy to share.",i:["1791391489/Trikon_2_hbpuxv.heic","1791391487/Trikon_1_uc73y8.heic","1791391499/Giant_Samosa_1_y6nyrd.heic","1791391499/Giant_Samosa_2_qdks69.heic"]},
+{id:"maharaja",c:"hamper",n:"The Maharaja Box",p:"Price on enquiry",d:"A grand festive box with a royal presentation, made for gifting in style.",i:["1792601938/212_dkvxgf.jpg","1792601938/WhatsApp_Image_2026-10-21_at_10.21.32_PM_yfaxxj.jpg"]},
 {id:"custom",c:"hamper",n:"Customised Hampers",p:"₹1,300–₹3,000",d:"Tell us your budget, theme and contents. We will put together a hamper made for you.",i:["1791391459/Darbar_Aam_6_ebiwgp.heic","1791391458/Darbar_Aam_5_dwxmr0.heic"]},
 {id:"basket",c:"basket",n:"Gift Baskets",p:"₹1,000–₹3,000",d:"Thoughtfully arranged jute baskets for festive celebrations and premium gifting.",i:["1791391450/Jute_Hamper_1_py7yif.heic","1791391450/Jute_Hamper_2_rjbuwx.heic"]},
 {id:"cashew",c:"dry",n:"Cashews",p:"Price on enquiry",d:"Whole, creamy cashews (kaju).",i:["1791576958/cashew--kaju---whole-114906_l_lakfbz.jpg"]},
 {id:"almond",c:"dry",n:"Almonds",p:"Price on enquiry",d:"California almonds (badam).",i:["1791576958/almond--badam---california-578268_l_vf6pfc.jpg"]},
 {id:"pista",c:"dry",n:"Pistachios",p:"Price on enquiry",d:"Premium pistachios (pista).",i:["1791576958/hde5b5aac124d47fc82040214b2b4c165l-988223_l_m4rp28.jpg"]},
 {id:"walnut",c:"dry",n:"Walnuts",p:"Price on enquiry",d:"Fresh walnuts, rich and crunchy.",i:["1791576958/Walnuts_9836865e-0d50-431b-bac4-2ec4b4efe50a_qgkel7.webp"]},
-{id:"raisin",c:"dry",n:"Raisins",p:"Price on enquiry",d:"Golden raisins, naturally sweet.",i:["1791576958/golden_raisins_749x_oaecpd.webp"]}];
+{id:"raisin",c:"dry",n:"Raisins",p:"Price on enquiry",d:"Golden raisins, naturally sweet.",i:["1791576958/golden_raisins_749x_oaecpd.webp"]},
+{id:"peri",c:"dry",n:"Peri Peri Cashews",p:"Price on enquiry",d:"Crunchy cashews tossed in a spicy peri peri seasoning.",i:["1792601938/df2_alas2z.jpg"]},
+{id:"cran",c:"dry",n:"Cranberries",p:"Price on enquiry",d:"Sweet and tangy dried cranberries.",i:["1792601938/df3_mf0rve.jpg"]},
+{id:"muesli",c:"dry",n:"Muesli Mix",p:"Price on enquiry",d:"A wholesome mix of grains, nuts and dried fruits.",i:["1792601938/df4_fxxbxo.jpg"]},
+{id:"masala",c:"dry",n:"Masala Mix",p:"Price on enquiry",d:"A savoury, spiced dry fruit and nut mix.",i:["1792601937/df5_nzfgfs.jpg"]},
+{id:"seeds",c:"dry",n:"Seeds Mix",p:"Price on enquiry",d:"A healthy blend of assorted seeds.",i:["1792601937/df1_p30lql.jpg"]}];
 const U=(s,w)=>{const m=s.match(/^(\d+)\/(.+)\.(heic|jpg|webp)$/);return "https://res.cloudinary.com/dq2nrpky0/image/upload/f_auto,q_auto,w_"+(w||700)+"/v"+m[1]+"/"+m[2]+"."+(m[3]==="heic"?"jpg":m[3])};
 const $=id=>document.getElementById(id);let cart=[],cur=null,gi=0;
 const lbl={hamper:"Hamper",basket:"Basket",dry:"Dry fruit"};
