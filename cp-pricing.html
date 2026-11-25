@@ -4,22 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Monthly Content Production Plans | The Sonic Media</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#000; --text:#f4f4f5; --muted:#b5b5ba;
     --glass:rgba(255,255,255,.09); --edge:rgba(255,255,255,.28);
-    --accent:#ff8a1f;
+    --accent:#ff8a1f; --orange:#ff5c00;
   }
   *{box-sizing:border-box;margin:0}
   body{
     font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
     color:var(--text);background:var(--bg);min-height:100vh;
-    padding:72px 20px 80px;position:relative;overflow-x:hidden;
+    padding:150px 20px 80px;position:relative;overflow-x:hidden;
   }
   header{text-align:center;margin:0 auto 64px}
   .brand{font-weight:600;font-size:15px;letter-spacing:.02em;color:var(--muted);margin-bottom:14px}
   h1{white-space:nowrap;font-size:clamp(16px,4.6vw,44px);font-weight:700;letter-spacing:-.02em;line-height:1.1}
+  h1{display:inline-block;padding:.38em 1.1em;background:var(--orange);border-radius:.45em;}
   header p{max-width:560px;margin:14px auto 0;color:var(--muted);font-size:16px;line-height:1.55}
 
   .plans{
@@ -36,7 +37,28 @@
   }
   /* hovered plan grows, the other two shrink slightly */
   .plans:hover .card{transform:scale(.95);opacity:.8}
-  .plans .card:hover{transform:scale(1.06);opacity:1;border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.14);z-index:2}
+  .plans .card:hover{
+    transform:scale(1.06);opacity:1;z-index:2;
+    border-color:rgba(255,255,255,.6);
+    background:linear-gradient(145deg,rgba(255,255,255,.24),rgba(255,255,255,.06));
+    backdrop-filter:blur(34px) saturate(170%);-webkit-backdrop-filter:blur(34px) saturate(170%);
+    box-shadow:0 28px 70px rgba(0,0,0,.5),0 0 46px rgba(255,138,31,.28),inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(255,255,255,.14);
+  }
+  .card{overflow:hidden}
+  .card::after{
+    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.2) 50%,transparent 70%);
+    transform:translateX(-120%);transition:transform .8s ease;
+  }
+  .plans .card:hover::after{transform:translateX(120%)}
+  /* soft colour glows behind the cards so the frosted glass has something to blur */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(circle at 18% 45%,rgba(255,92,0,.30),transparent 38%),
+      radial-gradient(circle at 82% 62%,rgba(255,138,31,.24),transparent 40%),
+      radial-gradient(circle at 50% 100%,rgba(255,92,0,.14),transparent 45%);
+  }
 
   .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
   .name{font-size:26px;font-weight:700;letter-spacing:-.01em}
@@ -57,18 +79,24 @@
   .deliver li{font-size:16.5px;font-weight:600;padding-left:18px}
   .deliver li::before{width:6px;height:6px}
   .cta{align-self:end;padding-top:28px}
-  .cta a{
+  .cta a,.cta button{
+    width:100%;cursor:pointer;font-family:inherit;
     display:block;text-align:center;text-decoration:none;
     padding:14px 18px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.06em;
     color:var(--text);background:rgba(255,255,255,.12);border:1px solid var(--edge);
     transition:background .2s ease,color .2s ease;
   }
-  .cta a:hover{background:#fff;color:#111}
-  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .cta a:hover,.cta button:hover{background:#fff;color:#111}
+  a:focus-visible,.cta button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   .toggle{display:none;margin-top:16px;background:none;border:0;padding:6px 0;color:var(--accent);font:600 13.5px Inter,system-ui,sans-serif;cursor:pointer;text-align:left}
   .toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   .note{text-align:center;margin-top:44px;font-size:13px;color:var(--muted)}
 
+
+  .custom{text-align:center;margin:40px auto 0}
+  .custom button{padding:16px 40px;border:0;border-radius:999px;background:var(--orange);color:#fff;font:600 14px Inter,system-ui,sans-serif;letter-spacing:.06em;cursor:pointer;transition:background .2s,transform .2s}
+  .custom button:hover{background:#ff7a2b;transform:scale(1.04)}
+  .custom button:focus-visible{outline:2px solid #fff;outline-offset:3px}
   @media (max-width:900px){
     .plans{grid-template-columns:1fr;max-width:460px;grid-template-rows:none;row-gap:24px}
     .card{display:flex;flex-direction:column;grid-row:auto}
@@ -78,61 +106,145 @@
     .toggle{display:inline-block}
     .plans:hover .card,.plans .card:hover{transform:none;opacity:1}
   }
-  @media (prefers-reduced-motion:reduce){.card{transition:none}}
+  @media (max-width:600px){
+    body{padding:104px 14px 56px}
+    header{margin-bottom:32px}
+    h1{font-size:clamp(18px,6vw,24px);padding:.34em .9em;border-radius:.4em}
+    .plans{max-width:400px;row-gap:18px}
+    .card{padding:20px 18px 22px;border-radius:22px}
+    .name{font-size:20px}
+    .badge{font-size:9.5px;padding:4px 9px}
+    .price{font-size:30px;margin:12px 0 2px}
+    .price small{font-size:13px}
+    .count{font-size:12px}
+    .ideal{font-size:12.5px;margin:10px 0 14px;line-height:1.5}
+    h3{font-size:11.5px;margin:12px 0 6px}
+    .dwrap h3{font-size:12.5px}
+    li{font-size:12.5px}
+    .deliver{gap:7px}
+    .deliver li{font-size:14.5px;padding-left:16px}
+    .toggle{font-size:12.5px;margin-top:10px}
+    .cta{padding-top:18px}
+    .cta a,.cta button{padding:12px 16px;font-size:12px}
+    .note{margin-top:28px;font-size:12px}
+    .custom{margin-top:28px}
+    .custom button{width:100%;max-width:400px;padding:14px 20px;font-size:12.5px}
+    #navbar{height:60px}
+    .nav-left img{width:30px;height:30px}
+    .nav-brand{font-size:13px}
+    .nav-home{font-size:12.5px;padding:8px 18px}
+  }
+
+  /* ===== LEAD POPUP ===== */
+  #lead{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  #lead[hidden]{display:none}
+  .lead-box{position:relative;width:100%;max-width:400px;padding:30px 26px 26px;border-radius:26px;background:#111114;border:1px solid var(--edge);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+  .lead-x{position:absolute;top:12px;right:14px;width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;font-size:20px;line-height:1;cursor:pointer}
+  .lead-x:hover{background:rgba(255,255,255,.2)}
+  .lead-box h2{font-size:21px;font-weight:700;letter-spacing:-.01em;padding-right:34px}
+  .lead-plan{margin:6px 0 18px;font-size:13.5px;color:var(--accent);font-weight:600}
+  .lead-box input{width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--edge);background:rgba(255,255,255,.06);color:var(--text);font:500 15px Inter,system-ui,sans-serif;outline:none}
+  .lead-box input::placeholder{color:#8a8a90}
+  .lead-box input:focus{border-color:var(--orange)}
+  .lead-box{max-height:92vh;overflow-y:auto}
+  .lead-field{margin-bottom:14px}
+  .lead-field label{display:block;margin:0 0 6px 2px;font-size:12.5px;font-weight:600;color:#d8d8dc}
+  .lead-field .opt{font-weight:500;color:var(--muted)}
+  .req{color:#ff3b3b;font-weight:700;margin-left:2px}
+  .lead-box input.invalid{border-color:#ff3b3b}
+  .lead-req-note{margin:2px 2px 0;font-size:12px;color:var(--muted)}
+  .lead-err{min-height:18px;margin:8px 2px 0;font-size:12.5px;color:#ff7a7a}
+  #lead-submit{width:100%;margin-top:10px;padding:14px;border:0;border-radius:999px;background:var(--orange);color:#fff;font:600 14px Inter,system-ui,sans-serif;letter-spacing:.04em;cursor:pointer;transition:background .2s,opacity .2s}
+  #lead-submit:hover{background:#ff7a2b}
+  #lead-submit:disabled{opacity:.7;cursor:default}
+  #lead-submit.done{background:#22c55e}
+  @media (max-width:600px){
+    .lead-box{padding:26px 20px 22px;border-radius:22px}
+    .lead-box h2{font-size:18px}
+    .lead-box input{font-size:16px;padding:13px 14px} /* 16px stops iOS zoom */
+  }
+  @media (prefers-reduced-motion:reduce){.card,.card::after{transition:none}}
+
+  /* ===== NAVBAR (matches thesonicmedia.com) ===== */
+  #navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,3.5vw,48px);background:rgba(0,0,0,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07)}
+  .nav-left{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+  .nav-left img{width:36px;height:36px;object-fit:contain}
+  .nav-brand{font-family:Syne,Inter,sans-serif;font-weight:800;font-size:16px;letter-spacing:.08em}
+  .nav-home{font:600 14px Inter,system-ui,sans-serif;color:#fff;text-decoration:none;background:var(--orange);padding:10px 26px;border-radius:999px;transition:background .2s}
+  .nav-home:hover{background:#ff7a2b}
+  #navbar a:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
 </style>
 </head>
 <body>
 
+<nav id="navbar" aria-label="Main">
+  <a class="nav-left" href="https://thesonicmedia.com/"><img src="https://res.cloudinary.com/dq2nrpky0/image/upload/v1779787887/favicon_oalxfi.png" alt="The Sonic Media logo"><span class="nav-brand">THE SONIC MEDIA</span></a>
+  <a class="nav-home" href="https://thesonicmedia.com/">Home</a>
+</nav>
+
 <header>
-  <div class="brand">The Sonic Media</div>
-  <h1>Monthly Content Production Plans</h1>
-  <p>Creative content designed to make your brand visible, engaging and memorable.</p>
+  <h1>Content Production Plans</h1>
 </header>
 
 <main class="plans" id="plans"></main>
-<p class="note">Select a plan and your email app opens with the request ready to send to us.</p>
+<div class="custom"><button type="button" id="custom-quote">GET A CUSTOM QUOTE</button></div>
+<p class="note">Select a plan, share your details, and our team will get back to you.</p>
+
+
+<div id="lead" hidden role="dialog" aria-modal="true" aria-labelledby="lead-title">
+  <div class="lead-box">
+    <button type="button" class="lead-x" id="lead-close" aria-label="Close">&times;</button>
+    <h2 id="lead-title">Get started</h2>
+    <div class="lead-plan" id="lead-plan"></div>
+    <div class="lead-field">
+      <label for="lead-name">Name<span class="req" aria-hidden="true">*</span></label>
+      <input id="lead-name" type="text" autocomplete="name" placeholder="Your full name" required aria-required="true">
+    </div>
+    <div class="lead-field">
+      <label for="lead-company">Company name <span class="opt">(Optional)</span></label>
+      <input id="lead-company" type="text" autocomplete="organization" placeholder="Your company name">
+    </div>
+    <div class="lead-field">
+      <label for="lead-mobile">Mobile number<span class="req" aria-hidden="true">*</span></label>
+      <input id="lead-mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="Your mobile number" required aria-required="true">
+    </div>
+    <div class="lead-field">
+      <label for="lead-email">Mail ID <span class="opt">(Optional)</span></label>
+      <input id="lead-email" type="email" autocomplete="email" placeholder="Your email ID">
+    </div>
+    <div class="lead-err" id="lead-err" role="alert"></div>
+    <button type="button" id="lead-submit">Submit</button>
+  </div>
+</div>
 
 <script>
-  // ====== CHANGE THIS to your real inbox ======
-  const CONTACT_EMAIL = "hello@thesonicmedia.com";
+
+  const WEB3FORMS_KEY = "66f90d59-83e7-4136-8823-1bfeb38deb41";
 
   const plans = [
     {
-      name:"Content Essentials", price:"21,999", count:"10 monthly creatives",
+      name:"Essentials", price:"21,999", count:"10 monthly creatives",
       ideal:"Ideal for businesses looking to establish a consistent social media presence.",
       deliver:["5 Reels","3 Static Posts","2 Carousel Posts"],
       include:["Creative content ideation","Reel concepts and scripting","Professional reel editing","Custom graphic designing","Carousel content and layouts","Captions and hashtags","Brand-aligned creative direction","Monthly content planning"]
     },
     {
-      name:"Content Growth", price:"39,999", count:"21 monthly creatives", badge:"Popular",
+      name:"Growth", price:"39,999", count:"21 monthly creatives", badge:"Popular",
       ideal:"Ideal for growing businesses looking to build stronger engagement and brand recognition.",
       deliver:["10 Reels","7 Static Posts","4 Carousel Posts"],
-      include:["Everything in Content Essentials","Advanced creative concepts","Content pillars and themes","Trend-based reel concepts","Stronger storytelling approach","Brand communication consistency","Monthly creative direction"]
+      include:["Everything in Essentials","Advanced creative concepts","Content pillars and themes","Trend-based reel concepts","Stronger storytelling approach","Brand communication consistency","Monthly creative direction"]
     },
     {
-      name:"Content Signature", price:"59,999", count:"30 monthly creatives",
+      name:"Signature", price:"59,999", count:"30 monthly creatives",
       ideal:"Ideal for ambitious brands looking for a strong, distinctive and consistent content identity.",
       deliver:["15 Reels","9 Static Posts","6 Carousel Posts"],
-      include:["Everything in Content Growth","Premium creative concepts","Campaign-based content ideas","Advanced brand storytelling","Platform-specific creative adaptations","Detailed content themes","Priority creative planning","Consistent visual brand direction"]
+      include:["Everything in Growth","Premium creative concepts","Campaign-based content ideas","Advanced brand storytelling","Platform-specific creative adaptations","Detailed content themes","Priority creative planning","Consistent visual brand direction"]
     }
   ];
 
   const li = a => a.map(x => `<li>${x}</li>`).join("");
 
-  document.getElementById("plans").innerHTML = plans.map(p => {
-    const subject = encodeURIComponent(`Plan enquiry: ${p.name} (₹${p.price}/month)`);
-    const body = encodeURIComponent(
-`Hi The Sonic Media team,
-
-I'd like to get started with the ${p.name} plan (₹${p.price}/month, ${p.count}).
-
-Name:
-Business name:
-Phone:
-Instagram / website:
-
-Thank you.`);
-    return `
+  document.getElementById("plans").innerHTML = plans.map((p, i) => `
     <article class="card">
       <div class="row">
         <div class="name">${p.name}</div>
@@ -151,10 +263,9 @@ Thank you.`);
       </div>
       <button type="button" class="toggle" aria-expanded="false">See more</button>
       <div class="cta">
-        <a href="mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}">SELECT PLAN</a>
+        <button type="button" class="select-plan" data-plan="${i}">SUBMIT ENQUIRY</button>
       </div>
-    </article>`;
-  }).join("");
+    </article>`).join("");
 
   document.querySelectorAll(".toggle").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -163,6 +274,99 @@ Thank you.`);
       btn.setAttribute("aria-expanded", open);
       btn.textContent = open ? "See less" : "See more";
     });
+  });
+
+  // ===== Lead popup =====
+  const lead = document.getElementById("lead");
+  const leadPlan = document.getElementById("lead-plan");
+  const inName = document.getElementById("lead-name");
+  const inCompany = document.getElementById("lead-company");
+  const inMobile = document.getElementById("lead-mobile");
+  const inEmail = document.getElementById("lead-email");
+  const errEl = document.getElementById("lead-err");
+  const submitBtn = document.getElementById("lead-submit");
+  const fields = [inName, inCompany, inMobile, inEmail];
+  let activePlan = null, lastFocus = null;
+
+  function openLead(i){
+    activePlan = i === "custom" ? { custom:true, name:"Custom Quote" } : plans[i];
+    lastFocus = document.activeElement;
+    leadPlan.textContent = activePlan.custom ? "Custom Quote" : `${activePlan.name} · ₹${activePlan.price} / month`;
+    fields.forEach(f => { f.value = ""; f.classList.remove("invalid"); });
+    errEl.textContent = "";
+    submitBtn.textContent = "Submit"; submitBtn.disabled = false; submitBtn.classList.remove("done");
+    lead.hidden = false;
+    document.body.style.overflow = "hidden";
+    inName.focus();
+  }
+  function closeLead(){
+    lead.hidden = true;
+    document.body.style.overflow = "";
+    if (lastFocus) lastFocus.focus();
+  }
+  function fail(input, msg){
+    input.classList.add("invalid");
+    errEl.textContent = msg;
+    input.focus();
+  }
+
+  document.getElementById("plans").addEventListener("click", e => {
+    const b = e.target.closest(".select-plan");
+    if (b) openLead(+b.dataset.plan);
+  });
+  document.getElementById("custom-quote").addEventListener("click", () => openLead("custom"));
+  fields.forEach(f => f.addEventListener("input", () => { f.classList.remove("invalid"); errEl.textContent = ""; }));
+  document.getElementById("lead-close").addEventListener("click", closeLead);
+  lead.addEventListener("click", e => { if (e.target === lead) closeLead(); });
+  document.addEventListener("keydown", e => {
+    if (lead.hidden) return;
+    if (e.key === "Escape") closeLead();
+    if (e.key === "Enter" && e.target.tagName === "INPUT") submitBtn.click();
+  });
+
+  submitBtn.addEventListener("click", async () => {
+    if (submitBtn.classList.contains("done") || submitBtn.disabled) return;
+    const name = inName.value.trim();
+    const company = inCompany.value.trim();
+    const mobile = inMobile.value.trim();
+    const email = inEmail.value.trim();
+
+    fields.forEach(f => f.classList.remove("invalid"));
+    if (!name) return fail(inName, "Please enter your name.");
+    if (!mobile) return fail(inMobile, "Please enter your mobile number.");
+    if (!/^\+?[\d\s-]{7,15}$/.test(mobile)) return fail(inMobile, "Enter a valid mobile number.");
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail(inEmail, "Enter a valid email address.");
+
+    errEl.textContent = "";
+    submitBtn.textContent = "Submitting…"; submitBtn.disabled = true;
+
+    const planLine = activePlan.custom ? "Custom Quote request" : `${activePlan.name} (₹${activePlan.price}/month, ${activePlan.count})`;
+    const payload = {
+      access_key: WEB3FORMS_KEY,
+      subject: activePlan.custom ? "Custom quote request" : `Plan enquiry: ${activePlan.name} (₹${activePlan.price}/month)`,
+      from_name: "Pricing Page Enquiry",
+      name: name,
+      phone: mobile,
+      message: `New enquiry from the Content Production Plans page\n\nPlan: ${planLine}\nName: ${name}\nCompany: ${company || "-"}\nMobile: ${mobile}\nEmail: ${email || "-"}`
+    };
+    if (company) payload.company = company;
+    if (email) payload.email = email;
+
+    try{
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok || data.success === false) throw new Error();
+      submitBtn.textContent = "Submitted ✓ We'll contact you soon";
+      submitBtn.classList.add("done");
+      setTimeout(closeLead, 2200);
+    }catch(_){
+      errEl.textContent = "Something went wrong. Please try again.";
+      submitBtn.textContent = "Submit"; submitBtn.disabled = false;
+    }
   });
 </script>
 </body>
